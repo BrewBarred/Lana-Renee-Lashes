@@ -8,6 +8,7 @@
     <OutputType>WinExe</OutputType>
     <RootNamespace>Lana_Renee_Lashes</RootNamespace>
     <AssemblyName>Lana-Renee-Lashes</AssemblyName>
+	  <langVersion>9.0</langVersion>
     <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,6 +34,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PresentationCore" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />

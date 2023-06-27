@@ -14,23 +14,32 @@ namespace Lana_Renee_Lashes
         {
             // maximum cost per unit before warning
             const double COST_WARNING = 4.5;
+            // price per goody lash
             double goodyLashPrice = 2.9;
+            // estimated goody shipping price per unit
             double estGoodyShipPricePerUnit = 0.0309;
 
+            // price per olivia lash 
             double oliviaLashPrice = 2;
-            double boxPriceFlat = 0;
-            double boxPricePacked = 0;
-            // estimate shipping cost per unit
+            // price per flatpacked box (unknown)
+            decimal boxPriceFlat = 0;
+            // price per packed box (unknown)
+            decimal boxPricePacked = 0;
+            // estimated shipping cost per unit
             decimal estOliviaShipPricePerUnit = 0.2263m;
-            // estimate box cost per unit
+            // estimated box cost per unit
+
             decimal estBoxPrice = 0.2632m;
-
-            double retailPrice = 24.99;
-
+            // retail price per unit
+            decimal retailPrice = 24.99m;
+            // australian gst multiplier (10%)
             double gstMultiplier = 0.1;
+            // est usd to aud multiplier - this should only be a guide
+            double estUsdToAusMultiplier = 1.5;
+            // personal assistant hourly rate
 
-            double estAudMultiplier = 1.06;
             decimal pA_HourlyRate = 25.00m;
+            // personal assistant estimated amount of boxes packed per hour
             double pA_EstBoxesPerHour = 53.33;
 
         }

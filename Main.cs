@@ -27,6 +27,8 @@ namespace Lana_Renee_Lashes
         decimal RETAIL_PRICE = 24.99m;
         // est usd to aud multiplier - this should only be a guide
         double estUsdToAusMultiplier = 1.5;
+        // personal assistant estimated amount of boxes packed per hour
+        double pA_BoxesPerHour = 53.33;
 
 
         // total cost of this goody order
@@ -58,13 +60,11 @@ namespace Lana_Renee_Lashes
         // personal assistant hourly rate
         decimal pA_HourlyRate = 25.00m;
         // hours spent boxing
-        double pA_HoursSpentboxing = 0;
+        double pA_HoursSpentBoxing = 0;
         // estimated hours it will take to box this order (based on the const int BOX_PER_HOUR taken from previous data)
         double pA_EstimatedHoursToBox = 0;
         // estimated total personal assistant cost
         decimal pA_EstimatedCost = 0m;
-        // personal assistant estimated amount of boxes packed per hour
-        double pA_BoxesPerHour = 53.33;
 
 
 
@@ -273,7 +273,7 @@ namespace Lana_Renee_Lashes
 
                                 case "textBoxPaHoursSpentBoxing":
                                     // stores user input to textBox spent boxing
-                                    pA_HoursSpentboxing = double.Parse(textBoxPaHoursSpentBoxing.Text);
+                                    pA_HoursSpentBoxing = double.Parse(textBoxPaHoursSpentBoxing.Text);
 
                                     break;
 
@@ -302,103 +302,136 @@ namespace Lana_Renee_Lashes
                                     LogError("[" + DateTime.Now + "]" + "Failed to find textbox: " + textBox);
                                     break;
 
-                            }
-                        }
+                            } // end switch
 
+                        } // end if
 
                     } // end if
 
                 } // end for
 
+                // converts total from olivia to usd if the check aud checkbox is ticked
+                oliviaCost = checkBoxConvert.Checked ? oliviaCost * (decimal)estUsdToAusMultiplier : oliviaCost;
+                // converts total from goody to usd if the check aud checkbox is ticked
+                goodyCost = checkBoxConvert.Checked ? goodyCost * (decimal)estUsdToAusMultiplier : goodyCost;
+                // calculates total cost
+                estTotalCost = goodyCost + oliviaCost;
+                // calculates total quantity
+                totalQuantity = goodyQuantity + oliviaQuantity;
 
-
-                // stores number of goody lashes
-                goodyQuantity = int.Parse(textBoxGoodyQuantity.Text);
-                // stores quantity of olivia lashes
-                oliviaQuantity = int.Parse(textBoxOliviaQuantity.Text);
-
-                // if personal assistant checkbox is checked AND P.A's hourly rate is not null
-                if (checkBoxPaCosts.Checked)
+                if (totalQuantity > 0)
                 {
+                    // displays goody cost total
+                    textBoxGoodyCost.Text = goodyCost.ToString("c2");
+                    // displays goody cost total
+                    textBoxOliviaCost.Text = oliviaCost.ToString("c2");
+                    // if personal assistant checkbox is checked
+                    textBoxTotalQuantity.Text = totalQuantity.ToString();
 
-                    // if P.A. hourly greater than max rate OR less than min rate
-                    if (pA_HourlyRate > MAX_RATE || pA_HourlyRate < MIN_RATE)
-                    {
-                        // writes error message to user
-                        MessageBox.Show("Please ensure hourly rate is valid!");
 
-                    }
-                    else
+                    if (checkBoxPaCosts.Checked)
                     {
-                        // sets pa estimated cost to hourly rate * hours spent boxing
-                        pA_EstimatedCost = pA_HourlyRate * (decimal)pA_HoursSpentboxing;
-                        // roughly estimates amount of hours it will take to box this order
-                        pA_EstimatedHoursToBox = totalQuantity / pA_BoxesPerHour;
-                        // if checkbox deduct hours spent is check
-                        if (checkBoxDeductHoursSpent.Checked)
+
+                        // if P.A. hourly greater than max rate OR less than min rate
+                        if (pA_HourlyRate > MAX_RATE || pA_HourlyRate < MIN_RATE)
                         {
-                            // lowers estimated hours to box lashes down by the amount of hours spent on it already
-                            pA_EstimatedHoursToBox -= pA_HoursSpentboxing;
+                            // writes error message to user
+                            MessageBox.Show("Please ensure hourly rate is valid!");
+
                         }
+                        else
+                        {
+
+                            ///////
+                            /// Calculate new variables
+                            /////
+
+                            if (pA_HoursSpentBoxing != 0)
+                            {
+                                // sets personal assistants estimated cost to hourly rate * hours spent boxing
+                                pA_EstimatedCost = pA_HourlyRate * (decimal)pA_HoursSpentBoxing;
+                                // roughly estimates amount of hours it will take to box this order
+                                pA_EstimatedHoursToBox = totalQuantity / pA_BoxesPerHour - pA_HoursSpentBoxing;
+                            }
+                            else
+                            {
+                                // sets personal assistants estimated cost to hourly rate * P.A.s average number of boxes packed per hour
+                                pA_EstimatedCost = pA_HourlyRate * (decimal)pA_BoxesPerHour;
+                                // roughly estimates amount of hours it will take to box this order
+                                pA_EstimatedHoursToBox = totalQuantity / pA_BoxesPerHour;
+
+                            } // end if
+
+                            // if checkbox deduct hours spent is checked
+                            if (checkBoxDeductHoursSpent.Checked && pA_EstimatedHoursToBox > pA_HoursSpentBoxing)
+                            {
+                                // lowers estimated hours to box lashes down by the amount of hours spent on it already
+                                pA_EstimatedHoursToBox -= pA_HoursSpentBoxing;
+
+                            } // end if
+
+                            // estimates the final cost
+                            estTotalCost += pA_EstimatedCost;
+                            // estimates the cost per lash set
+                            estCostPerUnit = estTotalCost / totalQuantity;
+                            // estimated profit per sale
+                            estProfitPerUnit = RETAIL_PRICE - estCostPerUnit;
+                            // sales required to profit
+                            estSalesToProfit = (int)estTotalCost / (int)RETAIL_PRICE + 1;
+                            //total profit margin this order
+                            estProfit = estProfitPerUnit * totalQuantity;
+                            //total profit margin this order minus gst
+                            estProfitLessGst = (estProfit *= (decimal)gstMultiplier);
+                            // gst amount
+                            gstToPay = (estProfit * (decimal)gstMultiplier);
+
+                            ///////
+                            /// Display Calculated values to respective textboxes
+                            /////
+
+
+                            // display hours spent boxing
+                            textBoxPaHoursSpentBoxing.Text = pA_HoursSpentBoxing.ToString("d2");
+                            // display pa's estimated hours to box
+                            textBoxPaBoxesPerHour.Text = pA_EstimatedHoursToBox.ToString("d2");
+
+                            // display estimated p.a. cost
+                            textBoxPaEstCost.Text = pA_EstimatedCost.ToString("c2");
+                            // updates estimated cost per unit
+                            textBoxEstCostPerUnit.Text = estCostPerUnit.ToString("c2");
+                            // updates estimated profit per unit
+                            textBoxEstProfitPerUnit.Text = (estProfitPerUnit.ToString("c2"));
+                            // updates estimated sales until we start to see profit
+                            textBoxEstSalesToProfit.Text = estSalesToProfit.ToString();
+                            // updates total quantity
+                            textBoxTotalQuantity.Text = totalQuantity.ToString();
+                            // updates estimated total cost
+                            textBoxEstTotalCost.Text = estTotalCost.ToString("c2");
+                            // updates estimated profit
+                            textBoxEstProfit.Text = estProfit.ToString("c2");
+                            // updates profit less gst
+                            textBoxEstProfitLessGst.Text = estProfitLessGst.ToString("c2");
+                            // updates gst to pay
+                            textBoxGstToPay.Text = gstToPay.ToString("c2");
+
+                        } // end if
 
                     } // end if
 
-                } // end if
+                    if ()
+                    {
 
-                // if total quantity adds up to more than 0
-                if (totalQuantity > 0)
-                {
-                    // adds the cost of both orders together for a total cost
-                    estTotalCost = (goodyCost + oliviaCost + pA_EstimatedCost) * (decimal)estUsdToAusMultiplier;
-                    // estimates the cost per lash set
-                    estCostPerUnit = estTotalCost / totalQuantity;
-                    // estimated profit per sale
-                    estProfitPerUnit = RETAIL_PRICE - estCostPerUnit;
-                    // sales required to profit
-                    estSalesToProfit = (int)estTotalCost / (int)RETAIL_PRICE + 1;
-                    // adds quantities of both orders together for a total quantity
-                    totalQuantity = goodyQuantity + oliviaQuantity;
-                    //total profit margin this order
-                    estProfit = estProfitPerUnit * totalQuantity;
-                    //total profit margin this order minus gst
-                    estProfitLessGst = (estProfit *= (decimal)gstMultiplier);
-                    // gst amount
-                    gstToPay = (estProfit * (decimal)gstMultiplier);
-                    // if checkbox extraboxes is checked and extra boxes value is 0, 
-                    checkBoxExtraBoxes.Text = checkBoxExtraBoxes.Text == "0" ? goodyQuantity.ToString() : checkBoxExtraBoxes.Text;
-                    // stores usd to aud multiplier into a variable
-                    estUsdToAusMultiplier = double.Parse(textBoxUsdToAud.Text);
+                    }
 
                 } // end if
 
-                ///////
-                /// Display Calculated values to respective textboxes
-                /////
 
-                if (Regex.IsMatch(@"{0}", pA_EstimatedHoursToBox.ToString()))
-                {
-                    // updates estimated hours to box
-                    textBoxPaBoxesPerHour.Text = pA_EstimatedHoursToBox == 0 ? "0" : pA_EstimatedHoursToBox.ToString("d2");
-                }
 
-                // updates personal assistant estimated cost with new value in decimal form
-                textBoxPaEstCost.Text = pA_EstimatedCost.ToString("c2");
-                // updates estimated cost per unit
-                textBoxEstCostPerUnit.Text = estCostPerUnit.ToString("c2");
-                // updates estimated profit per unit
-                textBoxEstProfitPerUnit.Text = (estProfitPerUnit.ToString("c2"));
-                // updates estimated sales until we start to see profit
-                textBoxEstSalesToProfit.Text = estSalesToProfit.ToString();
-                // updates total quantity
-                textBoxTotalQuantity.Text = totalQuantity.ToString();
-                // updates estimated total cost
-                textBoxEstTotalCost.Text = estTotalCost.ToString("c2");
-                // updates estimated profit
-                textBoxEstProfit.Text = estProfit.ToString("c2");
-                // updates profit less gst
-                textBoxEstProfitLessGst.Text = estProfitLessGst.ToString("c2");
-                // updates gst to pay
-                textBoxGstToPay.Text = gstToPay.ToString("c2");
+
+
+
+
+
 
             }
             //catch

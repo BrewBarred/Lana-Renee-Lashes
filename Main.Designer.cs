@@ -84,8 +84,8 @@
             this.label2 = new System.Windows.Forms.Label();
             this.checkBoxDeductHoursSpent = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.checkBoxConvert = new System.Windows.Forms.CheckBox();
+            this.labelConvert = new System.Windows.Forms.Label();
             this.textBoxRoughShip = new System.Windows.Forms.TextBox();
             this.labelRoughShip = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWillow)).BeginInit();
@@ -433,7 +433,7 @@
             this.labelUsdToAud.BackColor = System.Drawing.Color.Transparent;
             this.labelUsdToAud.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelUsdToAud.ForeColor = System.Drawing.Color.Thistle;
-            this.labelUsdToAud.Location = new System.Drawing.Point(523, 519);
+            this.labelUsdToAud.Location = new System.Drawing.Point(502, 518);
             this.labelUsdToAud.Name = "labelUsdToAud";
             this.labelUsdToAud.Size = new System.Drawing.Size(108, 16);
             this.labelUsdToAud.TabIndex = 0;
@@ -444,7 +444,7 @@
             this.linkLabelCheckMe.AutoSize = true;
             this.linkLabelCheckMe.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabelCheckMe.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.linkLabelCheckMe.Location = new System.Drawing.Point(705, 555);
+            this.linkLabelCheckMe.Location = new System.Drawing.Point(639, 584);
             this.linkLabelCheckMe.Name = "linkLabelCheckMe";
             this.linkLabelCheckMe.Size = new System.Drawing.Size(58, 13);
             this.linkLabelCheckMe.TabIndex = 12;
@@ -740,30 +740,30 @@
             this.label3.TabIndex = 60;
             this.label3.Text = "Deduct hours spent?";
             // 
-            // checkBox1
+            // checkBoxConvert
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F);
-            this.checkBox1.ForeColor = System.Drawing.Color.Thistle;
-            this.checkBox1.Location = new System.Drawing.Point(182, 627);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(15, 14);
-            this.checkBox1.TabIndex = 62;
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBoxConvert.AutoSize = true;
+            this.checkBoxConvert.Checked = true;
+            this.checkBoxConvert.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxConvert.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F);
+            this.checkBoxConvert.ForeColor = System.Drawing.Color.Thistle;
+            this.checkBoxConvert.Location = new System.Drawing.Point(182, 627);
+            this.checkBoxConvert.Name = "checkBoxConvert";
+            this.checkBoxConvert.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxConvert.TabIndex = 62;
+            this.checkBoxConvert.UseVisualStyleBackColor = true;
             // 
-            // label4
+            // labelConvert
             // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Thistle;
-            this.label4.Location = new System.Drawing.Point(75, 627);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(101, 16);
-            this.label4.TabIndex = 61;
-            this.label4.Text = "Convert to AUD:";
+            this.labelConvert.AutoSize = true;
+            this.labelConvert.BackColor = System.Drawing.Color.Transparent;
+            this.labelConvert.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelConvert.ForeColor = System.Drawing.Color.Thistle;
+            this.labelConvert.Location = new System.Drawing.Point(75, 627);
+            this.labelConvert.Name = "labelConvert";
+            this.labelConvert.Size = new System.Drawing.Size(101, 16);
+            this.labelConvert.TabIndex = 61;
+            this.labelConvert.Text = "Convert to AUD:";
             // 
             // textBoxRoughShip
             // 
@@ -794,8 +794,8 @@
             this.ClientSize = new System.Drawing.Size(797, 862);
             this.Controls.Add(this.textBoxRoughShip);
             this.Controls.Add(this.labelRoughShip);
-            this.Controls.Add(this.checkBox1);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.checkBoxConvert);
+            this.Controls.Add(this.labelConvert);
             this.Controls.Add(this.checkBoxDeductHoursSpent);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.checkBoxAutoFill);
@@ -925,8 +925,8 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox checkBoxDeductHoursSpent;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox checkBoxConvert;
+        private System.Windows.Forms.Label labelConvert;
         private System.Windows.Forms.TextBox textBoxRoughShip;
         private System.Windows.Forms.Label labelRoughShip;
     }

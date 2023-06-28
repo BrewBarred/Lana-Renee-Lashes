@@ -64,14 +64,14 @@
             this.textBoxPaHoursSpent = new System.Windows.Forms.TextBox();
             this.textBoxPaBoxesPerHour = new System.Windows.Forms.TextBox();
             this.textBoxCostPerUnit = new System.Windows.Forms.TextBox();
-            this.textBoxEstPaCost = new System.Windows.Forms.TextBox();
+            this.textBoxPaEstCost = new System.Windows.Forms.TextBox();
             this.textBoxSalesToProfit = new System.Windows.Forms.TextBox();
             this.textBoxProfitPerUnit = new System.Windows.Forms.TextBox();
-            this.textBox10 = new System.Windows.Forms.TextBox();
+            this.textBoxEstProfitLessGst = new System.Windows.Forms.TextBox();
             this.textBoxTotalLashes = new System.Windows.Forms.TextBox();
             this.textBoxEstTotalCost = new System.Windows.Forms.TextBox();
             this.textBoxEstProfit = new System.Windows.Forms.TextBox();
-            this.textBox14 = new System.Windows.Forms.TextBox();
+            this.textBoxGstToPay = new System.Windows.Forms.TextBox();
             this.labelExtraBoxesAmount = new System.Windows.Forms.Label();
             this.textBoxOliviaQuantity = new System.Windows.Forms.TextBox();
             this.textBoxOliviaCost = new System.Windows.Forms.TextBox();
@@ -116,9 +116,9 @@
             // 
             this.pictureBoxWillow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBoxWillow.Image = global::Lana_Renee_Lashes.Properties.Resources.Lana;
-            this.pictureBoxWillow.Location = new System.Drawing.Point(-41, -47);
+            this.pictureBoxWillow.Location = new System.Drawing.Point(-34, -69);
             this.pictureBoxWillow.Name = "pictureBoxWillow";
-            this.pictureBoxWillow.Size = new System.Drawing.Size(921, 207);
+            this.pictureBoxWillow.Size = new System.Drawing.Size(921, 213);
             this.pictureBoxWillow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxWillow.TabIndex = 2;
             this.pictureBoxWillow.TabStop = false;
@@ -500,16 +500,16 @@
             this.textBoxCostPerUnit.TabIndex = 0;
             this.textBoxCostPerUnit.TabStop = false;
             // 
-            // textBoxEstPaCost
+            // textBoxPaEstCost
             // 
-            this.textBoxEstPaCost.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.textBoxEstPaCost.ForeColor = System.Drawing.SystemColors.Info;
-            this.textBoxEstPaCost.Location = new System.Drawing.Point(188, 616);
-            this.textBoxEstPaCost.Name = "textBoxEstPaCost";
-            this.textBoxEstPaCost.ReadOnly = true;
-            this.textBoxEstPaCost.Size = new System.Drawing.Size(159, 20);
-            this.textBoxEstPaCost.TabIndex = 0;
-            this.textBoxEstPaCost.TabStop = false;
+            this.textBoxPaEstCost.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.textBoxPaEstCost.ForeColor = System.Drawing.SystemColors.Info;
+            this.textBoxPaEstCost.Location = new System.Drawing.Point(188, 616);
+            this.textBoxPaEstCost.Name = "textBoxPaEstCost";
+            this.textBoxPaEstCost.ReadOnly = true;
+            this.textBoxPaEstCost.Size = new System.Drawing.Size(159, 20);
+            this.textBoxPaEstCost.TabIndex = 0;
+            this.textBoxPaEstCost.TabStop = false;
             // 
             // textBoxSalesToProfit
             // 
@@ -533,16 +533,16 @@
             this.textBoxProfitPerUnit.TabIndex = 0;
             this.textBoxProfitPerUnit.TabStop = false;
             // 
-            // textBox10
+            // textBoxEstProfitLessGst
             // 
-            this.textBox10.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.textBox10.ForeColor = System.Drawing.SystemColors.Info;
-            this.textBox10.Location = new System.Drawing.Point(641, 690);
-            this.textBox10.Name = "textBox10";
-            this.textBox10.ReadOnly = true;
-            this.textBox10.Size = new System.Drawing.Size(159, 20);
-            this.textBox10.TabIndex = 0;
-            this.textBox10.TabStop = false;
+            this.textBoxEstProfitLessGst.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.textBoxEstProfitLessGst.ForeColor = System.Drawing.SystemColors.Info;
+            this.textBoxEstProfitLessGst.Location = new System.Drawing.Point(641, 690);
+            this.textBoxEstProfitLessGst.Name = "textBoxEstProfitLessGst";
+            this.textBoxEstProfitLessGst.ReadOnly = true;
+            this.textBoxEstProfitLessGst.Size = new System.Drawing.Size(159, 20);
+            this.textBoxEstProfitLessGst.TabIndex = 0;
+            this.textBoxEstProfitLessGst.TabStop = false;
             // 
             // textBoxTotalLashes
             // 
@@ -577,16 +577,16 @@
             this.textBoxEstProfit.TabIndex = 0;
             this.textBoxEstProfit.TabStop = false;
             // 
-            // textBox14
+            // textBoxGstToPay
             // 
-            this.textBox14.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.textBox14.ForeColor = System.Drawing.SystemColors.Info;
-            this.textBox14.Location = new System.Drawing.Point(641, 726);
-            this.textBox14.Name = "textBox14";
-            this.textBox14.ReadOnly = true;
-            this.textBox14.Size = new System.Drawing.Size(159, 20);
-            this.textBox14.TabIndex = 0;
-            this.textBox14.TabStop = false;
+            this.textBoxGstToPay.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.textBoxGstToPay.ForeColor = System.Drawing.SystemColors.Info;
+            this.textBoxGstToPay.Location = new System.Drawing.Point(641, 726);
+            this.textBoxGstToPay.Name = "textBoxGstToPay";
+            this.textBoxGstToPay.ReadOnly = true;
+            this.textBoxGstToPay.Size = new System.Drawing.Size(159, 20);
+            this.textBoxGstToPay.TabIndex = 0;
+            this.textBoxGstToPay.TabStop = false;
             // 
             // labelExtraBoxesAmount
             // 
@@ -714,14 +714,14 @@
             this.Controls.Add(this.labelOliviaOrdered);
             this.Controls.Add(this.labelOliviaCost);
             this.Controls.Add(this.labelExtraBoxesAmount);
-            this.Controls.Add(this.textBox14);
+            this.Controls.Add(this.textBoxGstToPay);
             this.Controls.Add(this.textBoxEstProfit);
             this.Controls.Add(this.textBoxEstTotalCost);
             this.Controls.Add(this.textBoxTotalLashes);
-            this.Controls.Add(this.textBox10);
+            this.Controls.Add(this.textBoxEstProfitLessGst);
             this.Controls.Add(this.textBoxProfitPerUnit);
             this.Controls.Add(this.textBoxSalesToProfit);
-            this.Controls.Add(this.textBoxEstPaCost);
+            this.Controls.Add(this.textBoxPaEstCost);
             this.Controls.Add(this.textBoxCostPerUnit);
             this.Controls.Add(this.textBoxPaBoxesPerHour);
             this.Controls.Add(this.textBoxPaHoursSpent);
@@ -810,14 +810,14 @@
         private System.Windows.Forms.TextBox textBoxPaHoursSpent;
         private System.Windows.Forms.TextBox textBoxPaBoxesPerHour;
         private System.Windows.Forms.TextBox textBoxCostPerUnit;
-        private System.Windows.Forms.TextBox textBoxEstPaCost;
+        private System.Windows.Forms.TextBox textBoxPaEstCost;
         private System.Windows.Forms.TextBox textBoxSalesToProfit;
         private System.Windows.Forms.TextBox textBoxProfitPerUnit;
-        private System.Windows.Forms.TextBox textBox10;
+        private System.Windows.Forms.TextBox textBoxEstProfitLessGst;
         private System.Windows.Forms.TextBox textBoxTotalLashes;
         private System.Windows.Forms.TextBox textBoxEstTotalCost;
         private System.Windows.Forms.TextBox textBoxEstProfit;
-        private System.Windows.Forms.TextBox textBox14;
+        private System.Windows.Forms.TextBox textBoxGstToPay;
         private System.Windows.Forms.Label labelExtraBoxesAmount;
         private System.Windows.Forms.TextBox textBoxOliviaQuantity;
         private System.Windows.Forms.TextBox textBoxOliviaCost;

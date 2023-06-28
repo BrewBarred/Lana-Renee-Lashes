@@ -1,4 +1,8 @@
-﻿using System.Windows.Forms;
+﻿using System;
+using System.Collections.Generic;
+using System.Text.RegularExpressions;
+using System.Windows.Forms;
+
 
 namespace Lana_Renee_Lashes
 {
@@ -14,6 +18,8 @@ namespace Lana_Renee_Lashes
         const int MAX_RATE = 40;
         // min hourly rate
         const int MIN_RATE = 20;
+        // retail price per unit
+        decimal RETAIL_PRICE = 24.99m;
 
         // total cost of this goody order
         decimal goodyCost = 0m;
@@ -39,8 +45,6 @@ namespace Lana_Renee_Lashes
         // estimated box cost per unit
 
         decimal estBoxPrice = 0.2632m;
-        // retail price per unit
-        decimal retailPrice = 24.99m;
         // australian gst multiplier (10%)
         double gstMultiplier = 0.1;
         // est usd to aud multiplier - this should only be a guide
@@ -57,14 +61,17 @@ namespace Lana_Renee_Lashes
         // estimated total personal assistant cost
         decimal pA_EstimatedCost = 0m;
 
+
+        // total lashes ordered
+        int totalLashesOrdered = 0;
+        // total cost of both orders
+        decimal totalCost = 0;
         // estimated cost per unit
         decimal estCostPerUnit = 0m;
         // estimated profit per unit
         decimal estProfitPerUnit = 0m;
         // estimated sales required before profit starts
         decimal estSalesToProfit = 0m;
-        // total lashes ordered
-        int totalLashesOrdered = 0;
         // estimated total cost
         decimal estTotalCost = 0m;
         // estimated profit
@@ -73,6 +80,7 @@ namespace Lana_Renee_Lashes
         decimal estProfitLessGst = 0m;
         // gst to pay
         decimal gstToPay = 0m;
+
 
 
         #endregion
@@ -92,7 +100,9 @@ namespace Lana_Renee_Lashes
         private void Main_KeyUp(object sender, KeyEventArgs e)
 
         {
-            try
+            //try
+
+
             {
                 // if user was releasing any key other than the "enter key" and currently active control is a textbox
                 if (!(e.KeyCode is Keys.Enter) && ActiveControl is TextBox textBox)
@@ -137,7 +147,7 @@ namespace Lana_Renee_Lashes
                 } // end if
 
             }
-            catch
+            //catch
             {
                 MessageBox.Show("Please repeat what you did and video it so I can fix it :P");
 
@@ -152,24 +162,47 @@ namespace Lana_Renee_Lashes
         /// </summary>
         private void Calculupdate()
         {
-            try
+            //try
             {
-                // stores cost of goody order
-                goodyCost = decimal.Parse(textBoxGoodyCost.Text);
+                if (Regex.IsMatch(textBoxGoodyCost.Text, @"^$[\d]{1, 8}"))
+                {
+                    // renames goody string for easier coding
+                    string text = textBoxGoodyCost.Text;
+                    // stores cost of goody order
+                    goodyCost = decimal.Parse(text.Substring(1, text.Length));
+
+                    // renames olivia string for easier coding
+                    text = textBoxOliviaCost.Text;
+                    // stores cost of olivia order
+                    oliviaCost = decimal.Parse(text.Substring(1, text.Length));
+
+                    // renames hourly rate string for easier coding
+                    text = textBoxPaHourlyRate.Text;
+                    // stores cost of olivia order
+                    pA_HourlyRate = decimal.Parse(text.Substring(1, text.Length));
+
+
+                }
+                else
+                {
+                    // stores cost of goody order as a decimal
+                    goodyCost = decimal.Parse(textBoxGoodyCost.Text);
+
+                    // stores cost of olivia order as a decimal
+                    oliviaCost = decimal.Parse(textBoxOliviaCost.Text);
+
+                } // end if
+
                 // stores number of goody lashes
                 goodyQuantity = int.Parse(textBoxGoodyQuantity.Text);
-
-                // stores cost of olivia order
-                oliviaCost = decimal.Parse(textBoxOliviaCost.Text);
                 // stores quantity of olivia lashes
                 oliviaQuantity = int.Parse(textBoxOliviaQuantity.Text);
 
                 // if personal assistant checkbox is checked AND P.A's hourly rate is not null
-                if (checkBoxPaCosts.Checked && textBoxPaHourlyRate.Text != null)
+                if (checkBoxPaCosts.Checked && textBoxPaHourlyRate.Text != null || textBoxPaHourlyRate.Text != "$")
                 {
                     // sets pa hourly rate to textbox contents
                     pA_HourlyRate = decimal.Parse(textBoxPaHourlyRate.Text);
-                    textBoxPaHourlyRate.Text = pA_HourlyRate.ToString("c2");
 
                     // if P.A. hourly greater than max rate OR less than min rate
                     if (pA_HourlyRate > MAX_RATE || pA_HourlyRate < MIN_RATE)
@@ -186,19 +219,61 @@ namespace Lana_Renee_Lashes
                     }
                     else
                     {
-                        // sets hourly rate to hourly rate * hours spent boxing
-                        pA_EstimatedCost = pA_HourlyRate *= (decimal)pA_HoursSpentboxing;
-                        // updates textbox with new hourly rate in decimal form
-                        textBoxPa.Text = (pA_EstimatedCops.ToString("c2"));
+                        // sets pa estimated cost to hourly rate * hours spent boxing
+                        pA_EstimatedCost = pA_HourlyRate * (decimal)pA_HoursSpentboxing;
+                        // roughly estimates amount of hours it will take to box this order
+                        pA_EstimatedHoursToBox = totalLashesOrdered / PA_BOXES_PER_HOUR;
 
                     } // end if
 
-
-
                 } // end if
 
+                // adds quantities of both orders together for a total quantity
+                totalLashesOrdered = goodyQuantity + oliviaQuantity;
+                // adds the cost of both orders together for a total cost
+                totalCost = goodyCost + oliviaCost + pA_EstimatedCost;
+                // estimates the cost per lash set
+                estCostPerUnit = totalCost / totalLashesOrdered;
+                // estimated profit per sale
+                estProfitPerUnit = RETAIL_PRICE - estCostPerUnit;
+                // sales required to profit
+                estSalesToProfit = totalCost / RETAIL_PRICE + 1;
+                //total profit margin this order
+                estProfit = estProfitPerUnit * totalLashesOrdered;
+                //total profit margin this order minus gst
+                estProfitLessGst = (estProfit *= (decimal)gstMultiplier);
+                // gst amount
+                gstToPay = (estProfit * (decimal)gstMultiplier);
+                // if checkbox extraboxes is checked and extra boxes value is 0, 
+                checkBoxExtraBoxes.Text = checkBoxExtraBoxes.Text == "0" ? goodyQuantity.ToString() : checkBoxExtraBoxes.Text;
+                // stores usd to aud multiplier into a variable
+                estUsdToAusMultiplier = double.Parse(textBoxUsdToAud.Text);
+
+                ///////
+                /// Display Calculated values to respective textboxes
+                /////
+
+                // updates personal assistant estimated cost with new value in decimal form
+                textBoxPaEstCost.Text = (pA_EstimatedCost.ToString("c2"));
+                // updates estimated cost per unit
+                textBoxPaEstCost.Text = (pA_EstimatedCost.ToString("c2"));
+                // updates 
+                textBoxPaEstCost.Text = (pA_EstimatedCost.ToString("c2"));
+                // updates 
+                textBoxPaEstCost.Text = (pA_EstimatedCost.ToString("c2"));
+                // updates 
+                textBoxPaEstCost.Text = (pA_EstimatedCost.ToString("c2"));
+                // updates 
+                textBoxPaEstCost.Text = (pA_EstimatedCost.ToString("c2"));
+                // updates
+                textBoxPaEstCost.Text = (pA_EstimatedCost.ToString("c2"));
+                // updates 
+                textBoxPaEstCost.Text = (pA_EstimatedCost.ToString("c2"));
+                // updates 
+                textBoxPaEstCost.Text = (pA_EstimatedCost.ToString("c2"));
+
             }
-            catch
+            //catch
             {
                 MessageBox.Show("Take a video of whats happening with what values and in which textboxes plus what you are trying to achieve so I can fix it");
 
@@ -243,7 +318,7 @@ namespace Lana_Renee_Lashes
         }
         #endregion
 
-        #region checkBoxPaCosts_CheckChanged Event
+        #region checkBoxExtraBoxes_CheckChanged Event
         /// <summary>
         /// Shows/Hides extra boxes controls
         /// </summary>
@@ -257,6 +332,8 @@ namespace Lana_Renee_Lashes
                 // show extra boxes controls
                 labelExtraBoxesAmount.Show();
                 textBoxExtraBoxes.Show();
+                // displays goody quantity as a default value for the extra boxes value
+                textBoxExtraBoxes.Text = goodyQuantity.ToString();
             }
             // else if extra boxes checkbox is not checked
             else
@@ -283,7 +360,7 @@ namespace Lana_Renee_Lashes
             // launches website address
             var urlLauncher = System.Diagnostics.Process.Start(url);
         }
-        #endregion 
+        #endregion
 
         #region linkLabelLanaReneeLashes_LinkClicked Event
         /// <summary>
@@ -299,6 +376,13 @@ namespace Lana_Renee_Lashes
             var urlLauncher = System.Diagnostics.Process.Start(url);
         }
         #endregion
+
+        #region labelETA_Click Event
+        /// <summary>
+        /// Hidden calculator if you click ETA link @ bottom left of page
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void labelEta_Click(object sender, System.EventArgs e)
         {
             // sets website address
@@ -306,6 +390,8 @@ namespace Lana_Renee_Lashes
             // launches website address
             var urlLauncher = System.Diagnostics.Process.Start(url);
         }
+        #endregion
+
     }
     public static class Tools
     {
@@ -370,5 +456,70 @@ namespace Lana_Renee_Lashes
             toolTip.SetToolTip(control, text);
         }
         #endregion
+
+        public static class Logger
+        {
+
+            // creates a new list to write errors to
+            public static List<string> errorReportList = new List<string>();
+
+            #region Log(message)
+            /// <summary>
+            /// Writes passed string to console window on a new line
+            /// </summary>
+            /// <param name="message"></param>
+            public static void Log(string message)
+            {
+                Console.WriteLine(message);
+            }
+            #endregion
+
+            #region LogError()
+            /// <summary>
+            /// Writes error message to console window and error report list
+            /// </summary>
+            public static void LogError(string errorMessage)
+            {
+                try
+                {
+
+                    // writes error to error report
+                    errorReportList.Add("[" + DateTime.Now + "]" + errorMessage);
+                    // writes line to console window on its own line
+                    Console.WriteLine("Error: " + errorMessage);
+                }
+                catch (Exception ex)
+                {
+                    // write error to console
+                    Log(ex.Message);
+
+                } // end try
+            }
+
+            #endregion
+
+            #region LogException()
+            /// <summary>
+            /// Writes exception message to console window and error report list
+            /// </summary>
+            public static void LogException(string errorMessage)
+            {
+                try
+                {
+                    // writes error to error report
+                    errorReportList.Add("[" + DateTime.Now + "]" + errorMessage);
+                    // writes line to console window on its own line
+                    Console.WriteLine("Exception: " + errorMessage);
+                }
+                catch (Exception ex)
+                {
+                    // write error to console
+                    Log(ex.Message);
+
+                } // end try
+            }
+
+            #endregion
+        }
     }
 }

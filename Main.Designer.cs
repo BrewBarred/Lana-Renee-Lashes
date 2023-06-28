@@ -497,99 +497,108 @@
             // textBoxEstCostPerUnit
             // 
             this.textBoxEstCostPerUnit.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.textBoxEstCostPerUnit.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxEstCostPerUnit.ForeColor = System.Drawing.SystemColors.Info;
             this.textBoxEstCostPerUnit.Location = new System.Drawing.Point(188, 652);
             this.textBoxEstCostPerUnit.Name = "textBoxEstCostPerUnit";
             this.textBoxEstCostPerUnit.ReadOnly = true;
-            this.textBoxEstCostPerUnit.Size = new System.Drawing.Size(159, 20);
+            this.textBoxEstCostPerUnit.Size = new System.Drawing.Size(159, 13);
             this.textBoxEstCostPerUnit.TabIndex = 0;
             this.textBoxEstCostPerUnit.TabStop = false;
             // 
             // textBoxPaEstCost
             // 
             this.textBoxPaEstCost.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.textBoxPaEstCost.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxPaEstCost.ForeColor = System.Drawing.SystemColors.Info;
             this.textBoxPaEstCost.Location = new System.Drawing.Point(188, 616);
             this.textBoxPaEstCost.Name = "textBoxPaEstCost";
             this.textBoxPaEstCost.ReadOnly = true;
-            this.textBoxPaEstCost.Size = new System.Drawing.Size(159, 20);
+            this.textBoxPaEstCost.Size = new System.Drawing.Size(159, 13);
             this.textBoxPaEstCost.TabIndex = 0;
             this.textBoxPaEstCost.TabStop = false;
             // 
             // textBoxEstSalesToProfit
             // 
             this.textBoxEstSalesToProfit.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.textBoxEstSalesToProfit.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxEstSalesToProfit.ForeColor = System.Drawing.SystemColors.Info;
             this.textBoxEstSalesToProfit.Location = new System.Drawing.Point(188, 726);
             this.textBoxEstSalesToProfit.Name = "textBoxEstSalesToProfit";
             this.textBoxEstSalesToProfit.ReadOnly = true;
-            this.textBoxEstSalesToProfit.Size = new System.Drawing.Size(159, 20);
+            this.textBoxEstSalesToProfit.Size = new System.Drawing.Size(159, 13);
             this.textBoxEstSalesToProfit.TabIndex = 0;
             this.textBoxEstSalesToProfit.TabStop = false;
             // 
             // textBoxEstProfitPerUnit
             // 
             this.textBoxEstProfitPerUnit.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.textBoxEstProfitPerUnit.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxEstProfitPerUnit.ForeColor = System.Drawing.SystemColors.Info;
             this.textBoxEstProfitPerUnit.Location = new System.Drawing.Point(188, 690);
             this.textBoxEstProfitPerUnit.Name = "textBoxEstProfitPerUnit";
             this.textBoxEstProfitPerUnit.ReadOnly = true;
-            this.textBoxEstProfitPerUnit.Size = new System.Drawing.Size(159, 20);
+            this.textBoxEstProfitPerUnit.Size = new System.Drawing.Size(159, 13);
             this.textBoxEstProfitPerUnit.TabIndex = 0;
             this.textBoxEstProfitPerUnit.TabStop = false;
             // 
             // textBoxEstProfitLessGst
             // 
             this.textBoxEstProfitLessGst.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.textBoxEstProfitLessGst.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxEstProfitLessGst.ForeColor = System.Drawing.SystemColors.Info;
             this.textBoxEstProfitLessGst.Location = new System.Drawing.Point(641, 690);
             this.textBoxEstProfitLessGst.Name = "textBoxEstProfitLessGst";
             this.textBoxEstProfitLessGst.ReadOnly = true;
-            this.textBoxEstProfitLessGst.Size = new System.Drawing.Size(159, 20);
+            this.textBoxEstProfitLessGst.Size = new System.Drawing.Size(159, 13);
             this.textBoxEstProfitLessGst.TabIndex = 0;
             this.textBoxEstProfitLessGst.TabStop = false;
             // 
             // textBoxTotalQuantity
             // 
             this.textBoxTotalQuantity.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.textBoxTotalQuantity.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxTotalQuantity.ForeColor = System.Drawing.SystemColors.Info;
             this.textBoxTotalQuantity.Location = new System.Drawing.Point(641, 578);
             this.textBoxTotalQuantity.Name = "textBoxTotalQuantity";
             this.textBoxTotalQuantity.ReadOnly = true;
-            this.textBoxTotalQuantity.Size = new System.Drawing.Size(159, 20);
+            this.textBoxTotalQuantity.Size = new System.Drawing.Size(159, 13);
             this.textBoxTotalQuantity.TabIndex = 0;
             this.textBoxTotalQuantity.TabStop = false;
             // 
             // textBoxEstTotalCost
             // 
             this.textBoxEstTotalCost.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.textBoxEstTotalCost.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxEstTotalCost.ForeColor = System.Drawing.SystemColors.Info;
             this.textBoxEstTotalCost.Location = new System.Drawing.Point(641, 614);
             this.textBoxEstTotalCost.Name = "textBoxEstTotalCost";
             this.textBoxEstTotalCost.ReadOnly = true;
-            this.textBoxEstTotalCost.Size = new System.Drawing.Size(159, 20);
+            this.textBoxEstTotalCost.Size = new System.Drawing.Size(159, 13);
             this.textBoxEstTotalCost.TabIndex = 0;
             this.textBoxEstTotalCost.TabStop = false;
             // 
             // textBoxEstProfit
             // 
             this.textBoxEstProfit.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.textBoxEstProfit.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxEstProfit.ForeColor = System.Drawing.SystemColors.Info;
             this.textBoxEstProfit.Location = new System.Drawing.Point(641, 652);
             this.textBoxEstProfit.Name = "textBoxEstProfit";
             this.textBoxEstProfit.ReadOnly = true;
-            this.textBoxEstProfit.Size = new System.Drawing.Size(159, 20);
+            this.textBoxEstProfit.Size = new System.Drawing.Size(159, 13);
             this.textBoxEstProfit.TabIndex = 0;
             this.textBoxEstProfit.TabStop = false;
             // 
             // textBoxGstToPay
             // 
             this.textBoxGstToPay.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.textBoxGstToPay.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxGstToPay.ForeColor = System.Drawing.SystemColors.Info;
             this.textBoxGstToPay.Location = new System.Drawing.Point(641, 726);
             this.textBoxGstToPay.Name = "textBoxGstToPay";
             this.textBoxGstToPay.ReadOnly = true;
-            this.textBoxGstToPay.Size = new System.Drawing.Size(159, 20);
+            this.textBoxGstToPay.Size = new System.Drawing.Size(159, 13);
             this.textBoxGstToPay.TabIndex = 0;
             this.textBoxGstToPay.TabStop = false;
             // 
@@ -684,7 +693,7 @@
             this.checkBoxAutoFill.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxAutoFill.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F);
             this.checkBoxAutoFill.ForeColor = System.Drawing.Color.Thistle;
-            this.checkBoxAutoFill.Location = new System.Drawing.Point(280, 592);
+            this.checkBoxAutoFill.Location = new System.Drawing.Point(199, 589);
             this.checkBoxAutoFill.Name = "checkBoxAutoFill";
             this.checkBoxAutoFill.Size = new System.Drawing.Size(15, 14);
             this.checkBoxAutoFill.TabIndex = 14;
@@ -696,7 +705,7 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Thistle;
-            this.label2.Location = new System.Drawing.Point(190, 590);
+            this.label2.Location = new System.Drawing.Point(109, 587);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(84, 16);
             this.label2.TabIndex = 0;
@@ -709,7 +718,7 @@
             this.checkBoxDeductHoursSpent.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxDeductHoursSpent.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F);
             this.checkBoxDeductHoursSpent.ForeColor = System.Drawing.Color.Thistle;
-            this.checkBoxDeductHoursSpent.Location = new System.Drawing.Point(281, 569);
+            this.checkBoxDeductHoursSpent.Location = new System.Drawing.Point(200, 566);
             this.checkBoxDeductHoursSpent.Name = "checkBoxDeductHoursSpent";
             this.checkBoxDeductHoursSpent.Size = new System.Drawing.Size(15, 14);
             this.checkBoxDeductHoursSpent.TabIndex = 13;
@@ -721,7 +730,7 @@
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Thistle;
-            this.label3.Location = new System.Drawing.Point(149, 567);
+            this.label3.Location = new System.Drawing.Point(68, 564);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(127, 16);
             this.label3.TabIndex = 60;

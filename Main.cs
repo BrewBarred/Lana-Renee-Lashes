@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using static Lana_Renee_Lashes.Tools.Logger;
 
 
 namespace Lana_Renee_Lashes
@@ -58,8 +59,6 @@ namespace Lana_Renee_Lashes
 
         // total lashes ordered
         int totalQuantity = 0;
-        // total cost of both orders
-        decimal totalCost = 0;
         // estimated box cost per unit
         decimal estBoxPrice = 0.2632m;
         // est usd to aud multiplier - this should only be a guide
@@ -81,7 +80,12 @@ namespace Lana_Renee_Lashes
         // gst to pay
         decimal gstToPay = 0m;
 
-
+        // protects user from accidentally looping confirmation by pressing enter to exit error dialogs
+        bool spamProtect = true;
+        // regex pattern to match priceboxes
+        Regex pricePattern = new Regex(@"^\$", RegexOptions.Compiled);
+        // regex pattern to match non-priceboxes
+        Regex textPattern = new Regex(@"^(\d|\,|\.){0-8}", RegexOptions.Compiled);
 
         #endregion
 
@@ -99,7 +103,7 @@ namespace Lana_Renee_Lashes
         /// <param name="e"></param>
         private void Main_KeyUp(object sender, KeyEventArgs e)
         {
-            try
+            //try
             {
                 // if user was releasing any key other than the "enter key" and currently active control is a textbox
                 if (!(e.KeyCode is Keys.Enter) && ActiveControl is TextBox textBox)
@@ -126,6 +130,19 @@ namespace Lana_Renee_Lashes
                 // else if user was releasing the "enter" key and currently active  control is not a textbox
                 else
                 {
+                    // if user releases enter once in a row
+                    if (e.KeyCode == Keys.Enter && spamProtect == false)
+                    {
+                        //sets spam protection to true to prevent double entering while trying to exit an error dialog
+                        spamProtect = true;
+                    }
+                    // else if user presses twice in a row
+                    else
+                    {
+                        // breaks out to prevent looping
+                        spamProtect = false;
+                        return;
+                    }
                     // if the currently active control is a checkbox
                     if (ActiveControl is CheckBox thisCheckBox)
                     {
@@ -135,18 +152,7 @@ namespace Lana_Renee_Lashes
                     // else if the current active control is not a checkbox
                     else
                     {
-                        // sets personal assistants hours spent boxing to user input value
-                        pA_HoursSpentboxing = double.Parse(textBoxPaHoursSpent.Text);
-
-                        // if personal hours spent boxing is 0
-                        if (pA_HoursSpentboxing == 0)
-                        {
-                            // writes error message to user
-                            MessageBox.Show("No hours logged for P.A, consider revising...");
-                            // writes error message to user
-                            MessageBox.Show("Calculating...");
-
-                        }
+                        // calculates new textbox values and updates textboxes
                         Calculupdate();
 
                     } // end if
@@ -154,9 +160,9 @@ namespace Lana_Renee_Lashes
                 } // end if
 
             }
-            catch
+            //catch
             {
-                MessageBox.Show("Please repeat what you did and video it so I can fix it :P");
+                LogError("Please repeat what you did and video it so I can fix it :P");
 
             } // end try
 
@@ -199,6 +205,17 @@ namespace Lana_Renee_Lashes
                         pA_HourlyRate = decimal.Parse(text.Substring(1, text.Length - 1));
                     }
 
+                    // sets personal assistants hours spent boxing to user input value
+                    pA_HoursSpentboxing = double.Parse(textBoxPaHoursSpent.Text);
+
+                    // if personal hours spent boxing is 0
+                    if (pA_HoursSpentboxing == 0)
+                    {
+                        // writes error message to user
+                        MessageBox.Show("No hours logged for P.A, consider revising...");
+
+                    }
+
 
                 }
                 else
@@ -237,7 +254,6 @@ namespace Lana_Renee_Lashes
                         if (checkBoxDeductHoursSpent.Checked)
                         {
                             // lowers estimated hours to box lashes down by the amount of hours spent on it already
-
                             pA_EstimatedHoursToBox -= pA_HoursSpentboxing;
                         }
 
@@ -250,16 +266,16 @@ namespace Lana_Renee_Lashes
                 // if total quantity adds up to more than 0
                 if (totalQuantity > 0)
                 {
+                    // adds the cost of both orders together for a total cost
+                    estTotalCost = (goodyCost + oliviaCost + pA_EstimatedCost) * (decimal)estUsdToAusMultiplier;
                     // estimates the cost per lash set
-                    estCostPerUnit = totalCost / totalQuantity;
+                    estCostPerUnit = estTotalCost / totalQuantity;
                     // estimated profit per sale
                     estProfitPerUnit = RETAIL_PRICE - estCostPerUnit;
                     // sales required to profit
-                    estSalesToProfit = (int)totalCost / (int)RETAIL_PRICE + 1;
+                    estSalesToProfit = (int)estTotalCost / (int)RETAIL_PRICE + 1;
                     // adds quantities of both orders together for a total quantity
                     totalQuantity = goodyQuantity + oliviaQuantity;
-                    // adds the cost of both orders together for a total cost
-                    totalCost = goodyCost + oliviaCost + pA_EstimatedCost;
                     //total profit margin this order
                     estProfit = estProfitPerUnit * totalQuantity;
                     //total profit margin this order minus gst
@@ -270,14 +286,19 @@ namespace Lana_Renee_Lashes
                     checkBoxExtraBoxes.Text = checkBoxExtraBoxes.Text == "0" ? goodyQuantity.ToString() : checkBoxExtraBoxes.Text;
                     // stores usd to aud multiplier into a variable
                     estUsdToAusMultiplier = double.Parse(textBoxUsdToAud.Text);
-                }
+
+                } // end if
 
                 ///////
                 /// Display Calculated values to respective textboxes
                 /////
 
-                // updates estimated hours to box
-                textBoxPaBoxesPerHour.Text = pA_EstimatedHoursToBox.ToString("d3");
+                if (Regex.IsMatch(@"{0}", pA_EstimatedHoursToBox.ToString()))
+                {
+                    // updates estimated hours to box
+                    textBoxPaBoxesPerHour.Text = pA_EstimatedHoursToBox == 0 ? "0" : pA_EstimatedHoursToBox.ToString("d2");
+                }
+
                 // updates personal assistant estimated cost with new value in decimal form
                 textBoxPaEstCost.Text = pA_EstimatedCost.ToString("c2");
                 // updates estimated cost per unit
@@ -289,7 +310,7 @@ namespace Lana_Renee_Lashes
                 // updates total quantity
                 textBoxTotalQuantity.Text = totalQuantity.ToString();
                 // updates estimated total cost
-                textBoxEstTotalCost.Text = totalCost.ToString("c2");
+                textBoxEstTotalCost.Text = estTotalCost.ToString("c2");
                 // updates estimated profit
                 textBoxEstProfit.Text = estProfit.ToString("c2");
                 // updates profit less gst
@@ -420,6 +441,10 @@ namespace Lana_Renee_Lashes
             var urlLauncher = System.Diagnostics.Process.Start(url);
         }
     }
+
+}
+namespace Lana_Renee_Lashes
+{
     public static class Tools
     {
         #region Tool Tips
@@ -549,4 +574,5 @@ namespace Lana_Renee_Lashes
             #endregion
         }
     }
+
 }

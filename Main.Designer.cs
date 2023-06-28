@@ -82,7 +82,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.checkBoxAutoFill = new System.Windows.Forms.CheckBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.checkBoxDeductHoursSpent = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWillow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -682,10 +682,10 @@
             this.checkBoxAutoFill.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxAutoFill.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F);
             this.checkBoxAutoFill.ForeColor = System.Drawing.Color.Thistle;
-            this.checkBoxAutoFill.Location = new System.Drawing.Point(280, 589);
+            this.checkBoxAutoFill.Location = new System.Drawing.Point(280, 592);
             this.checkBoxAutoFill.Name = "checkBoxAutoFill";
             this.checkBoxAutoFill.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxAutoFill.TabIndex = 13;
+            this.checkBoxAutoFill.TabIndex = 14;
             this.checkBoxAutoFill.UseVisualStyleBackColor = true;
             // 
             // label2
@@ -694,24 +694,24 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Thistle;
-            this.label2.Location = new System.Drawing.Point(190, 587);
+            this.label2.Location = new System.Drawing.Point(190, 590);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(84, 16);
             this.label2.TabIndex = 0;
             this.label2.Text = "Autofill Form:";
             // 
-            // checkBox1
+            // checkBoxDeductHoursSpent
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Checked = true;
-            this.checkBox1.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBox1.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F);
-            this.checkBox1.ForeColor = System.Drawing.Color.Thistle;
-            this.checkBox1.Location = new System.Drawing.Point(281, 566);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(15, 14);
-            this.checkBox1.TabIndex = 61;
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBoxDeductHoursSpent.AutoSize = true;
+            this.checkBoxDeductHoursSpent.Checked = true;
+            this.checkBoxDeductHoursSpent.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxDeductHoursSpent.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F);
+            this.checkBoxDeductHoursSpent.ForeColor = System.Drawing.Color.Thistle;
+            this.checkBoxDeductHoursSpent.Location = new System.Drawing.Point(281, 569);
+            this.checkBoxDeductHoursSpent.Name = "checkBoxDeductHoursSpent";
+            this.checkBoxDeductHoursSpent.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxDeductHoursSpent.TabIndex = 13;
+            this.checkBoxDeductHoursSpent.UseVisualStyleBackColor = true;
             // 
             // label3
             // 
@@ -719,7 +719,7 @@
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Thistle;
-            this.label3.Location = new System.Drawing.Point(149, 564);
+            this.label3.Location = new System.Drawing.Point(149, 567);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(127, 16);
             this.label3.TabIndex = 60;
@@ -731,7 +731,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(823, 785);
-            this.Controls.Add(this.checkBox1);
+            this.Controls.Add(this.checkBoxDeductHoursSpent);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.checkBoxAutoFill);
             this.Controls.Add(this.label2);
@@ -858,7 +858,7 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox checkBoxAutoFill;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.CheckBox checkBoxDeductHoursSpent;
         private System.Windows.Forms.Label label3;
     }
 }

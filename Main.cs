@@ -234,7 +234,13 @@ namespace Lana_Renee_Lashes
                         // sets pa estimated cost to hourly rate * hours spent boxing
                         pA_EstimatedCost = pA_HourlyRate * (decimal)pA_HoursSpentboxing;
                         // roughly estimates amount of hours it will take to box this order
-                        pA_EstimatedHoursToBox = totalQuantity / PA_BOXES_PER_HOUR - pA_HoursSpentboxing;
+                        pA_EstimatedHoursToBox = totalQuantity / PA_BOXES_PER_HOUR;
+                        // if checkbox deduct hours spent is check
+                        if (checkBoxDeductHoursSpent.Checked)
+                        {
+                            // lowers estimated hours to box lashes down by the amount of hours spent on it already
+                            pA_EstimatedHoursToBox -= pA_HoursSpentboxing;
+                        }
 
                     } // end if
 

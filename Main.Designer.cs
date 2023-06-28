@@ -43,7 +43,7 @@
             this.labelPaHourlyRate = new System.Windows.Forms.Label();
             this.labelEstPaCost = new System.Windows.Forms.Label();
             this.labelPaHoursToBox = new System.Windows.Forms.Label();
-            this.checkBoxExtraBoxes = new System.Windows.Forms.CheckBox();
+            this.checkBoxRoughBoxes = new System.Windows.Forms.CheckBox();
             this.labelCostPerUnit = new System.Windows.Forms.Label();
             this.labelEstimatedtotal = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
@@ -268,20 +268,19 @@
             this.labelPaHoursToBox.TabIndex = 0;
             this.labelPaHoursToBox.Text = "Est. Hours to box:";
             // 
-            // checkBoxExtraBoxes
+            // checkBoxRoughBoxes
             // 
-            this.checkBoxExtraBoxes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
-            this.checkBoxExtraBoxes.AutoSize = true;
-            this.checkBoxExtraBoxes.Checked = true;
-            this.checkBoxExtraBoxes.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxExtraBoxes.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F);
-            this.checkBoxExtraBoxes.ForeColor = System.Drawing.Color.Thistle;
-            this.checkBoxExtraBoxes.Location = new System.Drawing.Point(642, 361);
-            this.checkBoxExtraBoxes.Name = "checkBoxExtraBoxes";
-            this.checkBoxExtraBoxes.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxExtraBoxes.TabIndex = 9;
-            this.checkBoxExtraBoxes.UseVisualStyleBackColor = true;
-            this.checkBoxExtraBoxes.CheckedChanged += new System.EventHandler(this.checkBoxExtraBoxes_CheckedChanged);
+            this.checkBoxRoughBoxes.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.checkBoxRoughBoxes.AutoSize = true;
+            this.checkBoxRoughBoxes.Checked = true;
+            this.checkBoxRoughBoxes.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxRoughBoxes.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F);
+            this.checkBoxRoughBoxes.ForeColor = System.Drawing.Color.Thistle;
+            this.checkBoxRoughBoxes.Location = new System.Drawing.Point(642, 361);
+            this.checkBoxRoughBoxes.Name = "checkBoxRoughBoxes";
+            this.checkBoxRoughBoxes.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxRoughBoxes.TabIndex = 9;
+            this.checkBoxRoughBoxes.UseVisualStyleBackColor = true;
             // 
             // labelCostPerUnit
             // 
@@ -752,6 +751,7 @@
             this.checkBoxConvert.Size = new System.Drawing.Size(15, 14);
             this.checkBoxConvert.TabIndex = 62;
             this.checkBoxConvert.UseVisualStyleBackColor = true;
+            this.checkBoxConvert.CheckedChanged += new System.EventHandler(this.checkBoxConvert_CheckedChanged);
             // 
             // labelConvert
             // 
@@ -836,7 +836,7 @@
             this.Controls.Add(this.label11);
             this.Controls.Add(this.labelEstimatedtotal);
             this.Controls.Add(this.labelCostPerUnit);
-            this.Controls.Add(this.checkBoxExtraBoxes);
+            this.Controls.Add(this.checkBoxRoughBoxes);
             this.Controls.Add(this.labelPaHoursToBox);
             this.Controls.Add(this.labelEstPaCost);
             this.Controls.Add(this.labelPaHourlyRate);
@@ -884,7 +884,7 @@
         private System.Windows.Forms.Label labelPaHourlyRate;
         private System.Windows.Forms.Label labelEstPaCost;
         private System.Windows.Forms.Label labelPaHoursToBox;
-        private System.Windows.Forms.CheckBox checkBoxExtraBoxes;
+        private System.Windows.Forms.CheckBox checkBoxRoughBoxes;
         private System.Windows.Forms.Label labelCostPerUnit;
         private System.Windows.Forms.Label labelEstimatedtotal;
         private System.Windows.Forms.Label label11;

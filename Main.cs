@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using static Lana_Renee_Lashes.Tools.Logger;
+using static Lana_Renee_Lashes.Lana_Renee_Lashes.Tools.Logger;
 
 
 namespace Lana_Renee_Lashes
@@ -88,17 +88,19 @@ namespace Lana_Renee_Lashes
         decimal roughBoxPrice = 0;
         // rough shipping cost per unit
         decimal roughShippingCost = 0;
+        // user information
 
 
-
+        // AUD currency on?
+        bool audCurrency = true;
         // protects user from accidentally looping confirmation by pressing enter to exit error dialogs
         bool spamProtect = true;
         // regex pattern to match priceboxes
-        static public Regex pricePatternString = new Regex(@"\b^\$(\d{0,3}|\,|\.){0,8}\b", RegexOptions.Compiled);
+        static public Regex pricePatternString = new Regex(@"^\$(\d{0,3}|\,|\.){0,8}", RegexOptions.Compiled);
         // variable for to parse price regex
         string pricePattern = pricePatternString.ToString();
         // regex pattern to match non-priceboxes
-        Regex textPatternString = new Regex(@"\b^(\d{0,3}|\,|\.){0,8}\b", RegexOptions.Compiled);
+        Regex textPatternString = new Regex(@"^(\d{0,3}|\,|\.){0,8}", RegexOptions.Compiled);
         // variable for to parse text regex
         string textPattern = pricePatternString.ToString();
 
@@ -108,6 +110,16 @@ namespace Lana_Renee_Lashes
         {
             InitializeComponent();
             KeyPreview = true;
+
+            /////////////////////////////////////////////////sadfdasfdsafdsafasdf
+            goodyQuantity = 25;
+            oliviaQuantity = 30;
+            goodyCost = 10;
+            oliviaCost = 40;
+            textBoxOliviaCost.Text = oliviaCost.ToString("c2");
+            textBoxGoodyCost.Text = goodyCost.ToString("c2");
+            textBoxGoodyQuantity.Text = goodyQuantity.ToString();
+            textBoxOliviaQuantity.Text = oliviaQuantity.ToString();
         }
 
         #region CreateAccount_KeyUp Event
@@ -177,7 +189,7 @@ namespace Lana_Renee_Lashes
             }
             //catch
             {
-                LogError("Please repeat what you did and video it so I can fix it :P");
+                LogError("PHere?");
 
             } // end try
 
@@ -194,115 +206,116 @@ namespace Lana_Renee_Lashes
             {
 
                 // for each control in this form
-                foreach (TextBoxBase textBox in this.Controls)
+                foreach (Control textBox in this.Controls)
                 {
-                    // if text is null or blank
-                    if (textBox.Text is null or "0")
+                    if (textBox is TextBox && !(textBox.Text is null or "" or "0"))
                     {
-                        // moves to next text box
-                        continue;
-                    }
-                    // if regex finds a match between this control and pricebox pattern
-                    if (Regex.IsMatch(textBox.Text, pricePattern))
-                    {
-                        // stores textbox name into a shorter variable
-                        string text = textBox.Name;
-                        // switch to input name
-                        switch (text)
+                        // if regex finds a match between this control and pricebox pattern
+                        if (Regex.IsMatch(textBox.Text, pricePattern))
                         {
-                            // textbox good cost 
-                            case "textBoxGoodyCost":
-                                // stores user input to goodyCost variable
-                                goodyCost = decimal.Parse(textBoxGoodyCost.Text);
-
-                                break;
-
-                            case "textBoxOliviaCost":
-                                // stores user input to oliviaCost variable
-                                oliviaCost = decimal.Parse(textBoxOliviaCost.Text);
-
-                                break;
-
-                            case "textBoxPaHourlyRate":
-                                // stores user input to textBoxPaHourlyRate
-                                pA_HourlyRate = decimal.Parse(textBoxPaHourlyRate.Text);
-
-                                break;
-
-                            // if no case was matched
-                            default:
-                                // logs error
-                                LogError("[" + DateTime.Now + "]" + "Failed to find price box: " + textBox);
-                                break;
-
-                        } // end switch
-
-                    } // end if
-
-                    // if regex finds a match between this control and pricebox pattern
-                    else if (Regex.IsMatch(textBox.Text, pricePattern))
-                    {
-                        // stores textbox name into a shorter variable
-                        string text = textBox.Name;
-
-                        // if regex finds a match between this textbox text and text pattern
-                        if (Regex.IsMatch(textBox.Text, textPattern))
-                        {
+                            // stores textbox name into a shorter variable
+                            string text = textBox.Name;
+                            // takes a substring of the text to remove the $ symbol
+                            text = text.Substring(0, 1);
                             // switch to input name
                             switch (text)
                             {
                                 // textbox good cost 
-                                case "textBoxGoodyQuantity":
+                                case "textBoxGoodyCost":
                                     // stores user input to goodyCost variable
-                                    goodyCost = decimal.Parse(textBoxGoodyCost.Text);
+                                    goodyCost = decimal.Parse(textBoxGoodyCost.Text) * (decimal)estUsdToAusMultiplier;
 
                                     break;
 
-                                case "textBoxOliviaQuantity":
+                                case "textBoxOliviaCost":
                                     // stores user input to oliviaCost variable
-                                    oliviaCost = decimal.Parse(textBoxOliviaCost.Text);
+                                    oliviaCost = decimal.Parse(textBoxOliviaCost.Text) * (decimal)estUsdToAusMultiplier;
 
                                     break;
 
-
-                                case "textBoxUsdToAud":
-                                    // stores user input usd to aud conversion rate (default 1.5)
-                                    estUsdToAusMultiplier = double.Parse(textBoxUsdToAud.Text);
-
-                                    break;
-
-                                case "textBoxPaHoursSpentBoxing":
-                                    // stores user input to textBox spent boxing
-                                    pA_HoursSpentBoxing = double.Parse(textBoxPaHoursSpentBoxing.Text);
-
-                                    break;
-
-                                // textbox good cost 
-                                case "textBoxPaBoxesPerHour":
-                                    // stores user input to lashed boxed per hour variable
-                                    pA_BoxesPerHour = double.Parse(textBoxPaBoxesPerHour.Text);
-
-                                    break;
-
-                                case "textBoxRoughBoxPrice":
-                                    // stores user input to rough box price variable
-                                    roughBoxPrice = totalQuantity * EST_BOX_PRICE;
-
-                                    break;
-
-                                case "textBoxRoughShipPrice":
-                                    // stores user input to rough shipping cost variable
-                                    roughShippingCost = totalQuantity * EST_SHIP_PRICE;
+                                case "textBoxPaHourlyRate":
+                                    // stores user input to textBoxPaHourlyRate
+                                    pA_HourlyRate = decimal.Parse(textBoxPaHourlyRate.Text);
 
                                     break;
 
                                 // if no case was matched
                                 default:
                                     // logs error
-                                    LogError("[" + DateTime.Now + "]" + "Failed to find textbox: " + textBox);
+                                    LogError("[" + DateTime.Now + "]" + "Failed to find price box: " + textBox);
                                     break;
 
                             } // end switch
+
+                        } // end if
+
+                        // if regex finds a match between this control and pricebox pattern
+                        else if (Regex.IsMatch(textBox.Text, pricePattern))
+                        {
+                            // stores textbox name into a shorter variable
+                            string text = textBox.Name;
+
+                            // if regex finds a match between this textbox text and text pattern
+                            if (Regex.IsMatch(textBox.Text, textPattern))
+                            {
+                                // switch to input name
+                                switch (text)
+                                {
+                                    // textbox good cost 
+                                    case "textBoxGoodyQuantity":
+                                        // stores user input to goodyCost variable
+                                        goodyCost = decimal.Parse(textBoxGoodyCost.Text);
+
+                                        break;
+
+                                    case "textBoxOliviaQuantity":
+                                        // stores user input to oliviaCost variable
+                                        oliviaCost = decimal.Parse(textBoxOliviaCost.Text);
+
+                                        break;
+
+
+                                    case "textBoxUsdToAud":
+                                        // stores user input usd to aud conversion rate (default 1.5)
+                                        estUsdToAusMultiplier = double.Parse(textBoxUsdToAud.Text);
+
+                                        break;
+
+                                    case "textBoxPaHoursSpentBoxing":
+                                        // stores user input to textBox spent boxing
+                                        pA_HoursSpentBoxing = double.Parse(textBoxPaHoursSpentBoxing.Text);
+
+                                        break;
+
+                                    // textbox good cost 
+                                    case "textBoxPaBoxesPerHour":
+                                        // stores user input to lashed boxed per hour variable
+                                        pA_BoxesPerHour = double.Parse(textBoxPaBoxesPerHour.Text);
+
+                                        break;
+
+                                    case "textBoxRoughBoxPrice":
+                                        // stores user input to rough box price variable
+                                        roughBoxPrice = totalQuantity * EST_BOX_PRICE * (decimal)estUsdToAusMultiplier;
+
+                                        break;
+
+                                    case "textBoxRoughShipPrice":
+                                        // stores user input to rough shipping cost variable
+                                        roughShippingCost = totalQuantity * EST_SHIP_PRICE * (decimal)estUsdToAusMultiplier; ;
+
+                                        break;
+
+                                    // if no case was matched
+                                    default:
+                                        // logs error
+                                        LogError("[" + DateTime.Now + "]" + "Failed to find textbox: " + textBox);
+
+                                        break;
+
+                                } // end switch
+
+                            } // end if
 
                         } // end if
 
@@ -310,10 +323,11 @@ namespace Lana_Renee_Lashes
 
                 } // end for
 
+
                 // converts total from olivia to usd if the check aud checkbox is ticked
-                oliviaCost = checkBoxConvert.Checked ? oliviaCost * (decimal)estUsdToAusMultiplier : oliviaCost;
+                textBoxOliviaCost.Text = checkBoxConvert.Checked ? (oliviaCost * (decimal)estUsdToAusMultiplier).ToString("c2") : oliviaCost.ToString("c2");
                 // converts total from goody to usd if the check aud checkbox is ticked
-                goodyCost = checkBoxConvert.Checked ? goodyCost * (decimal)estUsdToAusMultiplier : goodyCost;
+                textBoxGoodyCost.Text = checkBoxConvert.Checked ? (goodyCost * (decimal)estUsdToAusMultiplier).ToString("c2") : goodyCost.ToString("c2");
                 // calculates total cost
                 estTotalCost = goodyCost + oliviaCost;
                 // calculates total quantity
@@ -352,6 +366,10 @@ namespace Lana_Renee_Lashes
                                 pA_EstimatedCost = pA_HourlyRate * (decimal)pA_HoursSpentBoxing;
                                 // roughly estimates amount of hours it will take to box this order
                                 pA_EstimatedHoursToBox = totalQuantity / pA_BoxesPerHour - pA_HoursSpentBoxing;
+                                // display hours spent boxing
+                                textBoxPaHoursSpentBoxing.Text = pA_HoursSpentBoxing.ToString("d2");
+                                // display pa's estimated hours to box
+                                textBoxPaBoxesPerHour.Text = pA_EstimatedHoursToBox.ToString("d2");
                             }
                             else
                             {
@@ -390,11 +408,6 @@ namespace Lana_Renee_Lashes
                             /////
 
 
-                            // display hours spent boxing
-                            textBoxPaHoursSpentBoxing.Text = pA_HoursSpentBoxing.ToString("d2");
-                            // display pa's estimated hours to box
-                            textBoxPaBoxesPerHour.Text = pA_EstimatedHoursToBox.ToString("d2");
-
                             // display estimated p.a. cost
                             textBoxPaEstCost.Text = pA_EstimatedCost.ToString("c2");
                             // updates estimated cost per unit
@@ -418,22 +431,9 @@ namespace Lana_Renee_Lashes
 
                     } // end if
 
-                    if ()
-                    {
-
-                    }
-
                 } // end if
 
-
-
-
-
-
-
-
-
-            }
+            } // end if
             //catch
             {
                 MessageBox.Show("Take a video of whats happening with what values and in which textboxes plus what you are trying to achieve so I can fix it");
@@ -461,6 +461,11 @@ namespace Lana_Renee_Lashes
                 textBoxPaHoursSpentBoxing.Show();
                 labelPaHoursToBox.Show();
                 textBoxPaBoxesPerHour.Show();
+
+                // resets hourly rate to it's default
+                pA_HourlyRate = 25m;
+                // displays hourly rate again
+                textBoxPaHourlyRate.Text = pA_HourlyRate.ToString("c2");
             }
             // else if P.A. checkbox is not checked
             else
@@ -479,33 +484,40 @@ namespace Lana_Renee_Lashes
         }
         #endregion
 
-        #region checkBoxExtraBoxes_CheckChanged Event
+        #region checkBoxRoughBox_CheckChanged Event
         /// <summary>
         /// Shows/Hides extra boxes controls
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void checkBoxExtraBoxes_CheckedChanged(object sender, System.EventArgs e)
+        private void checkRoughBox_CheckedChanged(object sender, System.EventArgs e)
         {
             // if extra boxes checkbox is checked
-            if (checkBoxExtraBoxes.Checked)
+            if (checkBoxRoughBoxes.Checked)
             {
                 // show extra boxes controls
                 labelRoughBoxPrice.Show();
                 textBoxRoughBoxPrice.Show();
-                // displays goody quantity as a default value for the extra boxes value
-                textBoxRoughBoxPrice.Text = goodyQuantity.ToString();
+                if (totalQuantity != 0)
+                {
+                    // displays a rough estimate of box price per unit in the correct currency
+                    textBoxRoughBoxPrice.Text = checkBoxConvert.Checked ? (roughBoxPrice * (decimal)estUsdToAusMultiplier).ToString("c2") : (roughBoxPrice).ToString("c2");
+                    // displays a rough estimate of shipping price per unit in the correct currency
+                    textBoxRoughShip.Text = checkBoxConvert.Checked ? (roughShippingCost * (decimal)estUsdToAusMultiplier).ToString("c2") : (roughShippingCost).ToString("c2");
+
+                }
+                // else if extra boxes checkbox is not checked
+                else
+                {
+                    // show extra boxes controls
+                    labelRoughBoxPrice.Hide();
+                    textBoxRoughBoxPrice.Hide();
+
+                } // end if
+
             }
-            // else if extra boxes checkbox is not checked
-            else
-            {
-                // show extra boxes controls
-                labelRoughBoxPrice.Hide();
-                textBoxRoughBoxPrice.Hide();
-
-            } // end if
-
         }
+
         #endregion
 
         #region linkLabelUsdToAud_LinkClicked Event
@@ -538,16 +550,33 @@ namespace Lana_Renee_Lashes
         }
         #endregion
 
+        #region labelSubTitle_MouseEnter()
+        /// <summary>
+        ///changes subtitle color to blue when mouse enters region
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void labelSubTitle_MouseEnter(object sender, EventArgs e)
         {
+            //changes subtitle color to blue
             labelSubTitle.ForeColor = Color.CadetBlue;
         }
+        #endregion
 
+        #region labelSubTitle_MouseLeave()
+        /// <summary>
+        ///changes subtitle color back to white when mouse exits region
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void labelSubTitle_MouseLeave(object sender, EventArgs e)
         {
+            //changes subtitle color back to white
             labelSubTitle.ForeColor = Color.White;
         }
+        #endregion
 
+        #region labelSubTitle_Click()
         private void labelSubTitle_Click(object sender, EventArgs e)
         {
             // sets website address to currency comparison on google
@@ -555,136 +584,168 @@ namespace Lana_Renee_Lashes
             // launches website address
             var urlLauncher = System.Diagnostics.Process.Start(url);
         }
-    }
-
-}
-namespace Lana_Renee_Lashes
-{
-    public static class Tools
-    {
-        #region Tool Tips
-        /// <summary>
-        /// Displays a tool tip at the current control
-        /// </summary>
-        /// <param name="control">Current Control</param>
-        /// <param name="title">Desired tool tip title</param>
-        /// <param name="text">Desired tool tip message</param>
-        /// <returns></returns>
-        public static Control ShowUsYaTips(this Control control, string title, string text)
-        {
-            // creates a new instance of the ToolTip method
-            var toolTip = new ToolTip
-            {
-                // sets the tool tip icon
-                ToolTipIcon = ToolTipIcon.Warning,
-                // sets the tool tip shape to a rectangle instead of a balloon
-                IsBalloon = false,
-                // enables tool tip even if parent control is not active
-                ShowAlways = true,
-                // sets the period of time that the tool tip is shown for
-                AutoPopDelay = 1600,
-                // sets the period of time that the mouse pointer must remain stationary for before the tool tip is shown
-                InitialDelay = 0,
-                // enables tool tip animation effect
-                UseAnimation = true,
-                // enables tool tip fading effect
-                UseFading = true
-            };
-            toolTip.SetToolTip(control, text);
-            return control;
-        }
-        /// <summary>
-        /// Displays a tool tip at the current control
-        /// </summary>
-        /// <param name="control">Current Control</param>
-        /// <param name="text">Desired tool tip message</param>
-        /// <returns></returns>
-        public static void ShowUsYaTips(this Control control, string text)
-        {
-
-            var toolTip = new ToolTip
-            {
-                // sets the tool tip shape to a rectangle instead of a balloon
-                IsBalloon = false,
-                // enables tool tip even if parent control is not active
-                ShowAlways = true,
-                // sets the period of time that the tool tip is shown for
-                AutoPopDelay = 1600,
-                // sets the period of time that the mouse pointer must remain stationary for before the tool tip is shown
-                InitialDelay = 0,
-                // enables tool tip animation effect
-                UseAnimation = true,
-                // enables tool tip fading effect
-                UseFading = true
-            };
-            toolTip.SetToolTip(control, text);
-        }
         #endregion
 
-        public static class Logger
+        /// <summary>
+        /// checkBoxConvert_CheckedChanged (Currency converter)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkBoxConvert_CheckedChanged(object sender, EventArgs e)
         {
-
-            // creates a new list to write errors to
-            public static List<string> errorReportList = new List<string>();
-
-            #region Log(message)
-            /// <summary>
-            /// Writes passed string to console window on a new line
-            /// </summary>
-            /// <param name="message"></param>
-            public static void Log(string message)
+            // used to reference different price boxes in the form
+            string text = null;
+            // if aud currency is enabled
+            if (checkBoxConvert.Checked)
             {
-                Console.WriteLine(message);
+                // changes the multiplier to the figure in the usd to aud rate textbox
+                estUsdToAusMultiplier = double.Parse(textBoxUsdToAud.Text);
+                // audcurrency is enabled
+                audCurrency = true;
+            }
+            // else if aud currency is not enabled
+            else
+            {
+                // multiplier is set to 1 to return the same number
+                estUsdToAusMultiplier = 1.0;
+                // audcurrency is disabled
+                audCurrency = false;
+
+            } // end if
+
+        }
+    }
+    namespace Lana_Renee_Lashes
+    {
+        public static class Tools
+        {
+            #region Tool Tips
+            /// <summary>
+            /// Displays a tool tip at the current control
+            /// </summary>
+            /// <param name="control">Current Control</param>
+            /// <param name="title">Desired tool tip title</param>
+            /// <param name="text">Desired tool tip message</param>
+            /// <returns></returns>
+            public static Control ShowUsYaTips(this Control control, string title, string text)
+            {
+                // creates a new instance of the ToolTip method
+                var toolTip = new ToolTip
+                {
+                    // sets the tool tip icon
+                    ToolTipIcon = ToolTipIcon.Warning,
+                    // sets the tool tip shape to a rectangle instead of a balloon
+                    IsBalloon = false,
+                    // enables tool tip even if parent control is not active
+                    ShowAlways = true,
+                    // sets the period of time that the tool tip is shown for
+                    AutoPopDelay = 1600,
+                    // sets the period of time that the mouse pointer must remain stationary for before the tool tip is shown
+                    InitialDelay = 0,
+                    // enables tool tip animation effect
+                    UseAnimation = true,
+                    // enables tool tip fading effect
+                    UseFading = true
+                };
+                toolTip.SetToolTip(control, text);
+                return control;
+            }
+            /// <summary>
+            /// Displays a tool tip at the current control
+            /// </summary>
+            /// <param name="control">Current Control</param>
+            /// <param name="text">Desired tool tip message</param>
+            /// <returns></returns>
+            public static void ShowUsYaTips(this Control control, string text)
+            {
+
+                var toolTip = new ToolTip
+                {
+                    // sets the tool tip shape to a rectangle instead of a balloon
+                    IsBalloon = false,
+                    // enables tool tip even if parent control is not active
+                    ShowAlways = true,
+                    // sets the period of time that the tool tip is shown for
+                    AutoPopDelay = 1600,
+                    // sets the period of time that the mouse pointer must remain stationary for before the tool tip is shown
+                    InitialDelay = 0,
+                    // enables tool tip animation effect
+                    UseAnimation = true,
+                    // enables tool tip fading effect
+                    UseFading = true
+                };
+                toolTip.SetToolTip(control, text);
             }
             #endregion
 
-            #region LogError()
-            /// <summary>
-            /// Writes error message to console window and error report list
-            /// </summary>
-            public static void LogError(string errorMessage)
+            #region Logger
+            public static class Logger
             {
-                try
-                {
 
-                    // writes error to error report
-                    errorReportList.Add("[" + DateTime.Now + "]" + errorMessage);
-                    // writes line to console window on its own line
-                    Console.WriteLine("Error: " + errorMessage);
+                // creates a new list to write errors to
+                public static List<string> errorReportList = new List<string>();
+
+                #region Log(message)
+                /// <summary>
+                /// Writes passed string to console window on a new line
+                /// </summary>
+                /// <param name="message"></param>
+                public static void Log(string message)
+                {
+                    Console.WriteLine(message);
                 }
-                catch (Exception ex)
+                #endregion
+
+                #region LogError()
+                /// <summary>
+                /// Writes error message to console window and error report list
+                /// </summary>
+                public static void LogError(string errorMessage)
                 {
-                    // write error to console
-                    Log(ex.Message);
+                    try
+                    {
 
-                } // end try
-            }
+                        // writes error to error report
+                        errorReportList.Add("[" + DateTime.Now + "]" + errorMessage);
+                        // writes line to console window on its own line
+                        Console.WriteLine("Error: " + errorMessage);
+                    }
+                    catch (Exception ex)
+                    {
+                        // write error to console
+                        Log(ex.Message);
 
-            #endregion
-
-            #region LogException()
-            /// <summary>
-            /// Writes exception message to console window and error report list
-            /// </summary>
-            public static void LogException(string errorMessage)
-            {
-                try
-                {
-                    // writes error to error report
-                    errorReportList.Add("[" + DateTime.Now + "]" + errorMessage);
-                    // writes line to console window on its own line
-                    Console.WriteLine("Exception: " + errorMessage);
+                    } // end try
                 }
-                catch (Exception ex)
-                {
-                    // write error to console
-                    Log(ex.Message);
 
-                } // end try
+                #endregion
+
+                #region LogException()
+                /// <summary>
+                /// Writes exception message to console window and error report list
+                /// </summary>
+                public static void LogException(string errorMessage)
+                {
+                    try
+                    {
+                        // writes error to error report
+                        errorReportList.Add("[" + DateTime.Now + "]" + errorMessage);
+                        // writes line to console window on its own line
+                        Console.WriteLine("Exception: " + errorMessage);
+                    }
+                    catch (Exception ex)
+                    {
+                        // write error to console
+                        Log(ex.Message);
+
+                    } // end try
+                }
+
+                #endregion
             }
 
             #endregion
         }
     }
-
 }
+

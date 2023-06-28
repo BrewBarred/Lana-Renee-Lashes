@@ -361,3 +361,9 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+/Lana-Renee-Lashes.csproj
+/.gitignore
+/.gitignore
+/Main.cs
+/Main.Designer.cs
+/.gitignore

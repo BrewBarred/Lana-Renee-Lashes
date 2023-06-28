@@ -12,16 +12,22 @@ namespace Lana_Renee_Lashes
     {
         #region Declarations
 
-        // personal assistant estimated amount of boxes packed per hour
-        const double PA_BOXES_PER_HOUR = 53.33;
+
         // maximum cost per unit before warning
         const double COST_WARNING = 4.5;
         // max hourly rate
         const int MAX_RATE = 40;
         // min hourly rate
         const int MIN_RATE = 20;
+        // estimated box cost per unit
+        const decimal EST_BOX_PRICE = 0.2632m;
+        // estimated shipping cost per unit
+        const decimal EST_SHIP_PRICE = 0.2263m;
         // retail price per unit
         decimal RETAIL_PRICE = 24.99m;
+        // est usd to aud multiplier - this should only be a guide
+        double estUsdToAusMultiplier = 1.5;
+
 
         // total cost of this goody order
         decimal goodyCost = 0m;
@@ -31,6 +37,7 @@ namespace Lana_Renee_Lashes
         decimal goodyLashPrice = 2.9m;
         // estimated goody shipping price per unit
         decimal goodyPricePerUnit = 0.0309m;
+
 
         // total cost of this olivia order
         decimal oliviaCost = 0m;
@@ -42,8 +49,10 @@ namespace Lana_Renee_Lashes
         decimal boxPriceFlat = 0;
         // price per packed box (unknown)
         decimal boxPricePacked = 0;
-        // estimated shipping cost per unit
-        decimal estOliviaShipPricePerUnit = 0.2263m;
+
+
+        // total lashes ordered
+        int totalQuantity = 0;
 
 
         // personal assistant hourly rate
@@ -54,15 +63,11 @@ namespace Lana_Renee_Lashes
         double pA_EstimatedHoursToBox = 0;
         // estimated total personal assistant cost
         decimal pA_EstimatedCost = 0m;
+        // personal assistant estimated amount of boxes packed per hour
+        double pA_BoxesPerHour = 53.33;
 
 
 
-        // total lashes ordered
-        int totalQuantity = 0;
-        // estimated box cost per unit
-        decimal estBoxPrice = 0.2632m;
-        // est usd to aud multiplier - this should only be a guide
-        double estUsdToAusMultiplier = 1.5;
         // estimated cost per unit
         decimal estCostPerUnit = 0m;
         // estimated profit per unit
@@ -79,13 +84,23 @@ namespace Lana_Renee_Lashes
         double gstMultiplier = 0.1;
         // gst to pay
         decimal gstToPay = 0m;
+        // rough price per box
+        decimal roughBoxPrice = 0;
+        // rough shipping cost per unit
+        decimal roughShippingCost = 0;
+
+
 
         // protects user from accidentally looping confirmation by pressing enter to exit error dialogs
         bool spamProtect = true;
         // regex pattern to match priceboxes
-        Regex pricePattern = new Regex(@"^\$", RegexOptions.Compiled);
+        static public Regex pricePatternString = new Regex(@"\b^\$(\d{0,3}|\,|\.){0,8}\b", RegexOptions.Compiled);
+        // variable for to parse price regex
+        string pricePattern = pricePatternString.ToString();
         // regex pattern to match non-priceboxes
-        Regex textPattern = new Regex(@"^(\d|\,|\.){0-8}", RegexOptions.Compiled);
+        Regex textPatternString = new Regex(@"\b^(\d{0,3}|\,|\.){0,8}\b", RegexOptions.Compiled);
+        // variable for to parse text regex
+        string textPattern = pricePatternString.ToString();
 
         #endregion
 
@@ -177,56 +192,125 @@ namespace Lana_Renee_Lashes
         {
             //try
             {
-                if (Regex.IsMatch(textBoxGoodyCost.Text, @"^\$"))
+
+                // for each control in this form
+                foreach (TextBoxBase textBox in this.Controls)
                 {
-                    // renames goody string for easier coding
-                    string text = textBoxGoodyCost.Text;
-                    if (text.Length > 1)
+                    // if text is null or blank
+                    if (textBox.Text is null or "0")
                     {
-                        // stores cost of goody order
-                        goodyCost = decimal.Parse(text.Substring(1, text.Length - 1));
+                        // moves to next text box
+                        continue;
+                    }
+                    // if regex finds a match between this control and pricebox pattern
+                    if (Regex.IsMatch(textBox.Text, pricePattern))
+                    {
+                        // stores textbox name into a shorter variable
+                        string text = textBox.Name;
+                        // switch to input name
+                        switch (text)
+                        {
+                            // textbox good cost 
+                            case "textBoxGoodyCost":
+                                // stores user input to goodyCost variable
+                                goodyCost = decimal.Parse(textBoxGoodyCost.Text);
+
+                                break;
+
+                            case "textBoxOliviaCost":
+                                // stores user input to oliviaCost variable
+                                oliviaCost = decimal.Parse(textBoxOliviaCost.Text);
+
+                                break;
+
+                            case "textBoxPaHourlyRate":
+                                // stores user input to textBoxPaHourlyRate
+                                pA_HourlyRate = decimal.Parse(textBoxPaHourlyRate.Text);
+
+                                break;
+
+                            // if no case was matched
+                            default:
+                                // logs error
+                                LogError("[" + DateTime.Now + "]" + "Failed to find price box: " + textBox);
+                                break;
+
+                        } // end switch
 
                     } // end if
 
-                    // renames olivia string for easier coding
-                    text = textBoxOliviaCost.Text;
-                    if (text.Length > 1)
+                    // if regex finds a match between this control and pricebox pattern
+                    else if (Regex.IsMatch(textBox.Text, pricePattern))
                     {
-                        // stores cost of olivia order
-                        oliviaCost = decimal.Parse(text.Substring(1, text.Length - 1));
+                        // stores textbox name into a shorter variable
+                        string text = textBox.Name;
+
+                        // if regex finds a match between this textbox text and text pattern
+                        if (Regex.IsMatch(textBox.Text, textPattern))
+                        {
+                            // switch to input name
+                            switch (text)
+                            {
+                                // textbox good cost 
+                                case "textBoxGoodyQuantity":
+                                    // stores user input to goodyCost variable
+                                    goodyCost = decimal.Parse(textBoxGoodyCost.Text);
+
+                                    break;
+
+                                case "textBoxOliviaQuantity":
+                                    // stores user input to oliviaCost variable
+                                    oliviaCost = decimal.Parse(textBoxOliviaCost.Text);
+
+                                    break;
+
+
+                                case "textBoxUsdToAud":
+                                    // stores user input usd to aud conversion rate (default 1.5)
+                                    estUsdToAusMultiplier = double.Parse(textBoxUsdToAud.Text);
+
+                                    break;
+
+                                case "textBoxPaHoursSpentBoxing":
+                                    // stores user input to textBox spent boxing
+                                    pA_HoursSpentboxing = double.Parse(textBoxPaHoursSpentBoxing.Text);
+
+                                    break;
+
+                                // textbox good cost 
+                                case "textBoxPaBoxesPerHour":
+                                    // stores user input to lashed boxed per hour variable
+                                    pA_BoxesPerHour = double.Parse(textBoxPaBoxesPerHour.Text);
+
+                                    break;
+
+                                case "textBoxRoughBoxPrice":
+                                    // stores user input to rough box price variable
+                                    roughBoxPrice = totalQuantity * EST_BOX_PRICE;
+
+                                    break;
+
+                                case "textBoxRoughShipPrice":
+                                    // stores user input to rough shipping cost variable
+                                    roughShippingCost = totalQuantity * EST_SHIP_PRICE;
+
+                                    break;
+
+                                // if no case was matched
+                                default:
+                                    // logs error
+                                    LogError("[" + DateTime.Now + "]" + "Failed to find textbox: " + textBox);
+                                    break;
+
+                            }
+                        }
+
 
                     } // end if
 
-                    if (text.Length > 1)
-                    {
-                        // renames hourly rate string for easier coding
-                        text = textBoxPaHourlyRate.Text;
-                        // stores cost of olivia order
-                        pA_HourlyRate = decimal.Parse(text.Substring(1, text.Length - 1));
-                    }
-
-                    // sets personal assistants hours spent boxing to user input value
-                    pA_HoursSpentboxing = double.Parse(textBoxPaHoursSpent.Text);
-
-                    // if personal hours spent boxing is 0
-                    if (pA_HoursSpentboxing == 0)
-                    {
-                        // writes error message to user
-                        MessageBox.Show("No hours logged for P.A, consider revising...");
-
-                    }
+                } // end for
 
 
-                }
-                else
-                {
-                    // stores cost of goody order as a decimal
-                    goodyCost = decimal.Parse(textBoxGoodyCost.Text);
-
-                    // stores cost of olivia order as a decimal
-                    oliviaCost = decimal.Parse(textBoxOliviaCost.Text);
-
-                } // end if
 
                 // stores number of goody lashes
                 goodyQuantity = int.Parse(textBoxGoodyQuantity.Text);
@@ -249,7 +333,7 @@ namespace Lana_Renee_Lashes
                         // sets pa estimated cost to hourly rate * hours spent boxing
                         pA_EstimatedCost = pA_HourlyRate * (decimal)pA_HoursSpentboxing;
                         // roughly estimates amount of hours it will take to box this order
-                        pA_EstimatedHoursToBox = totalQuantity / PA_BOXES_PER_HOUR;
+                        pA_EstimatedHoursToBox = totalQuantity / pA_BoxesPerHour;
                         // if checkbox deduct hours spent is check
                         if (checkBoxDeductHoursSpent.Checked)
                         {
@@ -261,8 +345,6 @@ namespace Lana_Renee_Lashes
 
                 } // end if
 
-                // calculates total quantity
-                totalQuantity = goodyQuantity + oliviaQuantity;
                 // if total quantity adds up to more than 0
                 if (totalQuantity > 0)
                 {
@@ -343,7 +425,7 @@ namespace Lana_Renee_Lashes
                 labelPaHourlyRate.Show();
                 textBoxPaHourlyRate.Show();
                 labelPaHoursSpent.Show();
-                textBoxPaHoursSpent.Show();
+                textBoxPaHoursSpentBoxing.Show();
                 labelPaHoursToBox.Show();
                 textBoxPaBoxesPerHour.Show();
             }
@@ -354,7 +436,7 @@ namespace Lana_Renee_Lashes
                 labelPaHourlyRate.Hide();
                 textBoxPaHourlyRate.Hide();
                 labelPaHoursSpent.Hide();
-                textBoxPaHoursSpent.Hide();
+                textBoxPaHoursSpentBoxing.Hide();
                 labelPaHoursToBox.Hide();
                 textBoxPaBoxesPerHour.Hide();
                 pA_HourlyRate = 0;
@@ -376,17 +458,17 @@ namespace Lana_Renee_Lashes
             if (checkBoxExtraBoxes.Checked)
             {
                 // show extra boxes controls
-                labelExtraBoxesAmount.Show();
-                textBoxExtraBoxes.Show();
+                labelRoughBoxPrice.Show();
+                textBoxRoughBoxPrice.Show();
                 // displays goody quantity as a default value for the extra boxes value
-                textBoxExtraBoxes.Text = goodyQuantity.ToString();
+                textBoxRoughBoxPrice.Text = goodyQuantity.ToString();
             }
             // else if extra boxes checkbox is not checked
             else
             {
                 // show extra boxes controls
-                labelExtraBoxesAmount.Hide();
-                textBoxExtraBoxes.Hide();
+                labelRoughBoxPrice.Hide();
+                textBoxRoughBoxPrice.Hide();
 
             } // end if
 
@@ -486,10 +568,7 @@ namespace Lana_Renee_Lashes
         /// <returns></returns>
         public static void ShowUsYaTips(this Control control, string text)
         {
-            if (text is null or "")
-            {
 
-            }
             var toolTip = new ToolTip
             {
                 // sets the tool tip shape to a rectangle instead of a balloon

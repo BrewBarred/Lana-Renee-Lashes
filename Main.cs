@@ -137,6 +137,10 @@ namespace Lana_Renee_Lashes
                     // else if the current active control is not a checkbox
                     else
                     {
+                        // sets personal assistants hours spent boxing to user input value
+                        pA_HoursSpentboxing = double.Parse(textBoxPaHoursSpent.Text);
+
+                        // if personal hours spent boxing is 0
                         if (pA_HoursSpentboxing == 0)
                         {
                             // writes error message to user
@@ -230,7 +234,7 @@ namespace Lana_Renee_Lashes
                         // sets pa estimated cost to hourly rate * hours spent boxing
                         pA_EstimatedCost = pA_HourlyRate * (decimal)pA_HoursSpentboxing;
                         // roughly estimates amount of hours it will take to box this order
-                        pA_EstimatedHoursToBox = totalQuantity / PA_BOXES_PER_HOUR;
+                        pA_EstimatedHoursToBox = totalQuantity / PA_BOXES_PER_HOUR - pA_HoursSpentboxing;
 
                     } // end if
 
@@ -243,32 +247,32 @@ namespace Lana_Renee_Lashes
                 {
                     // estimates the cost per lash set
                     estCostPerUnit = totalCost / totalQuantity;
+                    // estimated profit per sale
+                    estProfitPerUnit = RETAIL_PRICE - estCostPerUnit;
+                    // sales required to profit
+                    estSalesToProfit = totalCost / RETAIL_PRICE + 1;
+                    // adds quantities of both orders together for a total quantity
+                    totalQuantity = goodyQuantity + oliviaQuantity;
+                    // adds the cost of both orders together for a total cost
+                    totalCost = goodyCost + oliviaCost + pA_EstimatedCost;
+                    //total profit margin this order
+                    estProfit = estProfitPerUnit * totalQuantity;
+                    //total profit margin this order minus gst
+                    estProfitLessGst = (estProfit *= (decimal)gstMultiplier);
+                    // gst amount
+                    gstToPay = (estProfit * (decimal)gstMultiplier);
+                    // if checkbox extraboxes is checked and extra boxes value is 0, 
+                    checkBoxExtraBoxes.Text = checkBoxExtraBoxes.Text == "0" ? goodyQuantity.ToString() : checkBoxExtraBoxes.Text;
+                    // stores usd to aud multiplier into a variable
+                    estUsdToAusMultiplier = double.Parse(textBoxUsdToAud.Text);
                 }
-
-
-                // adds quantities of both orders together for a total quantity
-                totalQuantity = goodyQuantity + oliviaQuantity;
-                // adds the cost of both orders together for a total cost
-                totalCost = goodyCost + oliviaCost + pA_EstimatedCost;
-                // estimated profit per sale
-                estProfitPerUnit = RETAIL_PRICE - estCostPerUnit;
-                // sales required to profit
-                estSalesToProfit = totalCost / RETAIL_PRICE + 1;
-                //total profit margin this order
-                estProfit = estProfitPerUnit * totalQuantity;
-                //total profit margin this order minus gst
-                estProfitLessGst = (estProfit *= (decimal)gstMultiplier);
-                // gst amount
-                gstToPay = (estProfit * (decimal)gstMultiplier);
-                // if checkbox extraboxes is checked and extra boxes value is 0, 
-                checkBoxExtraBoxes.Text = checkBoxExtraBoxes.Text == "0" ? goodyQuantity.ToString() : checkBoxExtraBoxes.Text;
-                // stores usd to aud multiplier into a variable
-                estUsdToAusMultiplier = double.Parse(textBoxUsdToAud.Text);
 
                 ///////
                 /// Display Calculated values to respective textboxes
                 /////
 
+                // updates estimated hours to box
+                textBoxPaBoxesPerHour.Text = pA_EstimatedHoursToBox.ToString();
                 // updates personal assistant estimated cost with new value in decimal form
                 textBoxPaEstCost.Text = pA_EstimatedCost.ToString("c2");
                 // updates estimated cost per unit
@@ -276,9 +280,9 @@ namespace Lana_Renee_Lashes
                 // updates estimated profit per unit
                 textBoxEstProfitPerUnit.Text = (estProfitPerUnit.ToString("c2"));
                 // updates estimated sales until we start to see profit
-                textBoxEstSalesToProfit.Text = estSalesToProfit.ToString("c2");
+                textBoxEstSalesToProfit.Text = estSalesToProfit.ToString();
                 // updates total quantity
-                textBoxTotalQuantity.Text = textBoxTotalQuantity.ToString();
+                textBoxTotalQuantity.Text = totalQuantity.ToString();
                 // updates estimated total cost
                 textBoxEstTotalCost.Text = totalCost.ToString("c2");
                 // updates estimated profit

@@ -42,14 +42,6 @@ namespace Lana_Renee_Lashes
         decimal boxPricePacked = 0;
         // estimated shipping cost per unit
         decimal estOliviaShipPricePerUnit = 0.2263m;
-        // estimated box cost per unit
-
-        decimal estBoxPrice = 0.2632m;
-        // australian gst multiplier (10%)
-        double gstMultiplier = 0.1;
-        // est usd to aud multiplier - this should only be a guide
-        double estUsdToAusMultiplier = 1.5;
-
 
 
         // personal assistant hourly rate
@@ -62,10 +54,15 @@ namespace Lana_Renee_Lashes
         decimal pA_EstimatedCost = 0m;
 
 
+
         // total lashes ordered
-        int totalLashesOrdered = 0;
+        int totalQuantity = 0;
         // total cost of both orders
         decimal totalCost = 0;
+        // estimated box cost per unit
+        decimal estBoxPrice = 0.2632m;
+        // est usd to aud multiplier - this should only be a guide
+        double estUsdToAusMultiplier = 1.5;
         // estimated cost per unit
         decimal estCostPerUnit = 0m;
         // estimated profit per unit
@@ -78,6 +75,8 @@ namespace Lana_Renee_Lashes
         decimal estProfit = 0m;
         // estimated profit less gst
         decimal estProfitLessGst = 0m;
+        // australian gst multiplier (10%)
+        double gstMultiplier = 0.1;
         // gst to pay
         decimal gstToPay = 0m;
 
@@ -100,7 +99,7 @@ namespace Lana_Renee_Lashes
         private void Main_KeyUp(object sender, KeyEventArgs e)
 
         {
-            //try
+            try
 
 
             {
@@ -138,8 +137,14 @@ namespace Lana_Renee_Lashes
                     // else if the current active control is not a checkbox
                     else
                     {
-                        // send a click event to Create Account
-                        MessageBox.Show("Calculating...");
+                        if (pA_HoursSpentboxing == 0)
+                        {
+                            // writes error message to user
+                            MessageBox.Show("No hours logged for P.A, consider revising...");
+                            // writes error message to user
+                            MessageBox.Show("Calculating...");
+
+                        }
                         Calculupdate();
 
                     } // end if
@@ -147,7 +152,7 @@ namespace Lana_Renee_Lashes
                 } // end if
 
             }
-            //catch
+            catch
             {
                 MessageBox.Show("Please repeat what you did and video it so I can fix it :P");
 
@@ -162,24 +167,35 @@ namespace Lana_Renee_Lashes
         /// </summary>
         private void Calculupdate()
         {
-            //try
+            try
             {
-                if (Regex.IsMatch(textBoxGoodyCost.Text, @"^$[\d]{1, 8}"))
+                if (Regex.IsMatch(textBoxGoodyCost.Text, @"^\$"))
                 {
                     // renames goody string for easier coding
                     string text = textBoxGoodyCost.Text;
-                    // stores cost of goody order
-                    goodyCost = decimal.Parse(text.Substring(1, text.Length));
+                    if (text.Length > 1)
+                    {
+                        // stores cost of goody order
+                        goodyCost = decimal.Parse(text.Substring(1, text.Length - 1));
+
+                    } // end if
 
                     // renames olivia string for easier coding
                     text = textBoxOliviaCost.Text;
-                    // stores cost of olivia order
-                    oliviaCost = decimal.Parse(text.Substring(1, text.Length));
+                    if (text.Length > 1)
+                    {
+                        // stores cost of olivia order
+                        oliviaCost = decimal.Parse(text.Substring(1, text.Length - 1));
 
-                    // renames hourly rate string for easier coding
-                    text = textBoxPaHourlyRate.Text;
-                    // stores cost of olivia order
-                    pA_HourlyRate = decimal.Parse(text.Substring(1, text.Length));
+                    } // end if
+
+                    if (text.Length > 1)
+                    {
+                        // renames hourly rate string for easier coding
+                        text = textBoxPaHourlyRate.Text;
+                        // stores cost of olivia order
+                        pA_HourlyRate = decimal.Parse(text.Substring(1, text.Length - 1));
+                    }
 
 
                 }
@@ -199,10 +215,8 @@ namespace Lana_Renee_Lashes
                 oliviaQuantity = int.Parse(textBoxOliviaQuantity.Text);
 
                 // if personal assistant checkbox is checked AND P.A's hourly rate is not null
-                if (checkBoxPaCosts.Checked && textBoxPaHourlyRate.Text != null || textBoxPaHourlyRate.Text != "$")
+                if (checkBoxPaCosts.Checked)
                 {
-                    // sets pa hourly rate to textbox contents
-                    pA_HourlyRate = decimal.Parse(textBoxPaHourlyRate.Text);
 
                     // if P.A. hourly greater than max rate OR less than min rate
                     if (pA_HourlyRate > MAX_RATE || pA_HourlyRate < MIN_RATE)
@@ -211,35 +225,37 @@ namespace Lana_Renee_Lashes
                         MessageBox.Show("Please ensure hourly rate is valid!");
 
                     }
-                    else if (pA_HoursSpentboxing == 0)
-                    {
-                        // writes error message to user
-                        MessageBox.Show("Please ensure you have entered a valid number of hours for the P.A.");
-
-                    }
                     else
                     {
                         // sets pa estimated cost to hourly rate * hours spent boxing
                         pA_EstimatedCost = pA_HourlyRate * (decimal)pA_HoursSpentboxing;
                         // roughly estimates amount of hours it will take to box this order
-                        pA_EstimatedHoursToBox = totalLashesOrdered / PA_BOXES_PER_HOUR;
+                        pA_EstimatedHoursToBox = totalQuantity / PA_BOXES_PER_HOUR;
 
                     } // end if
 
                 } // end if
 
+                // calculates total quantity
+                totalQuantity = goodyQuantity + oliviaQuantity;
+                // if total quantity adds up to more than 0
+                if (totalQuantity > 0)
+                {
+                    // estimates the cost per lash set
+                    estCostPerUnit = totalCost / totalQuantity;
+                }
+
+
                 // adds quantities of both orders together for a total quantity
-                totalLashesOrdered = goodyQuantity + oliviaQuantity;
+                totalQuantity = goodyQuantity + oliviaQuantity;
                 // adds the cost of both orders together for a total cost
                 totalCost = goodyCost + oliviaCost + pA_EstimatedCost;
-                // estimates the cost per lash set
-                estCostPerUnit = totalCost / totalLashesOrdered;
                 // estimated profit per sale
                 estProfitPerUnit = RETAIL_PRICE - estCostPerUnit;
                 // sales required to profit
                 estSalesToProfit = totalCost / RETAIL_PRICE + 1;
                 //total profit margin this order
-                estProfit = estProfitPerUnit * totalLashesOrdered;
+                estProfit = estProfitPerUnit * totalQuantity;
                 //total profit margin this order minus gst
                 estProfitLessGst = (estProfit *= (decimal)gstMultiplier);
                 // gst amount
@@ -254,26 +270,26 @@ namespace Lana_Renee_Lashes
                 /////
 
                 // updates personal assistant estimated cost with new value in decimal form
-                textBoxPaEstCost.Text = (pA_EstimatedCost.ToString("c2"));
+                textBoxPaEstCost.Text = pA_EstimatedCost.ToString("c2");
                 // updates estimated cost per unit
-                textBoxPaEstCost.Text = (pA_EstimatedCost.ToString("c2"));
-                // updates 
-                textBoxPaEstCost.Text = (pA_EstimatedCost.ToString("c2"));
-                // updates 
-                textBoxPaEstCost.Text = (pA_EstimatedCost.ToString("c2"));
-                // updates 
-                textBoxPaEstCost.Text = (pA_EstimatedCost.ToString("c2"));
-                // updates 
-                textBoxPaEstCost.Text = (pA_EstimatedCost.ToString("c2"));
-                // updates
-                textBoxPaEstCost.Text = (pA_EstimatedCost.ToString("c2"));
-                // updates 
-                textBoxPaEstCost.Text = (pA_EstimatedCost.ToString("c2"));
-                // updates 
-                textBoxPaEstCost.Text = (pA_EstimatedCost.ToString("c2"));
+                textBoxEstCostPerUnit.Text = estCostPerUnit.ToString("c2");
+                // updates estimated profit per unit
+                textBoxEstProfitPerUnit.Text = (estProfitPerUnit.ToString("c2"));
+                // updates estimated sales until we start to see profit
+                textBoxEstSalesToProfit.Text = estSalesToProfit.ToString("c2");
+                // updates total quantity
+                textBoxTotalQuantity.Text = textBoxTotalQuantity.ToString();
+                // updates estimated total cost
+                textBoxEstTotalCost.Text = totalCost.ToString("c2");
+                // updates estimated profit
+                textBoxEstProfit.Text = estProfit.ToString("c2");
+                // updates profit less gst
+                textBoxEstProfitLessGst.Text = estProfitLessGst.ToString("c2");
+                // updates gst to pay
+                textBoxGstToPay.Text = gstToPay.ToString("c2");
 
             }
-            //catch
+            catch
             {
                 MessageBox.Show("Take a video of whats happening with what values and in which textboxes plus what you are trying to achieve so I can fix it");
 

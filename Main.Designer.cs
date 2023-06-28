@@ -63,12 +63,12 @@
             this.textBoxPaHourlyRate = new System.Windows.Forms.TextBox();
             this.textBoxPaHoursSpent = new System.Windows.Forms.TextBox();
             this.textBoxPaBoxesPerHour = new System.Windows.Forms.TextBox();
-            this.textBoxCostPerUnit = new System.Windows.Forms.TextBox();
+            this.textBoxEstCostPerUnit = new System.Windows.Forms.TextBox();
             this.textBoxPaEstCost = new System.Windows.Forms.TextBox();
-            this.textBoxSalesToProfit = new System.Windows.Forms.TextBox();
-            this.textBoxProfitPerUnit = new System.Windows.Forms.TextBox();
+            this.textBoxEstSalesToProfit = new System.Windows.Forms.TextBox();
+            this.textBoxEstProfitPerUnit = new System.Windows.Forms.TextBox();
             this.textBoxEstProfitLessGst = new System.Windows.Forms.TextBox();
-            this.textBoxTotalLashes = new System.Windows.Forms.TextBox();
+            this.textBoxTotalQuantity = new System.Windows.Forms.TextBox();
             this.textBoxEstTotalCost = new System.Windows.Forms.TextBox();
             this.textBoxEstProfit = new System.Windows.Forms.TextBox();
             this.textBoxGstToPay = new System.Windows.Forms.TextBox();
@@ -489,16 +489,16 @@
             this.textBoxPaBoxesPerHour.TabIndex = 6;
             this.textBoxPaBoxesPerHour.Text = "0";
             // 
-            // textBoxCostPerUnit
+            // textBoxEstCostPerUnit
             // 
-            this.textBoxCostPerUnit.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.textBoxCostPerUnit.ForeColor = System.Drawing.SystemColors.Info;
-            this.textBoxCostPerUnit.Location = new System.Drawing.Point(188, 652);
-            this.textBoxCostPerUnit.Name = "textBoxCostPerUnit";
-            this.textBoxCostPerUnit.ReadOnly = true;
-            this.textBoxCostPerUnit.Size = new System.Drawing.Size(159, 20);
-            this.textBoxCostPerUnit.TabIndex = 0;
-            this.textBoxCostPerUnit.TabStop = false;
+            this.textBoxEstCostPerUnit.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.textBoxEstCostPerUnit.ForeColor = System.Drawing.SystemColors.Info;
+            this.textBoxEstCostPerUnit.Location = new System.Drawing.Point(188, 652);
+            this.textBoxEstCostPerUnit.Name = "textBoxEstCostPerUnit";
+            this.textBoxEstCostPerUnit.ReadOnly = true;
+            this.textBoxEstCostPerUnit.Size = new System.Drawing.Size(159, 20);
+            this.textBoxEstCostPerUnit.TabIndex = 0;
+            this.textBoxEstCostPerUnit.TabStop = false;
             // 
             // textBoxPaEstCost
             // 
@@ -511,27 +511,27 @@
             this.textBoxPaEstCost.TabIndex = 0;
             this.textBoxPaEstCost.TabStop = false;
             // 
-            // textBoxSalesToProfit
+            // textBoxEstSalesToProfit
             // 
-            this.textBoxSalesToProfit.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.textBoxSalesToProfit.ForeColor = System.Drawing.SystemColors.Info;
-            this.textBoxSalesToProfit.Location = new System.Drawing.Point(188, 726);
-            this.textBoxSalesToProfit.Name = "textBoxSalesToProfit";
-            this.textBoxSalesToProfit.ReadOnly = true;
-            this.textBoxSalesToProfit.Size = new System.Drawing.Size(159, 20);
-            this.textBoxSalesToProfit.TabIndex = 0;
-            this.textBoxSalesToProfit.TabStop = false;
+            this.textBoxEstSalesToProfit.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.textBoxEstSalesToProfit.ForeColor = System.Drawing.SystemColors.Info;
+            this.textBoxEstSalesToProfit.Location = new System.Drawing.Point(188, 726);
+            this.textBoxEstSalesToProfit.Name = "textBoxEstSalesToProfit";
+            this.textBoxEstSalesToProfit.ReadOnly = true;
+            this.textBoxEstSalesToProfit.Size = new System.Drawing.Size(159, 20);
+            this.textBoxEstSalesToProfit.TabIndex = 0;
+            this.textBoxEstSalesToProfit.TabStop = false;
             // 
-            // textBoxProfitPerUnit
+            // textBoxEstProfitPerUnit
             // 
-            this.textBoxProfitPerUnit.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.textBoxProfitPerUnit.ForeColor = System.Drawing.SystemColors.Info;
-            this.textBoxProfitPerUnit.Location = new System.Drawing.Point(188, 690);
-            this.textBoxProfitPerUnit.Name = "textBoxProfitPerUnit";
-            this.textBoxProfitPerUnit.ReadOnly = true;
-            this.textBoxProfitPerUnit.Size = new System.Drawing.Size(159, 20);
-            this.textBoxProfitPerUnit.TabIndex = 0;
-            this.textBoxProfitPerUnit.TabStop = false;
+            this.textBoxEstProfitPerUnit.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.textBoxEstProfitPerUnit.ForeColor = System.Drawing.SystemColors.Info;
+            this.textBoxEstProfitPerUnit.Location = new System.Drawing.Point(188, 690);
+            this.textBoxEstProfitPerUnit.Name = "textBoxEstProfitPerUnit";
+            this.textBoxEstProfitPerUnit.ReadOnly = true;
+            this.textBoxEstProfitPerUnit.Size = new System.Drawing.Size(159, 20);
+            this.textBoxEstProfitPerUnit.TabIndex = 0;
+            this.textBoxEstProfitPerUnit.TabStop = false;
             // 
             // textBoxEstProfitLessGst
             // 
@@ -544,16 +544,16 @@
             this.textBoxEstProfitLessGst.TabIndex = 0;
             this.textBoxEstProfitLessGst.TabStop = false;
             // 
-            // textBoxTotalLashes
+            // textBoxTotalQuantity
             // 
-            this.textBoxTotalLashes.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.textBoxTotalLashes.ForeColor = System.Drawing.SystemColors.Info;
-            this.textBoxTotalLashes.Location = new System.Drawing.Point(641, 578);
-            this.textBoxTotalLashes.Name = "textBoxTotalLashes";
-            this.textBoxTotalLashes.ReadOnly = true;
-            this.textBoxTotalLashes.Size = new System.Drawing.Size(159, 20);
-            this.textBoxTotalLashes.TabIndex = 0;
-            this.textBoxTotalLashes.TabStop = false;
+            this.textBoxTotalQuantity.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.textBoxTotalQuantity.ForeColor = System.Drawing.SystemColors.Info;
+            this.textBoxTotalQuantity.Location = new System.Drawing.Point(641, 578);
+            this.textBoxTotalQuantity.Name = "textBoxTotalQuantity";
+            this.textBoxTotalQuantity.ReadOnly = true;
+            this.textBoxTotalQuantity.Size = new System.Drawing.Size(159, 20);
+            this.textBoxTotalQuantity.TabIndex = 0;
+            this.textBoxTotalQuantity.TabStop = false;
             // 
             // textBoxEstTotalCost
             // 
@@ -717,12 +717,12 @@
             this.Controls.Add(this.textBoxGstToPay);
             this.Controls.Add(this.textBoxEstProfit);
             this.Controls.Add(this.textBoxEstTotalCost);
-            this.Controls.Add(this.textBoxTotalLashes);
+            this.Controls.Add(this.textBoxTotalQuantity);
             this.Controls.Add(this.textBoxEstProfitLessGst);
-            this.Controls.Add(this.textBoxProfitPerUnit);
-            this.Controls.Add(this.textBoxSalesToProfit);
+            this.Controls.Add(this.textBoxEstProfitPerUnit);
+            this.Controls.Add(this.textBoxEstSalesToProfit);
             this.Controls.Add(this.textBoxPaEstCost);
-            this.Controls.Add(this.textBoxCostPerUnit);
+            this.Controls.Add(this.textBoxEstCostPerUnit);
             this.Controls.Add(this.textBoxPaBoxesPerHour);
             this.Controls.Add(this.textBoxPaHoursSpent);
             this.Controls.Add(this.textBoxPaHourlyRate);
@@ -809,12 +809,12 @@
         private System.Windows.Forms.TextBox textBoxPaHourlyRate;
         private System.Windows.Forms.TextBox textBoxPaHoursSpent;
         private System.Windows.Forms.TextBox textBoxPaBoxesPerHour;
-        private System.Windows.Forms.TextBox textBoxCostPerUnit;
+        private System.Windows.Forms.TextBox textBoxEstCostPerUnit;
         private System.Windows.Forms.TextBox textBoxPaEstCost;
-        private System.Windows.Forms.TextBox textBoxSalesToProfit;
-        private System.Windows.Forms.TextBox textBoxProfitPerUnit;
+        private System.Windows.Forms.TextBox textBoxEstSalesToProfit;
+        private System.Windows.Forms.TextBox textBoxEstProfitPerUnit;
         private System.Windows.Forms.TextBox textBoxEstProfitLessGst;
-        private System.Windows.Forms.TextBox textBoxTotalLashes;
+        private System.Windows.Forms.TextBox textBoxTotalQuantity;
         private System.Windows.Forms.TextBox textBoxEstTotalCost;
         private System.Windows.Forms.TextBox textBoxEstProfit;
         private System.Windows.Forms.TextBox textBoxGstToPay;

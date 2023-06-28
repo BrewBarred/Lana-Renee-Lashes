@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
 
@@ -68,7 +69,7 @@ namespace Lana_Renee_Lashes
         // estimated profit per unit
         decimal estProfitPerUnit = 0m;
         // estimated sales required before profit starts
-        decimal estSalesToProfit = 0m;
+        int estSalesToProfit = 0;
         // estimated total cost
         decimal estTotalCost = 0m;
         // estimated profit
@@ -97,11 +98,8 @@ namespace Lana_Renee_Lashes
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Main_KeyUp(object sender, KeyEventArgs e)
-
         {
             try
-
-
             {
                 // if user was releasing any key other than the "enter key" and currently active control is a textbox
                 if (!(e.KeyCode is Keys.Enter) && ActiveControl is TextBox textBox)
@@ -171,7 +169,7 @@ namespace Lana_Renee_Lashes
         /// </summary>
         private void Calculupdate()
         {
-            try
+            //try
             {
                 if (Regex.IsMatch(textBoxGoodyCost.Text, @"^\$"))
                 {
@@ -239,6 +237,7 @@ namespace Lana_Renee_Lashes
                         if (checkBoxDeductHoursSpent.Checked)
                         {
                             // lowers estimated hours to box lashes down by the amount of hours spent on it already
+
                             pA_EstimatedHoursToBox -= pA_HoursSpentboxing;
                         }
 
@@ -256,7 +255,7 @@ namespace Lana_Renee_Lashes
                     // estimated profit per sale
                     estProfitPerUnit = RETAIL_PRICE - estCostPerUnit;
                     // sales required to profit
-                    estSalesToProfit = totalCost / RETAIL_PRICE + 1;
+                    estSalesToProfit = (int)totalCost / (int)RETAIL_PRICE + 1;
                     // adds quantities of both orders together for a total quantity
                     totalQuantity = goodyQuantity + oliviaQuantity;
                     // adds the cost of both orders together for a total cost
@@ -278,7 +277,7 @@ namespace Lana_Renee_Lashes
                 /////
 
                 // updates estimated hours to box
-                textBoxPaBoxesPerHour.Text = pA_EstimatedHoursToBox.ToString();
+                textBoxPaBoxesPerHour.Text = pA_EstimatedHoursToBox.ToString("d3");
                 // updates personal assistant estimated cost with new value in decimal form
                 textBoxPaEstCost.Text = pA_EstimatedCost.ToString("c2");
                 // updates estimated cost per unit
@@ -299,7 +298,7 @@ namespace Lana_Renee_Lashes
                 textBoxGstToPay.Text = gstToPay.ToString("c2");
 
             }
-            catch
+            //catch
             {
                 MessageBox.Show("Take a video of whats happening with what values and in which textboxes plus what you are trying to achieve so I can fix it");
 
@@ -403,21 +402,23 @@ namespace Lana_Renee_Lashes
         }
         #endregion
 
-        #region labelETA_Click Event
-        /// <summary>
-        /// Hidden calculator if you click ETA link @ bottom left of page
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void labelEta_Click(object sender, System.EventArgs e)
+        private void labelSubTitle_MouseEnter(object sender, EventArgs e)
         {
-            // sets website address
-            string url = "https://www.google.com/search?q=calculator&source=hp&ei=k2abZJOsDeebjuMP6beCmAo&iflsig=AOEireoAAAAAZJt0o4y_-7uv_nA7Dkpo22FPs-_8ZV1r&ved=0ahUKEwjTwa_Pw-T_AhXnjWMGHembAKMQ4dUDCAs&uact=5&oq=calculator&gs_lcp=Cgdnd3Mtd2l6EAMyCwgAEIAEELEDEIMBMgsIABCABBCxAxCDATILCAAQgAQQsQMQgwEyCwgAEIAEELEDEIMBMggIABCABBCxAzIICAAQgAQQsQMyCAgAEIAEELEDMgUIABCABDILCAAQgAQQsQMQgwEyBQgAEIAEOhEILhCABBCxAxCDARDHARDRAzoLCAAQigUQsQMQgwE6EQguEIoFELEDEIMBEMcBENEDOhEILhCKBRCxAxCDARDHARCvAToECAAQAzoLCC4QgAQQxwEQ0QM6CwguEIoFELEDEIMBOgsILhCABBCxAxCDAVAAWPAGYLYHaABwAHgAgAHQAYgBwwqSAQUwLjcuMZgBAKABAQ&sclient=gws-wiz";
+            labelSubTitle.ForeColor = Color.CadetBlue;
+        }
+
+        private void labelSubTitle_MouseLeave(object sender, EventArgs e)
+        {
+            labelSubTitle.ForeColor = Color.White;
+        }
+
+        private void labelSubTitle_Click(object sender, EventArgs e)
+        {
+            // sets website address to currency comparison on google
+            string url = "https://www.google.com/search?q=calc&source=hp&ei=wqObZIrLLqCw4-EPq-qA-Ao&iflsig=AOEireoAAAAAZJux0siSA2TGgXYq7dNvvdXoMeRk0TFQ&ved=0ahUKEwiKtKr8_eT_AhUg2DgGHSs1AK8Q4dUDCAs&uact=5&oq=calc&gs_lcp=Cgdnd3Mtd2l6EAMyDQgAEIoFELEDEIMBEEMyBwguEIoFEEMyBwgAEIoFEEMyDQgAEIoFELEDEIMBEEMyDQgAEIoFELEDEIMBEEMyBwgAEIoFEEMyDQgAEIoFELEDEIMBEEMyEQguEIAEELEDEIMBEMcBENEDMgsIABCABBCxAxCDATILCAAQgAQQsQMQgwE6FwgAEIoFEOoCELQCEIoDELcDENQDEOUCOggIABCABBCxAzoLCAAQigUQsQMQgwFQ4gJYmAVg3AVoAXAAeACAAc0BiAHtApIBBTAuMS4xmAEAoAEBsAEK&sclient=gws-wiz";
             // launches website address
             var urlLauncher = System.Diagnostics.Process.Start(url);
         }
-        #endregion
-
     }
     public static class Tools
     {

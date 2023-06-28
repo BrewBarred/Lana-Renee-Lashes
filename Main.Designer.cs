@@ -45,7 +45,7 @@
             this.labelPaHoursToBox = new System.Windows.Forms.Label();
             this.checkBoxExtraBoxes = new System.Windows.Forms.CheckBox();
             this.labelCostPerUnit = new System.Windows.Forms.Label();
-            this.labelEstimatedTotal = new System.Windows.Forms.Label();
+            this.labelEstimatedtotal = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.labelTotalLashes = new System.Windows.Forms.Label();
             this.labelProfitPerUnit = new System.Windows.Forms.Label();
@@ -57,7 +57,7 @@
             this.linkLabel1 = new System.Windows.Forms.LinkLabel();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
             this.label = new System.Windows.Forms.Label();
-            this.linkLabel2 = new System.Windows.Forms.LinkLabel();
+            this.linkLabelCheckMe = new System.Windows.Forms.LinkLabel();
             this.textBoxGoodyCost = new System.Windows.Forms.TextBox();
             this.textBoxGoodyQuantity = new System.Windows.Forms.TextBox();
             this.textBoxPaHourlyRate = new System.Windows.Forms.TextBox();
@@ -113,14 +113,17 @@
             this.labelSubTitle.Size = new System.Drawing.Size(118, 21);
             this.labelSubTitle.TabIndex = 0;
             this.labelSubTitle.Text = "Cost Calculator:";
+            this.labelSubTitle.Click += new System.EventHandler(this.labelSubTitle_Click);
+            this.labelSubTitle.MouseEnter += new System.EventHandler(this.labelSubTitle_MouseEnter);
+            this.labelSubTitle.MouseLeave += new System.EventHandler(this.labelSubTitle_MouseLeave);
             // 
             // pictureBoxWillow
             // 
             this.pictureBoxWillow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBoxWillow.Image = global::Lana_Renee_Lashes.Properties.Resources.Lana;
-            this.pictureBoxWillow.Location = new System.Drawing.Point(-34, -69);
+            this.pictureBoxWillow.Location = new System.Drawing.Point(-46, -68);
             this.pictureBoxWillow.Name = "pictureBoxWillow";
-            this.pictureBoxWillow.Size = new System.Drawing.Size(921, 213);
+            this.pictureBoxWillow.Size = new System.Drawing.Size(921, 227);
             this.pictureBoxWillow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxWillow.TabIndex = 2;
             this.pictureBoxWillow.TabStop = false;
@@ -288,17 +291,17 @@
             this.labelCostPerUnit.TabIndex = 0;
             this.labelCostPerUnit.Text = "Estimated cost per unit:";
             // 
-            // labelEstimatedTotal
+            // labelEstimatedtotal
             // 
-            this.labelEstimatedTotal.AutoSize = true;
-            this.labelEstimatedTotal.BackColor = System.Drawing.Color.Transparent;
-            this.labelEstimatedTotal.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelEstimatedTotal.ForeColor = System.Drawing.Color.Thistle;
-            this.labelEstimatedTotal.Location = new System.Drawing.Point(465, 616);
-            this.labelEstimatedTotal.Name = "labelEstimatedTotal";
-            this.labelEstimatedTotal.Size = new System.Drawing.Size(139, 16);
-            this.labelEstimatedTotal.TabIndex = 0;
-            this.labelEstimatedTotal.Text = "Estimated Total Cost:";
+            this.labelEstimatedtotal.AutoSize = true;
+            this.labelEstimatedtotal.BackColor = System.Drawing.Color.Transparent;
+            this.labelEstimatedtotal.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelEstimatedtotal.ForeColor = System.Drawing.Color.Thistle;
+            this.labelEstimatedtotal.Location = new System.Drawing.Point(465, 616);
+            this.labelEstimatedtotal.Name = "labelEstimatedtotal";
+            this.labelEstimatedtotal.Size = new System.Drawing.Size(139, 16);
+            this.labelEstimatedtotal.TabIndex = 0;
+            this.labelEstimatedtotal.Text = "Estimated Total Cost:";
             // 
             // label11
             // 
@@ -432,18 +435,18 @@
             this.label.TabIndex = 0;
             this.label.Text = "USD to AUD rate:";
             // 
-            // linkLabel2
+            // linkLabelCheckMe
             // 
-            this.linkLabel2.AutoSize = true;
-            this.linkLabel2.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
-            this.linkLabel2.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.linkLabel2.Location = new System.Drawing.Point(738, 475);
-            this.linkLabel2.Name = "linkLabel2";
-            this.linkLabel2.Size = new System.Drawing.Size(58, 13);
-            this.linkLabel2.TabIndex = 12;
-            this.linkLabel2.TabStop = true;
-            this.linkLabel2.Text = "Check me!";
-            this.linkLabel2.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelUsdToAud_LinkClicked);
+            this.linkLabelCheckMe.AutoSize = true;
+            this.linkLabelCheckMe.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
+            this.linkLabelCheckMe.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.linkLabelCheckMe.Location = new System.Drawing.Point(738, 475);
+            this.linkLabelCheckMe.Name = "linkLabelCheckMe";
+            this.linkLabelCheckMe.Size = new System.Drawing.Size(58, 13);
+            this.linkLabelCheckMe.TabIndex = 12;
+            this.linkLabelCheckMe.TabStop = true;
+            this.linkLabelCheckMe.Text = "Check me!";
+            this.linkLabelCheckMe.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelUsdToAud_LinkClicked);
             // 
             // textBoxGoodyCost
             // 
@@ -673,7 +676,6 @@
             this.label1.Size = new System.Drawing.Size(37, 14);
             this.label1.TabIndex = 59;
             this.label1.Text = "E.T.A. ";
-            this.label1.Click += new System.EventHandler(this.labelEta_Click);
             // 
             // checkBoxAutoFill
             // 
@@ -757,7 +759,7 @@
             this.Controls.Add(this.textBoxPaHourlyRate);
             this.Controls.Add(this.textBoxGoodyQuantity);
             this.Controls.Add(this.textBoxGoodyCost);
-            this.Controls.Add(this.linkLabel2);
+            this.Controls.Add(this.linkLabelCheckMe);
             this.Controls.Add(this.label);
             this.Controls.Add(this.pictureBox3);
             this.Controls.Add(this.linkLabel1);
@@ -769,7 +771,7 @@
             this.Controls.Add(this.labelProfitPerUnit);
             this.Controls.Add(this.labelTotalLashes);
             this.Controls.Add(this.label11);
-            this.Controls.Add(this.labelEstimatedTotal);
+            this.Controls.Add(this.labelEstimatedtotal);
             this.Controls.Add(this.labelCostPerUnit);
             this.Controls.Add(this.checkBoxExtraBoxes);
             this.Controls.Add(this.labelPaHoursToBox);
@@ -821,7 +823,7 @@
         private System.Windows.Forms.Label labelPaHoursToBox;
         private System.Windows.Forms.CheckBox checkBoxExtraBoxes;
         private System.Windows.Forms.Label labelCostPerUnit;
-        private System.Windows.Forms.Label labelEstimatedTotal;
+        private System.Windows.Forms.Label labelEstimatedtotal;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Label labelTotalLashes;
         private System.Windows.Forms.Label labelProfitPerUnit;
@@ -833,7 +835,7 @@
         private System.Windows.Forms.LinkLabel linkLabel1;
         private System.Windows.Forms.PictureBox pictureBox3;
         private System.Windows.Forms.Label label;
-        private System.Windows.Forms.LinkLabel linkLabel2;
+        private System.Windows.Forms.LinkLabel linkLabelCheckMe;
         private System.Windows.Forms.TextBox textBoxGoodyCost;
         private System.Windows.Forms.TextBox textBoxGoodyQuantity;
         private System.Windows.Forms.TextBox textBoxPaHourlyRate;

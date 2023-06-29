@@ -259,118 +259,120 @@ namespace Lana_Renee_Lashes
             {
 
                 // for each control in this form
-                foreach (Control textBox in this.Controls)
+                foreach (Control control in this.Controls)
                 {
-                    if (textBox is TextBox && !(textBox.Text is null or "" or "0"))
+                    // creates a string reference for the name of the textbox being used
+                    string textBox = control.Name;
+                    // creates a string reference for the text in the textbox being used
+                    string text = control.Text;
+
+                    if (control is TextBox && !(text is null or "" or "0"))
                     {
-                        // if regex finds a match between this control and pricebox pattern
-                        if (Regex.IsMatch(textBox.Text, pricePattern))
+                        // if the text has a $ symbol in it
+                        if (text.Contains("$"))
                         {
-                            // stores textbox name into a shorter variable
-                            string text = textBox.Name;
-                            // takes a substring of the text to remove the $ symbol
-                            text = text.Substring(0, 1);
-                            // switch to input name
-                            switch (text)
-                            {
-                                // textbox good cost 
-                                case "textBoxGoodyCost":
-                                    // stores user input to goodyCost variable
-                                    goodyCost = decimal.Parse(textBoxGoodyCost.Text);
+                            // replaces it with nothing to avoid calculation errors
+                            text = text.Replace("$", "");
+                        }
 
-                                    break;
-
-                                case "textBoxOliviaCost":
-                                    // stores user input to oliviaCost variable
-                                    oliviaCost = decimal.Parse(textBoxOliviaCost.Text);
-
-                                    break;
-
-                                case "textBoxPaHourlyRate":
-                                    // stores user input to textBoxPaHourlyRate
-                                    pA_HourlyRate = decimal.Parse(textBoxPaHourlyRate.Text);
-
-                                    break;
-
-                                // if no case was matched
-                                default:
-                                    // logs error
-                                    LogError("[" + DateTime.Now + "]" + "Failed to find price box: " + textBox);
-                                    break;
-
-                            } // end switch
-
-                        } // end if
-
-                        // if regex finds a match between this control and pricebox pattern
-                        else if (Regex.IsMatch(textBox.Text, pricePattern))
+                        // switch to input name
+                        switch (textBox)
                         {
-                            // stores textbox name into a shorter variable
-                            string text = textBox.Name;
+                            // textbox good cost 
+                            case "textBoxGoodyCost":
+                                // stores user input to goodyCost variable
+                                goodyCost = decimal.Parse(text);
 
-                            // if regex finds a match between this textbox text and text pattern
-                            if (Regex.IsMatch(textBox.Text, numberPattern))
-                            {
-                                // switch to input name
-                                switch (text)
-                                {
-                                    // textbox good cost 
-                                    case "textBoxGoodyQuantity":
-                                        // stores user input to goodyCost variable
-                                        goodyQuantity = int.Parse(textBoxGoodyQuantity.Text);
+                                break;
 
-                                        break;
+                            case "textBoxOliviaCost":
+                                // stores user input to oliviaCost variable
+                                oliviaCost = decimal.Parse(text);
 
-                                    case "textBoxOliviaQuantity":
-                                        // stores user input to olivia quantity variable
-                                        oliviaQuantity = int.Parse(textBoxOliviaQuantity.Text);
+                                break;
 
-                                        break;
+                            case "textBoxPaHourlyRate":
+                                // stores user input to textBoxPaHourlyRate
+                                pA_HourlyRate = decimal.Parse(text);
+
+                                break;
+
+                            // if no case was matched
+                            default:
+                                // logs error
+                                LogError("[" + DateTime.Now + "]" + "Failed to find price box: " + textBox);
+                                break;
+
+                        } // end switch
+
+                    } // end if
 
 
-                                    case "textBoxUsdToAud":
-                                        // stores user input usd to aud conversion rate (default 1.5)
-                                        estUsdToAusMultiplier = double.Parse(textBoxUsdToAud.Text);
+                    // if regex finds a match between this textbox text and text pattern
+                    else if (Regex.IsMatch(text, numberPattern))
+                    {
+                        // switch to input name
+                        switch (text)
+                        {
+                            // textbox good cost 
+                            case "textBoxGoodyQuantity":
+                                // stores user input to goodyCost variable
+                                goodyQuantity = int.Parse(textBoxGoodyQuantity.Text);
 
-                                        break;
+                                break;
 
-                                    case "textBoxPaHoursSpentBoxing":
-                                        // stores user input to textBox spent boxing
-                                        pA_HoursSpentBoxing = double.Parse(textBoxPaHoursSpentBoxing.Text);
+                            case "textBoxOliviaQuantity":
+                                // stores user input to olivia quantity variable
+                                oliviaQuantity = int.Parse(textBoxOliviaQuantity.Text);
 
-                                        break;
+                                break;
 
-                                    // textbox good cost 
-                                    case "textBoxPaBoxesPerHour":
-                                        // stores user input to lashed boxed per hour variable
-                                        pA_BoxesPerHour = double.Parse(textBoxPaBoxesPerHour.Text);
+                            case "textBoxUsdToAud":
+                                // stores user input usd to aud conversion rate (default 1.5)
+                                estUsdToAusMultiplier = double.Parse(textBoxUsdToAud.Text);
 
-                                        break;
+                                break;
 
-                                    case "textBoxRoughBoxPrice":
-                                        // stores user input to rough box price variable
-                                        roughBoxCost = totalQuantity * EST_BOX_PRICE * (decimal)estUsdToAusMultiplier;
+                            case "textBoxPaHoursSpentBoxing":
+                                // stores user input to textBox spent boxing
+                                pA_HoursSpentBoxing = double.Parse(textBoxPaHoursSpentBoxing.Text);
 
-                                        break;
+                                break;
 
-                                    case "textBoxRoughShipPrice":
-                                        // stores user input to rough shipping cost variable
-                                        roughShippingCost = totalQuantity * EST_SHIP_PRICE * (decimal)estUsdToAusMultiplier; ;
+                            // textbox good cost 
+                            case "textBoxPaBoxesPerHour":
+                                // stores user input to lashed boxed per hour variable
+                                pA_BoxesPerHour = double.Parse(textBoxPaBoxesPerHour.Text);
 
-                                        break;
+                                break;
 
-                                    // if no case was matched
-                                    default:
-                                        // logs error
-                                        LogError("[" + DateTime.Now + "]" + "Failed to find textbox: " + textBox);
+                            case "textBoxRoughBoxPrice":
+                                // stores user input to rough box price variable
+                                roughBoxCost = totalQuantity * EST_BOX_PRICE * (decimal)estUsdToAusMultiplier;
 
-                                        break;
+                                break;
 
-                                } // end switch
+                            case "textBoxRoughShipPrice":
+                                // stores user input to rough shipping cost variable
+                                roughShippingCost = totalQuantity * EST_SHIP_PRICE * (decimal)estUsdToAusMultiplier; ;
 
-                            } // end if
+                                break;
 
-                        } // end if
+                            // if no case was matched
+                            default:
+                                // logs error
+                                LogError("[" + DateTime.Now + "]" + "Failed to find textbox: " + textBox);
+
+                                break;
+
+                        } // end switch
+
+                    }
+                    else
+                    {
+                        // logs error
+                        LogError("[" + DateTime.Now + "]" + "Failed to match regular expressions: ");
+                        return;
 
                     } // end if
 

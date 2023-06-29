@@ -666,7 +666,7 @@
             this.textBoxRoughBoxCost.Name = "textBoxRoughBoxCost";
             this.textBoxRoughBoxCost.Size = new System.Drawing.Size(159, 20);
             this.textBoxRoughBoxCost.TabIndex = 10;
-            this.textBoxRoughBoxCost.Text = "0";
+            this.textBoxRoughBoxCost.Text = "$0";
             // 
             // textBoxUsdToAud
             // 
@@ -758,7 +758,7 @@
             this.textBoxRoughShippingCost.Name = "textBoxRoughShippingCost";
             this.textBoxRoughShippingCost.Size = new System.Drawing.Size(159, 20);
             this.textBoxRoughShippingCost.TabIndex = 64;
-            this.textBoxRoughShippingCost.Text = "0";
+            this.textBoxRoughShippingCost.Text = "$0";
             // 
             // labelRoughShip
             // 

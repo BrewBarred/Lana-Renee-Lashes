@@ -126,6 +126,7 @@ namespace Lana_Renee_Lashes
         // stores current index of mouse cursor
         int oldIndex = 0;
 
+
         #endregion
 
         public Main()
@@ -141,6 +142,8 @@ namespace Lana_Renee_Lashes
             textBoxGoodyCost.Text = goodyCost.ToString("c2");
             textBoxGoodyQuantity.Text = goodyQuantity.ToString();
             textBoxOliviaQuantity.Text = oliviaQuantity.ToString();
+
+
         }
 
         #region CreateAccount_KeyUp Event
@@ -196,6 +199,8 @@ namespace Lana_Renee_Lashes
                             textBox.Text = text.Remove(oldIndex - 1, 1);
                             // stores this character as the last removed character
                             lastCharRemoved = e.KeyCode;
+                            // reverts index from start of string back to last position
+                            textBox.SelectionStart = oldIndex;
                             // handles the event
                             e.Handled = true;
                             return;
@@ -270,6 +275,10 @@ namespace Lana_Renee_Lashes
         {
             try
             {
+
+                TextBox[] displayBoxes = { textBoxPaEstCost, textBoxEstCostPerUnit , textBoxEstProfitPerUnit, textBoxEstSalesToProfit,
+                                           textBoxTotalQuantity, textBoxEstTotalCost, textBoxEstProfit, textBoxEstProfitLessGst, textBoxGstToPay };
+
                 // if neither of the quantity boxes have values
                 if (goodyQuantity + oliviaQuantity <= 0)
                 {
@@ -277,9 +286,8 @@ namespace Lana_Renee_Lashes
                     Log("Calculation skipped due to invalid quantities!");
                     // prevents wasting time trying to calculate nothing
                     return;
-                }
 
-
+                } // end if
 
                 ///////
                 /// Parses all values to their respective variables
@@ -301,6 +309,14 @@ namespace Lana_Renee_Lashes
                     string textBoxName = textBox.Name;
                     // creates a string reference for the text in the textbox being used
                     string text = textBox.Text;
+
+                    // if the current textbox is used for display only
+                    if (displayBoxes.Contains(textBox))
+                    {
+                        // continues to next control
+                        continue;
+
+                    } // end if
 
                     if (!(text is null or ""))
                     {

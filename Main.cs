@@ -109,7 +109,7 @@ namespace Lana_Renee_Lashes
         // variable used to parse valid keys for textboxes
         string numberDigit = numberDigitPattern.ToString();
         // stores valid keys that can be typed into textboxes
-        Keys[] validKeyArray = { Keys.Back, Keys.Space, Keys.Oemcomma, Keys.OemPeriod, Keys.Decimal, Keys.ShiftKey };
+        Keys[] validKeyArray = { Keys.Back, Keys.Oemcomma, Keys.OemPeriod, Keys.Decimal, Keys.ShiftKey };
         Keys lastCharRemoved;
 
         #endregion
@@ -150,8 +150,9 @@ namespace Lana_Renee_Lashes
                     string text = textBox.Text;
                     // creates a string reference of the char being used atm
                     string keyPressed = e.KeyCode.ToString();
+
                     // if textbox is empty
-                    if (text is null or "")
+                    if (text is null or "$" or "0")
                     {
                         // handles event
                         e.Handled = true;
@@ -171,22 +172,32 @@ namespace Lana_Renee_Lashes
                             {
                                 // informs the user that they may not use that character
                                 MessageBox.Show("\"" + e.KeyCode + "\" is not a valid input!");
-                            }
+
+                            } // end if
+
                             // stores current index
                             int oldIndex = textBox.SelectionStart;
                             // replaces keypress with nothing
                             textBox.Text = text.Remove(oldIndex - 1, 1);
-                            // resets index
+                            // reverts index from start of string back to last position
                             textBox.SelectionStart = oldIndex;
+                            // stores this character as the last removed character
                             lastCharRemoved = e.KeyCode;
+                            // handles the event
                             e.Handled = true;
                             return;
-                        }
+
+                        } // end if
+
                         // if user has selected autofill on
                         if (checkBoxAutoFill.Checked)
                         {
-                            // calculates and updates values
-                            Calculupdate();
+                            // if one of the quantity boxes are filled out (to prevent 0 division errors)
+                            if (goodyQuantity + oliviaQuantity > 0)
+                            {
+                                // calculates and updates values
+                                Calculupdate();
+                            }
                         } // end if
 
                     } // end if
@@ -209,7 +220,9 @@ namespace Lana_Renee_Lashes
                         // breaks out to prevent looping
                         spamProtect = false;
                         return;
-                    }
+
+                    } // end if
+
                     // if the currently active control is a checkbox
                     if (ActiveControl is CheckBox thisCheckBox)
                     {

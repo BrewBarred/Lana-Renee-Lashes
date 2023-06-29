@@ -458,7 +458,7 @@
             this.textBoxGoodyCost.Name = "textBoxGoodyCost";
             this.textBoxGoodyCost.Size = new System.Drawing.Size(159, 20);
             this.textBoxGoodyCost.TabIndex = 1;
-            this.textBoxGoodyCost.Text = "$";
+            this.textBoxGoodyCost.Text = "$0";
             // 
             // textBoxGoodyQuantity
             // 
@@ -633,7 +633,7 @@
             this.textBoxOliviaCost.Name = "textBoxOliviaCost";
             this.textBoxOliviaCost.Size = new System.Drawing.Size(159, 20);
             this.textBoxOliviaCost.TabIndex = 7;
-            this.textBoxOliviaCost.Text = "$";
+            this.textBoxOliviaCost.Text = "$0";
             // 
             // labelOliviaOrdered
             // 

@@ -101,18 +101,16 @@ namespace Lana_Renee_Lashes
         // user information
 
 
-        // AUD currency on?
-        bool audCurrency = true;
         // protects user from accidentally looping confirmation by pressing enter to exit error dialogs
         bool spamProtect = true;
         // regex pattern to match priceboxes
-        static public Regex pricePatternString = new Regex(@"^\$?(\d{0,3}|\,|\.){0,8}", RegexOptions.Compiled);
+        //static public Regex pricePatternString = new Regex(@"^\$?(\d{0,3}|\,|\.){0,8}", RegexOptions.Compiled);
         // variable used to parse price regex
-        string pricePattern = pricePatternString.ToString();
+        //string pricePattern = pricePatternString.ToString();
         // regex pattern to match non-priceboxes
-        static public Regex numberPatternString = new Regex(@"^(\d{0,3}|\,|\.){0,8}", RegexOptions.Compiled);
+        //static public Regex numberPatternString = new Regex(@"^(\d{0,3}|\,|\.){0,8}", RegexOptions.Compiled);
         // variable used to parse text regex
-        string numberPattern = numberPatternString.ToString();
+        //string numberPattern = numberPatternString.ToString();
         // regex pattern used to match numeric digits
         static public Regex numberDigitPattern = new Regex(@"\d", RegexOptions.Compiled);
         // variable used to parse valid keys for textboxes
@@ -202,7 +200,7 @@ namespace Lana_Renee_Lashes
                             // reverts index from start of string back to last position
                             textBox.SelectionStart = oldIndex;
                             // handles the event
-                            e.Handled = true;
+                            //e.Handled = true;
                             return;
 
                         } // end if
@@ -273,7 +271,7 @@ namespace Lana_Renee_Lashes
         /// </summary>
         private void Calculupdate()
         {
-            try
+            //try
             {
 
                 TextBox[] displayBoxes = { textBoxPaEstCost, textBoxEstCostPerUnit , textBoxEstProfitPerUnit, textBoxEstSalesToProfit,
@@ -477,10 +475,10 @@ namespace Lana_Renee_Lashes
 
 
             } // end try
-            catch (Exception ex)
+            //catch (Exception ex)
             {
                 // writes error to console
-                LogError(ex.Message);
+                //LogError(ex.Message);
 
             } // end try
 
@@ -604,7 +602,7 @@ namespace Lana_Renee_Lashes
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void checkRoughBox_CheckedChanged(object sender, System.EventArgs e)
+        private void checkBoxRoughBoxes_CheckedChanged(object sender, EventArgs e)
         {
             // if extra boxes checkbox is checked
             if (checkBoxRoughBoxes.Checked)
@@ -612,6 +610,8 @@ namespace Lana_Renee_Lashes
                 // show extra boxes controls
                 labelRoughBoxPrice.Show();
                 textBoxRoughBoxCost.Show();
+                labelRoughBoxPrice.Show();
+                textBoxRoughShippingCost.Show();
                 if (totalQuantity != 0)
                 {
                     // displays a rough estimate of box price per unit in the correct currency
@@ -628,6 +628,8 @@ namespace Lana_Renee_Lashes
                 // show extra boxes controls
                 labelRoughBoxPrice.Hide();
                 textBoxRoughBoxCost.Hide();
+                labelRoughShippingCost.Hide();
+                textBoxRoughShippingCost.Hide();
 
             } // end if
         }
@@ -699,7 +701,6 @@ namespace Lana_Renee_Lashes
             var urlLauncher = System.Diagnostics.Process.Start(url);
         }
         #endregion
-
     }
 
 }

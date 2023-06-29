@@ -85,7 +85,7 @@
             this.checkBoxDeductHoursSpent = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.textBoxRoughShippingCost = new System.Windows.Forms.TextBox();
-            this.labelRoughShip = new System.Windows.Forms.Label();
+            this.labelRoughShippingCost = new System.Windows.Forms.Label();
             this.buttonUsdToAud = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWillow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
@@ -280,6 +280,7 @@
             this.checkBoxRoughBoxes.Size = new System.Drawing.Size(15, 14);
             this.checkBoxRoughBoxes.TabIndex = 9;
             this.checkBoxRoughBoxes.UseVisualStyleBackColor = true;
+            this.checkBoxRoughBoxes.CheckedChanged += new System.EventHandler(this.checkBoxRoughBoxes_CheckedChanged);
             // 
             // labelCostPerUnit
             // 
@@ -747,17 +748,17 @@
             this.textBoxRoughShippingCost.TabIndex = 64;
             this.textBoxRoughShippingCost.Text = "$0";
             // 
-            // labelRoughShip
+            // labelRoughShippingCost
             // 
-            this.labelRoughShip.AutoSize = true;
-            this.labelRoughShip.BackColor = System.Drawing.Color.Transparent;
-            this.labelRoughShip.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelRoughShip.ForeColor = System.Drawing.Color.Thistle;
-            this.labelRoughShip.Location = new System.Drawing.Point(523, 453);
-            this.labelRoughShip.Name = "labelRoughShip";
-            this.labelRoughShip.Size = new System.Drawing.Size(151, 16);
-            this.labelRoughShip.TabIndex = 63;
-            this.labelRoughShip.Text = "Rough shipping per unit:";
+            this.labelRoughShippingCost.AutoSize = true;
+            this.labelRoughShippingCost.BackColor = System.Drawing.Color.Transparent;
+            this.labelRoughShippingCost.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelRoughShippingCost.ForeColor = System.Drawing.Color.Thistle;
+            this.labelRoughShippingCost.Location = new System.Drawing.Point(523, 453);
+            this.labelRoughShippingCost.Name = "labelRoughShippingCost";
+            this.labelRoughShippingCost.Size = new System.Drawing.Size(151, 16);
+            this.labelRoughShippingCost.TabIndex = 63;
+            this.labelRoughShippingCost.Text = "Rough shipping per unit:";
             // 
             // buttonUsdToAud
             // 
@@ -779,7 +780,7 @@
             this.ClientSize = new System.Drawing.Size(797, 862);
             this.Controls.Add(this.buttonUsdToAud);
             this.Controls.Add(this.textBoxRoughShippingCost);
-            this.Controls.Add(this.labelRoughShip);
+            this.Controls.Add(this.labelRoughShippingCost);
             this.Controls.Add(this.checkBoxDeductHoursSpent);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.checkBoxAutoFill);
@@ -910,7 +911,7 @@
         private System.Windows.Forms.CheckBox checkBoxDeductHoursSpent;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox textBoxRoughShippingCost;
-        private System.Windows.Forms.Label labelRoughShip;
+        private System.Windows.Forms.Label labelRoughShippingCost;
         private System.Windows.Forms.Button buttonUsdToAud;
     }
 }

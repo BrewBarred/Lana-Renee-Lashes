@@ -84,10 +84,9 @@
             this.label2 = new System.Windows.Forms.Label();
             this.checkBoxDeductHoursSpent = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
             this.textBoxRoughShippingCost = new System.Windows.Forms.TextBox();
             this.labelRoughShip = new System.Windows.Forms.Label();
-            this.checkBoxUsdToAud = new System.Windows.Forms.CheckBox();
+            this.buttonUsdToAud = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWillow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -696,7 +695,7 @@
             this.checkBoxAutoFill.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxAutoFill.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F);
             this.checkBoxAutoFill.ForeColor = System.Drawing.Color.Thistle;
-            this.checkBoxAutoFill.Location = new System.Drawing.Point(182, 660);
+            this.checkBoxAutoFill.Location = new System.Drawing.Point(180, 636);
             this.checkBoxAutoFill.Name = "checkBoxAutoFill";
             this.checkBoxAutoFill.Size = new System.Drawing.Size(15, 14);
             this.checkBoxAutoFill.TabIndex = 14;
@@ -708,7 +707,7 @@
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.Thistle;
-            this.label2.Location = new System.Drawing.Point(92, 658);
+            this.label2.Location = new System.Drawing.Point(90, 634);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(84, 16);
             this.label2.TabIndex = 0;
@@ -721,7 +720,7 @@
             this.checkBoxDeductHoursSpent.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxDeductHoursSpent.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F);
             this.checkBoxDeductHoursSpent.ForeColor = System.Drawing.Color.Thistle;
-            this.checkBoxDeductHoursSpent.Location = new System.Drawing.Point(182, 595);
+            this.checkBoxDeductHoursSpent.Location = new System.Drawing.Point(181, 609);
             this.checkBoxDeductHoursSpent.Name = "checkBoxDeductHoursSpent";
             this.checkBoxDeductHoursSpent.Size = new System.Drawing.Size(15, 14);
             this.checkBoxDeductHoursSpent.TabIndex = 13;
@@ -733,23 +732,11 @@
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label3.ForeColor = System.Drawing.Color.Thistle;
-            this.label3.Location = new System.Drawing.Point(50, 593);
+            this.label3.Location = new System.Drawing.Point(49, 607);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(127, 16);
             this.label3.TabIndex = 60;
             this.label3.Text = "Deduct hours spent?";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.Transparent;
-            this.label4.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.ForeColor = System.Drawing.Color.Thistle;
-            this.label4.Location = new System.Drawing.Point(75, 627);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(101, 16);
-            this.label4.TabIndex = 61;
-            this.label4.Text = "Convert to AUD:";
             // 
             // textBoxRoughShippingCost
             // 
@@ -772,19 +759,17 @@
             this.labelRoughShip.TabIndex = 63;
             this.labelRoughShip.Text = "Rough shipping per unit:";
             // 
-            // checkBoxUsdToAud
+            // buttonUsdToAud
             // 
-            this.checkBoxUsdToAud.AutoSize = true;
-            this.checkBoxUsdToAud.Checked = true;
-            this.checkBoxUsdToAud.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxUsdToAud.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F);
-            this.checkBoxUsdToAud.ForeColor = System.Drawing.Color.Thistle;
-            this.checkBoxUsdToAud.Location = new System.Drawing.Point(182, 627);
-            this.checkBoxUsdToAud.Name = "checkBoxUsdToAud";
-            this.checkBoxUsdToAud.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxUsdToAud.TabIndex = 65;
-            this.checkBoxUsdToAud.UseVisualStyleBackColor = true;
-            this.checkBoxUsdToAud.CheckedChanged += new System.EventHandler(this.checkBoxUsdToAud_CheckedChanged);
+            this.buttonUsdToAud.BackColor = System.Drawing.Color.Black;
+            this.buttonUsdToAud.ForeColor = System.Drawing.SystemColors.Control;
+            this.buttonUsdToAud.Location = new System.Drawing.Point(552, 577);
+            this.buttonUsdToAud.Name = "buttonUsdToAud";
+            this.buttonUsdToAud.Size = new System.Drawing.Size(134, 23);
+            this.buttonUsdToAud.TabIndex = 65;
+            this.buttonUsdToAud.Text = "Convert to AUD";
+            this.buttonUsdToAud.UseVisualStyleBackColor = false;
+            this.buttonUsdToAud.Click += new System.EventHandler(this.buttonUsdToAud_Click);
             // 
             // Main
             // 
@@ -792,10 +777,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(797, 862);
-            this.Controls.Add(this.checkBoxUsdToAud);
+            this.Controls.Add(this.buttonUsdToAud);
             this.Controls.Add(this.textBoxRoughShippingCost);
             this.Controls.Add(this.labelRoughShip);
-            this.Controls.Add(this.label4);
             this.Controls.Add(this.checkBoxDeductHoursSpent);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.checkBoxAutoFill);
@@ -925,10 +909,9 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.CheckBox checkBoxDeductHoursSpent;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox textBoxRoughShippingCost;
         private System.Windows.Forms.Label labelRoughShip;
-        private System.Windows.Forms.CheckBox checkBoxUsdToAud;
+        private System.Windows.Forms.Button buttonUsdToAud;
     }
 }
 

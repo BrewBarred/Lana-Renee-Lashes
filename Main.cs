@@ -117,9 +117,14 @@ namespace Lana_Renee_Lashes
         static public Regex numberDigitPattern = new Regex(@"\d", RegexOptions.Compiled);
         // variable used to parse valid keys for textboxes
         string numberDigit = numberDigitPattern.ToString();
+
         // stores valid keys that can be typed into textboxes
         Keys[] validKeyArray = { Keys.Back, Keys.Oemcomma, Keys.OemPeriod, Keys.Decimal, Keys.ShiftKey, Keys.Left, Keys.Right, Keys.Up, Keys.Down };
+        // stores last character removed by filter
         Keys lastCharRemoved;
+
+        // stores current index of mouse cursor
+        int oldIndex = 0;
 
         #endregion
 
@@ -160,6 +165,9 @@ namespace Lana_Renee_Lashes
                     // creates a string reference of the char being used atm
                     string keyPressed = e.KeyCode.ToString();
 
+                    // stores current index
+                    oldIndex = textBox.SelectionStart;
+
                     // if textbox is empty
                     if (text is null or "$" or "0")
                     {
@@ -184,12 +192,8 @@ namespace Lana_Renee_Lashes
 
                             } // end if
 
-                            // stores current index
-                            int oldIndex = textBox.SelectionStart;
                             // replaces keypress with nothing
                             textBox.Text = text.Remove(oldIndex - 1, 1);
-                            // reverts index from start of string back to last position
-                            textBox.SelectionStart = oldIndex;
                             // stores this character as the last removed character
                             lastCharRemoved = e.KeyCode;
                             // handles the event
@@ -209,13 +213,16 @@ namespace Lana_Renee_Lashes
                     } // end if
 
 
+                    // reverts index from start of string back to last position
+                    textBox.SelectionStart = oldIndex;
+
                 } // end if
 
                 // else if user was releasing the "enter" key and currently active  control is not a textbox
                 else
                 {
                     // if user releases enter once in a row
-                    if (e.KeyCode == Keys.Enter && spamProtect == false)
+                    if (e.KeyCode == Keys.Enter && spamProtect == false && e.KeyCode != Keys.Back)
                     {
                         //sets spam protection to true to prevent double entering while trying to exit an error dialog
                         spamProtect = true;
@@ -352,13 +359,13 @@ namespace Lana_Renee_Lashes
 
                             case "textBoxRoughBoxCost":
                                 // stores user input to rough box price variable
-                                roughBoxCost = totalQuantity * EST_BOX_PRICE * (decimal)estUsdToAusMultiplier;
+                                roughBoxCost = totalQuantity * EST_BOX_PRICE;
 
                                 break;
 
                             case "textBoxRoughShippingCost":
                                 // stores user input to rough shipping cost variable
-                                roughShippingCost = totalQuantity * EST_SHIP_PRICE * (decimal)estUsdToAusMultiplier;
+                                roughShippingCost = totalQuantity * EST_SHIP_PRICE;
 
                                 break;
 
@@ -452,6 +459,7 @@ namespace Lana_Renee_Lashes
 
                 Display();
 
+
             } // end try
             catch (Exception ex)
             {
@@ -469,20 +477,7 @@ namespace Lana_Renee_Lashes
         private void Display()
         {
 
-            // if goody cost is blank and goody quantity is greater than 0
-            if (goodyCost == 0 && goodyQuantity > 0)
-            {
-                goodyCost = goodyQuantity * estCostPerUnit;
 
-            } // end if
-
-            // if olivia cost is blank and goody quantity is greater than 0
-            if (oliviaCost == 0 && oliviaQuantity > 0)
-            {
-                // estimates olivia cost using 
-                oliviaCost = oliviaQuantity * oliviaCost;
-
-            } // end if
 
             if (goodyCost + goodyQuantity > 0 || oliviaCost + oliviaQuantity > 0)
             {
@@ -491,42 +486,16 @@ namespace Lana_Renee_Lashes
                 /// Displays monetary values to respective textboxes in correct currency
                 /////
 
-                // if convert to aud checkbox is ticked
-                if (checkBoxUsdToAud.Checked)
-                {
-                    if (audCurrency == false)
-                    {
-                        // displays goody cost in AUD
-                        textBoxGoodyCost.Text = (goodyCost * (decimal)estUsdToAusMultiplier).ToString("c2");
-                        // displays olivia cost in AUD
-                        textBoxOliviaCost.Text = (oliviaCost * (decimal)estUsdToAusMultiplier).ToString("c2");
-                        // displays estimated total cost in AUD
-                        textBoxEstTotalCost.Text = ((goodyCost + oliviaCost) * (decimal)estUsdToAusMultiplier).ToString("c2");
-                        // displays rough box cost in AUD
-                        textBoxRoughBoxCost.Text = (roughBoxCost * (decimal)estUsdToAusMultiplier).ToString("c2");
-                        // displays rough shipping cost in AUD
-                        textBoxRoughShippingCost.Text = (roughShippingCost * (decimal)estUsdToAusMultiplier).ToString("c2");
-                    }
-                }
-                else
-                {
-                    // displays goody cost in USD
-                    textBoxGoodyCost.Text = goodyCost.ToString("c2");
-                    // displays olivia cost in USD
-                    textBoxOliviaCost.Text = oliviaCost.ToString("c2");
-                    // displays estimated total cost in USD
-                    textBoxEstTotalCost.Text = (goodyCost + oliviaCost).ToString("c2");
-                    // displays estimated rough box cost in USD
-                    textBoxRoughBoxCost.Text = roughBoxCost.ToString("c2");
-                    // displays rough shipping cost in USD
-                    textBoxRoughShippingCost.Text = roughShippingCost.ToString("c2");
-
-                }// end if
-
-                ///////
-                /// Displays non-monetary values to respective textboxes
-                /////
-
+                // displays goody cost in USD
+                textBoxGoodyCost.Text = goodyCost.ToString("c2");
+                // displays olivia cost in USD
+                textBoxOliviaCost.Text = oliviaCost.ToString("c2");
+                // displays estimated total cost in USD
+                textBoxEstTotalCost.Text = (goodyCost + oliviaCost).ToString("c2");
+                // displays estimated rough box cost in USD
+                textBoxRoughBoxCost.Text = roughBoxCost.ToString("c2");
+                // displays rough shipping cost in USD
+                textBoxRoughShippingCost.Text = roughShippingCost.ToString("c2");
                 if (pA_HoursSpentBoxing + pA_EstimatedHoursToBox > 0)
                 {
                     // display hours spent boxing
@@ -552,10 +521,25 @@ namespace Lana_Renee_Lashes
                 textBoxEstProfitLessGst.Text = estProfitLessGst.ToString("c2");
                 // updates gst to pay
                 textBoxGstToPay.Text = gstToPay.ToString("c2");
+
             }
         }
 
         #endregion
+
+        private void buttonUsdToAud_Click(object sender, EventArgs e)
+        {
+            // displays goody cost in AUD
+            textBoxGoodyCost.Text = (goodyCost * (decimal)estUsdToAusMultiplier).ToString("c2");
+            // displays olivia cost in AUD
+            textBoxOliviaCost.Text = (oliviaCost * (decimal)estUsdToAusMultiplier).ToString("c2");
+            // displays estimated total cost in AUD
+            textBoxEstTotalCost.Text = ((goodyCost + oliviaCost) * (decimal)estUsdToAusMultiplier).ToString("c2");
+            // displays rough box cost in AUD
+            textBoxRoughBoxCost.Text = (roughBoxCost * (decimal)estUsdToAusMultiplier).ToString("c2");
+            // displays rough shipping cost in AUD
+            textBoxRoughShippingCost.Text = (roughShippingCost * (decimal)estUsdToAusMultiplier).ToString("c2");
+        }
 
         #region checkBoxPaCosts_CheckChanged Event
         /// <summary>
@@ -615,21 +599,21 @@ namespace Lana_Renee_Lashes
                 if (totalQuantity != 0)
                 {
                     // displays a rough estimate of box price per unit in the correct currency
-                    textBoxRoughBoxCost.Text = checkBoxUsdToAud.Checked ? (roughBoxCost * (decimal)estUsdToAusMultiplier).ToString("c2") : (roughBoxCost).ToString("c2");
+                    textBoxRoughBoxCost.Text = roughBoxCost.ToString("c2");
                     // displays a rough estimate of shipping price per unit in the correct currency
-                    textBoxRoughShippingCost.Text = checkBoxUsdToAud.Checked ? (roughShippingCost * (decimal)estUsdToAusMultiplier).ToString("c2") : (roughShippingCost).ToString("c2");
-
-                }
-                // else if extra boxes checkbox is not checked
-                else
-                {
-                    // show extra boxes controls
-                    labelRoughBoxPrice.Hide();
-                    textBoxRoughBoxCost.Hide();
+                    textBoxRoughShippingCost.Text = roughShippingCost.ToString("c2");
 
                 } // end if
 
             }
+            // else if extra boxes checkbox is not checked
+            else
+            {
+                // show extra boxes controls
+                labelRoughBoxPrice.Hide();
+                textBoxRoughBoxCost.Hide();
+
+            } // end if
         }
 
         #endregion
@@ -700,27 +684,6 @@ namespace Lana_Renee_Lashes
         }
         #endregion
 
-        /// <summary>
-        /// checkBoxConvert_CheckedChanged (Currency converter)
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void checkBoxUsdToAud_CheckedChanged(object sender, EventArgs e)
-        {
-            // if aud currency is enabled
-            if (checkBoxUsdToAud.Checked)
-            {
-                // audcurrency is enabled
-                audCurrency = true;
-            }
-            // else if aud currency is not enabled
-            else
-            {
-                // audcurrency is disabled
-                audCurrency = false;
-
-            } // end if
-        }
     }
 
 }

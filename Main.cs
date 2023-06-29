@@ -20,36 +20,38 @@ namespace Lana_Renee_Lashes
         const int MAX_RATE = 40;
         // min hourly rate
         const int MIN_RATE = 20;
-        // estimated box cost per unit
+        // estimated box cost per unit based on past order
         const decimal EST_BOX_PRICE = 0.2632m;
-        // estimated shipping cost per unit
+        // estimated shipping cost per unit based on past order
         const decimal EST_SHIP_PRICE = 0.2263m;
+
+
         // retail price per unit
-        decimal RETAIL_PRICE = 24.99m;
+        decimal retailSalePrice = 24.99m;
         // est usd to aud multiplier - this should only be a guide
         double estUsdToAusMultiplier = 1.5;
 
+        // goody price break-down (lash company only)
 
         // total cost of this goody order
         decimal goodyCost = 0m;
         // quantity of lashes from goody
         int goodyQuantity = 0;
         // price per goody lash
-        decimal goodyLashPrice = 2.9m;
-        // estimated goody shipping price per unit
-        decimal goodyPricePerUnit = 0.0309m;
+        decimal goodyLashCost = 2.9m;
+        // estimated goody price per unit calculated from a past order
+        decimal goodyPastOrderCost = 2.9309m;
 
+        // Olivia price break-down (Boxing company too)
 
         // total cost of this olivia order
         decimal oliviaCost = 0m;
         // quantity of lashes from olivia
         int oliviaQuantity = 0;
         // price per olivia lash 
-        decimal oliviaLashPrice = 2;
-        // price per flatpacked box (unknown)
-        decimal boxPriceFlat = 0;
-        // price per packed box (unknown)
-        decimal boxPricePacked = 0;
+        decimal oliviaLashCost = 2;
+        // estimated olivia price per unit calculated from a past order
+        decimal oliviaPastOrderCost = 3.3523m;
 
 
         // total lashes ordered
@@ -137,7 +139,7 @@ namespace Lana_Renee_Lashes
         /// <param name="e"></param>
         private void Main_KeyUp(object sender, KeyEventArgs e)
         {
-            //try
+            try
             {
 
                 // if the active control of this form is a textbox
@@ -192,12 +194,9 @@ namespace Lana_Renee_Lashes
                         // if user has selected autofill on
                         if (checkBoxAutoFill.Checked)
                         {
-                            // if one of the quantity boxes are filled out (to prevent 0 division errors)
-                            if (goodyQuantity + oliviaQuantity > 0)
-                            {
-                                // calculates and updates values
-                                Calculupdate();
-                            }
+                            // calculates and updates values
+                            Calculupdate();
+
                         } // end if
 
                     } // end if
@@ -240,7 +239,7 @@ namespace Lana_Renee_Lashes
                 } // end if
 
             }
-            //catch
+            catch
             {
                 LogError("PHere?");
 
@@ -257,14 +256,29 @@ namespace Lana_Renee_Lashes
         {
             try
             {
-
+                // if neither of the quantity boxes have values
+                if (goodyQuantity + oliviaQuantity <= 0)
+                {
+                    // writes error to console
+                    Log("Calution skipped due to invalid quantities!");
+                    // prevents wasting time trying to calculate nothing
+                    return;
+                }
                 // for each control in this form
                 foreach (Control control in this.Controls)
                 {
+                    // if control is not a textbox
+                    if (!(control is TextBox))
+                    {
+                        // breaks out
+                        return;
+                    }
                     // creates a string reference for the name of the textbox being used
                     string textBox = control.Name;
                     // creates a string reference for the text in the textbox being used
                     string text = control.Text;
+
+                    MessageBox.Show(control.ToString());
 
                     if (control is TextBox && !(text is null or "" or "0"))
                     {
@@ -274,8 +288,6 @@ namespace Lana_Renee_Lashes
                             // replaces it with nothing to avoid calculation errors
                             text = text.Replace("$", "");
                         }
-
-                        // switch to input name
                         switch (textBox)
                         {
                             // textbox good cost 
@@ -291,58 +303,35 @@ namespace Lana_Renee_Lashes
 
                                 break;
 
+                            // textbox good cost 
+                            case "textBoxGoodyQuantity":
+                                // stores user input to goodyCost variable
+                                goodyQuantity = int.Parse(text);
+
+                                break;
+
+                            case "textBoxOliviaQuantity":
+                                // stores user input to olivia quantity variable
+                                oliviaQuantity = int.Parse(text);
+
+                                break;
+
                             case "textBoxPaHourlyRate":
                                 // stores user input to textBoxPaHourlyRate
                                 pA_HourlyRate = decimal.Parse(text);
 
                                 break;
 
-                            // if no case was matched
-                            default:
-                                // logs error
-                                LogError("[" + DateTime.Now + "]" + "Failed to find price box: " + textBox);
-                                break;
-
-                        } // end switch
-
-                    } // end if
-
-
-                    // if regex finds a match between this textbox text and text pattern
-                    else if (Regex.IsMatch(text, numberPattern))
-                    {
-                        // switch to input name
-                        switch (text)
-                        {
-                            // textbox good cost 
-                            case "textBoxGoodyQuantity":
-                                // stores user input to goodyCost variable
-                                goodyQuantity = int.Parse(textBoxGoodyQuantity.Text);
-
-                                break;
-
-                            case "textBoxOliviaQuantity":
-                                // stores user input to olivia quantity variable
-                                oliviaQuantity = int.Parse(textBoxOliviaQuantity.Text);
-
-                                break;
-
-                            case "textBoxUsdToAud":
-                                // stores user input usd to aud conversion rate (default 1.5)
-                                estUsdToAusMultiplier = double.Parse(textBoxUsdToAud.Text);
-
-                                break;
-
                             case "textBoxPaHoursSpentBoxing":
                                 // stores user input to textBox spent boxing
-                                pA_HoursSpentBoxing = double.Parse(textBoxPaHoursSpentBoxing.Text);
+                                pA_HoursSpentBoxing = double.Parse(text);
 
                                 break;
 
                             // textbox good cost 
-                            case "textBoxPaBoxesPerHour":
+                            case "textBoxPaHoursToBox":
                                 // stores user input to lashed boxed per hour variable
-                                pA_BoxesPerHour = double.Parse(textBoxPaBoxesPerHour.Text);
+                                pA_BoxesPerHour = double.Parse(text);
 
                                 break;
 
@@ -358,6 +347,12 @@ namespace Lana_Renee_Lashes
 
                                 break;
 
+                            case "textBoxUsdToAud":
+                                // stores user input usd to aud conversion rate (default 1.5)
+                                estUsdToAusMultiplier = double.Parse(text);
+
+                                break;
+
                             // if no case was matched
                             default:
                                 // logs error
@@ -365,26 +360,19 @@ namespace Lana_Renee_Lashes
 
                                 break;
 
-                        } // end switch
+                        } // end switch 
 
-                    }
+                    } // end if 
                     else
                     {
                         // logs error
-                        LogError("[" + DateTime.Now + "]" + "Failed to match regular expressions: ");
+                        LogError("[" + DateTime.Now + "]" + "Failed to process control: " + control);
                         return;
 
                     } // end if
 
+
                 } // end for
-
-
-                CheckCurrency();
-
-                // stores quantity of goody lashes
-                goodyQuantity = int.Parse(textBoxGoodyQuantity.Text);
-                // stores quantity of olivia lashes
-                oliviaQuantity = int.Parse(textBoxOliviaQuantity.Text);
 
                 // if personal assistant checkbox is checked AND P.A's hourly rate is not null
                 if (checkBoxPaCosts.Checked)
@@ -426,13 +414,13 @@ namespace Lana_Renee_Lashes
                     if (totalQuantity > 0)
                     {
                         // adds the cost of both orders together for a total cost
-                        estTotalCost = (goodyCost + oliviaCost + pA_EstimatedCost) * (decimal)estUsdToAusMultiplier;
+                        estTotalCost = (goodyCost + oliviaCost + pA_EstimatedCost);
                         // estimates the cost per lash set
                         estCostPerUnit = estTotalCost / totalQuantity;
                         // estimated profit per sale
-                        estProfitPerUnit = RETAIL_PRICE - estCostPerUnit;
+                        estProfitPerUnit = retailSalePrice - estCostPerUnit;
                         // sales required to profit
-                        estSalesToProfit = (int)estTotalCost / (int)RETAIL_PRICE + 1;
+                        estSalesToProfit = (int)estTotalCost / (int)retailSalePrice + 1;
                         // adds quantities of both orders together for a total quantity
                         totalQuantity = goodyQuantity + oliviaQuantity;
                         //total profit margin this order
@@ -451,12 +439,11 @@ namespace Lana_Renee_Lashes
 
                 Display();
 
-
-
             } // end try
-            catch
+            catch (Exception ex)
             {
-                MessageBox.Show("Take a video of whats happening with what values and in which textboxes plus what you are trying to achieve so I can fix it");
+                // writes error to console
+                LogError(ex.Message);
 
             } // end try
 
@@ -464,64 +451,93 @@ namespace Lana_Renee_Lashes
 
         #endregion
 
-        private void CheckCurrency()
-        {
-
-            if (goodyCost + oliviaCost > 0 && goodyQuantity + oliviaQuantity > 0)
-            {
-                if (!audCurrency)
-                {
-                    // converts total from olivia to usd if the check aud checkbox is ticked
-                    oliviaCost = checkBoxUsdToAud.Checked ? oliviaCost * (decimal)estUsdToAusMultiplier : oliviaCost;
-                    // converts total from goody to usd if the check aud checkbox is ticked
-                    goodyCost = checkBoxUsdToAud.Checked ? goodyCost * (decimal)estUsdToAusMultiplier : goodyCost;
-                    // calculates total cost
-                    estTotalCost = goodyCost + oliviaCost;
-                    // calculates total quantity
-                    totalQuantity = goodyQuantity + oliviaQuantity;
-                    // converts rough box cost per unit to aud
-                    roughBoxCost = checkBoxUsdToAud.Checked ? roughBoxCost * (decimal)estUsdToAusMultiplier : roughBoxCost;
-                    // converts rough ship cost per unit to aud
-                    roughShippingCost = checkBoxUsdToAud.Checked ? roughShippingCost * (decimal)estUsdToAusMultiplier : roughShippingCost;
-                    // sets audCurrency to true so we don't keep popping in and boosting ourselves every lap
-                    audCurrency = true;
-
-                } // end if
-
-            } // end if
-        }
+        #region Display()
 
         private void Display()
         {
-            ///////
-            /// Display Calculated values to respective textboxes
-            /////
 
+            // if goody cost is blank and goody quantity is greater than 0
+            if (goodyCost == 0 && goodyQuantity > 0)
+            {
+                goodyCost = goodyQuantity * estCostPerUnit;
 
-            // display hours spent boxing
-            textBoxPaHoursSpentBoxing.Text = pA_HoursSpentBoxing.ToString("d2");
-            // display pa's estimated hours to box
-            textBoxPaBoxesPerHour.Text = pA_EstimatedHoursToBox.ToString("d2");
+            } // end if
 
-            // display estimated p.a. cost
-            textBoxPaEstCost.Text = pA_EstimatedCost.ToString("c2");
-            // updates estimated cost per unit
-            textBoxEstCostPerUnit.Text = estCostPerUnit.ToString("c2");
-            // updates estimated profit per unit
-            textBoxEstProfitPerUnit.Text = (estProfitPerUnit.ToString("c2"));
-            // updates estimated sales until we start to see profit
-            textBoxEstSalesToProfit.Text = estSalesToProfit.ToString();
-            // updates total quantity
-            textBoxTotalQuantity.Text = totalQuantity.ToString();
-            // updates estimated total cost
-            textBoxEstTotalCost.Text = estTotalCost.ToString("c2");
-            // updates estimated profit
-            textBoxEstProfit.Text = estProfit.ToString("c2");
-            // updates profit less gst
-            textBoxEstProfitLessGst.Text = estProfitLessGst.ToString("c2");
-            // updates gst to pay
-            textBoxGstToPay.Text = gstToPay.ToString("c2");
+            // if olivia cost is blank and goody quantity is greater than 0
+            if (oliviaCost == 0 && oliviaQuantity > 0)
+            {
+                // estimates olivia cost using 
+                oliviaCost = oliviaQuantity * oliviaCost;
+
+            } // end if
+
+            if (goodyCost + goodyQuantity > 0 || oliviaCost + oliviaQuantity > 0)
+            {
+
+                ///////
+                /// Displays monetary values to respective textboxes in correct currency
+                /////
+
+                // if convert to aud checkbox is ticked
+                if (checkBoxUsdToAud.Checked)
+                {
+                    // displays goody cost in AUD
+                    textBoxGoodyCost.Text = (goodyCost * (decimal)estUsdToAusMultiplier).ToString("c2");
+                    // displays olivia cost in AUD
+                    textBoxOliviaCost.Text = (oliviaCost * (decimal)estUsdToAusMultiplier).ToString("c2");
+                    // displays estimated total cost in AUD
+                    textBoxEstTotalCost.Text = ((goodyCost + oliviaCost) * (decimal)estUsdToAusMultiplier).ToString("c2");
+                    // displays rough box cost in AUD
+                    textBoxRoughBoxCost.Text = (roughBoxCost * (decimal)estUsdToAusMultiplier).ToString("c2");
+                    // displays rough shipping cost in AUD
+                    textBoxRoughShippingCost.Text = (roughShippingCost * (decimal)estUsdToAusMultiplier).ToString("c2");
+
+                }
+                else
+                {
+                    // displays goody cost in USD
+                    textBoxGoodyCost.Text = goodyCost.ToString("c2");
+                    // displays olivia cost in USD
+                    textBoxOliviaCost.Text = oliviaCost.ToString("c2");
+                    // displays estimated total cost in USD
+                    textBoxEstTotalCost.Text = goodyCost + oliviaCost.ToString("c2");
+                    // displays estimated rough box cost in USD
+                    textBoxRoughBoxCost.Text = roughBoxCost.ToString("c2");
+                    // displays rough shipping cost in USD
+                    textBoxRoughShippingCost.Text = roughShippingCost.ToString("c2");
+
+                }// end if
+
+                ///////
+                /// Displays non-monetary values to respective textboxes
+                /////
+
+                // display hours spent boxing
+                textBoxPaHoursSpentBoxing.Text = pA_HoursSpentBoxing.ToString("d2");
+                // display pa's estimated hours to box
+                textBoxPaHoursToBox.Text = pA_EstimatedHoursToBox.ToString("d2");
+                // display estimated p.a. cost
+                textBoxPaEstCost.Text = pA_EstimatedCost.ToString("c2");
+                // updates estimated cost per unit
+                textBoxEstCostPerUnit.Text = estCostPerUnit.ToString("c2");
+                // updates estimated profit per unit
+                textBoxEstProfitPerUnit.Text = (estProfitPerUnit.ToString("c2"));
+                // updates estimated sales until we start to see profit
+                textBoxEstSalesToProfit.Text = estSalesToProfit.ToString();
+                // updates total quantity
+                textBoxTotalQuantity.Text = totalQuantity.ToString();
+                // updates estimated total cost
+                textBoxEstTotalCost.Text = estTotalCost.ToString("c2");
+                // updates estimated profit
+                textBoxEstProfit.Text = estProfit.ToString("c2");
+                // updates profit less gst
+                textBoxEstProfitLessGst.Text = estProfitLessGst.ToString("c2");
+                // updates gst to pay
+                textBoxGstToPay.Text = gstToPay.ToString("c2");
+            }
         }
+
+        #endregion
 
         #region checkBoxPaCosts_CheckChanged Event
         /// <summary>
@@ -540,7 +556,7 @@ namespace Lana_Renee_Lashes
                 labelPaHoursSpent.Show();
                 textBoxPaHoursSpentBoxing.Show();
                 labelPaHoursToBox.Show();
-                textBoxPaBoxesPerHour.Show();
+                textBoxPaHoursToBox.Show();
 
                 // resets hourly rate to it's default
                 pA_HourlyRate = 25m;
@@ -556,7 +572,7 @@ namespace Lana_Renee_Lashes
                 labelPaHoursSpent.Hide();
                 textBoxPaHoursSpentBoxing.Hide();
                 labelPaHoursToBox.Hide();
-                textBoxPaBoxesPerHour.Hide();
+                textBoxPaHoursToBox.Hide();
                 pA_HourlyRate = 0;
 
             } // end if
@@ -577,13 +593,13 @@ namespace Lana_Renee_Lashes
             {
                 // show extra boxes controls
                 labelRoughBoxPrice.Show();
-                textBoxRoughBoxPrice.Show();
+                textBoxRoughBoxCost.Show();
                 if (totalQuantity != 0)
                 {
                     // displays a rough estimate of box price per unit in the correct currency
-                    textBoxRoughBoxPrice.Text = checkBoxUsdToAud.Checked ? (roughBoxCost * (decimal)estUsdToAusMultiplier).ToString("c2") : (roughBoxCost).ToString("c2");
+                    textBoxRoughBoxCost.Text = checkBoxUsdToAud.Checked ? (roughBoxCost * (decimal)estUsdToAusMultiplier).ToString("c2") : (roughBoxCost).ToString("c2");
                     // displays a rough estimate of shipping price per unit in the correct currency
-                    textBoxRoughShip.Text = checkBoxUsdToAud.Checked ? (roughShippingCost * (decimal)estUsdToAusMultiplier).ToString("c2") : (roughShippingCost).ToString("c2");
+                    textBoxRoughShippingCost.Text = checkBoxUsdToAud.Checked ? (roughShippingCost * (decimal)estUsdToAusMultiplier).ToString("c2") : (roughShippingCost).ToString("c2");
 
                 }
                 // else if extra boxes checkbox is not checked
@@ -591,7 +607,7 @@ namespace Lana_Renee_Lashes
                 {
                     // show extra boxes controls
                     labelRoughBoxPrice.Hide();
-                    textBoxRoughBoxPrice.Hide();
+                    textBoxRoughBoxCost.Hide();
 
                 } // end if
 

@@ -62,7 +62,7 @@
             this.textBoxGoodyQuantity = new System.Windows.Forms.TextBox();
             this.textBoxPaHourlyRate = new System.Windows.Forms.TextBox();
             this.textBoxPaHoursSpentBoxing = new System.Windows.Forms.TextBox();
-            this.textBoxPaBoxesPerHour = new System.Windows.Forms.TextBox();
+            this.textBoxPaHoursToBox = new System.Windows.Forms.TextBox();
             this.textBoxEstCostPerUnit = new System.Windows.Forms.TextBox();
             this.textBoxPaEstCost = new System.Windows.Forms.TextBox();
             this.textBoxEstSalesToProfit = new System.Windows.Forms.TextBox();
@@ -77,7 +77,7 @@
             this.textBoxOliviaCost = new System.Windows.Forms.TextBox();
             this.labelOliviaOrdered = new System.Windows.Forms.Label();
             this.labelOliviaCost = new System.Windows.Forms.Label();
-            this.textBoxRoughBoxPrice = new System.Windows.Forms.TextBox();
+            this.textBoxRoughBoxCost = new System.Windows.Forms.TextBox();
             this.textBoxUsdToAud = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBoxAutoFill = new System.Windows.Forms.CheckBox();
@@ -85,7 +85,7 @@
             this.checkBoxDeductHoursSpent = new System.Windows.Forms.CheckBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
-            this.textBoxRoughShip = new System.Windows.Forms.TextBox();
+            this.textBoxRoughShippingCost = new System.Windows.Forms.TextBox();
             this.labelRoughShip = new System.Windows.Forms.Label();
             this.checkBoxUsdToAud = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWillow)).BeginInit();
@@ -487,22 +487,22 @@
             this.textBoxPaHoursSpentBoxing.TabIndex = 5;
             this.textBoxPaHoursSpentBoxing.Text = "0";
             // 
-            // textBoxPaBoxesPerHour
+            // textBoxPaHoursToBox
             // 
-            this.textBoxPaBoxesPerHour.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.textBoxPaBoxesPerHour.Location = new System.Drawing.Point(102, 551);
-            this.textBoxPaBoxesPerHour.Name = "textBoxPaBoxesPerHour";
-            this.textBoxPaBoxesPerHour.ReadOnly = true;
-            this.textBoxPaBoxesPerHour.Size = new System.Drawing.Size(159, 20);
-            this.textBoxPaBoxesPerHour.TabIndex = 6;
-            this.textBoxPaBoxesPerHour.Text = "0";
+            this.textBoxPaHoursToBox.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.textBoxPaHoursToBox.Location = new System.Drawing.Point(102, 551);
+            this.textBoxPaHoursToBox.Name = "textBoxPaHoursToBox";
+            this.textBoxPaHoursToBox.ReadOnly = true;
+            this.textBoxPaHoursToBox.Size = new System.Drawing.Size(159, 20);
+            this.textBoxPaHoursToBox.TabIndex = 6;
+            this.textBoxPaHoursToBox.Text = "0";
             // 
             // textBoxEstCostPerUnit
             // 
             this.textBoxEstCostPerUnit.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.textBoxEstCostPerUnit.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxEstCostPerUnit.ForeColor = System.Drawing.SystemColors.Info;
-            this.textBoxEstCostPerUnit.Location = new System.Drawing.Point(180, 770);
+            this.textBoxEstCostPerUnit.Location = new System.Drawing.Point(180, 735);
             this.textBoxEstCostPerUnit.Name = "textBoxEstCostPerUnit";
             this.textBoxEstCostPerUnit.ReadOnly = true;
             this.textBoxEstCostPerUnit.Size = new System.Drawing.Size(159, 13);
@@ -538,7 +538,7 @@
             this.textBoxEstProfitPerUnit.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.textBoxEstProfitPerUnit.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxEstProfitPerUnit.ForeColor = System.Drawing.SystemColors.Info;
-            this.textBoxEstProfitPerUnit.Location = new System.Drawing.Point(190, 735);
+            this.textBoxEstProfitPerUnit.Location = new System.Drawing.Point(185, 768);
             this.textBoxEstProfitPerUnit.Name = "textBoxEstProfitPerUnit";
             this.textBoxEstProfitPerUnit.ReadOnly = true;
             this.textBoxEstProfitPerUnit.Size = new System.Drawing.Size(159, 13);
@@ -659,14 +659,14 @@
             this.labelOliviaCost.TabIndex = 0;
             this.labelOliviaCost.Text = "Total USD invoiced (incl. shipping + fees)";
             // 
-            // textBoxRoughBoxPrice
+            // textBoxRoughBoxCost
             // 
-            this.textBoxRoughBoxPrice.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.textBoxRoughBoxPrice.Location = new System.Drawing.Point(540, 417);
-            this.textBoxRoughBoxPrice.Name = "textBoxRoughBoxPrice";
-            this.textBoxRoughBoxPrice.Size = new System.Drawing.Size(159, 20);
-            this.textBoxRoughBoxPrice.TabIndex = 10;
-            this.textBoxRoughBoxPrice.Text = "0";
+            this.textBoxRoughBoxCost.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.textBoxRoughBoxCost.Location = new System.Drawing.Point(540, 417);
+            this.textBoxRoughBoxCost.Name = "textBoxRoughBoxCost";
+            this.textBoxRoughBoxCost.Size = new System.Drawing.Size(159, 20);
+            this.textBoxRoughBoxCost.TabIndex = 10;
+            this.textBoxRoughBoxCost.Text = "0";
             // 
             // textBoxUsdToAud
             // 
@@ -751,14 +751,14 @@
             this.label4.TabIndex = 61;
             this.label4.Text = "Convert to AUD:";
             // 
-            // textBoxRoughShip
+            // textBoxRoughShippingCost
             // 
-            this.textBoxRoughShip.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.textBoxRoughShip.Location = new System.Drawing.Point(540, 482);
-            this.textBoxRoughShip.Name = "textBoxRoughShip";
-            this.textBoxRoughShip.Size = new System.Drawing.Size(159, 20);
-            this.textBoxRoughShip.TabIndex = 64;
-            this.textBoxRoughShip.Text = "0";
+            this.textBoxRoughShippingCost.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.textBoxRoughShippingCost.Location = new System.Drawing.Point(540, 482);
+            this.textBoxRoughShippingCost.Name = "textBoxRoughShippingCost";
+            this.textBoxRoughShippingCost.Size = new System.Drawing.Size(159, 20);
+            this.textBoxRoughShippingCost.TabIndex = 64;
+            this.textBoxRoughShippingCost.Text = "0";
             // 
             // labelRoughShip
             // 
@@ -793,7 +793,7 @@
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(797, 862);
             this.Controls.Add(this.checkBoxUsdToAud);
-            this.Controls.Add(this.textBoxRoughShip);
+            this.Controls.Add(this.textBoxRoughShippingCost);
             this.Controls.Add(this.labelRoughShip);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.checkBoxDeductHoursSpent);
@@ -802,7 +802,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxUsdToAud);
-            this.Controls.Add(this.textBoxRoughBoxPrice);
+            this.Controls.Add(this.textBoxRoughBoxCost);
             this.Controls.Add(this.textBoxOliviaQuantity);
             this.Controls.Add(this.textBoxOliviaCost);
             this.Controls.Add(this.labelOliviaOrdered);
@@ -817,7 +817,7 @@
             this.Controls.Add(this.textBoxEstSalesToProfit);
             this.Controls.Add(this.textBoxPaEstCost);
             this.Controls.Add(this.textBoxEstCostPerUnit);
-            this.Controls.Add(this.textBoxPaBoxesPerHour);
+            this.Controls.Add(this.textBoxPaHoursToBox);
             this.Controls.Add(this.textBoxPaHoursSpentBoxing);
             this.Controls.Add(this.textBoxPaHourlyRate);
             this.Controls.Add(this.textBoxGoodyQuantity);
@@ -903,7 +903,7 @@
         private System.Windows.Forms.TextBox textBoxGoodyQuantity;
         private System.Windows.Forms.TextBox textBoxPaHourlyRate;
         private System.Windows.Forms.TextBox textBoxPaHoursSpentBoxing;
-        private System.Windows.Forms.TextBox textBoxPaBoxesPerHour;
+        private System.Windows.Forms.TextBox textBoxPaHoursToBox;
         private System.Windows.Forms.TextBox textBoxEstCostPerUnit;
         private System.Windows.Forms.TextBox textBoxPaEstCost;
         private System.Windows.Forms.TextBox textBoxEstSalesToProfit;
@@ -918,7 +918,7 @@
         private System.Windows.Forms.TextBox textBoxOliviaCost;
         private System.Windows.Forms.Label labelOliviaOrdered;
         private System.Windows.Forms.Label labelOliviaCost;
-        private System.Windows.Forms.TextBox textBoxRoughBoxPrice;
+        private System.Windows.Forms.TextBox textBoxRoughBoxCost;
         private System.Windows.Forms.TextBox textBoxUsdToAud;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox checkBoxAutoFill;
@@ -926,7 +926,7 @@
         private System.Windows.Forms.CheckBox checkBoxDeductHoursSpent;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
-        private System.Windows.Forms.TextBox textBoxRoughShip;
+        private System.Windows.Forms.TextBox textBoxRoughShippingCost;
         private System.Windows.Forms.Label labelRoughShip;
         private System.Windows.Forms.CheckBox checkBoxUsdToAud;
     }

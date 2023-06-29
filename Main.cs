@@ -166,8 +166,9 @@ namespace Lana_Renee_Lashes
                     // creates a string reference of the char being used atm
                     string keyPressed = e.KeyCode.ToString();
 
+
                     // stores current index
-                    //oldIndex = textBox.SelectionStart;
+                    oldIndex = textBox.SelectionStart;
 
                     // if textbox is empty
                     if (text is null or "$" or "0")
@@ -197,8 +198,6 @@ namespace Lana_Renee_Lashes
                             textBox.Text = text.Remove(oldIndex - 1, 1);
                             // stores this character as the last removed character
                             lastCharRemoved = e.KeyCode;
-                            // reverts index from start of string back to last position
-                            textBox.SelectionStart = oldIndex;
                             // handles the event
                             //e.Handled = true;
                             return;
@@ -216,7 +215,7 @@ namespace Lana_Renee_Lashes
                     } // end if
 
                     // reverts index from start of string back to last position
-                    //textBox.SelectionStart = oldIndex;
+                    textBox.SelectionStart = oldIndex;
 
                 } // end if
 
@@ -337,7 +336,9 @@ namespace Lana_Renee_Lashes
                         {
                             // replaces it with nothing to avoid calculation errors
                             text = text.Replace("$", "");
-                        }
+
+                        } // end if
+
                         switch (textBoxName)
                         {
                             // textbox good cost 
@@ -487,7 +488,6 @@ namespace Lana_Renee_Lashes
 
                 Display();
 
-
             } // end try
             catch (Exception ex)
             {
@@ -513,10 +513,6 @@ namespace Lana_Renee_Lashes
                 ///////
                 /// Displays monetary values to respective textboxes in correct currency
                 /////
-                ///
-
-                // references the active control as a textbox to change its properties
-                TextBox textBox = ActiveControl as TextBox;
 
                 // displays goody cost in USD
                 textBoxGoodyCost.Text = "$" + goodyCost.ToString();
@@ -554,9 +550,6 @@ namespace Lana_Renee_Lashes
                 textBoxEstProfitLessGst.Text = estProfitLessGst.ToString("c2");
                 // updates gst to pay
                 textBoxGstToPay.Text = gstToPay.ToString("c2");
-
-                // resets cursor index
-                textBox.SelectionStart = oldIndex;
 
             }
         }
@@ -727,31 +720,6 @@ namespace Lana_Renee_Lashes
         }
         #endregion
 
-        private void Main_KeyDown(object sender, KeyEventArgs e)
-        {
-            // if the active control of this form is a textbox
-            if (ActiveControl is TextBoxBase)
-            {
-                // unlocks the proper textbox properties
-                TextBox textBox = ActiveControl as TextBox;
-
-                if (e.KeyCode != Keys.Back || e.KeyCode != Keys.Left || e.KeyCode != Keys.Right)
-                {
-                    // stores current index
-                    oldIndex = textBox.SelectionStart + 1;
-                    if (textBox.Text == "$0")
-                    {
-                        oldIndex++;
-                    }
-
-
-                }
-                else
-                {
-                    MessageBox.Show("huh?");
-                }
-            }
-        }
 
     }
     namespace Lana_Renee_Lashes

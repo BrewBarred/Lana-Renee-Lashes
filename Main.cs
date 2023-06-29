@@ -381,6 +381,8 @@ namespace Lana_Renee_Lashes
 
                 } // end for
 
+                // calculates total quantity since this is needed for most calculations
+                totalQuantity = goodyQuantity + oliviaQuantity;
 
                 ///////
                 /// Calculate personal assistant costs

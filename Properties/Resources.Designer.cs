@@ -63,9 +63,29 @@ namespace Lana_Renee_Lashes.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Exclamation_mark {
+            get {
+                object obj = ResourceManager.GetObject("Exclamation_mark", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Lana {
             get {
                 object obj = ResourceManager.GetObject("Lana", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Willow {
+            get {
+                object obj = ResourceManager.GetObject("Willow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

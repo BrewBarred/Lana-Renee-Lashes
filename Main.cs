@@ -19,9 +19,9 @@ namespace Lana_Renee_Lashes
         ////
 
         // maximum total 
-        const double MAX_VALUE = 2147483647.00;
+        const double MAX_VALUE = 2147483647;
         // maximum cost per unit before warning
-        const double COST_WARNING = 4.5d;
+        const decimal COST_WARNING = 4.5m;
         // max hourly rate
         const int MAX_RATE = 40;
         // min hourly rate
@@ -144,17 +144,8 @@ namespace Lana_Renee_Lashes
         {
             InitializeComponent();
             KeyPreview = true;
-
-            goodyQuantity = 1100;
-            oliviaQuantity = 800;
-            goodyCost = 3224;
-            oliviaCost = 2681.8;
-            textBoxOliviaCost.Text = oliviaCost.ToString("c2");
-            textBoxGoodyCost.Text = goodyCost.ToString("c2");
-            textBoxGoodyQuantity.Text = goodyQuantity.ToString();
-            textBoxOliviaQuantity.Text = oliviaQuantity.ToString();
-
-
+            textBoxGoodyCost.Focus();
+            textBoxGoodyCost.SelectionStart = 1;
         }
 
         #region CreateAccount_KeyUp Event
@@ -216,8 +207,6 @@ namespace Lana_Renee_Lashes
                             textBox.Text = text.Remove(oldIndex - 1, 1);
                             // stores this character as the last removed character
                             lastCharRemoved = e.KeyCode;
-                            // handles the event
-                            //e.Handled = true;
                             return;
 
                         } // end if
@@ -661,6 +650,11 @@ namespace Lana_Renee_Lashes
                     // creates a reference variable to the active textbox
                     TextBox textBox = ActiveControl as TextBox;
 
+                    if (textBox.ReadOnly)
+                    {
+                        return;
+                    }
+
                     // if textbox text is $0
                     if (textBox.Text is "$0")
                     {
@@ -688,7 +682,6 @@ namespace Lana_Renee_Lashes
             textBoxGoodyCost.Text = (goodyCost * estUsdToAusMultiplier).ToString("c2");
             // displays olivia cost in AUD
             textBoxOliviaCost.Text = (oliviaCost * estUsdToAusMultiplier).ToString("c2");
-
             // displays rough box cost in AUD
             textBoxRoughBoxCost.Text = (roughBoxCost * (decimal)estUsdToAusMultiplier).ToString("c2");
             // displays rough shipping cost in AUD

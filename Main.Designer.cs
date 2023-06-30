@@ -64,7 +64,7 @@
             this.textBoxPaHoursSpentBoxing = new System.Windows.Forms.TextBox();
             this.textBoxPaHoursToBox = new System.Windows.Forms.TextBox();
             this.textBoxEstCostPerUnit = new System.Windows.Forms.TextBox();
-            this.textBoxPaEstCost = new System.Windows.Forms.TextBox();
+            this.textBoxEstTotalPaCost = new System.Windows.Forms.TextBox();
             this.textBoxEstSalesToProfit = new System.Windows.Forms.TextBox();
             this.textBoxEstProfitPerUnit = new System.Windows.Forms.TextBox();
             this.textBoxEstProfitLessGst = new System.Windows.Forms.TextBox();
@@ -509,17 +509,17 @@
             this.textBoxEstCostPerUnit.TabIndex = 0;
             this.textBoxEstCostPerUnit.TabStop = false;
             // 
-            // textBoxPaEstCost
+            // textBoxEstTotalPaCost
             // 
-            this.textBoxPaEstCost.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.textBoxPaEstCost.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxPaEstCost.ForeColor = System.Drawing.SystemColors.Info;
-            this.textBoxPaEstCost.Location = new System.Drawing.Point(181, 700);
-            this.textBoxPaEstCost.Name = "textBoxPaEstCost";
-            this.textBoxPaEstCost.ReadOnly = true;
-            this.textBoxPaEstCost.Size = new System.Drawing.Size(159, 13);
-            this.textBoxPaEstCost.TabIndex = 0;
-            this.textBoxPaEstCost.TabStop = false;
+            this.textBoxEstTotalPaCost.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.textBoxEstTotalPaCost.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxEstTotalPaCost.ForeColor = System.Drawing.SystemColors.Info;
+            this.textBoxEstTotalPaCost.Location = new System.Drawing.Point(181, 700);
+            this.textBoxEstTotalPaCost.Name = "textBoxEstTotalPaCost";
+            this.textBoxEstTotalPaCost.ReadOnly = true;
+            this.textBoxEstTotalPaCost.Size = new System.Drawing.Size(159, 13);
+            this.textBoxEstTotalPaCost.TabIndex = 0;
+            this.textBoxEstTotalPaCost.TabStop = false;
             // 
             // textBoxEstSalesToProfit
             // 
@@ -675,7 +675,7 @@
             this.textBoxUsdToAud.Name = "textBoxUsdToAud";
             this.textBoxUsdToAud.Size = new System.Drawing.Size(159, 20);
             this.textBoxUsdToAud.TabIndex = 11;
-            this.textBoxUsdToAud.Text = "1.49";
+            this.textBoxUsdToAud.Text = "1.50";
             // 
             // label1
             // 
@@ -800,7 +800,7 @@
             this.Controls.Add(this.textBoxEstProfitLessGst);
             this.Controls.Add(this.textBoxEstProfitPerUnit);
             this.Controls.Add(this.textBoxEstSalesToProfit);
-            this.Controls.Add(this.textBoxPaEstCost);
+            this.Controls.Add(this.textBoxEstTotalPaCost);
             this.Controls.Add(this.textBoxEstCostPerUnit);
             this.Controls.Add(this.textBoxPaHoursToBox);
             this.Controls.Add(this.textBoxPaHoursSpentBoxing);
@@ -890,7 +890,7 @@
         private System.Windows.Forms.TextBox textBoxPaHoursSpentBoxing;
         private System.Windows.Forms.TextBox textBoxPaHoursToBox;
         private System.Windows.Forms.TextBox textBoxEstCostPerUnit;
-        private System.Windows.Forms.TextBox textBoxPaEstCost;
+        private System.Windows.Forms.TextBox textBoxEstTotalPaCost;
         private System.Windows.Forms.TextBox textBoxEstSalesToProfit;
         private System.Windows.Forms.TextBox textBoxEstProfitPerUnit;
         private System.Windows.Forms.TextBox textBoxEstProfitLessGst;

@@ -13,18 +13,28 @@ namespace Lana_Renee_Lashes
     {
         #region Declarations
 
+        ///////
+        // Constants
+        ////
 
+        // maximum total 
+        const double = 2147483647.00;
         // maximum cost per unit before warning
         const double COST_WARNING = 4.5;
         // max hourly rate
         const int MAX_RATE = 40;
         // min hourly rate
         const int MIN_RATE = 20;
-        // estimated box cost per unit based on past order
-        const decimal EST_BOX_PRICE = 0.2632m;
-        // estimated shipping cost per unit based on past order
-        const decimal EST_SHIP_PRICE = 0.2263m;
+        // default box cost per unit based on past order
+        const decimal DEFAULT_BOX_PRICE = 0.2632m;
+        // default shipping cost per unit based on past order
+        const decimal DEFAULT_SHIP_PRICE = 0.2263m;
+        // default USD to AUS currency conversion rate
+        const double DEFAULT_USD_TO_AUS = 1.5;
 
+        ///////
+        // Semi-Constants (Preset but will be changeable via settings later)
+        ////
 
         // retail price per unit
         decimal retailSalePrice = 24.99m;
@@ -171,16 +181,15 @@ namespace Lana_Renee_Lashes
                     oldIndex = textBox.SelectionStart;
 
                     // if textbox is empty
-                    if (text is null or "")
+                    if (text is null or "" or "$")
                     {
+                        ClearAll();
                         // resets prices
-                        ClearPrices();
+                        ClearDisplays();
                         // writes info to console
                         Log("Event handled due to null or empty textbox");
-                        // updates price displays
-                        Display();
                         // breaks out of event
-                        return;
+                        Calculupdate();
 
                     } // end if
 
@@ -220,8 +229,38 @@ namespace Lana_Renee_Lashes
 
                     } // end if
 
-                    // reverts index from start of string back to last position
-                    textBox.SelectionStart = oldIndex;
+                    // if textbox is displaying $0
+                    if (textBox.Text is "$0")
+                    {
+                        // sets cursor to the end
+                        textBox.SelectionStart = 2;
+                    }
+                    // else if textbox is displaying nothing
+                    else if (textBox.Text is "")
+                    {
+                        // if the textbox is the goody quantity textbox
+                        if (textBox == textBoxGoodyQuantity)
+                        {
+                            // resets goody quantity
+                            goodyQuantity = 0;
+                        }
+                        // else if textbox is olivia quantity textbox
+                        else if (textBox == textBoxOliviaQuantity)
+                        {
+                            // resets olivia quantity
+                            oliviaQuantity = 0;
+
+                        } // end if
+
+                    } // end if
+
+                    // else if textbox is displaying something other than $0 or nothing
+                    else
+                    {
+                        // reverts index from start of string back to last position
+                        textBox.SelectionStart = oldIndex;
+
+                    } // end if
 
                 } // end if
 
@@ -258,8 +297,6 @@ namespace Lana_Renee_Lashes
                     } // end if
 
                 } // end if
-
-                // ClearPrices();
             }
             catch
             {
@@ -270,19 +307,64 @@ namespace Lana_Renee_Lashes
         }
         #endregion
 
-        private void ClearPrices()
+        #region ClearAll()
+        /// <summary>
+        /// Resets all values
+        /// </summary>
+        private void ClearAll()
         {
+            // clears all goody/olivia values
             goodyCost = 0;
             oliviaCost = 0;
+            goodyQuantity = 0;
+            oliviaQuantity = 0;
+
+            // clears total quantity
+            totalQuantity = 0;
+
+            // clears P.A. related values
             pA_EstimatedCost = 0;
+            pA_EstimatedHoursToBox = 0;
+            pA_BoxesPerHour = 0;
+
+            // clears defaults
+            roughBoxCost = DEFAULT_BOX_PRICE;
+            roughShippingCost = DEFAULT_SHIP_PRICE;
+            estUsdToAusMultiplier = DEFAULT_USD_TO_AUS;
+
+            // clears display values
             estTotalCost = 0;
             estSalesToProfit = 0;
             estProfitPerUnit = 0;
             estProfitLessGst = 0;
             estProfit = 0;
             estCostPerUnit = 0;
+            gstToPay = 0;
 
-        }
+        } // end void
+        #endregion
+
+        #region ClearDisplays()
+
+        /// <summary>
+        /// Clears all display boxes
+        /// </summary>
+        private void ClearDisplays()
+        {
+            // clears all display boxes
+            textBoxEstTotalPaCost.Text = "$0";
+            textBoxEstCostPerUnit.Text = "$0";
+            textBoxEstProfitPerUnit.Text = "$0";
+            textBoxEstSalesToProfit.Text = "$0";
+            textBoxTotalQuantity.Text = "$0";
+            textBoxEstTotalCost.Text = "$0";
+            textBoxEstProfit.Text = "$0";
+            textBoxEstProfitLessGst.Text = "$0";
+            textBoxGstToPay.Text = "$0";
+
+        } // end void
+
+        #endregion
 
         #region Calculupdate()
         /// <summary>
@@ -293,18 +375,9 @@ namespace Lana_Renee_Lashes
             try
             {
 
-                TextBox[] displayBoxes = { textBoxPaEstCost, textBoxEstCostPerUnit , textBoxEstProfitPerUnit, textBoxEstSalesToProfit,
+                TextBox[] displayBoxes = { textBoxEstTotalPaCost, textBoxEstCostPerUnit , textBoxEstProfitPerUnit, textBoxEstSalesToProfit,
                                          textBoxTotalQuantity, textBoxEstTotalCost, textBoxEstProfit, textBoxEstProfitLessGst, textBoxGstToPay };
 
-                // if neither of the quantity boxes have values
-                if (goodyQuantity + oliviaQuantity <= 0)
-                {
-                    // writes error to console
-                    Log("Calculation skipped due to invalid quantities!");
-                    // prevents wasting time trying to calculate nothing
-                    return;
-
-                } // end if
 
                 ///////
                 /// Parses all values to their respective variables
@@ -395,13 +468,13 @@ namespace Lana_Renee_Lashes
 
                             case "textBoxRoughBoxCost":
                                 // stores user input to rough box price variable
-                                roughBoxCost = totalQuantity * EST_BOX_PRICE;
+                                roughBoxCost = totalQuantity * DEFAULT_BOX_PRICE;
 
                                 break;
 
                             case "textBoxRoughShippingCost":
                                 // stores user input to rough shipping cost variable
-                                roughShippingCost = totalQuantity * EST_SHIP_PRICE;
+                                roughShippingCost = totalQuantity * DEFAULT_SHIP_PRICE;
 
                                 break;
 
@@ -484,9 +557,9 @@ namespace Lana_Renee_Lashes
                         //total profit margin this order
                         estProfit = estProfitPerUnit * totalQuantity;
                         //total profit margin this order minus gst
-                        estProfitLessGst = (estProfit *= (decimal)gstMultiplier);
+                        estProfitLessGst = estProfit - estProfit * (decimal)gstMultiplier;
                         // gst amount
-                        gstToPay = (estProfit * (decimal)gstMultiplier);
+                        gstToPay = estProfit * (decimal)gstMultiplier;
                         // stores usd to aud multiplier into a variable
                         estUsdToAusMultiplier = double.Parse(textBoxUsdToAud.Text);
 
@@ -540,7 +613,7 @@ namespace Lana_Renee_Lashes
                     textBoxPaHoursToBox.Text = pA_EstimatedHoursToBox.ToString("d2");
                 }
                 // display estimated p.a. cost
-                textBoxPaEstCost.Text = pA_EstimatedCost.ToString("c2");
+                textBoxEstTotalPaCost.Text = pA_EstimatedCost.ToString("c2");
                 // updates estimated cost per unit
                 textBoxEstCostPerUnit.Text = estCostPerUnit.ToString("c2");
                 // updates estimated profit per unit

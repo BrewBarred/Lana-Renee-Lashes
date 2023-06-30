@@ -18,7 +18,7 @@ namespace Lana_Renee_Lashes
         ////
 
         // maximum total 
-        const double = 2147483647.00;
+        const double MAX_VALUE = 2147483647.00;
         // maximum cost per unit before warning
         const double COST_WARNING = 4.5;
         // max hourly rate
@@ -229,38 +229,7 @@ namespace Lana_Renee_Lashes
 
                     } // end if
 
-                    // if textbox is displaying $0
-                    if (textBox.Text is "$0")
-                    {
-                        // sets cursor to the end
-                        textBox.SelectionStart = 2;
-                    }
-                    // else if textbox is displaying nothing
-                    else if (textBox.Text is "")
-                    {
-                        // if the textbox is the goody quantity textbox
-                        if (textBox == textBoxGoodyQuantity)
-                        {
-                            // resets goody quantity
-                            goodyQuantity = 0;
-                        }
-                        // else if textbox is olivia quantity textbox
-                        else if (textBox == textBoxOliviaQuantity)
-                        {
-                            // resets olivia quantity
-                            oliviaQuantity = 0;
-
-                        } // end if
-
-                    } // end if
-
-                    // else if textbox is displaying something other than $0 or nothing
-                    else
-                    {
-                        // reverts index from start of string back to last position
-                        textBox.SelectionStart = oldIndex;
-
-                    } // end if
+                    ResetCursor();
 
                 } // end if
 
@@ -304,6 +273,55 @@ namespace Lana_Renee_Lashes
 
             } // end try
 
+        }
+        #endregion
+        /// <summary>
+        /// Sets cursor back into it's correct position
+        /// </summary>
+        #region ResetCursor()
+
+        private void ResetCursor()
+        {
+            TextBox textBox = ActiveControl as TextBox;
+
+            // if textbox is displaying $0
+            if (textBox.Text is "$0")
+            {
+                // sets cursor to the end
+                textBox.SelectionStart = 2;
+            }
+            // else if textbox is display a $ symbol
+            else if (textBox.Text is "$")
+            {
+                // sets cursor to the end
+                textBox.SelectionStart = 1;
+            }
+            // else if textbox is displaying nothing
+            else if (textBox.Text is "")
+            {
+                // if the textbox is the goody quantity textbox
+                if (textBox == textBoxGoodyQuantity)
+                {
+                    // resets goody quantity
+                    goodyQuantity = 0;
+                }
+                // else if textbox is olivia quantity textbox
+                else if (textBox == textBoxOliviaQuantity)
+                {
+                    // resets olivia quantity
+                    oliviaQuantity = 0;
+
+                } // end if
+
+            } // end if
+
+            // else if textbox is displaying something other than $0 or nothing
+            else
+            {
+                // reverts index from start of string back to last position
+                textBox.SelectionStart = oldIndex;
+
+            } // end if
         }
         #endregion
 

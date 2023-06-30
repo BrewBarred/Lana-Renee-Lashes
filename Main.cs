@@ -494,7 +494,7 @@ namespace Lana_Renee_Lashes
 
                             case "textBoxRoughBoxCost":
                                 // stores user input to rough box price variable
-                                r oughBoxCost = totalQuantity * DEFAULT_BOX_PRICE;
+                                roughBoxCost = totalQuantity * DEFAULT_BOX_PRICE;
 
                                 break;
 

@@ -457,6 +457,7 @@
             // 
             this.textBoxGoodyCost.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.textBoxGoodyCost.Location = new System.Drawing.Point(102, 260);
+            this.textBoxGoodyCost.MaxLength = 12;
             this.textBoxGoodyCost.Name = "textBoxGoodyCost";
             this.textBoxGoodyCost.Size = new System.Drawing.Size(159, 20);
             this.textBoxGoodyCost.TabIndex = 1;
@@ -466,6 +467,7 @@
             // 
             this.textBoxGoodyQuantity.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.textBoxGoodyQuantity.Location = new System.Drawing.Point(102, 320);
+            this.textBoxGoodyQuantity.MaxLength = 6;
             this.textBoxGoodyQuantity.Name = "textBoxGoodyQuantity";
             this.textBoxGoodyQuantity.Size = new System.Drawing.Size(159, 20);
             this.textBoxGoodyQuantity.TabIndex = 2;
@@ -475,6 +477,7 @@
             // 
             this.textBoxPaHourlyRate.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.textBoxPaHourlyRate.Location = new System.Drawing.Point(102, 417);
+            this.textBoxPaHourlyRate.MaxLength = 12;
             this.textBoxPaHourlyRate.Name = "textBoxPaHourlyRate";
             this.textBoxPaHourlyRate.Size = new System.Drawing.Size(159, 20);
             this.textBoxPaHourlyRate.TabIndex = 4;
@@ -484,6 +487,7 @@
             // 
             this.textBoxPaHoursSpentBoxing.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.textBoxPaHoursSpentBoxing.Location = new System.Drawing.Point(102, 485);
+            this.textBoxPaHoursSpentBoxing.MaxLength = 4;
             this.textBoxPaHoursSpentBoxing.Name = "textBoxPaHoursSpentBoxing";
             this.textBoxPaHoursSpentBoxing.Size = new System.Drawing.Size(159, 20);
             this.textBoxPaHoursSpentBoxing.TabIndex = 5;
@@ -493,6 +497,7 @@
             // 
             this.textBoxPaHoursToBox.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.textBoxPaHoursToBox.Location = new System.Drawing.Point(102, 551);
+            this.textBoxPaHoursToBox.MaxLength = 6;
             this.textBoxPaHoursToBox.Name = "textBoxPaHoursToBox";
             this.textBoxPaHoursToBox.ReadOnly = true;
             this.textBoxPaHoursToBox.Size = new System.Drawing.Size(159, 20);
@@ -623,6 +628,7 @@
             // 
             this.textBoxOliviaQuantity.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.textBoxOliviaQuantity.Location = new System.Drawing.Point(540, 320);
+            this.textBoxOliviaQuantity.MaxLength = 6;
             this.textBoxOliviaQuantity.Name = "textBoxOliviaQuantity";
             this.textBoxOliviaQuantity.Size = new System.Drawing.Size(159, 20);
             this.textBoxOliviaQuantity.TabIndex = 8;
@@ -632,6 +638,7 @@
             // 
             this.textBoxOliviaCost.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.textBoxOliviaCost.Location = new System.Drawing.Point(540, 260);
+            this.textBoxOliviaCost.MaxLength = 12;
             this.textBoxOliviaCost.Name = "textBoxOliviaCost";
             this.textBoxOliviaCost.Size = new System.Drawing.Size(159, 20);
             this.textBoxOliviaCost.TabIndex = 7;
@@ -665,7 +672,9 @@
             // 
             this.textBoxRoughBoxCost.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.textBoxRoughBoxCost.Location = new System.Drawing.Point(540, 417);
+            this.textBoxRoughBoxCost.MaxLength = 12;
             this.textBoxRoughBoxCost.Name = "textBoxRoughBoxCost";
+            this.textBoxRoughBoxCost.ReadOnly = true;
             this.textBoxRoughBoxCost.Size = new System.Drawing.Size(159, 20);
             this.textBoxRoughBoxCost.TabIndex = 10;
             this.textBoxRoughBoxCost.Text = "$0";
@@ -674,6 +683,7 @@
             // 
             this.textBoxUsdToAud.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.textBoxUsdToAud.Location = new System.Drawing.Point(540, 551);
+            this.textBoxUsdToAud.MaxLength = 6;
             this.textBoxUsdToAud.Name = "textBoxUsdToAud";
             this.textBoxUsdToAud.Size = new System.Drawing.Size(159, 20);
             this.textBoxUsdToAud.TabIndex = 11;
@@ -746,7 +756,9 @@
             // 
             this.textBoxRoughShippingCost.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.textBoxRoughShippingCost.Location = new System.Drawing.Point(540, 482);
+            this.textBoxRoughShippingCost.MaxLength = 12;
             this.textBoxRoughShippingCost.Name = "textBoxRoughShippingCost";
+            this.textBoxRoughShippingCost.ReadOnly = true;
             this.textBoxRoughShippingCost.Size = new System.Drawing.Size(159, 20);
             this.textBoxRoughShippingCost.TabIndex = 64;
             this.textBoxRoughShippingCost.Text = "$0";

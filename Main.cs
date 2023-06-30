@@ -229,7 +229,7 @@ namespace Lana_Renee_Lashes
 
                     } // end if
 
-                    ResetCursor();
+                    SetCursor();
 
                 } // end if
 
@@ -280,7 +280,7 @@ namespace Lana_Renee_Lashes
         /// </summary>
         #region ResetCursor()
 
-        private void ResetCursor()
+        private void SetCursor()
         {
             TextBox textBox = ActiveControl as TextBox;
 
@@ -370,6 +370,8 @@ namespace Lana_Renee_Lashes
         private void ClearDisplays()
         {
             // clears all display boxes
+            textBoxRoughBoxCost.Text = "" + DEFAULT_BOX_PRICE;
+            textBoxRoughShippingCost.Text = "" + DEFAULT_SHIP_PRICE;
             textBoxEstTotalPaCost.Text = "$0";
             textBoxEstCostPerUnit.Text = "$0";
             textBoxEstProfitPerUnit.Text = "$0";
@@ -379,6 +381,7 @@ namespace Lana_Renee_Lashes
             textBoxEstProfit.Text = "$0";
             textBoxEstProfitLessGst.Text = "$0";
             textBoxGstToPay.Text = "$0";
+
 
         } // end void
 
@@ -602,9 +605,7 @@ namespace Lana_Renee_Lashes
 
         private void Display()
         {
-
-
-
+            // if goody cost and quantity are both 0 OR olivia cost and quantity are both 0
             if (goodyCost + goodyQuantity > 0 || oliviaCost + oliviaQuantity > 0)
             {
 
@@ -613,15 +614,15 @@ namespace Lana_Renee_Lashes
                 /////
 
                 // displays goody cost in USD
-                textBoxGoodyCost.Text = "$" + goodyCost.ToString();
+                textBoxGoodyCost.Text = "$" + goodyCost.ToString("#.##");
                 // displays olivia cost in USD
-                textBoxOliviaCost.Text = "$" + oliviaCost.ToString();
+                textBoxOliviaCost.Text = "$" + oliviaCost.ToString("#.##");
                 // displays estimated total cost in USD
                 textBoxEstTotalCost.Text = "$" + (goodyCost + oliviaCost).ToString();
-                // displays estimated rough box cost in USD
-                textBoxRoughBoxCost.Text = "$" + roughBoxCost.ToString();
-                // displays rough shipping cost in USD
-                textBoxRoughShippingCost.Text = "$" + roughShippingCost.ToString();
+                // displays estimated rough box cost in USD to 2.d.p
+                textBoxRoughBoxCost.Text = "$" + roughBoxCost.ToString("#.##");
+                // displays rough shipping cost in USD to 2.d.p.
+                textBoxRoughShippingCost.Text = "$" + roughShippingCost.ToString("#.##");
                 // if P.A's hours spent boxing AND est hours to box is both empty
                 if (pA_HoursSpentBoxing + pA_EstimatedHoursToBox > 0)
                 {

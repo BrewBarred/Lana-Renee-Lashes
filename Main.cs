@@ -299,24 +299,6 @@ namespace Lana_Renee_Lashes
                 // sets cursor to the end
                 textBox.SelectionStart = 1;
             }
-            // else if textbox is displaying nothing
-            else if (textBox.Text is "")
-            {
-                // if the textbox is the goody quantity textbox
-                if (textBox == textBoxGoodyQuantity)
-                {
-                    // resets goody quantity
-                    goodyQuantity = 0;
-                }
-                // else if textbox is olivia quantity textbox
-                else if (textBox == textBoxOliviaQuantity)
-                {
-                    // resets olivia quantity
-                    oliviaQuantity = 0;
-
-                } // end if
-
-            } // end if
 
             // else if textbox is displaying something other than $0 or nothing
             else

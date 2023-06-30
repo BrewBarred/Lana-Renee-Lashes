@@ -132,10 +132,10 @@ namespace Lana_Renee_Lashes
             InitializeComponent();
             KeyPreview = true;
 
-            goodyQuantity = 25;
-            oliviaQuantity = 30;
-            goodyCost = 10;
-            oliviaCost = 40;
+            goodyQuantity = 1100;
+            oliviaQuantity = 800;
+            goodyCost = 3224;
+            oliviaCost = 2681.8;
             textBoxOliviaCost.Text = oliviaCost.ToString("c2");
             textBoxGoodyCost.Text = goodyCost.ToString("c2");
             textBoxGoodyQuantity.Text = goodyQuantity.ToString();
@@ -171,18 +171,24 @@ namespace Lana_Renee_Lashes
                     oldIndex = textBox.SelectionStart;
 
                     // if textbox is empty
-                    if (text is null or "$" or "0")
+                    if (text is null or "")
                     {
-                        // handles event
-                        e.Handled = true;
+                        // resets prices
+                        ClearPrices();
                         // writes info to console
                         Log("Event handled due to null or empty textbox");
+                        // updates price displays
+                        Display();
+                        // breaks out of event
                         return;
 
-                    }
+                    } // end if
+
                     // else if user was releasing any key other than the "enter key" and currently active control is a textbox
                     else if (!(e.KeyCode is Keys.Enter))
                     {
+
+
                         // if pressed key is a valid key defined by regex and keystrokes array
                         if (!(Regex.IsMatch(keyPressed, numberDigit) || validKeyArray.Contains(e.KeyCode)))
                         {
@@ -253,7 +259,7 @@ namespace Lana_Renee_Lashes
 
                 } // end if
 
-                ClearPrices();
+                // ClearPrices();
             }
             catch
             {
@@ -288,7 +294,7 @@ namespace Lana_Renee_Lashes
             {
 
                 TextBox[] displayBoxes = { textBoxPaEstCost, textBoxEstCostPerUnit , textBoxEstProfitPerUnit, textBoxEstSalesToProfit,
-                                           textBoxTotalQuantity, textBoxEstTotalCost, textBoxEstProfit, textBoxEstProfitLessGst, textBoxGstToPay };
+                                         textBoxTotalQuantity, textBoxEstTotalCost, textBoxEstProfit, textBoxEstProfitLessGst, textBoxGstToPay };
 
                 // if neither of the quantity boxes have values
                 if (goodyQuantity + oliviaQuantity <= 0)
@@ -320,6 +326,7 @@ namespace Lana_Renee_Lashes
                     string textBoxName = textBox.Name;
                     // creates a string reference for the text in the textbox being used
                     string text = textBox.Text;
+                    totalQuantity = goodyQuantity + oliviaQuantity;
 
                     // if the current textbox is used for display only
                     if (displayBoxes.Contains(textBox))
@@ -521,9 +528,9 @@ namespace Lana_Renee_Lashes
                 // displays estimated total cost in USD
                 textBoxEstTotalCost.Text = "$" + (goodyCost + oliviaCost).ToString();
                 // displays estimated rough box cost in USD
-                textBoxRoughBoxCost.Text = roughBoxCost.ToString("c2");
+                textBoxRoughBoxCost.Text = "$" + roughBoxCost.ToString();
                 // displays rough shipping cost in USD
-                textBoxRoughShippingCost.Text = roughShippingCost.ToString("c2");
+                textBoxRoughShippingCost.Text = "$" + roughShippingCost.ToString();
                 // if P.A's hours spent boxing AND est hours to box is both empty
                 if (pA_HoursSpentBoxing + pA_EstimatedHoursToBox > 0)
                 {
@@ -550,6 +557,13 @@ namespace Lana_Renee_Lashes
                 textBoxEstProfitLessGst.Text = estProfitLessGst.ToString("c2");
                 // updates gst to pay
                 textBoxGstToPay.Text = gstToPay.ToString("c2");
+
+                TextBox textBox = ActiveControl as TextBox;
+
+                if (textBox.Text is "$0")
+                {
+                    textBox.SelectionStart = 2;
+                }
 
             }
         }
@@ -630,14 +644,6 @@ namespace Lana_Renee_Lashes
                 textBoxRoughBoxCost.Show();
                 labelRoughBoxPrice.Show();
                 textBoxRoughShippingCost.Show();
-                if (totalQuantity != 0)
-                {
-                    // displays a rough estimate of box price per unit in the correct currency
-                    textBoxRoughBoxCost.Text = roughBoxCost.ToString("c2");
-                    // displays a rough estimate of shipping price per unit in the correct currency
-                    textBoxRoughShippingCost.Text = roughShippingCost.ToString("c2");
-
-                } // end if
 
             }
             // else if extra boxes checkbox is not checked

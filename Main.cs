@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Lana_Renee_Lashes.Lana_Renee_Lashes;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -20,7 +21,7 @@ namespace Lana_Renee_Lashes
         // maximum total 
         const double MAX_VALUE = 2147483647.00;
         // maximum cost per unit before warning
-        const double COST_WARNING = 4.5;
+        const double COST_WARNING = 4.5d;
         // max hourly rate
         const int MAX_RATE = 40;
         // min hourly rate
@@ -30,7 +31,9 @@ namespace Lana_Renee_Lashes
         // default shipping cost per unit based on past order
         const decimal DEFAULT_SHIP_PRICE = 0.2263m;
         // default USD to AUS currency conversion rate
-        const double DEFAULT_USD_TO_AUS = 1.5;
+        const double DEFAULT_USD_TO_AUS = 1.5d;
+        // default P.A. estimated boxes per hour
+        const double DEFAULT_BOXES_PER_HOUR = 53.33d;
 
         ///////
         // Semi-Constants (Preset but will be changeable via settings later)
@@ -84,7 +87,7 @@ namespace Lana_Renee_Lashes
         // estimated total personal assistant cost
         decimal pA_EstimatedCost = 0m;
         // personal assistant estimated amount of boxes packed per hour
-        double pA_BoxesPerHour = 53.33;
+        double pA_BoxesPerHour = DEFAULT_BOXES_PER_HOUR;
 
 
 
@@ -343,12 +346,6 @@ namespace Lana_Renee_Lashes
             // clears P.A. related values
             pA_EstimatedCost = 0;
             pA_EstimatedHoursToBox = 0;
-            pA_BoxesPerHour = 0;
-
-            // clears defaults
-            roughBoxCost = DEFAULT_BOX_PRICE;
-            roughShippingCost = DEFAULT_SHIP_PRICE;
-            estUsdToAusMultiplier = DEFAULT_USD_TO_AUS;
 
             // clears display values
             estTotalCost = 0;
@@ -358,6 +355,14 @@ namespace Lana_Renee_Lashes
             estProfit = 0;
             estCostPerUnit = 0;
             estGstToPay = 0;
+
+            // resets defaults
+
+            pA_BoxesPerHour = DEFAULT_BOXES_PER_HOUR;
+            roughBoxCost = DEFAULT_BOX_PRICE;
+            roughShippingCost = DEFAULT_SHIP_PRICE;
+            estUsdToAusMultiplier = DEFAULT_USD_TO_AUS;
+
 
         } // end void
         #endregion
@@ -487,8 +492,8 @@ namespace Lana_Renee_Lashes
 
                             // textbox good cost 
                             case "textBoxPaHoursToBox":
-                                // stores user input to lashed boxed per hour variable
-                                pA_BoxesPerHour = double.Parse(text);
+                                // stores user input into boxes per hour variable
+                                pA_EstimatedHoursToBox = double.Parse(text);
 
                                 break;
 
@@ -537,31 +542,23 @@ namespace Lana_Renee_Lashes
                     if (pA_HourlyRate > MAX_RATE || pA_HourlyRate < MIN_RATE)
                     {
                         // writes error message to user
-                        MessageBox.Show("Please ensure hourly rate is valid!");
+                        textBoxPaHourlyRate.ShowUsYaTips("Please ensure hourly rate is valid!");
 
                     }
-                    // else if P.A. hourly rate is within the accepted values
-                    else
-                    {
-                        // if P.A. hours spent boxing is not 0
-                        if (pA_HoursSpentBoxing != 0)
-                        {
-                            // sets personal assistants estimated cost to hourly rate * hours spent boxing
-                            pA_EstimatedCost = decimal.Parse((pA_HourlyRate * pA_HoursSpentBoxing).ToString());
-                            // roughly estimates amount of hours it will take to box this order
-                            pA_EstimatedHoursToBox = totalQuantity / pA_BoxesPerHour - pA_HoursSpentBoxing;
-                        }
-                        // else if P.A. boxes per hour is not 0
-                        else if (pA_BoxesPerHour != 0)
-                        {
-                            // sets personal assistants estimated cost to hourly rate * P.A.s average number of boxes packed per hour
-                            pA_EstimatedCost = decimal.Parse((pA_HourlyRate * pA_BoxesPerHour).ToString());
-                            // roughly estimates amount of hours it will take to box this order
-                            pA_EstimatedHoursToBox = totalQuantity / pA_BoxesPerHour;
 
-                        } // end if
+                    // roughly estimates amount of hours it will take to box this order
+                    pA_EstimatedHoursToBox = totalQuantity / pA_BoxesPerHour;
+
+                    // if deduct hours spent checkbox is checked
+                    if (checkBoxDeductHoursSpent.Checked)
+                    {
+                        // subtracts hours spent boxing from estimated hours to box
+                        pA_EstimatedHoursToBox -= pA_HoursSpentBoxing;
 
                     } // end if
+
+                    // sets personal assistants estimated cost to hourly rate * estimated hours to box
+                    pA_EstimatedCost = decimal.Parse((pA_HourlyRate * pA_EstimatedHoursToBox).ToString());
 
                     ///////
                     /// Calculate other costs

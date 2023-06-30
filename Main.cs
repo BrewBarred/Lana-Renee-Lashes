@@ -103,7 +103,7 @@ namespace Lana_Renee_Lashes
         // australian gst multiplier (10%)
         double gstMultiplier = 0.1;
         // gst to pay
-        decimal gstToPay = 0m;
+        decimal estGstToPay = 0m;
         // rough price per box
         decimal roughBoxCost = 0;
         // rough shipping cost per unit
@@ -357,7 +357,7 @@ namespace Lana_Renee_Lashes
             estProfitLessGst = 0;
             estProfit = 0;
             estCostPerUnit = 0;
-            gstToPay = 0;
+            estGstToPay = 0;
 
         } // end void
         #endregion
@@ -380,7 +380,7 @@ namespace Lana_Renee_Lashes
             textBoxEstTotalCost.Text = "$0";
             textBoxEstProfit.Text = "$0";
             textBoxEstProfitLessGst.Text = "$0";
-            textBoxGstToPay.Text = "$0";
+            textBoxEstGstToPay.Text = "$0";
 
 
         } // end void
@@ -397,7 +397,7 @@ namespace Lana_Renee_Lashes
             {
 
                 TextBox[] displayBoxes = { textBoxEstTotalPaCost, textBoxEstCostPerUnit , textBoxEstProfitPerUnit, textBoxEstSalesToProfit,
-                                         textBoxTotalQuantity, textBoxEstTotalCost, textBoxEstProfit, textBoxEstProfitLessGst, textBoxGstToPay };
+                                         textBoxTotalQuantity, textBoxEstTotalCost, textBoxEstProfit, textBoxEstProfitLessGst, textBoxEstGstToPay };
 
 
                 ///////
@@ -442,7 +442,7 @@ namespace Lana_Renee_Lashes
 
                         if (text is "")
                         {
-                            continue;
+                            text = "0";
                         }
 
                         switch (textBoxName)
@@ -494,7 +494,7 @@ namespace Lana_Renee_Lashes
 
                             case "textBoxRoughBoxCost":
                                 // stores user input to rough box price variable
-                                roughBoxCost = totalQuantity * DEFAULT_BOX_PRICE;
+                                r oughBoxCost = totalQuantity * DEFAULT_BOX_PRICE;
 
                                 break;
 
@@ -595,7 +595,7 @@ namespace Lana_Renee_Lashes
                         //total profit margin this order minus gst
                         estProfitLessGst = estProfit - estProfit * (decimal)gstMultiplier;
                         // gst amount
-                        gstToPay = estProfit * (decimal)gstMultiplier;
+                        estGstToPay = estProfit * (decimal)gstMultiplier;
                         // stores usd to aud multiplier into a variable
                         estUsdToAusMultiplier = double.Parse(textBoxUsdToAud.Text);
 
@@ -661,7 +661,7 @@ namespace Lana_Renee_Lashes
             // updates profit less gst
             textBoxEstProfitLessGst.Text = estProfitLessGst.ToString("c2");
             // updates gst to pay
-            textBoxGstToPay.Text = gstToPay.ToString("c2");
+            textBoxEstGstToPay.Text = estGstToPay.ToString("c2");
 
             // if active control is a textbox
             if (ActiveControl is TextBox)
@@ -690,12 +690,25 @@ namespace Lana_Renee_Lashes
             textBoxGoodyCost.Text = (goodyCost * estUsdToAusMultiplier).ToString("c2");
             // displays olivia cost in AUD
             textBoxOliviaCost.Text = (oliviaCost * estUsdToAusMultiplier).ToString("c2");
-            // displays estimated total cost in AUD
-            textBoxEstTotalCost.Text = ((goodyCost + oliviaCost) * estUsdToAusMultiplier).ToString("c2");
+
             // displays rough box cost in AUD
             textBoxRoughBoxCost.Text = (roughBoxCost * (decimal)estUsdToAusMultiplier).ToString("c2");
             // displays rough shipping cost in AUD
             textBoxRoughShippingCost.Text = (roughShippingCost * (decimal)estUsdToAusMultiplier).ToString("c2");
+            // displays estimated cost per unit in AUD
+            textBoxEstCostPerUnit.Text = (estCostPerUnit * (decimal)estUsdToAusMultiplier).ToString("c2");
+            // displays estimated profit per unit in AUD
+            textBoxEstProfitPerUnit.Text = (estProfitPerUnit * (decimal)estUsdToAusMultiplier).ToString("c2");
+            // displays estimated sales to profit in AUD
+            textBoxEstSalesToProfit.Text = (estSalesToProfit * (decimal)estUsdToAusMultiplier).ToString("c2");
+            // displays estimated total cost in AUD
+            textBoxEstTotalCost.Text = ((goodyCost + oliviaCost) * estUsdToAusMultiplier).ToString("c2");
+            // displays estimated profit in AUD
+            textBoxEstProfit.Text = (estProfit * (decimal)estUsdToAusMultiplier).ToString("c2");
+            // displays estimated profit less GST in AUD
+            textBoxEstProfitLessGst.Text = (estProfitLessGst * (decimal)estUsdToAusMultiplier).ToString("c2");
+            // displays estimated GST to pay in AUD
+            textBoxEstGstToPay.Text = (estGstToPay * (decimal)estUsdToAusMultiplier).ToString("c2");
         }
         #endregion
 
@@ -752,9 +765,9 @@ namespace Lana_Renee_Lashes
             if (checkBoxRoughBoxes.Checked)
             {
                 // show extra boxes controls
-                labelRoughBoxPrice.Show();
+                labelRoughBoxCost.Show();
                 textBoxRoughBoxCost.Show();
-                labelRoughBoxPrice.Show();
+                labelRoughBoxCost.Show();
                 textBoxRoughShippingCost.Show();
 
             }
@@ -762,7 +775,7 @@ namespace Lana_Renee_Lashes
             else
             {
                 // show extra boxes controls
-                labelRoughBoxPrice.Hide();
+                labelRoughBoxCost.Hide();
                 textBoxRoughBoxCost.Hide();
                 labelRoughShippingCost.Hide();
                 textBoxRoughShippingCost.Hide();

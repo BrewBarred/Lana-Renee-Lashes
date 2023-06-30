@@ -46,7 +46,7 @@
             this.checkBoxRoughBoxes = new System.Windows.Forms.CheckBox();
             this.labelCostPerUnit = new System.Windows.Forms.Label();
             this.labelEstimatedtotal = new System.Windows.Forms.Label();
-            this.label11 = new System.Windows.Forms.Label();
+            this.labelGstToPay = new System.Windows.Forms.Label();
             this.labelTotalLashes = new System.Windows.Forms.Label();
             this.labelProfitPerUnit = new System.Windows.Forms.Label();
             this.labelSalesToProfit = new System.Windows.Forms.Label();
@@ -71,8 +71,8 @@
             this.textBoxTotalQuantity = new System.Windows.Forms.TextBox();
             this.textBoxEstTotalCost = new System.Windows.Forms.TextBox();
             this.textBoxEstProfit = new System.Windows.Forms.TextBox();
-            this.textBoxGstToPay = new System.Windows.Forms.TextBox();
-            this.labelRoughBoxPrice = new System.Windows.Forms.Label();
+            this.textBoxEstGstToPay = new System.Windows.Forms.TextBox();
+            this.labelRoughBoxCost = new System.Windows.Forms.Label();
             this.textBoxOliviaQuantity = new System.Windows.Forms.TextBox();
             this.textBoxOliviaCost = new System.Windows.Forms.TextBox();
             this.labelOliviaOrdered = new System.Windows.Forms.Label();
@@ -308,17 +308,17 @@
             this.labelEstimatedtotal.TabIndex = 0;
             this.labelEstimatedtotal.Text = "Estimated Total Cost:";
             // 
-            // label11
+            // labelGstToPay
             // 
-            this.label11.AutoSize = true;
-            this.label11.BackColor = System.Drawing.Color.Transparent;
-            this.label11.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label11.ForeColor = System.Drawing.Color.Thistle;
-            this.label11.Location = new System.Drawing.Point(444, 804);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(78, 16);
-            this.label11.TabIndex = 0;
-            this.label11.Text = "GST to pay:";
+            this.labelGstToPay.AutoSize = true;
+            this.labelGstToPay.BackColor = System.Drawing.Color.Transparent;
+            this.labelGstToPay.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelGstToPay.ForeColor = System.Drawing.Color.Thistle;
+            this.labelGstToPay.Location = new System.Drawing.Point(444, 804);
+            this.labelGstToPay.Name = "labelGstToPay";
+            this.labelGstToPay.Size = new System.Drawing.Size(78, 16);
+            this.labelGstToPay.TabIndex = 0;
+            this.labelGstToPay.Text = "GST to pay:";
             // 
             // labelTotalLashes
             // 
@@ -595,29 +595,29 @@
             this.textBoxEstProfit.TabIndex = 0;
             this.textBoxEstProfit.TabStop = false;
             // 
-            // textBoxGstToPay
+            // textBoxEstGstToPay
             // 
-            this.textBoxGstToPay.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.textBoxGstToPay.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxGstToPay.ForeColor = System.Drawing.SystemColors.Info;
-            this.textBoxGstToPay.Location = new System.Drawing.Point(628, 806);
-            this.textBoxGstToPay.Name = "textBoxGstToPay";
-            this.textBoxGstToPay.ReadOnly = true;
-            this.textBoxGstToPay.Size = new System.Drawing.Size(159, 13);
-            this.textBoxGstToPay.TabIndex = 0;
-            this.textBoxGstToPay.TabStop = false;
+            this.textBoxEstGstToPay.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.textBoxEstGstToPay.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxEstGstToPay.ForeColor = System.Drawing.SystemColors.Info;
+            this.textBoxEstGstToPay.Location = new System.Drawing.Point(628, 806);
+            this.textBoxEstGstToPay.Name = "textBoxEstGstToPay";
+            this.textBoxEstGstToPay.ReadOnly = true;
+            this.textBoxEstGstToPay.Size = new System.Drawing.Size(159, 13);
+            this.textBoxEstGstToPay.TabIndex = 0;
+            this.textBoxEstGstToPay.TabStop = false;
             // 
-            // labelRoughBoxPrice
+            // labelRoughBoxCost
             // 
-            this.labelRoughBoxPrice.AutoSize = true;
-            this.labelRoughBoxPrice.BackColor = System.Drawing.Color.Transparent;
-            this.labelRoughBoxPrice.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelRoughBoxPrice.ForeColor = System.Drawing.Color.Thistle;
-            this.labelRoughBoxPrice.Location = new System.Drawing.Point(523, 388);
-            this.labelRoughBoxPrice.Name = "labelRoughBoxPrice";
-            this.labelRoughBoxPrice.Size = new System.Drawing.Size(131, 16);
-            this.labelRoughBoxPrice.TabIndex = 0;
-            this.labelRoughBoxPrice.Text = "Rough price per box:";
+            this.labelRoughBoxCost.AutoSize = true;
+            this.labelRoughBoxCost.BackColor = System.Drawing.Color.Transparent;
+            this.labelRoughBoxCost.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelRoughBoxCost.ForeColor = System.Drawing.Color.Thistle;
+            this.labelRoughBoxCost.Location = new System.Drawing.Point(523, 388);
+            this.labelRoughBoxCost.Name = "labelRoughBoxCost";
+            this.labelRoughBoxCost.Size = new System.Drawing.Size(102, 16);
+            this.labelRoughBoxCost.TabIndex = 0;
+            this.labelRoughBoxCost.Text = "Rough box cost:";
             // 
             // textBoxOliviaQuantity
             // 
@@ -758,9 +758,9 @@
             this.labelRoughShippingCost.ForeColor = System.Drawing.Color.Thistle;
             this.labelRoughShippingCost.Location = new System.Drawing.Point(523, 453);
             this.labelRoughShippingCost.Name = "labelRoughShippingCost";
-            this.labelRoughShippingCost.Size = new System.Drawing.Size(151, 16);
+            this.labelRoughShippingCost.Size = new System.Drawing.Size(130, 16);
             this.labelRoughShippingCost.TabIndex = 63;
-            this.labelRoughShippingCost.Text = "Rough shipping per unit:";
+            this.labelRoughShippingCost.Text = "Rough shipping cost:";
             // 
             // buttonUsdToAud
             // 
@@ -820,8 +820,8 @@
             this.Controls.Add(this.textBoxOliviaCost);
             this.Controls.Add(this.labelOliviaOrdered);
             this.Controls.Add(this.labelOliviaCost);
-            this.Controls.Add(this.labelRoughBoxPrice);
-            this.Controls.Add(this.textBoxGstToPay);
+            this.Controls.Add(this.labelRoughBoxCost);
+            this.Controls.Add(this.textBoxEstGstToPay);
             this.Controls.Add(this.textBoxEstProfit);
             this.Controls.Add(this.textBoxEstTotalCost);
             this.Controls.Add(this.textBoxTotalQuantity);
@@ -846,7 +846,7 @@
             this.Controls.Add(this.labelSalesToProfit);
             this.Controls.Add(this.labelProfitPerUnit);
             this.Controls.Add(this.labelTotalLashes);
-            this.Controls.Add(this.label11);
+            this.Controls.Add(this.labelGstToPay);
             this.Controls.Add(this.labelEstimatedtotal);
             this.Controls.Add(this.labelCostPerUnit);
             this.Controls.Add(this.checkBoxRoughBoxes);
@@ -900,7 +900,7 @@
         private System.Windows.Forms.CheckBox checkBoxRoughBoxes;
         private System.Windows.Forms.Label labelCostPerUnit;
         private System.Windows.Forms.Label labelEstimatedtotal;
-        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label labelGstToPay;
         private System.Windows.Forms.Label labelTotalLashes;
         private System.Windows.Forms.Label labelProfitPerUnit;
         private System.Windows.Forms.Label labelSalesToProfit;
@@ -925,8 +925,8 @@
         private System.Windows.Forms.TextBox textBoxTotalQuantity;
         private System.Windows.Forms.TextBox textBoxEstTotalCost;
         private System.Windows.Forms.TextBox textBoxEstProfit;
-        private System.Windows.Forms.TextBox textBoxGstToPay;
-        private System.Windows.Forms.Label labelRoughBoxPrice;
+        private System.Windows.Forms.TextBox textBoxEstGstToPay;
+        private System.Windows.Forms.Label labelRoughBoxCost;
         private System.Windows.Forms.TextBox textBoxOliviaQuantity;
         private System.Windows.Forms.TextBox textBoxOliviaCost;
         private System.Windows.Forms.Label labelOliviaOrdered;

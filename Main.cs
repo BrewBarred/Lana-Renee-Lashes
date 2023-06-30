@@ -621,63 +621,70 @@ namespace Lana_Renee_Lashes
 
         private void Display()
         {
-
-            ///////
-            /// Displays monetary values to respective textboxes in correct currency
-            /////
-
-            // displays goody cost in USD
-            textBoxGoodyCost.Text = "$" + goodyCost.ToString("#.##");
-            // displays olivia cost in USD
-            textBoxOliviaCost.Text = "$" + oliviaCost.ToString("#.##");
-            // displays estimated total cost in USD
-            textBoxEstTotalCost.Text = "$" + (goodyCost + oliviaCost).ToString();
-            // displays estimated rough box cost in USD to 2.d.p
-            textBoxRoughBoxCost.Text = "$" + roughBoxCost.ToString("#.##");
-            // displays rough shipping cost in USD to 2.d.p.
-            textBoxRoughShippingCost.Text = "$" + roughShippingCost.ToString("#.##");
-            // if P.A's hours spent boxing AND est hours to box is both empty
-            if (pA_HoursSpentBoxing + pA_EstimatedHoursToBox > 0)
+            try
             {
-                // display hours spent boxing
-                textBoxPaHoursSpentBoxing.Text = pA_HoursSpentBoxing.ToString("d2");
-                // display pa's estimated hours to box
-                textBoxPaHoursToBox.Text = pA_EstimatedHoursToBox.ToString("d2");
-            }
-            // display estimated p.a. cost
-            textBoxEstTotalPaCost.Text = pA_EstimatedCost.ToString("c2");
-            // updates estimated cost per unit
-            textBoxEstCostPerUnit.Text = estCostPerUnit.ToString("c2");
-            // updates estimated profit per unit
-            textBoxEstProfitPerUnit.Text = (estProfitPerUnit.ToString("c2"));
-            // updates estimated sales until we start to see profit
-            textBoxEstSalesToProfit.Text = estSalesToProfit.ToString();
-            // updates total quantity
-            textBoxTotalQuantity.Text = totalQuantity.ToString();
-            // updates estimated total cost
-            textBoxEstTotalCost.Text = estTotalCost.ToString("c2");
-            // updates estimated profit
-            textBoxEstProfit.Text = estProfit.ToString("c2");
-            // updates profit less gst
-            textBoxEstProfitLessGst.Text = estProfitLessGst.ToString("c2");
-            // updates gst to pay
-            textBoxEstGstToPay.Text = estGstToPay.ToString("c2");
+                ///////
+                /// Displays monetary values to respective textboxes in correct currency
+                /////
 
-            // if active control is a textbox
-            if (ActiveControl is TextBox)
-            {
-                // creates a reference variable to the active textbox
-                TextBox textBox = ActiveControl as TextBox;
-
-                // if textbox text is $0
-                if (textBox.Text is "$0")
+                // displays goody cost in USD
+                textBoxGoodyCost.Text = "$" + goodyCost.ToString("#.##");
+                // displays olivia cost in USD
+                textBoxOliviaCost.Text = "$" + oliviaCost.ToString("#.##");
+                // displays estimated total cost in USD
+                textBoxEstTotalCost.Text = "$" + (goodyCost + oliviaCost).ToString();
+                // displays estimated rough box cost in USD to 2.d.p
+                textBoxRoughBoxCost.Text = "$" + roughBoxCost.ToString("#.##");
+                // displays rough shipping cost in USD to 2.d.p.
+                textBoxRoughShippingCost.Text = "$" + roughShippingCost.ToString("#.##");
+                // if P.A's hours spent boxing AND est hours to box is both empty
+                if (pA_HoursSpentBoxing + pA_EstimatedHoursToBox > 0)
                 {
-                    // sets cursor to 2
-                    textBox.SelectionStart = 2;
+                    // display hours spent boxing
+                    textBoxPaHoursSpentBoxing.Text = pA_HoursSpentBoxing.ToString("#.#");
+                    // display pa's estimated hours to box
+                    textBoxPaHoursToBox.Text = pA_EstimatedHoursToBox.ToString("#.#");
+                }
+                // display estimated p.a. cost
+                textBoxEstTotalPaCost.Text = pA_EstimatedCost.ToString("c2");
+                // updates estimated cost per unit
+                textBoxEstCostPerUnit.Text = estCostPerUnit.ToString("c2");
+                // updates estimated profit per unit
+                textBoxEstProfitPerUnit.Text = (estProfitPerUnit.ToString("c2"));
+                // updates estimated sales until we start to see profit
+                textBoxEstSalesToProfit.Text = estSalesToProfit.ToString();
+                // updates total quantity
+                textBoxTotalQuantity.Text = totalQuantity.ToString();
+                // updates estimated total cost
+                textBoxEstTotalCost.Text = estTotalCost.ToString("c2");
+                // updates estimated profit
+                textBoxEstProfit.Text = estProfit.ToString("c2");
+                // updates profit less gst
+                textBoxEstProfitLessGst.Text = estProfitLessGst.ToString("c2");
+                // updates gst to pay
+                textBoxEstGstToPay.Text = estGstToPay.ToString("c2");
+
+                // if active control is a textbox
+                if (ActiveControl is TextBox)
+                {
+                    // creates a reference variable to the active textbox
+                    TextBox textBox = ActiveControl as TextBox;
+
+                    // if textbox text is $0
+                    if (textBox.Text is "$0")
+                    {
+                        // sets cursor to 2
+                        textBox.SelectionStart = 2;
+
+                    } // end if
 
                 } // end if
-
-            } // end if
+            }
+            catch (Exception ex)
+            {
+                // writes error to console
+                LogError(ex.Message);
+            }
         }
 
         #endregion
@@ -769,6 +776,7 @@ namespace Lana_Renee_Lashes
                 textBoxRoughBoxCost.Show();
                 labelRoughBoxCost.Show();
                 textBoxRoughShippingCost.Show();
+                Calculupdate();
 
             }
             // else if extra boxes checkbox is not checked

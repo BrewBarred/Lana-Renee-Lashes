@@ -87,6 +87,8 @@
             this.textBoxRoughShippingCost = new System.Windows.Forms.TextBox();
             this.labelRoughShippingCost = new System.Windows.Forms.Label();
             this.buttonUsdToAud = new System.Windows.Forms.Button();
+            this.checkBoxEstPricesByQuantity = new System.Windows.Forms.CheckBox();
+            this.labelEstPricesByQuantity = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWillow)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
@@ -772,12 +774,38 @@
             this.buttonUsdToAud.UseVisualStyleBackColor = false;
             this.buttonUsdToAud.Click += new System.EventHandler(this.buttonUsdToAud_Click);
             // 
+            // checkBoxEstPricesByQuantity
+            // 
+            this.checkBoxEstPricesByQuantity.AutoSize = true;
+            this.checkBoxEstPricesByQuantity.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F);
+            this.checkBoxEstPricesByQuantity.ForeColor = System.Drawing.Color.Thistle;
+            this.checkBoxEstPricesByQuantity.Location = new System.Drawing.Point(181, 586);
+            this.checkBoxEstPricesByQuantity.Name = "checkBoxEstPricesByQuantity";
+            this.checkBoxEstPricesByQuantity.Size = new System.Drawing.Size(15, 14);
+            this.checkBoxEstPricesByQuantity.TabIndex = 66;
+            this.checkBoxEstPricesByQuantity.UseVisualStyleBackColor = true;
+            this.checkBoxEstPricesByQuantity.CheckedChanged += new System.EventHandler(this.checkBoxEstPricesByQuantity_CheckedChanged);
+            // 
+            // labelEstPricesByQuantity
+            // 
+            this.labelEstPricesByQuantity.AutoSize = true;
+            this.labelEstPricesByQuantity.BackColor = System.Drawing.Color.Transparent;
+            this.labelEstPricesByQuantity.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelEstPricesByQuantity.ForeColor = System.Drawing.Color.Thistle;
+            this.labelEstPricesByQuantity.Location = new System.Drawing.Point(41, 584);
+            this.labelEstPricesByQuantity.Name = "labelEstPricesByQuantity";
+            this.labelEstPricesByQuantity.Size = new System.Drawing.Size(139, 16);
+            this.labelEstPricesByQuantity.TabIndex = 67;
+            this.labelEstPricesByQuantity.Text = "Est. Prices by quantity?";
+            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(797, 862);
+            this.Controls.Add(this.checkBoxEstPricesByQuantity);
+            this.Controls.Add(this.labelEstPricesByQuantity);
             this.Controls.Add(this.buttonUsdToAud);
             this.Controls.Add(this.textBoxRoughShippingCost);
             this.Controls.Add(this.labelRoughShippingCost);
@@ -913,6 +941,8 @@
         private System.Windows.Forms.TextBox textBoxRoughShippingCost;
         private System.Windows.Forms.Label labelRoughShippingCost;
         private System.Windows.Forms.Button buttonUsdToAud;
+        private System.Windows.Forms.CheckBox checkBoxEstPricesByQuantity;
+        private System.Windows.Forms.Label labelEstPricesByQuantity;
     }
 }
 

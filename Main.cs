@@ -375,8 +375,8 @@ namespace Lana_Renee_Lashes
         private void ClearDisplays()
         {
             // clears all display boxes
-            textBoxRoughBoxCost.Text = "" + DEFAULT_BOX_PRICE;
-            textBoxRoughShippingCost.Text = "" + DEFAULT_SHIP_PRICE;
+            textBoxRoughBoxCost.Text = "$0" + DEFAULT_BOX_PRICE.ToString("#.##");
+            textBoxRoughShippingCost.Text = "$0" + DEFAULT_SHIP_PRICE.ToString("#.##");
             textBoxEstTotalPaCost.Text = "$0";
             textBoxEstCostPerUnit.Text = "$0";
             textBoxEstProfitPerUnit.Text = "$0";
@@ -425,7 +425,6 @@ namespace Lana_Renee_Lashes
                     string textBoxName = textBox.Name;
                     // creates a string reference for the text in the textbox being used
                     string text = textBox.Text;
-                    totalQuantity = goodyQuantity + oliviaQuantity;
 
                     // if the current textbox is used for display only
                     if (displayBoxes.Contains(textBox))
@@ -499,13 +498,13 @@ namespace Lana_Renee_Lashes
 
                             case "textBoxRoughBoxCost":
                                 // stores user input to rough box price variable
-                                roughBoxCost = totalQuantity * DEFAULT_BOX_PRICE;
+                                roughBoxCost = decimal.Parse(text);
 
                                 break;
 
                             case "textBoxRoughShippingCost":
                                 // stores user input to rough shipping cost variable
-                                roughShippingCost = totalQuantity * DEFAULT_SHIP_PRICE;
+                                roughShippingCost = decimal.Parse(text);
 
                                 break;
 
@@ -587,14 +586,18 @@ namespace Lana_Renee_Lashes
                         estSalesToProfit = (int)estTotalCost / (int)retailSalePrice + 1;
                         // adds quantities of both orders together for a total quantity
                         totalQuantity = goodyQuantity + oliviaQuantity;
-                        //total profit margin this order
+                        // total profit margin this order
                         estProfit = estProfitPerUnit * totalQuantity;
-                        //total profit margin this order minus gst
+                        // total profit margin this order minus gst
                         estProfitLessGst = estProfit - estProfit * (decimal)gstMultiplier;
                         // gst amount
                         estGstToPay = estProfit * (decimal)gstMultiplier;
-                        // stores usd to aud multiplier into a variable
-                        estUsdToAusMultiplier = double.Parse(textBoxUsdToAud.Text);
+
+                        // rough box cost
+                        roughBoxCost = totalQuantity * DEFAULT_BOX_PRICE;
+                        // rough shipping cost
+                        roughShippingCost = totalQuantity * DEFAULT_SHIP_PRICE;
+
 
                     } // end if
 
@@ -630,8 +633,17 @@ namespace Lana_Renee_Lashes
                 textBoxOliviaCost.Text = "$" + oliviaCost.ToString("#.##");
                 // displays estimated total cost in USD
                 textBoxEstTotalCost.Text = "$" + (goodyCost + oliviaCost).ToString();
-                // displays estimated rough box cost in USD to 2.d.p
-                textBoxRoughBoxCost.Text = "$" + roughBoxCost.ToString("#.##");
+                if (roughBoxCost > 1)
+                {
+                    // displays estimated rough box cost in USD to 2.d.p
+                    textBoxRoughBoxCost.Text = "$" + roughBoxCost.ToString("#.##");
+                }
+                else
+                {
+                    // displays estimated rough box cost in USD to 2.d.p
+                    textBoxRoughBoxCost.Text = "$0" + roughBoxCost.ToString("#.##");
+
+                } // end if
                 // displays rough shipping cost in USD to 2.d.p.
                 textBoxRoughShippingCost.Text = "$" + roughShippingCost.ToString("#.##");
                 // if P.A's hours spent boxing AND est hours to box is both empty

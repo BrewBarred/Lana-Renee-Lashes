@@ -728,6 +728,7 @@
             this.checkBoxDeductHoursSpent.Size = new System.Drawing.Size(15, 14);
             this.checkBoxDeductHoursSpent.TabIndex = 13;
             this.checkBoxDeductHoursSpent.UseVisualStyleBackColor = true;
+            this.checkBoxDeductHoursSpent.CheckedChanged += new System.EventHandler(this.checkBoxDeductHoursSpent_CheckedChanged);
             // 
             // label3
             // 

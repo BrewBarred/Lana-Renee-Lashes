@@ -878,6 +878,11 @@ namespace Lana_Renee_Lashes
             } // end if
 
         } // end void 
+
+        private void checkBoxDeductHoursSpent_CheckedChanged(object sender, EventArgs e)
+        {
+            Calculupdate();
+        }
     }
     namespace Lana_Renee_Lashes
     {

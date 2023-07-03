@@ -21,7 +21,7 @@ namespace Lana_Renee_Lashes
         // maximum total 
         const double MAX_VALUE = 2147483647;
         // maximum cost per unit before warning
-        const decimal COST_WARNING = 4.5m;
+        const decimal COST_WARNING = 5.5m;
         // max hourly rate
         const int MAX_RATE = 40;
         // min hourly rate
@@ -346,13 +346,13 @@ namespace Lana_Renee_Lashes
         private void ClearDisplays()
         {
             // clears all display boxes
-            textBoxRoughBoxCost.Text = "$0" + DEFAULT_BOX_PRICE.ToString("#.##");
-            textBoxRoughShippingCost.Text = "$0" + DEFAULT_SHIP_PRICE.ToString("#.##");
+            textBoxRoughBoxCost.Text = "$0" + DEFAULT_BOX_PRICE.ToString("#.00");
+            textBoxRoughShippingCost.Text = "$0" + DEFAULT_SHIP_PRICE.ToString("#.00");
             textBoxEstTotalPaCost.Text = "$0";
             textBoxEstCostPerUnit.Text = "$0";
             textBoxEstProfitPerUnit.Text = "$0";
-            textBoxEstSalesToProfit.Text = "$0";
-            textBoxTotalQuantity.Text = "$0";
+            textBoxEstSalesToProfit.Text = "0";
+            textBoxTotalQuantity.Text = "0";
             textBoxEstTotalCost.Text = "$0";
             textBoxEstProfit.Text = "$0";
             textBoxEstProfitLessGst.Text = "$0";
@@ -517,7 +517,7 @@ namespace Lana_Renee_Lashes
                     }
 
                     // roughly estimates amount of hours it will take to box this order
-                    pA_EstimatedHoursToBox = totalQuantity / pA_BoxesPerHour;
+                    pA_EstimatedHoursToBox = goodyQuantity / pA_BoxesPerHour;
 
                     // if deduct hours spent checkbox is checked
                     if (checkBoxDeductHoursSpent.Checked)
@@ -554,7 +554,7 @@ namespace Lana_Renee_Lashes
                         // estimated profit per sale
                         estProfitPerUnit = retailSalePrice - estCostPerUnit;
                         // sales required to profit
-                        estSalesToProfit = (int)estTotalCost / (int)retailSalePrice + 1;
+                        estSalesToProfit = (int)estTotalCost / (int)estProfitPerUnit + 1;
                         // adds quantities of both orders together for a total quantity
                         totalQuantity = goodyQuantity + oliviaQuantity;
                         // total profit margin this order
@@ -598,31 +598,39 @@ namespace Lana_Renee_Lashes
                 /// Displays monetary values to respective textboxes in correct currency
                 /////
 
-                // displays goody cost in USD
-                textBoxGoodyCost.Text = "$" + goodyCost.ToString("#.##");
-                // displays olivia cost in USD
-                textBoxOliviaCost.Text = "$" + oliviaCost.ToString("#.##");
+                if (goodyCost != 0)
+                {
+                    // displays goody cost in USD
+                    textBoxGoodyCost.Text = "$" + goodyCost.ToString("#.##");
+                }
+                if (oliviaCost != 0)
+                {
+                    // displays olivia cost in USD
+                    textBoxOliviaCost.Text = "$" + oliviaCost.ToString("#.##");
+                } // end if
+
                 // displays estimated total cost in USD
                 textBoxEstTotalCost.Text = "$" + (goodyCost + oliviaCost).ToString();
                 if (roughBoxCost > 1)
                 {
                     // displays estimated rough box cost in USD to 2.d.p
-                    textBoxRoughBoxCost.Text = "$" + roughBoxCost.ToString("#.##");
+                    textBoxRoughBoxCost.Text = "$" + roughBoxCost.ToString("#.00");
                 }
                 else
                 {
                     // displays estimated rough box cost in USD to 2.d.p
-                    textBoxRoughBoxCost.Text = "$0" + roughBoxCost.ToString("#.##");
+                    textBoxRoughBoxCost.Text = "$0" + roughBoxCost.ToString("#.00");
 
                 } // end if
+
                 // displays rough shipping cost in USD to 2.d.p.
-                textBoxRoughShippingCost.Text = "$" + roughShippingCost.ToString("#.##");
+                textBoxRoughShippingCost.Text = "$" + roughShippingCost.ToString("#.00");
                 // if P.A's hours spent boxing AND est hours to box is both empty
                 if (pA_HoursSpentBoxing + pA_EstimatedHoursToBox > 0)
                 {
-                    // display hours spent boxing
+                    // display hours spent boxing to 1 d.p.
                     textBoxPaHoursSpentBoxing.Text = pA_HoursSpentBoxing.ToString("#.#");
-                    // display pa's estimated hours to box
+                    // display pa's estimated hours to box to 1 d.p.
                     textBoxPaHoursToBox.Text = pA_EstimatedHoursToBox.ToString("#.#");
                 }
                 // display estimated p.a. cost
@@ -631,7 +639,7 @@ namespace Lana_Renee_Lashes
                 textBoxEstCostPerUnit.Text = estCostPerUnit.ToString("c2");
                 // updates estimated profit per unit
                 textBoxEstProfitPerUnit.Text = (estProfitPerUnit.ToString("c2"));
-                // updates estimated sales until we start to see profit
+                // updates estimated sales until we start to see profit to 0 d.p.
                 textBoxEstSalesToProfit.Text = estSalesToProfit.ToString();
                 // updates total quantity
                 textBoxTotalQuantity.Text = totalQuantity.ToString();
@@ -650,10 +658,12 @@ namespace Lana_Renee_Lashes
                     // creates a reference variable to the active textbox
                     TextBox textBox = ActiveControl as TextBox;
 
+                    // 
                     if (textBox.ReadOnly)
                     {
                         return;
-                    }
+                    
+                    } // end if
 
                     // if textbox text is $0
                     if (textBox.Text is "$0")
@@ -691,7 +701,7 @@ namespace Lana_Renee_Lashes
             // displays estimated profit per unit in AUD
             textBoxEstProfitPerUnit.Text = (estProfitPerUnit * (decimal)estUsdToAusMultiplier).ToString("c2");
             // displays estimated sales to profit in AUD
-            textBoxEstSalesToProfit.Text = (estSalesToProfit * (decimal)estUsdToAusMultiplier).ToString("c2");
+            textBoxEstSalesToProfit.Text = (estSalesToProfit * (decimal)estUsdToAusMultiplier).ToString();
             // displays estimated total cost in AUD
             textBoxEstTotalCost.Text = ((goodyCost + oliviaCost) * estUsdToAusMultiplier).ToString("c2");
             // displays estimated profit in AUD

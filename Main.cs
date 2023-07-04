@@ -130,7 +130,7 @@ namespace Lana_Renee_Lashes
         string numberDigit = numberDigitPattern.ToString();
 
         // stores valid keys that can be typed into textboxes
-        Keys[] validKeyArray = { Keys.Back, Keys.Oemcomma, Keys.OemPeriod, Keys.Decimal, Keys.ShiftKey, Keys.Left, Keys.Right, Keys.Up, Keys.Down };
+        Keys[] validKeyArray = { Keys.Back, Keys.Oemcomma, Keys.OemPeriod, Keys.Decimal, Keys.ShiftKey, Keys.Left, Keys.Right, Keys.Up, Keys.Down, Keys.Tab };
         // stores last character removed by filter
         Keys lastCharRemoved;
 
@@ -143,7 +143,6 @@ namespace Lana_Renee_Lashes
         public Main()
         {
             InitializeComponent();
-            KeyPreview = true;
             textBoxGoodyCost.Focus();
             textBoxGoodyCost.SelectionStart = 1;
         }
@@ -270,7 +269,7 @@ namespace Lana_Renee_Lashes
         /// <summary>
         /// Sets cursor back into it's correct position
         /// </summary>
-        #region ResetCursor()
+        #region SetCursor()
 
         private void SetCursor()
         {
@@ -287,6 +286,12 @@ namespace Lana_Renee_Lashes
             {
                 // sets cursor to the end
                 textBox.SelectionStart = 1;
+            }
+            // if textbox text length is equal to 2
+            else if (textBox.TextLength is 2)
+            {
+                // sets cursor to the end of the text
+                textBox.SelectionStart = 2;
             }
 
             // else if textbox is displaying something other than $0 or nothing

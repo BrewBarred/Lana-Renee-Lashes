@@ -885,6 +885,11 @@ namespace Lana_Renee_Lashes
         {
             Calculupdate();
         }
+
+        private void textBoxTotalQuantity_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
     namespace Lana_Renee_Lashes
     {

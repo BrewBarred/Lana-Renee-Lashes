@@ -266,10 +266,11 @@ namespace Lana_Renee_Lashes
 
         }
         #endregion
+
+        #region SetCursor()
         /// <summary>
         /// Sets cursor back into it's correct position
         /// </summary>
-        #region SetCursor()
 
         private void SetCursor()
         {
@@ -736,6 +737,7 @@ namespace Lana_Renee_Lashes
                 textBoxPaHoursSpentBoxing.Show();
                 labelPaHoursToBox.Show();
                 textBoxPaHoursToBox.Show();
+                checkBoxDeductHoursSpent.Show();
 
                 // resets hourly rate to it's default
                 pA_HourlyRate = 25;
@@ -752,6 +754,7 @@ namespace Lana_Renee_Lashes
                 textBoxPaHoursSpentBoxing.Hide();
                 labelPaHoursToBox.Hide();
                 textBoxPaHoursToBox.Hide();
+                checkBoxDeductHoursSpent.Hide();
                 pA_HourlyRate = 0;
 
             } // end if

@@ -391,7 +391,7 @@ namespace Lana_Renee_Lashes
                 /////
 
                 // for each control in this form
-                foreach (Control control in this.Controls)
+                foreach (Control control in panelGoody.Controls)
                 {
                     // if control is not a textbox
                     if (!(control is TextBox))
@@ -399,6 +399,7 @@ namespace Lana_Renee_Lashes
                         // continues to next control
                         continue;
                     }
+
 
                     // sets control to a proper textbox for referencing
                     TextBox textBox = control as TextBox;
@@ -425,14 +426,17 @@ namespace Lana_Renee_Lashes
 
                         } // end if
 
+                        // if the text is empty
                         if (text is "")
                         {
+                            // sets the text value to 0
                             text = "0";
-                        }
+                        
+                        } // end if
 
                         switch (textBoxName)
                         {
-                            // textbox good cost 
+
                             case "textBoxGoodyCost":
                                 // stores user input to goodyCost variable
                                 goodyCost = double.Parse(text);
@@ -445,7 +449,6 @@ namespace Lana_Renee_Lashes
 
                                 break;
 
-                            // textbox good cost 
                             case "textBoxGoodyQuantity":
                                 // stores user input to goodyCost variable
                                 goodyQuantity = int.Parse(text);
@@ -470,7 +473,6 @@ namespace Lana_Renee_Lashes
 
                                 break;
 
-                            // textbox good cost 
                             case "textBoxPaHoursToBox":
                                 // stores user input into boxes per hour variable
                                 pA_EstimatedHoursToBox = double.Parse(text);
@@ -554,8 +556,11 @@ namespace Lana_Renee_Lashes
 
                     } // end if
 
-                    // if goody cost and quantity are not equal to 0 OR olivia cost and quantity are not equal to 0
-                    if (goodyCost + goodyQuantity > 0 || oliviaCost + oliviaQuantity > 0)
+
+                } // end if
+
+                // if goody cost and quantity are not equal to 0 OR olivia cost and quantity are not equal to 0
+                if (goodyCost + goodyQuantity > 0 || oliviaCost + oliviaQuantity > 0)
                     {
                         // adds the cost of both orders together for a total cost
                         estTotalCost = decimal.Parse((goodyCost + oliviaCost + (double)pA_EstimatedCost).ToString());
@@ -582,7 +587,6 @@ namespace Lana_Renee_Lashes
 
                     } // end if
 
-                } // end if
 
                 Display();
 
@@ -612,15 +616,19 @@ namespace Lana_Renee_Lashes
                 {
                     // displays goody cost in USD
                     textBoxGoodyCost.Text = "$" + goodyCost.ToString("#.##");
-                }
+               
+                } // end if
+
                 if (oliviaCost != 0)
                 {
                     // displays olivia cost in USD
                     textBoxOliviaCost.Text = "$" + oliviaCost.ToString("#.##");
+               
                 } // end if
 
                 // displays estimated total cost in USD
                 textBoxEstTotalCost.Text = "$" + (goodyCost + oliviaCost).ToString();
+
                 if (roughBoxCost > 1)
                 {
                     // displays estimated rough box cost in USD to 2.d.p
@@ -893,11 +901,6 @@ namespace Lana_Renee_Lashes
         private void checkBoxDeductHoursSpent_CheckedChanged(object sender, EventArgs e)
         {
             Calculupdate();
-        }
-
-        private void textBoxTotalQuantity_TextChanged(object sender, EventArgs e)
-        {
-
         }
     }
     namespace Lana_Renee_Lashes

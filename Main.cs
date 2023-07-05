@@ -145,6 +145,10 @@ namespace Lana_Renee_Lashes
             InitializeComponent();
             textBoxGoodyCost.Focus();
             textBoxGoodyCost.SelectionStart = 1;
+            this.AutoScroll = false;
+            this.HorizontalScroll.Maximum = 0;
+            this.VerticalScroll.Visible = false;
+            this.AutoScroll = true;
         }
 
         #region CreateAccount_KeyUp Event
@@ -266,10 +270,11 @@ namespace Lana_Renee_Lashes
 
         }
         #endregion
+
+        #region SetCursor()
         /// <summary>
         /// Sets cursor back into it's correct position
         /// </summary>
-        #region SetCursor()
 
         private void SetCursor()
         {
@@ -736,6 +741,8 @@ namespace Lana_Renee_Lashes
                 textBoxPaHoursSpentBoxing.Show();
                 labelPaHoursToBox.Show();
                 textBoxPaHoursToBox.Show();
+                labelDeductHoursSpent.Show();
+                checkBoxDeductHoursSpent.Show();
 
                 // resets hourly rate to it's default
                 pA_HourlyRate = 25;
@@ -752,6 +759,8 @@ namespace Lana_Renee_Lashes
                 textBoxPaHoursSpentBoxing.Hide();
                 labelPaHoursToBox.Hide();
                 textBoxPaHoursToBox.Hide();
+                labelDeductHoursSpent.Hide();
+                checkBoxDeductHoursSpent.Hide();
                 pA_HourlyRate = 0;
 
             } // end if

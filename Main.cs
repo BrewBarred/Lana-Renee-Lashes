@@ -737,6 +737,7 @@ namespace Lana_Renee_Lashes
                 textBoxPaHoursSpentBoxing.Show();
                 labelPaHoursToBox.Show();
                 textBoxPaHoursToBox.Show();
+                labelDeductHoursSpent.Show();
                 checkBoxDeductHoursSpent.Show();
 
                 // resets hourly rate to it's default
@@ -754,6 +755,7 @@ namespace Lana_Renee_Lashes
                 textBoxPaHoursSpentBoxing.Hide();
                 labelPaHoursToBox.Hide();
                 textBoxPaHoursToBox.Hide();
+                labelDeductHoursSpent.Hide();
                 checkBoxDeductHoursSpent.Hide();
                 pA_HourlyRate = 0;
 

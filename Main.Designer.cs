@@ -274,7 +274,7 @@
             this.labelEstimatedtotal.BackColor = System.Drawing.Color.Transparent;
             this.labelEstimatedtotal.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelEstimatedtotal.ForeColor = System.Drawing.Color.Thistle;
-            this.labelEstimatedtotal.Location = new System.Drawing.Point(495, 839);
+            this.labelEstimatedtotal.Location = new System.Drawing.Point(530, 839);
             this.labelEstimatedtotal.Name = "labelEstimatedtotal";
             this.labelEstimatedtotal.Size = new System.Drawing.Size(139, 16);
             this.labelEstimatedtotal.TabIndex = 0;
@@ -286,7 +286,7 @@
             this.labelGstToPay.BackColor = System.Drawing.Color.Transparent;
             this.labelGstToPay.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelGstToPay.ForeColor = System.Drawing.Color.Thistle;
-            this.labelGstToPay.Location = new System.Drawing.Point(496, 927);
+            this.labelGstToPay.Location = new System.Drawing.Point(531, 927);
             this.labelGstToPay.Name = "labelGstToPay";
             this.labelGstToPay.Size = new System.Drawing.Size(78, 16);
             this.labelGstToPay.TabIndex = 0;
@@ -298,7 +298,7 @@
             this.labelTotalLashes.BackColor = System.Drawing.Color.Transparent;
             this.labelTotalLashes.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTotalLashes.ForeColor = System.Drawing.Color.Thistle;
-            this.labelTotalLashes.Location = new System.Drawing.Point(495, 810);
+            this.labelTotalLashes.Location = new System.Drawing.Point(530, 810);
             this.labelTotalLashes.Name = "labelTotalLashes";
             this.labelTotalLashes.Size = new System.Drawing.Size(137, 16);
             this.labelTotalLashes.TabIndex = 0;
@@ -334,7 +334,7 @@
             this.label15.BackColor = System.Drawing.Color.Transparent;
             this.label15.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.Thistle;
-            this.label15.Location = new System.Drawing.Point(495, 867);
+            this.label15.Location = new System.Drawing.Point(530, 867);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(111, 16);
             this.label15.TabIndex = 0;
@@ -346,7 +346,7 @@
             this.label17.BackColor = System.Drawing.Color.Transparent;
             this.label17.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.Color.Thistle;
-            this.label17.Location = new System.Drawing.Point(496, 896);
+            this.label17.Location = new System.Drawing.Point(531, 896);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(166, 16);
             this.label17.TabIndex = 0;
@@ -778,7 +778,7 @@
             this.pictureBoxWillow.Image = global::Lana_Renee_Lashes.Properties.Resources.Lana;
             this.pictureBoxWillow.Location = new System.Drawing.Point(-1, -69);
             this.pictureBoxWillow.Name = "pictureBoxWillow";
-            this.pictureBoxWillow.Size = new System.Drawing.Size(843, 237);
+            this.pictureBoxWillow.Size = new System.Drawing.Size(889, 237);
             this.pictureBoxWillow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pictureBoxWillow.TabIndex = 2;
             this.pictureBoxWillow.TabStop = false;
@@ -828,7 +828,7 @@
             this.panel2.Location = new System.Drawing.Point(518, 198);
             this.panel2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(272, 485);
+            this.panel2.Size = new System.Drawing.Size(317, 485);
             this.panel2.TabIndex = 69;
             // 
             // panel4
@@ -856,7 +856,7 @@
             this.panel5.Controls.Add(this.linkLabel1);
             this.panel5.Controls.Add(this.textBoxEstGstToPay);
             this.panel5.Controls.Add(this.textBoxTotalQuantity);
-            this.panel5.Location = new System.Drawing.Point(497, 810);
+            this.panel5.Location = new System.Drawing.Point(532, 810);
             this.panel5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel5.Name = "panel5";
             this.panel5.Size = new System.Drawing.Size(342, 166);
@@ -869,7 +869,7 @@
             this.labelSubTitle.BackColor = System.Drawing.Color.Transparent;
             this.labelSubTitle.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelSubTitle.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.labelSubTitle.Location = new System.Drawing.Point(719, 45);
+            this.labelSubTitle.Location = new System.Drawing.Point(764, 45);
             this.labelSubTitle.Name = "labelSubTitle";
             this.labelSubTitle.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
             this.labelSubTitle.Size = new System.Drawing.Size(118, 27);
@@ -886,7 +886,7 @@
             this.labelTitle.BackColor = System.Drawing.Color.Transparent;
             this.labelTitle.Font = new System.Drawing.Font("Microsoft Tai Le", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTitle.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.labelTitle.Location = new System.Drawing.Point(649, 28);
+            this.labelTitle.Location = new System.Drawing.Point(694, 28);
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(188, 26);
             this.labelTitle.TabIndex = 0;
@@ -897,7 +897,7 @@
             this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(622, 28);
+            this.pictureBox2.Location = new System.Drawing.Point(667, 28);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(28, 26);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -913,7 +913,7 @@
             this.panel3.Location = new System.Drawing.Point(0, 0);
             this.panel3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(843, 168);
+            this.panel3.Size = new System.Drawing.Size(888, 168);
             this.panel3.TabIndex = 72;
             // 
             // Main
@@ -925,7 +925,7 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(854, 644);
+            this.ClientSize = new System.Drawing.Size(889, 991);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.textBoxGoodyQuantity);
             this.Controls.Add(this.textBoxGoodyCost);
@@ -944,8 +944,8 @@
             this.Controls.Add(this.panel4);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.KeyPreview = true;
-            this.MaximumSize = new System.Drawing.Size(905, 683);
-            this.MinimumSize = new System.Drawing.Size(773, 683);
+            this.MaximumSize = new System.Drawing.Size(905, 1030);
+            this.MinimumSize = new System.Drawing.Size(905, 1030);
             this.Name = "Main";
             this.Opacity = 0.9D;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;

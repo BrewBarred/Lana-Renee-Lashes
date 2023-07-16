@@ -385,13 +385,20 @@ namespace Lana_Renee_Lashes
                 TextBox[] displayBoxes = { textBoxEstTotalPaCost, textBoxEstCostPerUnit , textBoxEstProfitPerUnit, textBoxEstSalesToProfit,
                                          textBoxTotalQuantity, textBoxEstTotalCost, textBoxEstProfit, textBoxEstProfitLessGst, textBoxEstGstToPay };
 
+                Panel[] panelList = { panelGoody, panelOlivia, panelPa, panelUsdToAud };
 
                 ///////
                 /// Parses all values to their respective variables
                 /////
 
+                foreach (Panel panel in panelList)
+                {
+                    Panel thisPanel = panel as Panel;
+
+                    //MessageBox.Show(thisPanel.Name.ToString());
+
                 // for each control in this form
-                foreach (Control control in panelGoody.Controls)
+                foreach (Control control in thisPanel.Controls)
                 {
                     // if control is not a textbox
                     if (!(control is TextBox))
@@ -407,6 +414,8 @@ namespace Lana_Renee_Lashes
                     string textBoxName = textBox.Name;
                     // creates a string reference for the text in the textbox being used
                     string text = textBox.Text;
+
+                        //MessageBox.Show(textBox.ToString());
 
                     // if the current textbox is used for display only
                     if (displayBoxes.Contains(textBox))
@@ -507,6 +516,8 @@ namespace Lana_Renee_Lashes
                         } // end switch 
 
                     } // end if 
+
+                    } // end for
 
                 } // end for
 
@@ -790,7 +801,7 @@ namespace Lana_Renee_Lashes
                 // show extra boxes controls
                 labelRoughBoxCost.Show();
                 textBoxRoughBoxCost.Show();
-                labelRoughBoxCost.Show();
+                labelRoughShippingCost.Show();
                 textBoxRoughShippingCost.Show();
                 Calculupdate();
 

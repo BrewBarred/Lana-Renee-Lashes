@@ -188,7 +188,7 @@
             this.labelPaHoursSpent.BackColor = System.Drawing.Color.Transparent;
             this.labelPaHoursSpent.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelPaHoursSpent.ForeColor = System.Drawing.Color.Thistle;
-            this.labelPaHoursSpent.Location = new System.Drawing.Point(22, 71);
+            this.labelPaHoursSpent.Location = new System.Drawing.Point(21, 134);
             this.labelPaHoursSpent.Name = "labelPaHoursSpent";
             this.labelPaHoursSpent.Size = new System.Drawing.Size(125, 16);
             this.labelPaHoursSpent.TabIndex = 0;
@@ -227,11 +227,11 @@
             this.labelEstPaCost.BackColor = System.Drawing.Color.Transparent;
             this.labelEstPaCost.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelEstPaCost.ForeColor = System.Drawing.Color.Thistle;
-            this.labelEstPaCost.Location = new System.Drawing.Point(45, 845);
+            this.labelEstPaCost.Location = new System.Drawing.Point(72, 9);
             this.labelEstPaCost.Name = "labelEstPaCost";
-            this.labelEstPaCost.Size = new System.Drawing.Size(165, 16);
+            this.labelEstPaCost.Size = new System.Drawing.Size(148, 16);
             this.labelEstPaCost.TabIndex = 0;
-            this.labelEstPaCost.Text = "Estimated total P.A. Cost:";
+            this.labelEstPaCost.Text = "Estimated boxing cost:";
             // 
             // labelPaHoursToBox
             // 
@@ -239,7 +239,7 @@
             this.labelPaHoursToBox.BackColor = System.Drawing.Color.Transparent;
             this.labelPaHoursToBox.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelPaHoursToBox.ForeColor = System.Drawing.Color.Thistle;
-            this.labelPaHoursToBox.Location = new System.Drawing.Point(21, 134);
+            this.labelPaHoursToBox.Location = new System.Drawing.Point(21, 71);
             this.labelPaHoursToBox.Name = "labelPaHoursToBox";
             this.labelPaHoursToBox.Size = new System.Drawing.Size(111, 16);
             this.labelPaHoursToBox.TabIndex = 0;
@@ -266,7 +266,7 @@
             this.labelCostPerUnit.BackColor = System.Drawing.Color.Transparent;
             this.labelCostPerUnit.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelCostPerUnit.ForeColor = System.Drawing.Color.Thistle;
-            this.labelCostPerUnit.Location = new System.Drawing.Point(56, 874);
+            this.labelCostPerUnit.Location = new System.Drawing.Point(66, 37);
             this.labelCostPerUnit.Name = "labelCostPerUnit";
             this.labelCostPerUnit.Size = new System.Drawing.Size(154, 16);
             this.labelCostPerUnit.TabIndex = 0;
@@ -292,9 +292,9 @@
             this.labelGstToPay.ForeColor = System.Drawing.Color.Thistle;
             this.labelGstToPay.Location = new System.Drawing.Point(540, 935);
             this.labelGstToPay.Name = "labelGstToPay";
-            this.labelGstToPay.Size = new System.Drawing.Size(78, 16);
+            this.labelGstToPay.Size = new System.Drawing.Size(148, 16);
             this.labelGstToPay.TabIndex = 0;
-            this.labelGstToPay.Text = "GST to pay:";
+            this.labelGstToPay.Text = "Estimated G.S.T. Total:";
             // 
             // labelTotalLashes
             // 
@@ -302,7 +302,7 @@
             this.labelTotalLashes.BackColor = System.Drawing.Color.Transparent;
             this.labelTotalLashes.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTotalLashes.ForeColor = System.Drawing.Color.Thistle;
-            this.labelTotalLashes.Location = new System.Drawing.Point(539, 818);
+            this.labelTotalLashes.Location = new System.Drawing.Point(539, 6);
             this.labelTotalLashes.Name = "labelTotalLashes";
             this.labelTotalLashes.Size = new System.Drawing.Size(137, 16);
             this.labelTotalLashes.TabIndex = 0;
@@ -314,7 +314,7 @@
             this.labelProfitPerUnit.BackColor = System.Drawing.Color.Transparent;
             this.labelProfitPerUnit.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelProfitPerUnit.ForeColor = System.Drawing.Color.Thistle;
-            this.labelProfitPerUnit.Location = new System.Drawing.Point(46, 902);
+            this.labelProfitPerUnit.Location = new System.Drawing.Point(56, 65);
             this.labelProfitPerUnit.Name = "labelProfitPerUnit";
             this.labelProfitPerUnit.Size = new System.Drawing.Size(164, 16);
             this.labelProfitPerUnit.TabIndex = 0;
@@ -326,11 +326,12 @@
             this.labelSalesToProfit.BackColor = System.Drawing.Color.Transparent;
             this.labelSalesToProfit.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelSalesToProfit.ForeColor = System.Drawing.Color.Thistle;
-            this.labelSalesToProfit.Location = new System.Drawing.Point(48, 933);
+            this.labelSalesToProfit.Location = new System.Drawing.Point(539, 32);
             this.labelSalesToProfit.Name = "labelSalesToProfit";
             this.labelSalesToProfit.Size = new System.Drawing.Size(162, 16);
             this.labelSalesToProfit.TabIndex = 0;
             this.labelSalesToProfit.Text = "Estimated sales to profit:";
+            this.labelSalesToProfit.Click += new System.EventHandler(this.labelSalesToProfit_Click);
             // 
             // label15
             // 
@@ -427,7 +428,7 @@
             // textBoxPaHoursSpentBoxing
             // 
             this.textBoxPaHoursSpentBoxing.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.textBoxPaHoursSpentBoxing.Location = new System.Drawing.Point(48, 99);
+            this.textBoxPaHoursSpentBoxing.Location = new System.Drawing.Point(47, 162);
             this.textBoxPaHoursSpentBoxing.MaxLength = 4;
             this.textBoxPaHoursSpentBoxing.Name = "textBoxPaHoursSpentBoxing";
             this.textBoxPaHoursSpentBoxing.Size = new System.Drawing.Size(159, 20);
@@ -437,7 +438,7 @@
             // textBoxPaHoursToBox
             // 
             this.textBoxPaHoursToBox.BackColor = System.Drawing.SystemColors.InactiveCaption;
-            this.textBoxPaHoursToBox.Location = new System.Drawing.Point(48, 164);
+            this.textBoxPaHoursToBox.Location = new System.Drawing.Point(48, 101);
             this.textBoxPaHoursToBox.MaxLength = 6;
             this.textBoxPaHoursToBox.Name = "textBoxPaHoursToBox";
             this.textBoxPaHoursToBox.ReadOnly = true;
@@ -450,7 +451,7 @@
             this.textBoxEstCostPerUnit.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.textBoxEstCostPerUnit.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxEstCostPerUnit.ForeColor = System.Drawing.SystemColors.Info;
-            this.textBoxEstCostPerUnit.Location = new System.Drawing.Point(211, 875);
+            this.textBoxEstCostPerUnit.Location = new System.Drawing.Point(221, 38);
             this.textBoxEstCostPerUnit.Name = "textBoxEstCostPerUnit";
             this.textBoxEstCostPerUnit.ReadOnly = true;
             this.textBoxEstCostPerUnit.Size = new System.Drawing.Size(159, 13);
@@ -462,7 +463,7 @@
             this.textBoxEstTotalPaCost.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.textBoxEstTotalPaCost.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxEstTotalPaCost.ForeColor = System.Drawing.SystemColors.Info;
-            this.textBoxEstTotalPaCost.Location = new System.Drawing.Point(211, 846);
+            this.textBoxEstTotalPaCost.Location = new System.Drawing.Point(221, 10);
             this.textBoxEstTotalPaCost.Name = "textBoxEstTotalPaCost";
             this.textBoxEstTotalPaCost.ReadOnly = true;
             this.textBoxEstTotalPaCost.Size = new System.Drawing.Size(159, 13);
@@ -474,7 +475,7 @@
             this.textBoxEstSalesToProfit.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.textBoxEstSalesToProfit.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxEstSalesToProfit.ForeColor = System.Drawing.SystemColors.Info;
-            this.textBoxEstSalesToProfit.Location = new System.Drawing.Point(211, 934);
+            this.textBoxEstSalesToProfit.Location = new System.Drawing.Point(708, 33);
             this.textBoxEstSalesToProfit.Name = "textBoxEstSalesToProfit";
             this.textBoxEstSalesToProfit.ReadOnly = true;
             this.textBoxEstSalesToProfit.Size = new System.Drawing.Size(159, 13);
@@ -486,7 +487,7 @@
             this.textBoxEstProfitPerUnit.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.textBoxEstProfitPerUnit.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxEstProfitPerUnit.ForeColor = System.Drawing.SystemColors.Info;
-            this.textBoxEstProfitPerUnit.Location = new System.Drawing.Point(211, 903);
+            this.textBoxEstProfitPerUnit.Location = new System.Drawing.Point(221, 66);
             this.textBoxEstProfitPerUnit.Name = "textBoxEstProfitPerUnit";
             this.textBoxEstProfitPerUnit.ReadOnly = true;
             this.textBoxEstProfitPerUnit.Size = new System.Drawing.Size(159, 13);
@@ -510,7 +511,7 @@
             this.textBoxTotalQuantity.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
             this.textBoxTotalQuantity.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxTotalQuantity.ForeColor = System.Drawing.SystemColors.Info;
-            this.textBoxTotalQuantity.Location = new System.Drawing.Point(708, 821);
+            this.textBoxTotalQuantity.Location = new System.Drawing.Point(708, 9);
             this.textBoxTotalQuantity.Name = "textBoxTotalQuantity";
             this.textBoxTotalQuantity.ReadOnly = true;
             this.textBoxTotalQuantity.Size = new System.Drawing.Size(159, 13);
@@ -559,11 +560,11 @@
             this.labelRoughBoxCost.BackColor = System.Drawing.Color.Transparent;
             this.labelRoughBoxCost.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelRoughBoxCost.ForeColor = System.Drawing.Color.Thistle;
-            this.labelRoughBoxCost.Location = new System.Drawing.Point(102, 6);
+            this.labelRoughBoxCost.Location = new System.Drawing.Point(37, 91);
             this.labelRoughBoxCost.Name = "labelRoughBoxCost";
-            this.labelRoughBoxCost.Size = new System.Drawing.Size(107, 16);
+            this.labelRoughBoxCost.Size = new System.Drawing.Size(183, 16);
             this.labelRoughBoxCost.TabIndex = 0;
-            this.labelRoughBoxCost.Text = "Rough box cost:";
+            this.labelRoughBoxCost.Text = "Estimated cost of flat boxes:";
             // 
             // textBoxOliviaQuantity
             // 
@@ -614,12 +615,13 @@
             this.textBoxRoughBoxCost.BackColor = System.Drawing.SystemColors.ControlText;
             this.textBoxRoughBoxCost.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxRoughBoxCost.ForeColor = System.Drawing.SystemColors.Info;
-            this.textBoxRoughBoxCost.Location = new System.Drawing.Point(210, 6);
+            this.textBoxRoughBoxCost.Location = new System.Drawing.Point(221, 91);
             this.textBoxRoughBoxCost.MaxLength = 12;
             this.textBoxRoughBoxCost.Name = "textBoxRoughBoxCost";
             this.textBoxRoughBoxCost.ReadOnly = true;
             this.textBoxRoughBoxCost.Size = new System.Drawing.Size(159, 13);
             this.textBoxRoughBoxCost.TabIndex = 10;
+            this.textBoxRoughBoxCost.Text = "$0";
             // 
             // textBoxUsdToAud
             // 
@@ -699,7 +701,7 @@
             this.textBoxRoughShippingCost.BackColor = System.Drawing.SystemColors.ControlText;
             this.textBoxRoughShippingCost.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.textBoxRoughShippingCost.ForeColor = System.Drawing.SystemColors.Info;
-            this.textBoxRoughShippingCost.Location = new System.Drawing.Point(210, 37);
+            this.textBoxRoughShippingCost.Location = new System.Drawing.Point(221, 120);
             this.textBoxRoughShippingCost.MaxLength = 12;
             this.textBoxRoughShippingCost.Name = "textBoxRoughShippingCost";
             this.textBoxRoughShippingCost.ReadOnly = true;
@@ -712,11 +714,11 @@
             this.labelRoughShippingCost.BackColor = System.Drawing.Color.Transparent;
             this.labelRoughShippingCost.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelRoughShippingCost.ForeColor = System.Drawing.Color.Thistle;
-            this.labelRoughShippingCost.Location = new System.Drawing.Point(71, 34);
+            this.labelRoughShippingCost.Location = new System.Drawing.Point(44, 119);
             this.labelRoughShippingCost.Name = "labelRoughShippingCost";
-            this.labelRoughShippingCost.Size = new System.Drawing.Size(138, 16);
+            this.labelRoughShippingCost.Size = new System.Drawing.Size(176, 16);
             this.labelRoughShippingCost.TabIndex = 63;
-            this.labelRoughShippingCost.Text = "Rough shipping cost:";
+            this.labelRoughShippingCost.Text = "Estimated cost of shipping:";
             // 
             // buttonUsdToAud
             // 
@@ -826,7 +828,7 @@
             this.panelUsdToAud.Controls.Add(this.linkLabelCheckMe);
             this.panelUsdToAud.Controls.Add(this.textBoxUsdToAud);
             this.panelUsdToAud.Controls.Add(this.buttonUsdToAud);
-            this.panelUsdToAud.Location = new System.Drawing.Point(511, 365);
+            this.panelUsdToAud.Location = new System.Drawing.Point(511, 394);
             this.panelUsdToAud.Name = "panelUsdToAud";
             this.panelUsdToAud.Size = new System.Drawing.Size(317, 110);
             this.panelUsdToAud.TabIndex = 74;
@@ -892,10 +894,21 @@
             this.panelDisplay.Controls.Add(this.labelRoughBoxCost);
             this.panelDisplay.Controls.Add(this.textBoxRoughShippingCost);
             this.panelDisplay.Controls.Add(this.textBoxRoughBoxCost);
+            this.panelDisplay.Controls.Add(this.labelEstPaCost);
+            this.panelDisplay.Controls.Add(this.textBoxEstCostPerUnit);
+            this.panelDisplay.Controls.Add(this.labelSalesToProfit);
+            this.panelDisplay.Controls.Add(this.labelTotalLashes);
+            this.panelDisplay.Controls.Add(this.textBoxEstProfitPerUnit);
+            this.panelDisplay.Controls.Add(this.textBoxTotalQuantity);
+            this.panelDisplay.Controls.Add(this.textBoxEstSalesToProfit);
+            this.panelDisplay.Controls.Add(this.textBoxEstTotalPaCost);
+            this.panelDisplay.Controls.Add(this.labelProfitPerUnit);
+            this.panelDisplay.Controls.Add(this.labelCostPerUnit);
             this.panelDisplay.Location = new System.Drawing.Point(1, 784);
             this.panelDisplay.Name = "panelDisplay";
             this.panelDisplay.Size = new System.Drawing.Size(887, 206);
             this.panelDisplay.TabIndex = 73;
+            this.panelDisplay.Paint += new System.Windows.Forms.PaintEventHandler(this.panelDisplay_Paint);
             // 
             // panelPa
             // 
@@ -904,11 +917,11 @@
             this.panelPa.Controls.Add(this.labelPaHourlyRate);
             this.panelPa.Controls.Add(this.labelPaHoursToBox);
             this.panelPa.Controls.Add(this.labelPaHoursSpent);
-            this.panelPa.Controls.Add(this.textBoxPaHoursToBox);
             this.panelPa.Controls.Add(this.labelDeductHoursSpent);
+            this.panelPa.Controls.Add(this.textBoxPaHoursToBox);
             this.panelPa.Controls.Add(this.textBoxPaHoursSpentBoxing);
             this.panelPa.Controls.Add(this.textBoxPaHourlyRate);
-            this.panelPa.Location = new System.Drawing.Point(63, 365);
+            this.panelPa.Location = new System.Drawing.Point(63, 394);
             this.panelPa.Name = "panelPa";
             this.panelPa.Size = new System.Drawing.Size(262, 234);
             this.panelPa.TabIndex = 75;
@@ -924,7 +937,7 @@
             this.panelSettings.Controls.Add(this.label2);
             this.panelSettings.Controls.Add(this.checkBoxAutoFill);
             this.panelSettings.Controls.Add(this.checkBoxEstPricesByQuantity);
-            this.panelSettings.Location = new System.Drawing.Point(511, 475);
+            this.panelSettings.Location = new System.Drawing.Point(511, 587);
             this.panelSettings.Name = "panelSettings";
             this.panelSettings.Size = new System.Drawing.Size(317, 124);
             this.panelSettings.TabIndex = 75;
@@ -942,24 +955,14 @@
             this.Controls.Add(this.panelPa);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.textBoxEstTotalCost);
-            this.Controls.Add(this.textBoxEstCostPerUnit);
             this.Controls.Add(this.panelHeader);
-            this.Controls.Add(this.textBoxEstProfitPerUnit);
             this.Controls.Add(this.textBoxEstProfit);
-            this.Controls.Add(this.textBoxEstSalesToProfit);
             this.Controls.Add(this.label17);
-            this.Controls.Add(this.labelEstPaCost);
-            this.Controls.Add(this.textBoxEstTotalPaCost);
             this.Controls.Add(this.textBoxEstProfitLessGst);
-            this.Controls.Add(this.labelCostPerUnit);
             this.Controls.Add(this.label15);
-            this.Controls.Add(this.labelSalesToProfit);
             this.Controls.Add(this.linkLabel1);
-            this.Controls.Add(this.labelProfitPerUnit);
-            this.Controls.Add(this.labelTotalLashes);
             this.Controls.Add(this.textBoxEstGstToPay);
             this.Controls.Add(this.labelGstToPay);
-            this.Controls.Add(this.textBoxTotalQuantity);
             this.Controls.Add(this.labelEstimatedtotal);
             this.Controls.Add(this.panelGoody);
             this.Controls.Add(this.panelOlivia);
@@ -973,7 +976,7 @@
             this.Opacity = 0.9D;
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "1";
+            this.Text = "Lana Renee Lashes";
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Main_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

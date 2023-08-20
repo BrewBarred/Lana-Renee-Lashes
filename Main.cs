@@ -925,6 +925,16 @@ namespace Lana_Renee_Lashes
         {
             Calculupdate();
         }
+
+        private void labelSalesToProfit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void panelDisplay_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
     namespace Lana_Renee_Lashes
     {

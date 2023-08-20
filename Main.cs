@@ -15,6 +15,25 @@ namespace Lana_Renee_Lashes
         #region Declarations
 
         ///////
+        // Defaults
+        ////
+
+        // default active textbox color
+        Color defaultActiveColor = SystemColors.InactiveCaption;
+        // deafault inactive textbox color
+        Color defaultInactiveColor = Color.DimGray;
+        // default box cost per unit based on past order
+        decimal defaultBoxCost = 0.2632m;
+        // default shipping cost per unit based on past order
+        decimal defaultShippingCost = 0.2263m;
+        // default USD to AUS currency conversion rate
+        double defaultUsdToAudRate = 1.5d;
+        // default P.A. hourly rate
+        decimal defaultHourlyRate = 25m;
+        // default P.A. estimated boxes per hour
+        double defaultBoxesPerHour = 53.33d;
+
+        ///////
         // Constants
         ////
 
@@ -23,17 +42,9 @@ namespace Lana_Renee_Lashes
         // maximum cost per unit before warning
         const decimal COST_WARNING = 5.5m;
         // max hourly rate
-        const int MAX_RATE = 40;
+        const int MAX_HOURLY_RATE = 40;
         // min hourly rate
-        const int MIN_RATE = 20;
-        // default box cost per unit based on past order
-        const decimal DEFAULT_BOX_PRICE = 0.2632m;
-        // default shipping cost per unit based on past order
-        const decimal DEFAULT_SHIP_PRICE = 0.2263m;
-        // default USD to AUS currency conversion rate
-        const double DEFAULT_USD_TO_AUS = 1.5d;
-        // default P.A. estimated boxes per hour
-        const double DEFAULT_BOXES_PER_HOUR = 53.33d;
+        const int MIN_HOURLY_RATE = 20;
 
         ///////
         // Semi-Constants (Preset but will be changeable via settings later)
@@ -70,12 +81,8 @@ namespace Lana_Renee_Lashes
         // estimated olivia price per unit calculated from a past order
         decimal oliviaPastOrderCost = 3.3523m;
 
-
-        // total lashes ordered
-        int totalQuantity = 0;
-
         ///////
-        // Personal price break-down
+        // Personal assistant price break-down
         ////
 
         // personal assistant hourly rate
@@ -87,9 +94,11 @@ namespace Lana_Renee_Lashes
         // estimated total personal assistant cost
         decimal pA_EstimatedCost = 0m;
         // personal assistant estimated amount of boxes packed per hour
-        double pA_BoxesPerHour = DEFAULT_BOXES_PER_HOUR;
+        double pA_BoxesPerHour = 0;
 
 
+        // total lashes ordered
+        int totalQuantity = 0;
 
         // estimated cost per unit
         decimal estCostPerUnit = 0m;
@@ -111,7 +120,6 @@ namespace Lana_Renee_Lashes
         decimal roughBoxCost = 0;
         // rough shipping cost per unit
         decimal roughShippingCost = 0;
-        // user information
 
 
         // protects user from accidentally looping confirmation by pressing enter to exit error dialogs
@@ -130,7 +138,7 @@ namespace Lana_Renee_Lashes
         string numberDigit = numberDigitPattern.ToString();
 
         // stores valid keys that can be typed into textboxes
-        Keys[] validKeyArray = { Keys.Back, Keys.Oemcomma, Keys.OemPeriod, Keys.Decimal, Keys.ShiftKey, Keys.Left, Keys.Right, Keys.Up, Keys.Down, Keys.Tab, Keys.Delete };
+        Keys[] validKeyArray = { Keys.Back, Keys.Oemcomma, Keys.OemPeriod, Keys.Decimal, Keys.ShiftKey, Keys.Left, Keys.Right, Keys.Up, Keys.Down, Keys.Tab, Keys.Delete, Keys.Oemcomma };
         // stores last character removed by filter
         Keys lastCharRemoved;
 
@@ -337,10 +345,10 @@ namespace Lana_Renee_Lashes
 
             // resets defaults
 
-            pA_BoxesPerHour = DEFAULT_BOXES_PER_HOUR;
-            roughBoxCost = DEFAULT_BOX_PRICE;
-            roughShippingCost = DEFAULT_SHIP_PRICE;
-            estUsdToAusMultiplier = DEFAULT_USD_TO_AUS;
+            pA_BoxesPerHour = defaultBoxesPerHour;
+            roughBoxCost = defaultBoxCost;
+            roughShippingCost = defaultShippingCost;
+            estUsdToAusMultiplier = defaultUsdToAudRate;
 
 
         } // end void
@@ -354,8 +362,8 @@ namespace Lana_Renee_Lashes
         private void ClearDisplays()
         {
             // clears all display boxes
-            textBoxRoughBoxCost.Text = "$0" + DEFAULT_BOX_PRICE.ToString("#.00");
-            textBoxRoughShippingCost.Text = "$0" + DEFAULT_SHIP_PRICE.ToString("#.00");
+            textBoxRoughBoxCost.Text = "$0" + defaultBoxCost.ToString("#.00");
+            textBoxRoughShippingCost.Text = "$0" + defaultShippingCost.ToString("#.00");
             textBoxEstTotalPaCost.Text = "$0";
             textBoxEstCostPerUnit.Text = "$0";
             textBoxEstProfitPerUnit.Text = "$0";
@@ -530,7 +538,7 @@ namespace Lana_Renee_Lashes
                 if (checkBoxPaCosts.Checked)
                 {
                     // if P.A. hourly rate is greater than max rate OR less than min rate
-                    if (pA_HourlyRate > MAX_RATE || pA_HourlyRate < MIN_RATE)
+                    if (pA_HourlyRate > MAX_HOURLY_RATE || pA_HourlyRate < MIN_HOURLY_RATE)
                     {
                         // writes error message to user
                         textBoxPaHourlyRate.ShowUsYaTips("Please ensure hourly rate is valid!");
@@ -589,9 +597,9 @@ namespace Lana_Renee_Lashes
                     estGstToPay = estProfit * (decimal)gstMultiplier;
 
                     // rough box cost
-                    roughBoxCost = totalQuantity * DEFAULT_BOX_PRICE;
+                    roughBoxCost = totalQuantity * defaultBoxCost;
                     // rough shipping cost
-                    roughShippingCost = totalQuantity * DEFAULT_SHIP_PRICE;
+                    roughShippingCost = totalQuantity * defaultShippingCost;
 
 
                 } // end if
@@ -765,36 +773,38 @@ namespace Lana_Renee_Lashes
             // if P.A. checkbox is checked
             if (checkBoxPaCosts.Checked)
             {
-                // show P.A. controls
-                labelPaHourlyRate.Show();
-                textBoxPaHourlyRate.Show();
-                labelPaHoursSpent.Show();
-                textBoxPaHoursSpentBoxing.Show();
-                labelPaHoursToBox.Show();
-                textBoxPaHoursToBox.Show();
-                labelDeductHoursSpent.Show();
-                checkBoxDeductHoursSpent.Show();
+                // sets P.A. textbox colors back to the default color
+                textBoxPaHourlyRate.BackColor = defaultActiveColor;
+                textBoxPaHoursSpentBoxing.BackColor = defaultActiveColor;
+                textBoxPaHoursToBox.BackColor = defaultActiveColor;
 
-                // resets hourly rate to it's default
-                pA_HourlyRate = 25;
-                // displays hourly rate again
-                textBoxPaHourlyRate.Text = pA_HourlyRate.ToString("c2");
+                // sets P.A's hourly rate back to the default value
+                pA_HourlyRate = (double)defaultHourlyRate;
+                // sets P.A's hourly rate back to the deault hourly rate
+                textBoxPaHourlyRate.Text = defaultHourlyRate.ToString("C2");
+                // enables P.A's hourly rate textbox
+                textBoxPaHourlyRate.ReadOnly = false;
+
             }
             // else if P.A. checkbox is not checked
             else
             {
-                // hide P.A. controls
-                labelPaHourlyRate.Hide();
-                textBoxPaHourlyRate.Hide();
-                labelPaHoursSpent.Hide();
-                textBoxPaHoursSpentBoxing.Hide();
-                labelPaHoursToBox.Hide();
-                textBoxPaHoursToBox.Hide();
-                labelDeductHoursSpent.Hide();
-                checkBoxDeductHoursSpent.Hide();
+                // sets P.A. textbox colors to dim gray
+                textBoxPaHourlyRate.BackColor = Color.DimGray;
+                textBoxPaHoursSpentBoxing.BackColor = Color.DimGray;
+                textBoxPaHoursToBox.BackColor = Color.DimGray;
+
+                // sets P.A's hourly rate to 0
                 pA_HourlyRate = 0;
+                // sets P.A's hourly rate display to N/A
+                textBoxPaHourlyRate.Text = "N/A";
+                // disables P.A's hourly rate textbox
+                textBoxPaHourlyRate.ReadOnly = true;
+
 
             } // end if
+
+            Calculupdate();
 
         }
         #endregion
@@ -826,6 +836,7 @@ namespace Lana_Renee_Lashes
                 textBoxRoughBoxCost.Hide();
                 labelRoughShippingCost.Hide();
                 textBoxRoughShippingCost.Hide();
+                Calculupdate();
 
             } // end if
         }

@@ -18,22 +18,30 @@ namespace Lana_Renee_Lashes
         // Defaults
         ////
 
+        // default colors
+
         // default inactive color
         Color defaultInactiveColor = Color.DimGray;
         // default active text color
         Color defaultActiveTextColor = Color.Thistle;
         // default active textbox color
         Color defaultActiveTextBoxColor = SystemColors.InactiveCaption;
+
+        // default PA values
+
+        // default P.A. estimated boxes per hour
+        double defaultBoxesPerHour = 90d;
+        // default P.A. hourly rate
+        decimal defaultHourlyRate = 25m;
+        // default USD to AUS currency conversion rate
+        double defaultUsdToAudRate = 1.5d;
+
+        // default box 
+
         // default box cost per unit based on past order
         decimal defaultBoxCost = 0.2632m;
         // default shipping cost per unit based on past order
         decimal defaultShippingCost = 0.2263m;
-        // default USD to AUS currency conversion rate
-        double defaultUsdToAudRate = 1.5d;
-        // default P.A. hourly rate
-        decimal defaultHourlyRate = 25m;
-        // default P.A. estimated boxes per hour
-        double defaultBoxesPerHour = 90d;
 
         ///////
         // Constants
@@ -101,7 +109,6 @@ namespace Lana_Renee_Lashes
 
         // total lashes ordered
         int totalQuantity = 0;
-
         // estimated cost per unit
         decimal estCostPerUnit = 0m;
         // estimated profit per unit
@@ -889,6 +896,7 @@ namespace Lana_Renee_Lashes
             string url = "https://www.google.com/search?q=usd+to+aud&ei=7yubZKOKEfOK2roPo4qSoAI&ved=0ahUKEwjjvY_Zi-T_AhVzhVYBHSOFBCQQ4dUDCBA&uact=5&oq=usd+to+aud&gs_lcp=Cgxnd3Mtd2l6LXNlcnAQAzINCAAQigUQsQMQgwEQQzIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDIFCAAQgAQyBQgAEIAEMgUIABCABDoKCAAQRxDWBBCwAzoKCAAQigUQsAMQQzoHCAAQigUQQ0oECEEYAFD7BFiTDmD1DmgBcAF4AIABoAKIAdQKkgEFMC4yLjSYAQCgAQHAAQHIAQo&sclient=gws-wiz-serp";
             // launches website address
             var urlLauncher = System.Diagnostics.Process.Start(url);
+            // sets checkedCurrency to true
         }
         #endregion
 

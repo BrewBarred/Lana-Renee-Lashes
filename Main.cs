@@ -18,10 +18,12 @@ namespace Lana_Renee_Lashes
         // Defaults
         ////
 
-        // default active textbox color
-        Color defaultActiveColor = SystemColors.InactiveCaption;
-        // deafault inactive textbox color
+        // default inactive color
         Color defaultInactiveColor = Color.DimGray;
+        // default active text color
+        Color defaultActivetextColor = Color.Thistle;
+        // default active textbox color
+        Color defaultActiveTextBoxColor = SystemColors.InactiveCaption;
         // default box cost per unit based on past order
         decimal defaultBoxCost = 0.2632m;
         // default shipping cost per unit based on past order
@@ -774,9 +776,9 @@ namespace Lana_Renee_Lashes
             if (checkBoxPaCosts.Checked)
             {
                 // sets P.A. textbox colors back to the default color
-                textBoxPaHourlyRate.BackColor = defaultActiveColor;
-                textBoxPaHoursSpentBoxing.BackColor = defaultActiveColor;
-                textBoxPaHoursToBox.BackColor = defaultActiveColor;
+                textBoxPaHourlyRate.BackColor = defaultActiveTextBoxColor;
+                textBoxPaHoursSpentBoxing.BackColor = defaultActiveTextBoxColor;
+                textBoxPaHoursToBox.BackColor = defaultActiveTextBoxColor;
 
                 // sets P.A's hourly rate back to the default value
                 pA_HourlyRate = (double)defaultHourlyRate;

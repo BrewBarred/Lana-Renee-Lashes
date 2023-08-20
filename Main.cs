@@ -21,7 +21,7 @@ namespace Lana_Renee_Lashes
         // default inactive color
         Color defaultInactiveColor = Color.DimGray;
         // default active text color
-        Color defaultActivetextColor = Color.Thistle;
+        Color defaultActiveTextColor = Color.Thistle;
         // default active textbox color
         Color defaultActiveTextBoxColor = SystemColors.InactiveCaption;
         // default box cost per unit based on past order
@@ -33,7 +33,7 @@ namespace Lana_Renee_Lashes
         // default P.A. hourly rate
         decimal defaultHourlyRate = 25m;
         // default P.A. estimated boxes per hour
-        double defaultBoxesPerHour = 53.33d;
+        double defaultBoxesPerHour = 90d;
 
         ///////
         // Constants
@@ -153,13 +153,29 @@ namespace Lana_Renee_Lashes
         public Main()
         {
             InitializeComponent();
-            this.Height = Screen.GetWorkingArea(this).Height;
-            textBoxGoodyCost.Focus();
-            textBoxGoodyCost.SelectionStart = 1;
-
+            // sets up application defaults
+            Setup();
         }
 
-        #region CreateAccount_KeyUp Event
+        #region Setup()
+        /// <summary>
+        /// Sets up application defaults
+        /// </summary>
+        public void Setup()
+        {
+            // sets height of app to match working area of the current screen
+            this.Height = Screen.GetWorkingArea(this).Height;
+            // defaults the app to the top of the screen
+            this.Top = 0;
+            // focuses cursor onto textBoxGoodyCost
+            textBoxGoodyCost.Focus();
+            // sets cursor to the end of the text in textBoxGoodyCost
+            textBoxGoodyCost.SelectionStart = textBoxGoodyCost.TextLength;
+
+        } // end void
+        #endregion
+
+        #region Main_KeyUp Event
         /// <summary>
         /// When any key is lifted, checks if all controls are valid to enable/disable "Create Account" button and displays tool tips to assist user with validation process
         /// </summary>
@@ -682,7 +698,7 @@ namespace Lana_Renee_Lashes
                     // display hours spent boxing to 1 d.p.
                     textBoxPaHoursSpentBoxing.Text = pA_HoursSpentBoxing.ToString("#.#");
                     // display pa's estimated hours to box to 1 d.p.
-                    textBoxPaHoursToBox.Text = pA_EstimatedHoursToBox.ToString("#.#");
+                    textBoxPaEstHoursToBox.Text = pA_EstimatedHoursToBox.ToString("#.#");
                 }
                 // display estimated p.a. cost
                 textBoxEstTotalPaCost.Text = pA_EstimatedCost.ToString("c2");
@@ -778,30 +794,46 @@ namespace Lana_Renee_Lashes
                 // sets P.A. textbox colors back to the default color
                 textBoxPaHourlyRate.BackColor = defaultActiveTextBoxColor;
                 textBoxPaHoursSpentBoxing.BackColor = defaultActiveTextBoxColor;
-                textBoxPaHoursToBox.BackColor = defaultActiveTextBoxColor;
+                textBoxPaEstHoursToBox.BackColor = defaultActiveTextBoxColor;
 
-                // sets P.A's hourly rate back to the default value
-                pA_HourlyRate = (double)defaultHourlyRate;
-                // sets P.A's hourly rate back to the deault hourly rate
-                textBoxPaHourlyRate.Text = defaultHourlyRate.ToString("C2");
+                // enables deduct hours spent setting
+                labelDeductHoursSpent.Font = new Font(labelDeductHoursSpent.Font, FontStyle.Regular);
+                checkBoxDeductHoursSpent.Enabled = true;
+
                 // enables P.A's hourly rate textbox
-                textBoxPaHourlyRate.ReadOnly = false;
+                pA_HourlyRate = (double)defaultHourlyRate;
+                textBoxPaHourlyRate.Enable(defaultHourlyRate.ToString("C2"));
+
+                // enables P.A's estHoursToBox textbox
+                textBoxPaEstHoursToBox.Enable();
+
+                // enables P.A's hoursSpentBoxing textbox
+                textBoxPaHoursSpentBoxing.Enable();
 
             }
             // else if P.A. checkbox is not checked
             else
             {
                 // sets P.A. textbox colors to dim gray
-                textBoxPaHourlyRate.BackColor = Color.DimGray;
-                textBoxPaHoursSpentBoxing.BackColor = Color.DimGray;
-                textBoxPaHoursToBox.BackColor = Color.DimGray;
+                textBoxPaHourlyRate.BackColor = defaultInactiveColor;
+                textBoxPaHoursSpentBoxing.BackColor = defaultInactiveColor;
+                textBoxPaEstHoursToBox.BackColor = defaultInactiveColor;
 
-                // sets P.A's hourly rate to 0
-                pA_HourlyRate = 0;
-                // sets P.A's hourly rate display to N/A
-                textBoxPaHourlyRate.Text = "N/A";
+                // disables deduct hours spent setting
+                labelDeductHoursSpent.Font = new Font(labelDeductHoursSpent.Font, FontStyle.Strikeout);
+                checkBoxDeductHoursSpent.Enabled = false;
+
                 // disables P.A's hourly rate textbox
-                textBoxPaHourlyRate.ReadOnly = true;
+                pA_HourlyRate = 0;
+                textBoxPaHourlyRate.Disable();
+
+                // disables P.A's estHoursToBox textbox
+                pA_EstimatedHoursToBox = 0;
+                textBoxPaEstHoursToBox.Disable();
+
+                // disables P.A's hours spent boxing textbox
+                pA_HoursSpentBoxing = 0;
+                textBoxPaHoursSpentBoxing.Disable();
 
 
             } // end if
@@ -953,6 +985,65 @@ namespace Lana_Renee_Lashes
     {
         public static class Tools
         {
+            #region Disable(TextBoxBase textbox)
+            /// <summary>
+            /// Disables a passed textbox
+            /// </summary>
+            /// <param name="textBox">Textbox to disable</param>
+            public static void Disable(this TextBoxBase textBox)
+            {
+                // sets textbox text to "N/A"
+                textBox.Text = "N/A";
+                // makes textbox readonly
+                textBox.ReadOnly = true;
+
+            } // end void
+            #endregion
+
+            #region Enable(this TextBoxBase textbox, string defaultValue, bool readOnlySetting)
+            /// <summary>
+            /// Extends a textBoxBase to enable it and insert the passed default value and readonly status
+            /// </summary>
+            /// <param name="textBox">Textbox to enable</param>
+            /// <param name="defaultValue">Default value to insert into textbox</param>
+            /// <param name="readOnlySetting">Read-only status of textbox</param>
+            public static void Enable(this TextBoxBase textBox, string defaultValue, bool readOnlySetting)
+            {
+                // sets textbox text to 0
+                textBox.Text = defaultValue;
+                // makes textbox writable
+                textBox.ReadOnly = readOnlySetting;
+
+            } // end void
+            #endregion
+
+            #region Enable(this TextBoxBase textbox, string defaultValue)
+            /// <summary>
+            /// Extends a textBoxBase to enable it and insert the passed default value
+            /// </summary>
+            /// <param name="textBox">Textbox to enable</param>
+            /// <param name="defaultValue">Default value to insert into textbox</param>
+            public static void Enable(this TextBoxBase textBox, string defaultValue)
+            {
+                // enables the textbox with passed default value
+                textBox.Enable(defaultValue, false);
+
+            } // end void
+            #endregion
+
+            #region Enable(this TextBoxBase textbox)
+            /// <summary>
+            /// Enables a passed textbox and sets it's default value to zero
+            /// </summary>
+            /// <param name="textBox">Textbox to enable</param>
+            public static void Enable(this TextBoxBase textBox)
+            {
+                // enables the textbox with passed default value
+                textBox.Enable("0", false);
+
+            } // end void
+            #endregion
+
             #region ShowUsYaTips(text)
             /// <summary>
             /// Displays a tool tip at the current control

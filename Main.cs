@@ -21,7 +21,7 @@ namespace Lana_Renee_Lashes
         // default colors
 
         // default inactive color
-        Color defaultInactiveColor = Color.DimGray;
+        Color defaultInactiveColor = Color.LightGray;
         // default active text color
         Color defaultActiveTextColor = Color.Thistle;
         // default active textbox color
@@ -29,12 +29,19 @@ namespace Lana_Renee_Lashes
 
         // default PA values
 
+        // default boxing cost
+        double defaultBoxingCost = 0.25d;
         // default P.A. estimated boxes per hour
         double defaultBoxesPerHour = 90d;
         // default P.A. hourly rate
         decimal defaultHourlyRate = 25m;
+        // default hours spent on this order
+        decimal defaultHoursSpent = 0;
+
+        // default currency conversion rate
+
         // default USD to AUS currency conversion rate
-        double defaultUsdToAudRate = 1.5d;
+        double defaultUsdToAudRate = 1.57d;
 
         // default box 
 
@@ -572,15 +579,8 @@ namespace Lana_Renee_Lashes
 
                     // roughly estimates amount of hours it will take to box this order
                     pA_EstimatedHoursToBox = goodyQuantity / pA_BoxesPerHour;
-
-                    // if deduct hours spent checkbox is checked
-                    if (checkBoxDeductHoursSpent.Checked)
-                    {
-                        // subtracts hours spent boxing from estimated hours to box
-                        pA_EstimatedHoursToBox -= pA_HoursSpentBoxing;
-
-                    } // end if
-
+                    // subtracts hours spent boxing from estimated hours to box
+                    pA_EstimatedHoursToBox -= pA_HoursSpentBoxing;
                     // sets personal assistants estimated cost to hourly rate * estimated hours to box
                     pA_EstimatedCost = decimal.Parse((pA_HourlyRate * pA_EstimatedHoursToBox).ToString());
 
@@ -803,9 +803,8 @@ namespace Lana_Renee_Lashes
                 textBoxPaHoursSpentBoxing.BackColor = defaultActiveTextBoxColor;
                 textBoxPaEstHoursToBox.BackColor = defaultActiveTextBoxColor;
 
-                // enables deduct hours spent setting
-                labelDeductHoursSpent.Font = new Font(labelDeductHoursSpent.Font, FontStyle.Regular);
-                checkBoxDeductHoursSpent.Enabled = true;
+                // enables textboxBoxingCost
+
 
                 // enables P.A's hourly rate textbox
                 pA_HourlyRate = (double)defaultHourlyRate;
@@ -825,10 +824,6 @@ namespace Lana_Renee_Lashes
                 textBoxPaHourlyRate.BackColor = defaultInactiveColor;
                 textBoxPaHoursSpentBoxing.BackColor = defaultInactiveColor;
                 textBoxPaEstHoursToBox.BackColor = defaultInactiveColor;
-
-                // disables deduct hours spent setting
-                labelDeductHoursSpent.Font = new Font(labelDeductHoursSpent.Font, FontStyle.Strikeout);
-                checkBoxDeductHoursSpent.Enabled = false;
 
                 // disables P.A's hourly rate textbox
                 pA_HourlyRate = 0;
@@ -859,7 +854,7 @@ namespace Lana_Renee_Lashes
         private void checkBoxRoughBoxes_CheckedChanged(object sender, EventArgs e)
         {
             // if extra boxes checkbox is checked
-            if (checkBoxRoughBoxes.Checked)
+            if (checkBoxShowFlatBoxEst.Checked)
             {
                 // show extra boxes controls
                 labelRoughBoxCost.Show();
@@ -978,16 +973,6 @@ namespace Lana_Renee_Lashes
         {
             Calculupdate();
         }
-
-        private void labelSalesToProfit_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void panelDisplay_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
     }
     namespace Lana_Renee_Lashes
     {
@@ -995,46 +980,31 @@ namespace Lana_Renee_Lashes
         {
             #region Disable(TextBoxBase textbox)
             /// <summary>
-            /// Disables a passed textbox
+            /// Extends a textBoxBase to disable it
             /// </summary>
             /// <param name="textBox">Textbox to disable</param>
             public static void Disable(this TextBoxBase textBox)
             {
-                // sets textbox text to "N/A"
-                textBox.Text = "N/A";
-                // makes textbox readonly
-                textBox.ReadOnly = true;
-
-            } // end void
-            #endregion
-
-            #region Enable(this TextBoxBase textbox, string defaultValue, bool readOnlySetting)
-            /// <summary>
-            /// Extends a textBoxBase to enable it and insert the passed default value and readonly status
-            /// </summary>
-            /// <param name="textBox">Textbox to enable</param>
-            /// <param name="defaultValue">Default value to insert into textbox</param>
-            /// <param name="readOnlySetting">Read-only status of textbox</param>
-            public static void Enable(this TextBoxBase textBox, string defaultValue, bool readOnlySetting)
-            {
-                // sets textbox text to 0
-                textBox.Text = defaultValue;
-                // makes textbox writable
-                textBox.ReadOnly = readOnlySetting;
+                // disables textbox
+                textBox.Enabled = false;
 
             } // end void
             #endregion
 
             #region Enable(this TextBoxBase textbox, string defaultValue)
             /// <summary>
-            /// Extends a textBoxBase to enable it and insert the passed default value
+            /// Extends a textBoxBase to enable it and inserts the passed default value
             /// </summary>
             /// <param name="textBox">Textbox to enable</param>
             /// <param name="defaultValue">Default value to insert into textbox</param>
+            /// <param name="readOnlySetting">Read-only status of textbox</param>
             public static void Enable(this TextBoxBase textBox, string defaultValue)
             {
-                // enables the textbox with passed default value
-                textBox.Enable(defaultValue, false);
+
+                // disables textbox
+                textBox.Enabled = true;
+                // sets textbox text to 0
+                textBox.Text = defaultValue;
 
             } // end void
             #endregion
@@ -1047,7 +1017,7 @@ namespace Lana_Renee_Lashes
             public static void Enable(this TextBoxBase textBox)
             {
                 // enables the textbox with passed default value
-                textBox.Enable("0", false);
+                textBox.Enable("0");
 
             } // end void
             #endregion

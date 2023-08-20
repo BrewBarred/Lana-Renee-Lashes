@@ -798,7 +798,7 @@
             this.panelGoody.Controls.Add(this.textBoxGoodyQuantity);
             this.panelGoody.Controls.Add(this.labelGoodyCost);
             this.panelGoody.Controls.Add(this.labelGoodyQuantity);
-            this.panelGoody.Location = new System.Drawing.Point(63, 198);
+            this.panelGoody.Location = new System.Drawing.Point(86, 200);
             this.panelGoody.Margin = new System.Windows.Forms.Padding(2);
             this.panelGoody.Name = "panelGoody";
             this.panelGoody.Size = new System.Drawing.Size(262, 169);
@@ -815,7 +815,7 @@
             this.panelOlivia.Controls.Add(this.labelOliviaOrdered);
             this.panelOlivia.Controls.Add(this.textBoxOliviaQuantity);
             this.panelOlivia.Controls.Add(this.labelOlivia);
-            this.panelOlivia.Location = new System.Drawing.Point(511, 198);
+            this.panelOlivia.Location = new System.Drawing.Point(477, 200);
             this.panelOlivia.Margin = new System.Windows.Forms.Padding(2);
             this.panelOlivia.Name = "panelOlivia";
             this.panelOlivia.Size = new System.Drawing.Size(317, 169);
@@ -831,7 +831,7 @@
             this.panelUsdToAud.Controls.Add(this.linkLabelCheckMe);
             this.panelUsdToAud.Controls.Add(this.textBoxUsdToAud);
             this.panelUsdToAud.Controls.Add(this.buttonUsdToAud);
-            this.panelUsdToAud.Location = new System.Drawing.Point(511, 372);
+            this.panelUsdToAud.Location = new System.Drawing.Point(477, 405);
             this.panelUsdToAud.Name = "panelUsdToAud";
             this.panelUsdToAud.Size = new System.Drawing.Size(317, 158);
             this.panelUsdToAud.TabIndex = 74;
@@ -957,7 +957,7 @@
             this.panelPa.Controls.Add(this.labelPa);
             this.panelPa.Controls.Add(this.labelPaHourlyRate);
             this.panelPa.Controls.Add(this.textBoxPaHourlyRate);
-            this.panelPa.Location = new System.Drawing.Point(63, 599);
+            this.panelPa.Location = new System.Drawing.Point(86, 601);
             this.panelPa.Name = "panelPa";
             this.panelPa.Size = new System.Drawing.Size(262, 184);
             this.panelPa.TabIndex = 75;
@@ -1038,9 +1038,9 @@
             this.panelSettings.Controls.Add(this.checkBoxPaCosts);
             this.panelSettings.Controls.Add(this.checkBoxAutoFill);
             this.panelSettings.Controls.Add(this.labelEstPricesByQuantity);
-            this.panelSettings.Location = new System.Drawing.Point(511, 605);
+            this.panelSettings.Location = new System.Drawing.Point(477, 601);
             this.panelSettings.Name = "panelSettings";
-            this.panelSettings.Size = new System.Drawing.Size(317, 178);
+            this.panelSettings.Size = new System.Drawing.Size(317, 184);
             this.panelSettings.TabIndex = 75;
             // 
             // labelShowShippingEst
@@ -1090,7 +1090,7 @@
             this.panelBoxing.Controls.Add(this.textBox1);
             this.panelBoxing.Controls.Add(this.labelPaHoursSpent);
             this.panelBoxing.Controls.Add(this.labelPaHoursToBox);
-            this.panelBoxing.Location = new System.Drawing.Point(63, 372);
+            this.panelBoxing.Location = new System.Drawing.Point(86, 374);
             this.panelBoxing.Name = "panelBoxing";
             this.panelBoxing.Size = new System.Drawing.Size(262, 221);
             this.panelBoxing.TabIndex = 76;

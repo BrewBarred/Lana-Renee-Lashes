@@ -143,12 +143,10 @@ namespace Lana_Renee_Lashes
         public Main()
         {
             InitializeComponent();
+            this.Height = Screen.GetWorkingArea(this).Height;
             textBoxGoodyCost.Focus();
             textBoxGoodyCost.SelectionStart = 1;
-            this.AutoScroll = false;
-            this.HorizontalScroll.Maximum = 0;
-            this.VerticalScroll.Visible = false;
-            this.AutoScroll = true;
+
         }
 
         #region CreateAccount_KeyUp Event
@@ -397,125 +395,125 @@ namespace Lana_Renee_Lashes
 
                     //MessageBox.Show(thisPanel.Name.ToString());
 
-                // for each control in this form
-                foreach (Control control in thisPanel.Controls)
-                {
-                    // if control is not a textbox
-                    if (!(control is TextBox))
+                    // for each control in this form
+                    foreach (Control control in thisPanel.Controls)
                     {
-                        // continues to next control
-                        continue;
-                    }
+                        // if control is not a textbox
+                        if (!(control is TextBox))
+                        {
+                            // continues to next control
+                            continue;
+                        }
 
 
-                    // sets control to a proper textbox for referencing
-                    TextBox textBox = control as TextBox;
-                    // creates a string reference for the name of the textbox being used
-                    string textBoxName = textBox.Name;
-                    // creates a string reference for the text in the textbox being used
-                    string text = textBox.Text;
+                        // sets control to a proper textbox for referencing
+                        TextBox textBox = control as TextBox;
+                        // creates a string reference for the name of the textbox being used
+                        string textBoxName = textBox.Name;
+                        // creates a string reference for the text in the textbox being used
+                        string text = textBox.Text;
 
                         //MessageBox.Show(textBox.ToString());
 
-                    // if the current textbox is used for display only
-                    if (displayBoxes.Contains(textBox))
-                    {
-                        // continues to next control
-                        continue;
-
-                    } // end if
-
-                    if (!(text is null))
-                    {
-                        // if the text has a $ symbol in it
-                        if (text.Contains("$"))
+                        // if the current textbox is used for display only
+                        if (displayBoxes.Contains(textBox))
                         {
-                            // replaces it with nothing to avoid calculation errors
-                            text = text.Replace("$", "");
+                            // continues to next control
+                            continue;
 
                         } // end if
 
-                        // if the text is empty
-                        if (text is "")
+                        if (!(text is null))
                         {
-                            // sets the text value to 0
-                            text = "0";
-                        
-                        } // end if
+                            // if the text has a $ symbol in it
+                            if (text.Contains("$"))
+                            {
+                                // replaces it with nothing to avoid calculation errors
+                                text = text.Replace("$", "");
 
-                        switch (textBoxName)
-                        {
+                            } // end if
 
-                            case "textBoxGoodyCost":
-                                // stores user input to goodyCost variable
-                                goodyCost = double.Parse(text);
+                            // if the text is empty
+                            if (text is "")
+                            {
+                                // sets the text value to 0
+                                text = "0";
 
-                                break;
+                            } // end if
 
-                            case "textBoxOliviaCost":
-                                // stores user input to oliviaCost variable
-                                oliviaCost = double.Parse(text);
+                            switch (textBoxName)
+                            {
 
-                                break;
+                                case "textBoxGoodyCost":
+                                    // stores user input to goodyCost variable
+                                    goodyCost = double.Parse(text);
 
-                            case "textBoxGoodyQuantity":
-                                // stores user input to goodyCost variable
-                                goodyQuantity = int.Parse(text);
+                                    break;
 
-                                break;
+                                case "textBoxOliviaCost":
+                                    // stores user input to oliviaCost variable
+                                    oliviaCost = double.Parse(text);
 
-                            case "textBoxOliviaQuantity":
-                                // stores user input to olivia quantity variable
-                                oliviaQuantity = int.Parse(text);
+                                    break;
 
-                                break;
+                                case "textBoxGoodyQuantity":
+                                    // stores user input to goodyCost variable
+                                    goodyQuantity = int.Parse(text);
 
-                            case "textBoxPaHourlyRate":
-                                // stores user input to textBoxPaHourlyRate
-                                pA_HourlyRate = double.Parse(text);
+                                    break;
 
-                                break;
+                                case "textBoxOliviaQuantity":
+                                    // stores user input to olivia quantity variable
+                                    oliviaQuantity = int.Parse(text);
 
-                            case "textBoxPaHoursSpentBoxing":
-                                // stores user input to textBox spent boxing
-                                pA_HoursSpentBoxing = double.Parse(text);
+                                    break;
 
-                                break;
+                                case "textBoxPaHourlyRate":
+                                    // stores user input to textBoxPaHourlyRate
+                                    pA_HourlyRate = double.Parse(text);
 
-                            case "textBoxPaHoursToBox":
-                                // stores user input into boxes per hour variable
-                                pA_EstimatedHoursToBox = double.Parse(text);
+                                    break;
 
-                                break;
+                                case "textBoxPaHoursSpentBoxing":
+                                    // stores user input to textBox spent boxing
+                                    pA_HoursSpentBoxing = double.Parse(text);
 
-                            case "textBoxRoughBoxCost":
-                                // stores user input to rough box price variable
-                                roughBoxCost = decimal.Parse(text);
+                                    break;
 
-                                break;
+                                case "textBoxPaHoursToBox":
+                                    // stores user input into boxes per hour variable
+                                    pA_EstimatedHoursToBox = double.Parse(text);
 
-                            case "textBoxRoughShippingCost":
-                                // stores user input to rough shipping cost variable
-                                roughShippingCost = decimal.Parse(text);
+                                    break;
 
-                                break;
+                                case "textBoxRoughBoxCost":
+                                    // stores user input to rough box price variable
+                                    roughBoxCost = decimal.Parse(text);
 
-                            case "textBoxUsdToAud":
-                                // stores user input usd to aud conversion rate (default 1.5)
-                                estUsdToAusMultiplier = double.Parse(text);
+                                    break;
 
-                                break;
+                                case "textBoxRoughShippingCost":
+                                    // stores user input to rough shipping cost variable
+                                    roughShippingCost = decimal.Parse(text);
 
-                            // if no case was matched
-                            default:
-                                // logs error
-                                LogError("[" + DateTime.Now + "]" + "Failed to process control: " + textBox);
+                                    break;
 
-                                break;
+                                case "textBoxUsdToAud":
+                                    // stores user input usd to aud conversion rate (default 1.5)
+                                    estUsdToAusMultiplier = double.Parse(text);
 
-                        } // end switch 
+                                    break;
 
-                    } // end if 
+                                // if no case was matched
+                                default:
+                                    // logs error
+                                    LogError("[" + DateTime.Now + "]" + "Failed to process control: " + textBox);
+
+                                    break;
+
+                            } // end switch 
+
+                        } // end if 
 
                     } // end for
 
@@ -572,31 +570,31 @@ namespace Lana_Renee_Lashes
 
                 // if goody cost and quantity are not equal to 0 OR olivia cost and quantity are not equal to 0
                 if (goodyCost + goodyQuantity > 0 || oliviaCost + oliviaQuantity > 0)
-                    {
-                        // adds the cost of both orders together for a total cost
-                        estTotalCost = decimal.Parse((goodyCost + oliviaCost + (double)pA_EstimatedCost).ToString());
-                        // estimates the cost per lash set
-                        estCostPerUnit = estTotalCost / totalQuantity;
-                        // estimated profit per sale
-                        estProfitPerUnit = retailSalePrice - estCostPerUnit;
-                        // sales required to profit
-                        estSalesToProfit = (int)estTotalCost / (int)estProfitPerUnit + 1;
-                        // adds quantities of both orders together for a total quantity
-                        totalQuantity = goodyQuantity + oliviaQuantity;
-                        // total profit margin this order
-                        estProfit = estProfitPerUnit * totalQuantity;
-                        // total profit margin this order minus gst
-                        estProfitLessGst = estProfit - estProfit * (decimal)gstMultiplier;
-                        // gst amount
-                        estGstToPay = estProfit * (decimal)gstMultiplier;
+                {
+                    // adds the cost of both orders together for a total cost
+                    estTotalCost = decimal.Parse((goodyCost + oliviaCost + (double)pA_EstimatedCost).ToString());
+                    // estimates the cost per lash set
+                    estCostPerUnit = estTotalCost / totalQuantity;
+                    // estimated profit per sale
+                    estProfitPerUnit = retailSalePrice - estCostPerUnit;
+                    // sales required to profit
+                    estSalesToProfit = (int)estTotalCost / (int)estProfitPerUnit + 1;
+                    // adds quantities of both orders together for a total quantity
+                    totalQuantity = goodyQuantity + oliviaQuantity;
+                    // total profit margin this order
+                    estProfit = estProfitPerUnit * totalQuantity;
+                    // total profit margin this order minus gst
+                    estProfitLessGst = estProfit - estProfit * (decimal)gstMultiplier;
+                    // gst amount
+                    estGstToPay = estProfit * (decimal)gstMultiplier;
 
-                        // rough box cost
-                        roughBoxCost = totalQuantity * DEFAULT_BOX_PRICE;
-                        // rough shipping cost
-                        roughShippingCost = totalQuantity * DEFAULT_SHIP_PRICE;
+                    // rough box cost
+                    roughBoxCost = totalQuantity * DEFAULT_BOX_PRICE;
+                    // rough shipping cost
+                    roughShippingCost = totalQuantity * DEFAULT_SHIP_PRICE;
 
 
-                    } // end if
+                } // end if
 
 
                 Display();
@@ -627,14 +625,14 @@ namespace Lana_Renee_Lashes
                 {
                     // displays goody cost in USD
                     textBoxGoodyCost.Text = "$" + goodyCost.ToString("#.##");
-               
+
                 } // end if
 
                 if (oliviaCost != 0)
                 {
                     // displays olivia cost in USD
                     textBoxOliviaCost.Text = "$" + oliviaCost.ToString("#.##");
-               
+
                 } // end if
 
                 // displays estimated total cost in USD
@@ -691,7 +689,7 @@ namespace Lana_Renee_Lashes
                     if (textBox.ReadOnly)
                     {
                         return;
-                    
+
                     } // end if
 
                     // if textbox text is $0

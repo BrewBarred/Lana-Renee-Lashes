@@ -779,6 +779,7 @@
             // 
             // pictureBoxWillow
             // 
+            this.pictureBoxWillow.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.pictureBoxWillow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBoxWillow.Image = global::Lana_Renee_Lashes.Properties.Resources.Lana;
             this.pictureBoxWillow.Location = new System.Drawing.Point(-1, -72);
@@ -790,6 +791,7 @@
             // 
             // panelGoody
             // 
+            this.panelGoody.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.panelGoody.Controls.Add(this.textBoxGoodyCost);
             this.panelGoody.Controls.Add(this.textBoxGoodyQuantity);
             this.panelGoody.Controls.Add(this.labelGoodyQuantity);
@@ -804,8 +806,7 @@
             // 
             // panelOlivia
             // 
-            this.panelOlivia.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelOlivia.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.panelOlivia.Controls.Add(this.pictureBox1);
             this.panelOlivia.Controls.Add(this.textBoxOliviaCost);
             this.panelOlivia.Controls.Add(this.labelOliviaCost);
@@ -820,6 +821,7 @@
             // 
             // panelUsdToAud
             // 
+            this.panelUsdToAud.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.panelUsdToAud.Controls.Add(this.labelUsdToAud);
             this.panelUsdToAud.Controls.Add(this.linkLabelCheckMe);
             this.panelUsdToAud.Controls.Add(this.textBoxUsdToAud);
@@ -831,7 +833,7 @@
             // 
             // labelSubTitle
             // 
-            this.labelSubTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelSubTitle.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelSubTitle.AutoSize = true;
             this.labelSubTitle.BackColor = System.Drawing.Color.Transparent;
             this.labelSubTitle.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -848,7 +850,7 @@
             // 
             // labelTitle
             // 
-            this.labelTitle.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelTitle.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.labelTitle.AutoSize = true;
             this.labelTitle.BackColor = System.Drawing.Color.Transparent;
             this.labelTitle.Font = new System.Drawing.Font("Microsoft Tai Le", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -861,7 +863,7 @@
             // 
             // pictureBox2
             // 
-            this.pictureBox2.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
             this.pictureBox2.Location = new System.Drawing.Point(667, 28);
@@ -885,6 +887,7 @@
             // 
             // panelDisplay
             // 
+            this.panelDisplay.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
             this.panelDisplay.Controls.Add(this.labelRoughShippingCost);
             this.panelDisplay.Controls.Add(this.labelRoughBoxCost);
             this.panelDisplay.Controls.Add(this.textBoxRoughShippingCost);
@@ -896,6 +899,7 @@
             // 
             // panelPa
             // 
+            this.panelPa.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.panelPa.Controls.Add(this.checkBoxDeductHoursSpent);
             this.panelPa.Controls.Add(this.labelPaHourlyRate);
             this.panelPa.Controls.Add(this.labelPaHoursToBox);
@@ -911,6 +915,7 @@
             // 
             // panelSettings
             // 
+            this.panelSettings.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.panelSettings.Controls.Add(this.labelEstPricesByQuantity);
             this.panelSettings.Controls.Add(this.labelRoughPrices);
             this.panelSettings.Controls.Add(this.labelPaCosts);
@@ -926,11 +931,9 @@
             // 
             // Main
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.AutoScroll = true;
+            this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Dpi;
             this.AutoScrollMargin = new System.Drawing.Size(1, 1);
-            this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(889, 991);
@@ -963,6 +966,7 @@
             this.Controls.Add(this.panelDisplay);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.KeyPreview = true;
+            this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(905, 1030);
             this.MinimumSize = new System.Drawing.Size(905, 1030);
             this.Name = "Main";

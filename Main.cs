@@ -663,7 +663,7 @@ namespace Lana_Renee_Lashes
                 {
                     // displays roughShippingCost in USD to 2.d.p
                     textBoxRoughShippingCost.Text = "$0" + roughShippingCost.ToString("#.00");
-                
+
                 } // end if
 
                 // if P.A's hours spent boxing AND est hours to box is both empty

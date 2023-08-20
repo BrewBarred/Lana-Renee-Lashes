@@ -73,7 +73,7 @@
             this.labelOliviaCost = new System.Windows.Forms.Label();
             this.textBoxRoughBoxCost = new System.Windows.Forms.TextBox();
             this.textBoxUsdToAud = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
+            this.labelETA = new System.Windows.Forms.Label();
             this.checkBoxAutoFill = new System.Windows.Forms.CheckBox();
             this.labelAutofillForm = new System.Windows.Forms.Label();
             this.checkBoxDeductHoursSpent = new System.Windows.Forms.CheckBox();
@@ -167,7 +167,7 @@
             this.labelRoughPrices.BackColor = System.Drawing.Color.Transparent;
             this.labelRoughPrices.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelRoughPrices.ForeColor = System.Drawing.Color.Thistle;
-            this.labelRoughPrices.Location = new System.Drawing.Point(57, 77);
+            this.labelRoughPrices.Location = new System.Drawing.Point(57, 76);
             this.labelRoughPrices.Name = "labelRoughPrices";
             this.labelRoughPrices.Size = new System.Drawing.Size(157, 16);
             this.labelRoughPrices.TabIndex = 0;
@@ -255,7 +255,7 @@
             this.checkBoxRoughBoxes.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxRoughBoxes.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F);
             this.checkBoxRoughBoxes.ForeColor = System.Drawing.Color.Thistle;
-            this.checkBoxRoughBoxes.Location = new System.Drawing.Point(233, 77);
+            this.checkBoxRoughBoxes.Location = new System.Drawing.Point(233, 76);
             this.checkBoxRoughBoxes.Name = "checkBoxRoughBoxes";
             this.checkBoxRoughBoxes.Size = new System.Drawing.Size(15, 14);
             this.checkBoxRoughBoxes.TabIndex = 9;
@@ -361,10 +361,11 @@
             // 
             // linkLabel1
             // 
+            this.linkLabel1.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.linkLabel1.AutoSize = true;
             this.linkLabel1.LinkBehavior = System.Windows.Forms.LinkBehavior.HoverUnderline;
             this.linkLabel1.LinkColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.linkLabel1.Location = new System.Drawing.Point(766, 961);
+            this.linkLabel1.Location = new System.Drawing.Point(765, 211);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(111, 13);
             this.linkLabel1.TabIndex = 14;
@@ -644,17 +645,18 @@
             this.textBoxUsdToAud.TabIndex = 11;
             this.textBoxUsdToAud.Text = "1.50";
             // 
-            // label1
+            // labelETA
             // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.Transparent;
-            this.label1.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.ForeColor = System.Drawing.Color.Thistle;
-            this.label1.Location = new System.Drawing.Point(12, 961);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(37, 14);
-            this.label1.TabIndex = 59;
-            this.label1.Text = "E.T.A. ";
+            this.labelETA.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.labelETA.AutoSize = true;
+            this.labelETA.BackColor = System.Drawing.Color.Transparent;
+            this.labelETA.Font = new System.Drawing.Font("Microsoft Tai Le", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelETA.ForeColor = System.Drawing.Color.Thistle;
+            this.labelETA.Location = new System.Drawing.Point(11, 211);
+            this.labelETA.Name = "labelETA";
+            this.labelETA.Size = new System.Drawing.Size(37, 14);
+            this.labelETA.TabIndex = 59;
+            this.labelETA.Text = "E.T.A. ";
             // 
             // checkBoxAutoFill
             // 
@@ -770,7 +772,6 @@
             // 
             // pictureBox3
             // 
-            this.pictureBox3.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.pictureBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox3.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox3.Image")));
             this.pictureBox3.Location = new System.Drawing.Point(-2, -2);
@@ -793,10 +794,11 @@
             // 
             // pictureBoxWillow
             // 
-            this.pictureBoxWillow.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.pictureBoxWillow.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBoxWillow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBoxWillow.Image = global::Lana_Renee_Lashes.Properties.Resources.Lana;
-            this.pictureBoxWillow.Location = new System.Drawing.Point(-1, -72);
+            this.pictureBoxWillow.Location = new System.Drawing.Point(-1, -69);
             this.pictureBoxWillow.Name = "pictureBoxWillow";
             this.pictureBoxWillow.Size = new System.Drawing.Size(889, 237);
             this.pictureBoxWillow.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -805,7 +807,7 @@
             // 
             // panelGoody
             // 
-            this.panelGoody.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.panelGoody.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panelGoody.BackColor = System.Drawing.Color.Transparent;
             this.panelGoody.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelGoody.Controls.Add(this.textBoxGoodyCost);
@@ -822,7 +824,7 @@
             // 
             // panelOlivia
             // 
-            this.panelOlivia.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.panelOlivia.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panelOlivia.BackColor = System.Drawing.Color.Transparent;
             this.panelOlivia.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelOlivia.Controls.Add(this.pictureBox1);
@@ -839,7 +841,7 @@
             // 
             // panelUsdToAud
             // 
-            this.panelUsdToAud.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.panelUsdToAud.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panelUsdToAud.BackColor = System.Drawing.Color.Transparent;
             this.panelUsdToAud.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelUsdToAud.Controls.Add(this.labelCurrency);
@@ -871,7 +873,7 @@
             this.labelSubTitle.BackColor = System.Drawing.Color.Transparent;
             this.labelSubTitle.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelSubTitle.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.labelSubTitle.Location = new System.Drawing.Point(770, 49);
+            this.labelSubTitle.Location = new System.Drawing.Point(770, 51);
             this.labelSubTitle.Name = "labelSubTitle";
             this.labelSubTitle.Padding = new System.Windows.Forms.Padding(0, 6, 0, 0);
             this.labelSubTitle.Size = new System.Drawing.Size(118, 27);
@@ -888,7 +890,7 @@
             this.labelTitle.BackColor = System.Drawing.Color.Transparent;
             this.labelTitle.Font = new System.Drawing.Font("Microsoft Tai Le", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTitle.ForeColor = System.Drawing.SystemColors.ButtonFace;
-            this.labelTitle.Location = new System.Drawing.Point(700, 32);
+            this.labelTitle.Location = new System.Drawing.Point(700, 34);
             this.labelTitle.Name = "labelTitle";
             this.labelTitle.Size = new System.Drawing.Size(188, 26);
             this.labelTitle.TabIndex = 0;
@@ -899,7 +901,7 @@
             this.pictureBox2.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.pictureBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.pictureBox2.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox2.Image")));
-            this.pictureBox2.Location = new System.Drawing.Point(674, 32);
+            this.pictureBox2.Location = new System.Drawing.Point(674, 34);
             this.pictureBox2.Name = "pictureBox2";
             this.pictureBox2.Size = new System.Drawing.Size(28, 26);
             this.pictureBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -908,6 +910,7 @@
             // 
             // panelHeader
             // 
+            this.panelHeader.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panelHeader.Controls.Add(this.pictureBox2);
             this.panelHeader.Controls.Add(this.labelTitle);
             this.panelHeader.Controls.Add(this.labelSubTitle);
@@ -924,6 +927,8 @@
             this.panelDisplay.Controls.Add(this.labelRoughShippingCost);
             this.panelDisplay.Controls.Add(this.textBoxEstTotalCost);
             this.panelDisplay.Controls.Add(this.textBoxEstProfit);
+            this.panelDisplay.Controls.Add(this.labelETA);
+            this.panelDisplay.Controls.Add(this.linkLabel1);
             this.panelDisplay.Controls.Add(this.labelRoughBoxCost);
             this.panelDisplay.Controls.Add(this.labelSalesToProfit);
             this.panelDisplay.Controls.Add(this.label17);
@@ -951,7 +956,7 @@
             // 
             // panelPa
             // 
-            this.panelPa.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.panelPa.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panelPa.BackColor = System.Drawing.Color.Transparent;
             this.panelPa.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelPa.Controls.Add(this.labelPa);
@@ -980,7 +985,7 @@
             // 
             // panelSettings
             // 
-            this.panelSettings.Anchor = System.Windows.Forms.AnchorStyles.Right;
+            this.panelSettings.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.panelSettings.BackColor = System.Drawing.Color.Transparent;
             this.panelSettings.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.panelSettings.Controls.Add(this.labelSettings);
@@ -994,9 +999,9 @@
             this.panelSettings.Controls.Add(this.labelPaCosts);
             this.panelSettings.Controls.Add(this.labelRoughPrices);
             this.panelSettings.Controls.Add(this.labelDeductHoursSpent);
-            this.panelSettings.Location = new System.Drawing.Point(511, 570);
+            this.panelSettings.Location = new System.Drawing.Point(511, 572);
             this.panelSettings.Name = "panelSettings";
-            this.panelSettings.Size = new System.Drawing.Size(317, 181);
+            this.panelSettings.Size = new System.Drawing.Size(317, 179);
             this.panelSettings.TabIndex = 75;
             // 
             // labelSettings
@@ -1022,16 +1027,12 @@
             this.Controls.Add(this.panelUsdToAud);
             this.Controls.Add(this.panelSettings);
             this.Controls.Add(this.panelPa);
-            this.Controls.Add(this.label1);
             this.Controls.Add(this.panelHeader);
-            this.Controls.Add(this.linkLabel1);
             this.Controls.Add(this.panelGoody);
             this.Controls.Add(this.panelOlivia);
             this.Controls.Add(this.panelDisplay);
             this.ForeColor = System.Drawing.SystemColors.ControlText;
             this.KeyPreview = true;
-            this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(905, 1030);
             this.MinimumSize = new System.Drawing.Size(905, 1030);
             this.Name = "Main";
             this.Opacity = 0.9D;
@@ -1058,7 +1059,6 @@
             this.panelSettings.ResumeLayout(false);
             this.panelSettings.PerformLayout();
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -1110,7 +1110,7 @@
         private System.Windows.Forms.Label labelOliviaCost;
         private System.Windows.Forms.TextBox textBoxRoughBoxCost;
         private System.Windows.Forms.TextBox textBoxUsdToAud;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label labelETA;
         private System.Windows.Forms.CheckBox checkBoxAutoFill;
         private System.Windows.Forms.Label labelAutofillForm;
         private System.Windows.Forms.CheckBox checkBoxDeductHoursSpent;

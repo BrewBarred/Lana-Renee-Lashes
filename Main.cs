@@ -329,6 +329,7 @@ namespace Lana_Renee_Lashes
             InitializeComponent();
             // sets up applications default settings and values
             Setup();
+            textBoxBoxingCost.Text = "Poopoo";
 
         } // end main
 

@@ -28,12 +28,18 @@ namespace Lana_Renee_Lashes
         // estimated olivia price per unit calculated from a past order
         static decimal defaultOliviaTotalCostPerUnit = 3.3523m;
 
-        // default boxing cost
+        // default retail price per unit
+        static decimal retailSalePrice = 24.99m;
+
+        // default boxing cost (per box in AUD)
         static decimal defaultBoxingCost = 0.25m;
         // default estimated boxes packed per hour
         static double defaultEstBoxesPerHour = 90d;
-        // default retail price per unit
-        static decimal retailSalePrice = 24.99m;
+
+        // default estimated cost of flatboxes
+        static decimal defaultCostOfFlatBoxes = 0.2632m;
+        // default estimated cost of shipping
+        static decimal defaultCostOfShipping = 0.2263m;
 
         ///////
         // Defaults
@@ -89,15 +95,15 @@ namespace Lana_Renee_Lashes
         // default estimates
 
         // default estimated boxing cost
-        static decimal defaultEstBoxingCost = 0.00m;
+        static decimal defaultCostOfBoxing = 0.00m;
         // default estimated cost per unit
         static decimal defaultEstCostPerUnit = 0.00m;
         // default estimated profit per unit
         static decimal defaultEstProfitPerUnit = 0.00m;
         // default estimated cost of flatboxes
-        static decimal defaultEstCostOfFlatBoxes = 0.2632m;
+        static decimal defaultEstCostOfFlatBoxes = 0.00m;
         // default estimated cost of shipping
-        static decimal defaultEstCostOfShipping = 0.2263m;
+        static decimal defaultEstCostOfShipping = 0.00m;
 
         // default total lashes ordered
         static int defaultTotalQuantity = 0;
@@ -136,7 +142,7 @@ namespace Lana_Renee_Lashes
         #region Variables
 
         // groups all USD currency values into an array for easier conversion to AUD later
-        static decimal[] currencyValuesArray = { defaultEstBoxingCost, defaultEstCostPerUnit, defaultEstProfitPerUnit, defaultEstCostOfFlatBoxes, defaultEstCostOfShipping,
+        static decimal[] currencyValuesArray = { defaultCostOfBoxing, defaultEstCostPerUnit, defaultEstProfitPerUnit, defaultEstCostOfFlatBoxes, defaultEstCostOfShipping,
                                                  defaultEstTotalCost, defaultEstProfit, defaultEstProfitLessGst, defaultEstGstTotal };
 
         ///////
@@ -201,7 +207,7 @@ namespace Lana_Renee_Lashes
         ////
 
         // total estimated boxing cost
-        static decimal estBoxingCost
+        static decimal estCostOfBoxing
         {
             // returns estBoxingCost
             get { return currencyValuesArray[0]; }
@@ -329,7 +335,6 @@ namespace Lana_Renee_Lashes
             InitializeComponent();
             // sets up applications default settings and values
             Setup();
-            textBoxBoxingCost.Text = "Poopoo";
 
         } // end main
 
@@ -340,9 +345,9 @@ namespace Lana_Renee_Lashes
         public void Setup()
         {
             // sets height of app to match working area of the current screen
-            this.Height = Screen.GetWorkingArea(this).Height;
+            Height = Screen.GetWorkingArea(this).Height;
             // defaults the app to the top of the screen
-            this.Top = 0;
+            Top = 0;
             // resets all values to their defaults
             ResetAll();
             // focuses cursor onto textBoxGoodyCost
@@ -386,7 +391,6 @@ namespace Lana_Renee_Lashes
 
             boxingCost = defaultBoxingCost;
             textBoxBoxingCost.Text = defaultBoxingCostString;
-            estBoxingCost = defaultEstBoxingCost;
             estHoursToBox = defaultEstimatedHoursToBox;
             hoursSpentBoxing = defaultHoursSpentBoxing;
 
@@ -397,23 +401,25 @@ namespace Lana_Renee_Lashes
 
             paHourlyRate = defaultPaHourlyRate;
             paHoursSpentThisOrder = defaultPaHoursSpentThisOrder;
-            estPaCost = defaultEstPaCost;
 
 
             ///////
             // Resets estimated figures
             ////
 
-            totalQuantity = defaultTotalQuantity;
+            estCostOfBoxing = defaultCostOfBoxing;
             estCostPerUnit = defaultEstCostPerUnit;
             estProfitPerUnit = defaultEstProfitPerUnit;
+            estPaCost = defaultEstPaCost;
+            estCostOfFlatBoxes = defaultEstCostOfFlatBoxes;
+            estCostOfShipping = defaultEstCostOfShipping;
+
+            totalQuantity = defaultTotalQuantity;
             estSalesToProfit = defaultEstSalesToProfit;
             estTotalCost = defaultEstTotalCost;
             estProfit = defaultEstProfit;
             estProfitLessGst = defaultEstProfitLessGst;
             estGstTotal = defaultEstGstTotal;
-            estCostOfFlatBoxes = defaultEstCostOfFlatBoxes;
-            estCostOfShipping = defaultEstCostOfShipping;
 
             ///////
             // Resets USD to AUD conversion rate
@@ -588,59 +594,59 @@ namespace Lana_Renee_Lashes
         private void UpdateEstimates()
         {
             // updates all estimate displays
-            textBoxEstBoxingCost.Text = estBoxingCost.ToString();
-            textBoxEstCostPerUnit.Text = estCostPerUnit.ToString();
-            textBoxEstProfitPerUnit.Text = estProfitPerUnit.ToString();
-            textBoxEstPaCost.Text = estPaCost.ToString();
-            textBoxEstCostOfFlatBoxes.Text = estCostOfFlatBoxes.ToString();
-            textBoxEstCostOfShipping.Text = estCostOfShipping.ToString();
+            textBoxEstCostPerUnit.Text = estCostPerUnit.FormatCurrency();
+            textBoxEstProfitPerUnit.Text = estProfitPerUnit.FormatCurrency();
             textBoxTotalLashesOrdered.Text = totalQuantity.ToString();
             textBoxEstSalesToProfit.Text = estSalesToProfit.ToString();
-            textBoxEstTotalCost.Text = estTotalCost.ToString();
-            textBoxEstProfit.Text = estProfit.ToString();
-            textBoxEstProfitLessGst.Text = estProfitLessGst.ToString();
-            textBoxEstGstTotal.Text = estGstTotal.ToString();
+            textBoxEstTotalCost.Text = estTotalCost.FormatCurrency();
+            textBoxEstProfit.Text = estProfit.FormatCurrency();
+            textBoxEstProfitLessGst.Text = estProfitLessGst.FormatCurrency();
+            textBoxEstGstTotal.Text = estGstTotal.FormatCurrency();
 
-            // if include P.A. costs checkbox is not checked
-            if (!checkBoxPaCosts.Checked)
+            // if include P.A. costs checkbox is checked
+            if (checkBoxPaCosts.Checked)
+            {
+                // displays estimated P.A. cost
+                textBoxEstPaCost.Text = estPaCost.FormatCurrency();
+
+            }
+            // else if include P.A. costs checkbox is not checked
+            else
             {
                 // sets P.A. cost display to "Disabled"
                 textBoxEstPaCost.Text = "Disabled";
 
-            } // end if
+            }// end if
 
-            // if enable flatbox estimates checkbox is not checked
-            if (!checkBoxEnableFlatBoxEst.Checked)
+            // if enable flatbox estimates checkbox is checked
+            if (checkBoxEnableFlatBoxEst.Checked)
+            {
+                // displays estimated cost of flat boxes
+                textBoxEstCostOfFlatBoxes.Text = estCostOfFlatBoxes.FormatCurrency();
+
+            }
+            // else if enable flatbox estimates checkbox is not checked
+            else
             {
                 // sets estimated cost of flatboxes to "Disabled"
                 textBoxEstCostOfFlatBoxes.Text = "Disabled";
 
-            }
-            // else if enable flatbox estimates checkbox 'is' checked
-            else
-            {
-                // displays estimated cost of flat boxes
-                textBoxEstCostOfFlatBoxes.Text = estCostOfFlatBoxes.ToString();
-
             }// end if
 
-            // if enable shipping estimates checkbox is not checked
-            if (!checkBoxEnableShippingEst.Checked)
+            // if enable shipping estimates checkbox is checked
+            if (checkBoxEnableShippingEst.Checked)
+            {
+                // displays estimated cost of shipping
+                textBoxEstCostOfShipping.Text = estCostOfShipping.FormatCurrency();
+
+            }
+            // else if enable shipping estimates checkbox is not checked
+            else
             {
                 // sets estimated cost of shipping to "Disabled"
                 textBoxEstCostOfShipping.Text = "Disabled";
 
-            }
-            // else if enable shipping estimates checkbox 'is' checked
-            else
-            {
-                // displays estimated cost of shipping
-                textBoxEstCostOfShipping.Text = estCostOfShipping.ToString();
-
             }// end if
-
-            // formats the displays
-            Format();
 
         } // end void
 
@@ -648,7 +654,7 @@ namespace Lana_Renee_Lashes
 
         #region FetchInput()
         /// <summary>
-        /// Calculates our new values and updates the textboxes with results
+        /// Fetches user input from textboxes and parses them into relevant variables
         /// </summary>
         private void FetchInput()
         {
@@ -744,6 +750,18 @@ namespace Lana_Renee_Lashes
 
                                     break;
 
+                                case "textBoxBoxingCost":
+                                    // stores user input to hoursSpentBoxing
+                                    boxingCost = text.ToDecimal();
+
+                                    break;
+
+                                case "textBoxEstHoursToBox":
+                                    // stores user input to hoursSpentBoxing
+                                    estHoursToBox = double.Parse(text);
+
+                                    break;
+
                                 case "textBoxHoursSpentBoxing":
                                     // stores user input to hoursSpentBoxing
                                     hoursSpentBoxing = double.Parse(text);
@@ -781,7 +799,7 @@ namespace Lana_Renee_Lashes
                                 // if no case was matched
                                 default:
                                     // logs error
-                                    LogError("[" + DateTime.Now + "]" + "Failed to process control: " + textBox);
+                                    LogError("[" + DateTime.Now + "]" + "Failed to process control: " + textBox.Name);
 
                                     break;
 
@@ -862,7 +880,7 @@ namespace Lana_Renee_Lashes
                 if (goodyTotal + goodyQuantity > 0 || oliviaTotal + oliviaQuantity > 0)
                 {
                     // calculates estimated boxing cost
-                    estBoxingCost = totalQuantity * boxingCost;
+                    estCostOfBoxing = totalQuantity * boxingCost;
                     // adds the cost of both orders together for a total cost
                     estTotalCost = goodyTotal + oliviaTotal + estPaCost;
                     // estimates the cost per lash set
@@ -877,19 +895,19 @@ namespace Lana_Renee_Lashes
                     estProfitLessGst = estProfit - (estProfit * (decimal)GST_MULTIPLIER);
                     // gst amount
                     estGstTotal = estProfit * (decimal)GST_MULTIPLIER;
-                    // rough box cost
-                    estCostOfFlatBoxes = totalQuantity * defaultEstCostOfFlatBoxes;
                     // rough shipping cost
                     estCostOfShipping = totalQuantity * defaultEstCostOfShipping;
 
-                }
-                else
-                {
-                    ResetAll();
+                } // end if
 
-                }// end if
+            }
+            // else if total quantity is 0
+            else
+            {
+                // resets everything to their default values
+                ResetAll();
 
-            } // end if
+            }// end if// end if
 
             // updates display boxes with newly calculated values
             UpdateEstimates();
@@ -925,10 +943,10 @@ namespace Lana_Renee_Lashes
                 textBoxEstTotalCost.Text = (goodyTotal + oliviaTotal).FormatCurrency();
 
                 // if roughBoxCost is greater than $1
-                if (estBoxingCost > 1)
+                if (estCostOfBoxing > 1)
                 {
                     // displays rough box cost in USD to 2.d.p
-                    textBoxEstCostOfFlatBoxes.Text = estBoxingCost.FormatCurrency();
+                    textBoxBoxingCost.Text = estCostOfBoxing.FormatCurrency() + " cents";
 
                 } // end if
 
@@ -955,7 +973,7 @@ namespace Lana_Renee_Lashes
                 } // end if
 
                 // display estimated p.a. cost
-                textBoxEstBoxingCost.Text = estBoxingCost.ToString("c2");
+                textBoxEstBoxingCost.Text = estCostOfBoxing.ToString("c2");
                 // updates estimated cost per unit
                 textBoxEstCostPerUnit.Text = estCostPerUnit.ToString("c2");
                 // updates estimated profit per unit
@@ -1007,7 +1025,7 @@ namespace Lana_Renee_Lashes
 
         #region buttonUsdToAud_Click
         /// <summary>
-        /// Converts estimated values from USD to AUD
+        /// Converts displayed estimates from USD to AUD
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1047,10 +1065,6 @@ namespace Lana_Renee_Lashes
             // if P.A. checkbox is checked
             if (checkBoxPaCosts.Checked)
             {
-
-                // enables textboxBoxingCost
-
-
                 // enables P.A's hourly rate textbox
                 paHourlyRate = defaultPaHourlyRate;
                 textBoxPaHourlyRate.Enable(defaultPaHourlyRate.ToString("C2"));
@@ -1071,8 +1085,6 @@ namespace Lana_Renee_Lashes
                 paHoursSpentThisOrder = 0;
                 textBoxPaHoursSpentOnThisOrder.Disable();
 
-
-
             } // end if
 
             FetchInput();
@@ -1080,36 +1092,24 @@ namespace Lana_Renee_Lashes
         }
         #endregion
 
-        #region checkBoxRoughBox_CheckChanged Event
+        #region checkBoxEnableFlatBoxEst_CheckChanged Event
         /// <summary>
-        /// Shows/Hides extra boxes controls
+        /// Enables/Disables flat box estimates
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void checkBoxRoughBoxes_CheckedChanged(object sender, EventArgs e)
+        private void checkBoxEnableFlatBoxEst_CheckedChanged(object sender, EventArgs e)
         {
             // if extra boxes checkbox is checked
-            if (checkBoxEnableFlatBoxEst.Checked)
+            if (!checkBoxEnableFlatBoxEst.Checked)
             {
-                // show extra boxes controls
-                labelRoughBoxCost.Show();
-                textBoxEstCostOfFlatBoxes.Show();
-                labelRoughShippingCost.Show();
-                textBoxEstCostOfShipping.Show();
-                FetchInput();
-
-            }
-            // else if extra boxes checkbox is not checked
-            else
-            {
-                // show extra boxes controls
-                labelRoughBoxCost.Hide();
-                textBoxEstCostOfFlatBoxes.Hide();
-                labelRoughShippingCost.Hide();
-                textBoxEstCostOfShipping.Hide();
-                FetchInput();
+                // disables flatbox estimates
+                textBoxEstCostOfFlatBoxes.Text = "Disabled";
 
             } // end if
+
+            // grabs user input and displays new values
+            FetchInput();
 
         } // end void
 

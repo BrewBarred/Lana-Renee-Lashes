@@ -81,6 +81,10 @@ namespace Lana_Renee_Lashes
             {
                 // removes any "$" symbols from the string
                 string newString = thisString.Replace("$", "");
+                // removes any white spaces from the string
+                newString = newString.Replace(" ", "");
+                // removes "cents" from the text (found in boxing cost)
+                newString = newString.Replace("cents", "");
                 // removes any commas from the string
                 decimal newDecimal = decimal.Parse(newString.Replace(",", ""));
                 // returns the stripped decimal
@@ -107,8 +111,36 @@ namespace Lana_Renee_Lashes
         {
             try
             {
+
                 // stores the decimal value formatted as a currency string
-                string newCurrency = "$" + thisDecimal.ToString("#.##");
+                string newCurrency;
+
+                // if thisDecimal is equal to 0
+                if (thisDecimal == 0)
+                {
+                    // sets newCurrency to $0
+                    newCurrency = "$0";
+                }
+                // if thisDecimal is a negative value
+                else if (thisDecimal < 0)
+                {
+                    // formats passed decimal value to 2 d.p. with a 0 in front and inserts the dollar sign 'after' the negative sign
+                    newCurrency = thisDecimal.ToString("#.00").Insert(1, " $");
+                }
+                // if thisDecimal is less than 1
+                else if (thisDecimal < 1)
+                {
+                    // formats passed decimal value to 2 d.p. with a 0 in front
+                    newCurrency = "$0" + thisDecimal.ToString("#.00");
+                }
+                // else if thisDecimal is greater than 1
+                else
+                {
+                    // formats passed decimal value to 2 d.p.
+                    newCurrency = "$" + thisDecimal.ToString("#.00");
+
+                } // end if
+
                 // returns the formatted decimal value as a string
                 return newCurrency;
             }

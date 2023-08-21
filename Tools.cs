@@ -81,25 +81,39 @@ namespace Lana_Renee_Lashes
             {
                 // removes any "$" symbols from the string
                 string newString = thisString.Replace("$", "");
-                // removes any white spaces from the string
-                newString = newString.Replace(" ", "");
                 // removes "cents" from the text (found in boxing cost)
                 newString = newString.Replace("cents", "");
+                // removes " hours" from the text (found in est. hours to box)
+                newString = newString.Replace("hrs", ".");
+                // removes " minutes" from the text (found in est. hours to box)
+                newString = newString.Replace("mins", "");
+                // removes any white spaces from the string
+                newString = newString.Replace(" ", "");
                 // removes any commas from the string
                 decimal newDecimal = decimal.Parse(newString.Replace(",", ""));
+
                 // returns the stripped decimal
                 return newDecimal;
             }
             catch (Exception ex)
             {
-                LogError("Failed to parse " + thisString + " into a decimal value");
-                Log(ex.Message);
+                LogError("Failed to parse \"" + thisString + "\" into a decimal value", ex.Message);
                 return -1;
 
             } // end try
 
-        } // end void
+        } // end decimal
         #endregion
+
+        public static double ToDouble(this string thisString)
+        {
+            decimal decimalValue = thisString.ToDecimal();
+            string decimalString = decimalValue.ToString("0.##");
+            double newDouble = double.Parse(decimalString);
+
+            return newDouble;
+
+        }
 
         #region FormatCurrency(this decimal thisDecimal)
         /// <summary>
@@ -152,7 +166,83 @@ namespace Lana_Renee_Lashes
 
             } // end try
 
-        } // end void
+        } // end string
+        #endregion
+
+        #region ToHours()
+        /// <summary>
+        /// Extends a double value, splits it into hours and minutes and returns the result as a string
+        /// </summary>
+        /// <param name="thisString"></param>
+        /// <returns></returns>
+        public static string FormatHours(this double thisDouble)
+        {
+            // if the passed double value has a decimal point
+            if (thisDouble.ToString().Contains("."))
+            {
+                // splits the string by decimal point
+                string[] splitString = thisDouble.ToString().Split('.');
+                // if the double value had more than 1 decimal point
+                if (splitString.Length != 2)
+                {
+                    // writes error to console
+                    LogError("Failed to convert the value \"" + thisDouble + "\" to hours and minutes");
+                    return "Error!";
+                }
+                // else if the value after the decimal point is equal to zero
+                else if (int.Parse(splitString[1]) == 0)
+                {
+                    // returns the estimated hours as a string
+                    return splitString[0] + " hrs";
+
+                }
+                else if (splitString.Length == 2)
+                {
+                    // stores the hours from the split string and formats it into an "hours" string
+                    string hours = splitString[0] + " hrs ";
+                    // converts value after decimal point to a to a 2 digit number
+                    string minutes = splitString[1];
+
+                    // if minutes is a single digit number
+                    if (minutes.Count() == 1)
+                    {
+                        // inserts a zero to the end of the number
+                        minutes = minutes.Insert(1, "0");
+
+                    } // end if
+
+                    // converts 2 digit decimal value into a formatted "minutes" string
+                    minutes = (double.Parse(minutes) / 100 * 60).ToString() + " mins";
+
+                    // returns the passed double value as a string in hours and minutes format
+                    return hours + minutes;
+
+                } // end if
+
+            } // end if
+
+            // returns the passed double as a string formatted to hours
+            return thisDouble.ToString() + " hrs";
+
+        } // end string
+        #endregion
+
+        #region Count(this string thisString)
+        /// <summary>
+        /// Extends a string and returns the number of characters in it excluding white spaces
+        /// </summary>
+        /// <returns></returns>
+        public static int Count(this string thisString)
+        {
+            // trims all white spaces from the string
+            thisString = thisString.Trim();
+            // splits this string into a character array
+            char[] charArray = thisString.ToCharArray();
+
+            // returns the length of the character array as an integer value
+            return charArray.Length;
+
+        } // end int
         #endregion
 
         #region ShowUsYaTips(text)

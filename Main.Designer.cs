@@ -58,7 +58,7 @@
             this.textBoxHoursSpentBoxing = new System.Windows.Forms.TextBox();
             this.textBoxEstHoursToBox = new System.Windows.Forms.TextBox();
             this.textBoxEstCostPerUnit = new System.Windows.Forms.TextBox();
-            this.textBoxEstBoxingCost = new System.Windows.Forms.TextBox();
+            this.textBoxEstCostOfBoxing = new System.Windows.Forms.TextBox();
             this.textBoxEstSalesToProfit = new System.Windows.Forms.TextBox();
             this.textBoxEstProfitPerUnit = new System.Windows.Forms.TextBox();
             this.textBoxEstProfitLessGst = new System.Windows.Forms.TextBox();
@@ -482,19 +482,19 @@
             this.textBoxEstCostPerUnit.TabStop = false;
             this.textBoxEstCostPerUnit.Text = "$0.00";
             // 
-            // textBoxEstBoxingCost
+            // textBoxEstCostOfBoxing
             // 
-            this.textBoxEstBoxingCost.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.textBoxEstBoxingCost.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
-            this.textBoxEstBoxingCost.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.textBoxEstBoxingCost.ForeColor = System.Drawing.SystemColors.Info;
-            this.textBoxEstBoxingCost.Location = new System.Drawing.Point(339, 44);
-            this.textBoxEstBoxingCost.Name = "textBoxEstBoxingCost";
-            this.textBoxEstBoxingCost.ReadOnly = true;
-            this.textBoxEstBoxingCost.Size = new System.Drawing.Size(109, 13);
-            this.textBoxEstBoxingCost.TabIndex = 0;
-            this.textBoxEstBoxingCost.TabStop = false;
-            this.textBoxEstBoxingCost.Text = "$0.00";
+            this.textBoxEstCostOfBoxing.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.textBoxEstCostOfBoxing.BackColor = System.Drawing.SystemColors.InactiveCaptionText;
+            this.textBoxEstCostOfBoxing.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.textBoxEstCostOfBoxing.ForeColor = System.Drawing.SystemColors.Info;
+            this.textBoxEstCostOfBoxing.Location = new System.Drawing.Point(339, 44);
+            this.textBoxEstCostOfBoxing.Name = "textBoxEstCostOfBoxing";
+            this.textBoxEstCostOfBoxing.ReadOnly = true;
+            this.textBoxEstCostOfBoxing.Size = new System.Drawing.Size(109, 13);
+            this.textBoxEstCostOfBoxing.TabIndex = 0;
+            this.textBoxEstCostOfBoxing.TabStop = false;
+            this.textBoxEstCostOfBoxing.Text = "$0.00";
             // 
             // textBoxEstSalesToProfit
             // 
@@ -951,7 +951,7 @@
             this.panelDisplay.Controls.Add(this.labelGstToPay);
             this.panelDisplay.Controls.Add(this.labelEstimatedtotal);
             this.panelDisplay.Controls.Add(this.textBoxEstSalesToProfit);
-            this.panelDisplay.Controls.Add(this.textBoxEstBoxingCost);
+            this.panelDisplay.Controls.Add(this.textBoxEstCostOfBoxing);
             this.panelDisplay.Controls.Add(this.textBoxEstProfitPerUnit);
             this.panelDisplay.Controls.Add(this.labelCostPerUnit);
             this.panelDisplay.Controls.Add(this.labelProfitPerUnit);
@@ -1118,6 +1118,7 @@
             this.checkBoxEnableShippingEst.Size = new System.Drawing.Size(15, 14);
             this.checkBoxEnableShippingEst.TabIndex = 71;
             this.checkBoxEnableShippingEst.UseVisualStyleBackColor = true;
+            this.checkBoxEnableShippingEst.CheckedChanged += new System.EventHandler(this.checkBoxEnableShippingEst_CheckedChanged);
             // 
             // labelSettingsPanel
             // 
@@ -1246,7 +1247,7 @@
         private System.Windows.Forms.TextBox textBoxHoursSpentBoxing;
         private System.Windows.Forms.TextBox textBoxEstHoursToBox;
         private System.Windows.Forms.TextBox textBoxEstCostPerUnit;
-        private System.Windows.Forms.TextBox textBoxEstBoxingCost;
+        private System.Windows.Forms.TextBox textBoxEstCostOfBoxing;
         private System.Windows.Forms.TextBox textBoxEstSalesToProfit;
         private System.Windows.Forms.TextBox textBoxEstProfitPerUnit;
         private System.Windows.Forms.TextBox textBoxEstProfitLessGst;

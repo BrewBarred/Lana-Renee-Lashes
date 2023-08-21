@@ -423,6 +423,7 @@
             this.textBoxGoodyTotal.Size = new System.Drawing.Size(159, 20);
             this.textBoxGoodyTotal.TabIndex = 1;
             this.textBoxGoodyTotal.Text = "$343";
+            this.textBoxGoodyTotal.Leave += new System.EventHandler(this.textBoxGoodyTotal_Leave);
             // 
             // textBoxGoodyQuantity
             // 
@@ -626,6 +627,7 @@
             this.textBoxOliviaTotal.Size = new System.Drawing.Size(159, 20);
             this.textBoxOliviaTotal.TabIndex = 7;
             this.textBoxOliviaTotal.Text = "$324";
+            this.textBoxOliviaTotal.Leave += new System.EventHandler(this.textBoxOliviaTotal_Leave);
             // 
             // labelOliviaOrdered
             // 
@@ -700,6 +702,7 @@
             this.checkBoxAutoFill.Size = new System.Drawing.Size(15, 14);
             this.checkBoxAutoFill.TabIndex = 14;
             this.checkBoxAutoFill.UseVisualStyleBackColor = true;
+            this.checkBoxAutoFill.CheckedChanged += new System.EventHandler(this.checkBoxAutoFill_CheckedChanged);
             // 
             // labelAutofillForm
             // 

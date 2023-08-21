@@ -320,7 +320,9 @@ namespace Lana_Renee_Lashes
         string numberDigit = numberDigitPattern.ToString();
 
         // stores valid keys that can be typed into textboxes
-        Keys[] validKeyArray = { Keys.Back, Keys.Oemcomma, Keys.OemPeriod, Keys.Decimal, Keys.ShiftKey, Keys.Left, Keys.Right, Keys.Up, Keys.Down, Keys.Tab, Keys.Delete, Keys.Oemcomma, Keys.Enter };
+        Keys[] validKeyArray = { Keys.Back, Keys.Oemcomma, Keys.OemPeriod, Keys.Decimal, Keys.ShiftKey, Keys.Left,
+                                 Keys.Right, Keys.Up, Keys.Down, Keys.Tab, Keys.Delete, Keys.Oemcomma, Keys.Enter };
+
         // stores last character removed by filter
         Keys lastCharRemoved;
 
@@ -1003,9 +1005,9 @@ namespace Lana_Renee_Lashes
                     // calculates estimated boxing cost
                     estCostOfBoxing = totalQuantity * boxingCost;
                     // adds the cost of both orders together plus Pa expenses for an estimated total cost
-                    estTotalCost = goodyTotal + oliviaTotal + estPaCost;
+                    estTotalCost = goodyTotal + oliviaTotal + estPaCost + estCostOfBoxing;
                     // estimates how many hours it will take to box the unpacked lashes
-                    estHoursToBox = totalQuantity / setEstBoxesPerHour;
+                    estHoursToBox = totalQuantity / setEstBoxesPerHour - hoursSpentBoxing;
                     // estimates the cost per lash set
                     estCostPerUnit = estTotalCost / totalQuantity;
                     // estimated profit per sale
@@ -1015,7 +1017,7 @@ namespace Lana_Renee_Lashes
                     // estimated cost of shipping
                     estCostOfShipping = totalQuantity * setCostOfShipping;
                     // sales required to profit
-                    estSalesToProfit = (int)estTotalCost / (int)estCostPerUnit;
+                    estSalesToProfit = (int)estTotalCost / (int)estProfitPerUnit + 1;
                     // total profit for this order
                     estProfit = estProfitPerUnit * totalQuantity;
                     // total profit for this order less GST
@@ -1025,6 +1027,7 @@ namespace Lana_Renee_Lashes
 
                 } // end if
 
+                // if auto
             }
             // else if total quantity is 0
             else
@@ -1071,9 +1074,24 @@ namespace Lana_Renee_Lashes
         } // end void
         #endregion
 
+        #region Settings:
+
+        #region checkBoxAutoFill_CheckedChanged() Event
+        /// <summary>
+        /// Handles autofill checkbox event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkBoxAutoFill_CheckedChanged(object sender, EventArgs e)
+        {
+
+
+        } // end void
+        #endregion
+
         #region checkBoxPaCosts_CheckChanged Event
         /// <summary>
-        /// Shows/Hides personal assistant extras and adds/deducts cost from profits
+        /// Enables/Disables personal assistant costs and adds/deducts cost from total cost etc.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1104,9 +1122,43 @@ namespace Lana_Renee_Lashes
 
             } // end if
 
+            // updates estimates to allow for PA cost
             FetchInput();
 
         }
+        #endregion
+
+        #region checkBoxEstPricesByQuantity_CheckedChanged
+        /// <summary>
+        /// Handles estimate prices by quantity checkbox event
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void checkBoxEstPricesByQuantity_CheckedChanged(object sender, EventArgs e)
+        {
+            // if checkbox is checked
+            if (checkBoxEstPricesByQuantity.Checked)
+            {
+                // disables goody/olivia total textboxes to prevent user getting confused
+                textBoxGoodyTotal.Disable();
+                textBoxOliviaTotal.Disable();
+            }
+            // else if checkbox is not checked
+            else
+            {
+                // enabled good/olivia total textboxes again
+                textBoxGoodyTotal.Enable();
+                textBoxOliviaTotal.Enable();
+                // sets goody/olivia quantities to zero
+                textBoxGoodyQuantity.Text = "0";
+                textBoxOliviaQuantity.Text = "0";
+
+            } // end if
+
+            // calculates values
+            FetchInput();
+
+        } // end void
         #endregion
 
         #region checkBoxEnableFlatBoxEst_CheckChanged Event
@@ -1125,7 +1177,7 @@ namespace Lana_Renee_Lashes
 
             } // end if
 
-            // grabs user input and displays new values
+            // updates estimates to allow for flatbox cost
             FetchInput();
 
         } // end void
@@ -1148,8 +1200,40 @@ namespace Lana_Renee_Lashes
 
             } // end if
 
-            // grabs user input and displays new values
+            // updates estimates to allow for shipping costs
             FetchInput();
+
+        } // end void
+        #endregion
+
+        #endregion
+
+        #region Misc Events:
+
+        #region textBoxGoodyTotal_Leave() Event
+        /// <summary>
+        /// Formats textbox to currency value when user leaves textbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxGoodyTotal_Leave(object sender, EventArgs e)
+        {
+            // formats goody total to represent a currency value
+            textBoxGoodyTotal.Text = goodyTotal.FormatCurrency();
+
+        } // end void
+        #endregion
+
+        #region textBoxOliviaTotal_Leave() Event
+        /// <summary>
+        /// Formats textbox to currency value when user leaves textbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxOliviaTotal_Leave(object sender, EventArgs e)
+        {
+            // formats olivia total to represent a currency value
+            textBoxOliviaTotal.Text = oliviaTotal.FormatCurrency();
 
         } // end void
         #endregion
@@ -1222,28 +1306,7 @@ namespace Lana_Renee_Lashes
 
         #endregion
 
-        private void checkBoxEstPricesByQuantity_CheckedChanged(object sender, EventArgs e)
-        {
-            // if checkbox is checked
-            if (checkBoxEstPricesByQuantity.Checked)
-            {
-                textBoxGoodyTotal.Disable();
-                textBoxOliviaTotal.Disable();
-            }
-            // else if checkbox is not checked
-            else
-            {
-                textBoxGoodyTotal.Enable();
-                textBoxOliviaTotal.Enable();
-                goodyTotal = 0;
-                oliviaTotal = 0;
-
-            } // end if
-
-            // calculates values
-            FetchInput();
-
-        } // end void
+        #endregion
 
     } // end class
 

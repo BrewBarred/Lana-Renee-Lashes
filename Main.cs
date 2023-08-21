@@ -136,29 +136,21 @@ namespace Lana_Renee_Lashes
         #region Variables
 
         // groups all USD currency values into an array for easier conversion to AUD later
-        static decimal[] currencyValuesArray = { goodyTotal, oliviaTotal, estBoxingCost, estCostPerUnit, estProfitPerUnit, estCostOfFlatBoxes,
-                                        estCostOfShipping, estTotalCost, estProfit, estProfitLessGst, estGstTotal};
+        static decimal[] currencyValuesArray = { defaultEstBoxingCost, defaultEstCostPerUnit, defaultEstProfitPerUnit, defaultEstCostOfFlatBoxes, defaultEstCostOfShipping,
+                                                 defaultEstTotalCost, defaultEstProfit, defaultEstProfitLessGst, defaultEstGstTotal };
 
         ///////
         // Goody price break-down
         ////
 
         // total cost of this goody order
-        static decimal goodyTotal
-        {
-            // returns goodyTotal
-            get { return currencyValuesArray[0]; }
-            // updates goodyTotal
-            set { currencyValuesArray[0] = value; }
-
-        } // end decimal
-
+        decimal goodyTotal;
         // quantity of lashes from goody
         int goodyQuantity;
         // price per goody lash
         static decimal goodyEstLashCost;
         // estimated goody price per unit calculated from a past order
-        static decimal goodyEstCostPerUnit;
+        static decimal goodyEstTotalCostPerUnit;
 
 
         ///////
@@ -166,14 +158,7 @@ namespace Lana_Renee_Lashes
         ////
 
         // total cost of this olivia order
-        static decimal oliviaTotal
-        {
-            // returns oliviaTotal
-            get { return currencyValuesArray[1]; }
-            // updates oliviaTotal
-            set { currencyValuesArray[1] = value; }
-
-        } // end decimal
+        decimal oliviaTotal;
         // quantity of lashes from olivia
         int oliviaQuantity;
         // price per olivia lash 
@@ -219,9 +204,9 @@ namespace Lana_Renee_Lashes
         static decimal estBoxingCost
         {
             // returns estBoxingCost
-            get { return currencyValuesArray[2]; }
+            get { return currencyValuesArray[0]; }
             // updates estBoxingCost
-            set { currencyValuesArray[2] = value; }
+            set { currencyValuesArray[0] = value; }
 
         } // end decimal
 
@@ -229,9 +214,9 @@ namespace Lana_Renee_Lashes
         static decimal estCostPerUnit
         {
             // returns estCostPerUnit
-            get { return currencyValuesArray[3]; }
+            get { return currencyValuesArray[1]; }
             // updates estCostPerUnit
-            set { currencyValuesArray[3] = value; }
+            set { currencyValuesArray[1] = value; }
 
         } // end decimal
 
@@ -239,9 +224,9 @@ namespace Lana_Renee_Lashes
         static decimal estProfitPerUnit
         {
             // returns estProfitPerUnit
-            get { return currencyValuesArray[4]; }
+            get { return currencyValuesArray[2]; }
             // updates estProfitPerUnit
-            set { currencyValuesArray[4] = value; }
+            set { currencyValuesArray[2] = value; }
 
         } // end decimal
 
@@ -251,9 +236,9 @@ namespace Lana_Renee_Lashes
         static decimal estCostOfFlatBoxes
         {
             // returns estCostOfFlatBoxes
-            get { return currencyValuesArray[5]; }
+            get { return currencyValuesArray[3]; }
             // updates estCostOfFlatBoxes
-            set { currencyValuesArray[5] = value; }
+            set { currencyValuesArray[3] = value; }
 
         } // end decimal
 
@@ -261,23 +246,23 @@ namespace Lana_Renee_Lashes
         static decimal estCostOfShipping
         {
             // returns estCostOfShipping
-            get { return currencyValuesArray[6]; }
+            get { return currencyValuesArray[4]; }
             // updates estCostOfShipping
-            set { currencyValuesArray[6] = value; }
+            set { currencyValuesArray[4] = value; }
 
         } // end decimal
 
         // total lashes ordered
-        int totalLashesOrdered;
+        int totalQuantity;
         // estimated sales required before profit starts
         int estSalesToProfit;
         // estimated total cost
         static decimal estTotalCost
         {
             // returns estTotalCost
-            get { return currencyValuesArray[7]; }
+            get { return currencyValuesArray[5]; }
             // updates estTotalCost
-            set { currencyValuesArray[7] = value; }
+            set { currencyValuesArray[5] = value; }
 
         } // end decimal
 
@@ -285,9 +270,9 @@ namespace Lana_Renee_Lashes
         static decimal estProfit
         {
             // returns estProfit
-            get { return currencyValuesArray[8]; }
+            get { return currencyValuesArray[6]; }
             // updates estProfit
-            set { currencyValuesArray[8] = value; }
+            set { currencyValuesArray[6] = value; }
 
         } // end decimal
 
@@ -295,9 +280,9 @@ namespace Lana_Renee_Lashes
         static decimal estProfitLessGst
         {
             // returns estProfitLessGst
-            get { return currencyValuesArray[9]; }
+            get { return currencyValuesArray[7]; }
             // updates estProfitLessGst
-            set { currencyValuesArray[9] = value; }
+            set { currencyValuesArray[7] = value; }
 
         } // end decimal
 
@@ -305,9 +290,9 @@ namespace Lana_Renee_Lashes
         static decimal estGstTotal
         {
             // returns estGstTotal
-            get { return currencyValuesArray[10]; }
+            get { return currencyValuesArray[8]; }
             // updates estGstTotal
-            set { currencyValuesArray[10] = value; }
+            set { currencyValuesArray[8] = value; }
 
         } // end decimal
 
@@ -329,7 +314,7 @@ namespace Lana_Renee_Lashes
         string numberDigit = numberDigitPattern.ToString();
 
         // stores valid keys that can be typed into textboxes
-        Keys[] validKeyArray = { Keys.Back, Keys.Oemcomma, Keys.OemPeriod, Keys.Decimal, Keys.ShiftKey, Keys.Left, Keys.Right, Keys.Up, Keys.Down, Keys.Tab, Keys.Delete, Keys.Oemcomma };
+        Keys[] validKeyArray = { Keys.Back, Keys.Oemcomma, Keys.OemPeriod, Keys.Decimal, Keys.ShiftKey, Keys.Left, Keys.Right, Keys.Up, Keys.Down, Keys.Tab, Keys.Delete, Keys.Oemcomma, Keys.Enter };
         // stores last character removed by filter
         Keys lastCharRemoved;
 
@@ -344,7 +329,8 @@ namespace Lana_Renee_Lashes
             InitializeComponent();
             // sets up applications default settings and values
             Setup();
-        }
+
+        } // end main
 
         #region Setup()
         /// <summary>
@@ -380,7 +366,7 @@ namespace Lana_Renee_Lashes
             goodyTotal = defaultGoodyTotal;
             goodyQuantity = defaultGoodyQuantity;
             goodyEstLashCost = defaultGoodyLashCost;
-            goodyEstCostPerUnit = defaultGoodyTotalCostPerUnit;
+            goodyEstTotalCostPerUnit = defaultGoodyTotalCostPerUnit;
 
 
             ///////
@@ -417,7 +403,7 @@ namespace Lana_Renee_Lashes
             // Resets estimated figures
             ////
 
-            totalLashesOrdered = defaultTotalQuantity;
+            totalQuantity = defaultTotalQuantity;
             estCostPerUnit = defaultEstCostPerUnit;
             estProfitPerUnit = defaultEstProfitPerUnit;
             estSalesToProfit = defaultEstSalesToProfit;
@@ -472,15 +458,12 @@ namespace Lana_Renee_Lashes
                         UpdateEstimates();
                         // writes info to console
                         Log("Event handled due to null or empty textbox");
-                        // breaks out of event
-                        FetchInput();
 
                     } // end if
 
                     // else if user was releasing any key other than the "enter key" and currently active control is a textbox
                     else if (!(e.KeyCode is Keys.Enter))
                     {
-
 
                         // if pressed key is a valid key defined by regex and keystrokes array
                         if (!(Regex.IsMatch(keyPressed, numberDigit) || validKeyArray.Contains(e.KeyCode)))
@@ -610,7 +593,7 @@ namespace Lana_Renee_Lashes
             textBoxEstPaCost.Text = estPaCost.ToString();
             textBoxEstCostOfFlatBoxes.Text = estCostOfFlatBoxes.ToString();
             textBoxEstCostOfShipping.Text = estCostOfShipping.ToString();
-            textBoxTotalLashesOrdered.Text = totalLashesOrdered.ToString();
+            textBoxTotalLashesOrdered.Text = totalQuantity.ToString();
             textBoxEstSalesToProfit.Text = estSalesToProfit.ToString();
             textBoxEstTotalCost.Text = estTotalCost.ToString();
             textBoxEstProfit.Text = estProfit.ToString();
@@ -831,10 +814,10 @@ namespace Lana_Renee_Lashes
         {
 
             // calculates total quantity
-            totalLashesOrdered = goodyQuantity + oliviaQuantity;
+            totalQuantity = goodyQuantity + oliviaQuantity;
 
             // if total lashes ordered is greater than 0
-            if (totalLashesOrdered > 0)
+            if (totalQuantity > 0)
             {
 
                 ///////
@@ -862,13 +845,13 @@ namespace Lana_Renee_Lashes
                 /////
 
                 // calculates estimated hours to box
-                estHoursToBox = totalLashesOrdered / defaultEstBoxesPerHour - hoursSpentBoxing;
+                estHoursToBox = totalQuantity / defaultEstBoxesPerHour - hoursSpentBoxing;
 
                 // if checkbox estimate prices by quantity is checked
                 if (checkBoxEstPricesByQuantity.Checked)
                 {
                     // sets goody cost to an estimated value based on a past order
-                    goodyTotal = goodyQuantity * goodyEstCostPerUnit;
+                    goodyTotal = goodyQuantity * goodyEstTotalCostPerUnit;
                     // sets olivia cost to an estimated value based on a past order
                     oliviaTotal = oliviaQuantity * oliviaEstTotalCostPerUnit;
 
@@ -878,27 +861,32 @@ namespace Lana_Renee_Lashes
                 if (goodyTotal + goodyQuantity > 0 || oliviaTotal + oliviaQuantity > 0)
                 {
                     // calculates estimated boxing cost
-                    estBoxingCost = totalLashesOrdered * boxingCost;
+                    estBoxingCost = totalQuantity * boxingCost;
                     // adds the cost of both orders together for a total cost
                     estTotalCost = goodyTotal + oliviaTotal + estPaCost;
                     // estimates the cost per lash set
-                    estCostPerUnit = estTotalCost / totalLashesOrdered;
+                    estCostPerUnit = estTotalCost / totalQuantity;
                     // estimated profit per sale
                     estProfitPerUnit = retailSalePrice - estCostPerUnit;
                     // sales required to profit
                     estSalesToProfit = (int)estTotalCost / (int)estProfitPerUnit;
                     // total profit for this order
-                    estProfit = estProfitPerUnit * totalLashesOrdered;
+                    estProfit = estProfitPerUnit * totalQuantity;
                     // total profit for this order less GST
                     estProfitLessGst = estProfit - (estProfit * (decimal)GST_MULTIPLIER);
                     // gst amount
                     estGstTotal = estProfit * (decimal)GST_MULTIPLIER;
                     // rough box cost
-                    estCostOfFlatBoxes = totalLashesOrdered * defaultEstCostOfFlatBoxes;
+                    estCostOfFlatBoxes = totalQuantity * defaultEstCostOfFlatBoxes;
                     // rough shipping cost
-                    estCostOfShipping = totalLashesOrdered * defaultEstCostOfShipping;
+                    estCostOfShipping = totalQuantity * defaultEstCostOfShipping;
 
-                } // end if
+                }
+                else
+                {
+                    ResetAll();
+
+                }// end if
 
             } // end if
 
@@ -921,31 +909,25 @@ namespace Lana_Renee_Lashes
                 if (goodyTotal != 0)
                 {
                     // displays goody cost in USD
-                    textBoxGoodyTotal.Text = "$" + goodyTotal.ToString("#.##");
+                    textBoxGoodyTotal.Text = goodyTotal.FormatCurrency();
 
                 } // end if
 
                 if (oliviaTotal != 0)
                 {
                     // displays olivia cost in USD
-                    textBoxOliviaTotal.Text = "$" + oliviaTotal.ToString("#.##");
+                    textBoxOliviaTotal.Text = oliviaTotal.FormatCurrency();
 
                 } // end if
 
                 // displays estimated total cost in USD
-                textBoxEstTotalCost.Text = "$" + (goodyTotal + oliviaTotal).ToString();
+                textBoxEstTotalCost.Text = (goodyTotal + oliviaTotal).FormatCurrency();
 
                 // if roughBoxCost is greater than $1
                 if (estBoxingCost > 1)
                 {
                     // displays rough box cost in USD to 2.d.p
-                    textBoxEstCostOfFlatBoxes.Text = "$" + estBoxingCost.ToString("#.00");
-                }
-                // else if roughBoxCost is less than $1
-                else
-                {
-                    // displays rough box cost in USD to 2.d.p
-                    textBoxEstCostOfFlatBoxes.Text = "$0" + estBoxingCost.ToString("#.00");
+                    textBoxEstCostOfFlatBoxes.Text = estBoxingCost.FormatCurrency();
 
                 } // end if
 
@@ -980,7 +962,7 @@ namespace Lana_Renee_Lashes
                 // updates estimated sales until we start to see profit to 0 d.p.
                 textBoxEstSalesToProfit.Text = estSalesToProfit.ToString();
                 // updates total quantity
-                textBoxTotalLashesOrdered.Text = totalLashesOrdered.ToString();
+                textBoxTotalLashesOrdered.Text = totalQuantity.ToString();
                 // updates estimated total cost
                 textBoxEstTotalCost.Text = estTotalCost.ToString("c2");
                 // updates estimated profit
@@ -1031,12 +1013,12 @@ namespace Lana_Renee_Lashes
         private void buttonUsdToAud_Click(object sender, EventArgs e)
         {
             // checks if figures have already been converted to AUD, returns true if they have, else returns false
-            bool Unconverted = (estTotalCost * (decimal)usdToAud) != textBoxEstTotalCost.Text.ToDecimal();
+            bool converted = ((goodyTotal + oliviaTotal + estPaCost) * (decimal)usdToAud) == textBoxEstTotalCost.Text.ToDecimal();
 
             // converts usd to aud multiplier to a decimal for easier calculations
             decimal conversionRate = (decimal)usdToAud;
 
-            if (Unconverted)
+            if (!converted)
             {
                 // foreach decimal value in the decimal value array
                 for (int i = 0; i < currencyValuesArray.Length - 1; i++)

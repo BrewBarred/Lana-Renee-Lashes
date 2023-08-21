@@ -242,9 +242,9 @@
             this.labelEstBoxingCost.ForeColor = System.Drawing.Color.Thistle;
             this.labelEstBoxingCost.Location = new System.Drawing.Point(146, 43);
             this.labelEstBoxingCost.Name = "labelEstBoxingCost";
-            this.labelEstBoxingCost.Size = new System.Drawing.Size(148, 16);
+            this.labelEstBoxingCost.Size = new System.Drawing.Size(165, 16);
             this.labelEstBoxingCost.TabIndex = 0;
-            this.labelEstBoxingCost.Text = "Estimated boxing cost:";
+            this.labelEstBoxingCost.Text = "Estimated cost of boxing:";
             // 
             // labelPaHoursToBox
             // 
@@ -291,7 +291,7 @@
             this.labelEstimatedtotal.BackColor = System.Drawing.Color.Transparent;
             this.labelEstimatedtotal.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelEstimatedtotal.ForeColor = System.Drawing.Color.Thistle;
-            this.labelEstimatedtotal.Location = new System.Drawing.Point(482, 95);
+            this.labelEstimatedtotal.Location = new System.Drawing.Point(470, 94);
             this.labelEstimatedtotal.Name = "labelEstimatedtotal";
             this.labelEstimatedtotal.Size = new System.Drawing.Size(134, 16);
             this.labelEstimatedtotal.TabIndex = 0;
@@ -304,11 +304,11 @@
             this.labelGstToPay.BackColor = System.Drawing.Color.Transparent;
             this.labelGstToPay.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelGstToPay.ForeColor = System.Drawing.Color.Thistle;
-            this.labelGstToPay.Location = new System.Drawing.Point(482, 166);
+            this.labelGstToPay.Location = new System.Drawing.Point(470, 165);
             this.labelGstToPay.Name = "labelGstToPay";
-            this.labelGstToPay.Size = new System.Drawing.Size(148, 16);
+            this.labelGstToPay.Size = new System.Drawing.Size(155, 16);
             this.labelGstToPay.TabIndex = 0;
-            this.labelGstToPay.Text = "Estimated G.S.T. Total:";
+            this.labelGstToPay.Text = "Estimated G.S.T. to pay:";
             // 
             // labelTotalLashesOrdered
             // 
@@ -317,7 +317,7 @@
             this.labelTotalLashesOrdered.BackColor = System.Drawing.Color.Transparent;
             this.labelTotalLashesOrdered.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelTotalLashesOrdered.ForeColor = System.Drawing.Color.Thistle;
-            this.labelTotalLashesOrdered.Location = new System.Drawing.Point(482, 44);
+            this.labelTotalLashesOrdered.Location = new System.Drawing.Point(470, 43);
             this.labelTotalLashesOrdered.Name = "labelTotalLashesOrdered";
             this.labelTotalLashesOrdered.Size = new System.Drawing.Size(137, 16);
             this.labelTotalLashesOrdered.TabIndex = 0;
@@ -343,7 +343,7 @@
             this.labelSalesToProfit.BackColor = System.Drawing.Color.Transparent;
             this.labelSalesToProfit.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelSalesToProfit.ForeColor = System.Drawing.Color.Thistle;
-            this.labelSalesToProfit.Location = new System.Drawing.Point(482, 70);
+            this.labelSalesToProfit.Location = new System.Drawing.Point(470, 69);
             this.labelSalesToProfit.Name = "labelSalesToProfit";
             this.labelSalesToProfit.Size = new System.Drawing.Size(162, 16);
             this.labelSalesToProfit.TabIndex = 0;
@@ -356,7 +356,7 @@
             this.label15.BackColor = System.Drawing.Color.Transparent;
             this.label15.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label15.ForeColor = System.Drawing.Color.Thistle;
-            this.label15.Location = new System.Drawing.Point(482, 120);
+            this.label15.Location = new System.Drawing.Point(470, 119);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(111, 16);
             this.label15.TabIndex = 0;
@@ -369,11 +369,11 @@
             this.label17.BackColor = System.Drawing.Color.Transparent;
             this.label17.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label17.ForeColor = System.Drawing.Color.Thistle;
-            this.label17.Location = new System.Drawing.Point(482, 143);
+            this.label17.Location = new System.Drawing.Point(470, 142);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(166, 16);
+            this.label17.Size = new System.Drawing.Size(174, 16);
             this.label17.TabIndex = 0;
-            this.label17.Text = "Estimated profit less GST:";
+            this.label17.Text = "Estimated profit less G.S.T:";
             // 
             // linkLabel1
             // 
@@ -1059,9 +1059,9 @@
             this.labelBoxingCost.ForeColor = System.Drawing.Color.Thistle;
             this.labelBoxingCost.Location = new System.Drawing.Point(13, 43);
             this.labelBoxingCost.Name = "labelBoxingCost";
-            this.labelBoxingCost.Size = new System.Drawing.Size(117, 16);
+            this.labelBoxingCost.Size = new System.Drawing.Size(135, 16);
             this.labelBoxingCost.TabIndex = 34;
-            this.labelBoxingCost.Text = "Boxing Cost (AUD):";
+            this.labelBoxingCost.Text = "Boxing cost (per box):";
             // 
             // textBoxBoxingCost
             // 

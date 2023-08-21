@@ -69,9 +69,9 @@ namespace Lana_Renee_Lashes
         } // end void
         #endregion
 
-        #region ToNum()
+        #region ToDecimal()
         /// <summary>
-        /// Extends a formatted string to return a decimal value without "$" signs or ","
+        /// Extends a formatted string to return a decimal value stripped of any "$" signs or ","
         /// </summary>
         /// <param name="thisString">String to convert to a stripped decimal value</param>
         /// <returns></returns>
@@ -91,6 +91,32 @@ namespace Lana_Renee_Lashes
                 LogError("Failed to parse " + thisString + " into a decimal value");
                 Log(ex.Message);
                 return -1;
+
+            } // end try
+
+        } // end void
+        #endregion
+
+        #region FormatCurrency(this decimal thisDecimal)
+        /// <summary>
+        /// Extends a decimal value to return it as a string formatted to a currency value
+        /// </summary>
+        /// <param name="thisDecimal">Decimal to convert to a string formatted as a currency value</param>
+        /// <returns></returns>
+        public static string FormatCurrency(this decimal thisDecimal)
+        {
+            try
+            {
+                // stores the decimal value formatted as a currency string
+                string newCurrency = "$" + thisDecimal.ToString("#.##");
+                // returns the formatted decimal value as a string
+                return newCurrency;
+            }
+            catch (Exception ex)
+            {
+                // logs error message
+                LogError("Failed to parse " + thisDecimal + " into a decimal value", ex.Message);
+                return null;
 
             } // end try
 
@@ -144,7 +170,7 @@ namespace Lana_Renee_Lashes
             }
             #endregion
 
-            #region LogError()
+            #region LogError(string errorMessage)
             /// <summary>
             /// Writes error message to console window and error report list
             /// </summary>
@@ -153,7 +179,7 @@ namespace Lana_Renee_Lashes
                 try
                 {
                     // writes error to error report
-                    errorReportList.Add("[" + DateTime.Now + "]" + errorMessage);
+                    errorReportList.Add("[" + DateTime.Now + "] " + errorMessage);
                     // writes line to console window on its own line
                     Console.WriteLine("Error: " + errorMessage);
                 }
@@ -163,8 +189,31 @@ namespace Lana_Renee_Lashes
                     Log(ex.Message);
 
                 } // end try
-            }
 
+            } // end void
+            #endregion
+
+            #region LogError(string errorMessage, Exception exMessage)
+            /// <summary>
+            /// Writes error message to error report list and console window along with passed exception message
+            /// </summary>
+            public static void LogError(string errorMessage, string exMessage)
+            {
+                try
+                {
+                    // writes error to error report along with exception message
+                    errorReportList.Add("[" + DateTime.Now + "] " + errorMessage + ". Exception: " + exMessage);
+                    // writes error to console window along with exception message
+                    Console.WriteLine("Error: " + errorMessage + ". Exception: " + exMessage);
+                }
+                catch (Exception ex)
+                {
+                    // write error to console
+                    Log(ex.Message);
+
+                } // end try
+
+            } // end void
             #endregion
 
             #region LogException()

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using static Lana_Renee_Lashes.Tools.Logger;
 
 namespace Lana_Renee_Lashes
 {
@@ -68,6 +69,34 @@ namespace Lana_Renee_Lashes
         } // end void
         #endregion
 
+        #region ToNum()
+        /// <summary>
+        /// Extends a formatted string to return a decimal value without "$" signs or ","
+        /// </summary>
+        /// <param name="thisString">String to convert to a stripped decimal value</param>
+        /// <returns></returns>
+        public static decimal ToDecimal(this string thisString)
+        {
+            try
+            {
+                // removes any "$" symbols from the string
+                string newString = thisString.Replace("$", "");
+                // removes any commas from the string
+                decimal newDecimal = decimal.Parse(newString.Replace(",", ""));
+                // returns the stripped decimal
+                return newDecimal;
+            }
+            catch (Exception ex)
+            {
+                LogError("Failed to parse " + thisString + " into a decimal value");
+                Log(ex.Message);
+                return -1;
+
+            } // end try
+
+        } // end void
+        #endregion
+
         #region ShowUsYaTips(text)
         /// <summary>
         /// Displays a tool tip at the current control
@@ -123,7 +152,6 @@ namespace Lana_Renee_Lashes
             {
                 try
                 {
-
                     // writes error to error report
                     errorReportList.Add("[" + DateTime.Now + "]" + errorMessage);
                     // writes line to console window on its own line

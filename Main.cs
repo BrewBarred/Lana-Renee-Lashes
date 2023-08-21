@@ -714,6 +714,15 @@ namespace Lana_Renee_Lashes
             textBoxEstProfitLessGst.Text = estProfitLessGst.FormatCurrency();
             textBoxEstGstTotal.Text = estGstTotal.FormatCurrency();
 
+            // if estimate prices by quantity checkbox is checked
+            if (checkBoxEstPricesByQuantity.Checked)
+            {
+                // updates goody/olivia totals
+                textBoxGoodyTotal.Text = goodyTotal.FormatCurrency();
+                textBoxOliviaTotal.Text = oliviaTotal.FormatCurrency();
+
+            } // end if
+
             // if include P.A. costs checkbox is checked
             if (checkBoxPaCosts.Checked)
             {
@@ -1006,7 +1015,7 @@ namespace Lana_Renee_Lashes
                     // estimated cost of shipping
                     estCostOfShipping = totalQuantity * setCostOfShipping;
                     // sales required to profit
-                    estSalesToProfit = (int)estTotalCost / (int)estProfitPerUnit;
+                    estSalesToProfit = (int)estTotalCost / (int)estCostPerUnit;
                     // total profit for this order
                     estProfit = estProfitPerUnit * totalQuantity;
                     // total profit for this order less GST
@@ -1220,16 +1229,19 @@ namespace Lana_Renee_Lashes
             {
                 textBoxGoodyTotal.Disable();
                 textBoxOliviaTotal.Disable();
-                // calculates values
-                FetchInput();
             }
             // else if checkbox is not checked
             else
             {
                 textBoxGoodyTotal.Enable();
                 textBoxOliviaTotal.Enable();
+                goodyTotal = 0;
+                oliviaTotal = 0;
 
             } // end if
+
+            // calculates values
+            FetchInput();
 
         } // end void
 

@@ -177,52 +177,69 @@ namespace Lana_Renee_Lashes
         /// <returns></returns>
         public static string FormatHours(this double thisDouble)
         {
-            // if the passed double value has a decimal point
-            if (thisDouble.ToString().Contains("."))
+            try
             {
-                // splits the string by decimal point
-                string[] splitString = thisDouble.ToString().Split('.');
-                // if the double value had more than 1 decimal point
-                if (splitString.Length != 2)
+                // if the passed double value has a decimal point
+                if (thisDouble.ToString().Contains("."))
                 {
-                    // writes error to console
-                    LogError("Failed to convert the value \"" + thisDouble + "\" to hours and minutes");
-                    return "Error!";
-                }
-                // else if the value after the decimal point is equal to zero
-                else if (int.Parse(splitString[1]) == 0)
-                {
-                    // returns the estimated hours as a string
-                    return splitString[0] + " hrs";
-
-                }
-                else if (splitString.Length == 2)
-                {
-                    // stores the hours from the split string and formats it into an "hours" string
-                    string hours = splitString[0] + " hrs ";
-                    // converts value after decimal point to a to a 2 digit number
-                    string minutes = splitString[1];
-
-                    // if minutes is a single digit number
-                    if (minutes.Count() == 1)
+                    // splits the string by decimal point
+                    string[] splitString = thisDouble.ToString().Split('.');
+                    // if the double value had more than 1 decimal point
+                    if (splitString.Length < 1)
                     {
-                        // inserts a zero to the end of the number
-                        minutes = minutes.Insert(1, "0");
+                        // writes error to console
+                        LogError("Failed to convert the value \"" + thisDouble + "\" to hours and minutes");
+                        return "Error!";
+                    }
+                    // else if the value after the decimal point is equal to zero
+                    if (double.Parse(splitString[1]) == 0)
+                    {
+                        // returns the estimated hours as a string
+                        return splitString[0] + " hrs";
+
+                    }
+                    else if (splitString.Length >= 2)
+                    {
+                        // stores the hours from the split string and formats it into an "hours" string
+                        string hours = splitString[0] + " hrs ";
+                        // converts value after decimal point to a to a 2 digit number
+                        string minutes = splitString[1];
+
+                        // if minutes is a single digit number
+                        if (minutes.Count() == 1)
+                        {
+                            // inserts a zero to the end of the number
+                            minutes = minutes.Insert(1, "0");
+
+                        }
+                        // else if minutes length is greater than two
+                        else if (minutes.Count() > 2)
+                        {
+                            // takes only the first two characters of the string
+                            minutes = minutes.Substring(0, 2);
+
+                        }// end if
+
+                        // converts 2 digit decimal value into a formatted "minutes" string
+                        minutes = Math.Ceiling((decimal.Parse(minutes) / 100 * 60)).ToString() + " mins";
+
+                        // returns the passed double value as a string in hours and minutes format
+                        return hours + minutes;
 
                     } // end if
 
-                    // converts 2 digit decimal value into a formatted "minutes" string
-                    minutes = (double.Parse(minutes) / 100 * 60).ToString() + " mins";
-
-                    // returns the passed double value as a string in hours and minutes format
-                    return hours + minutes;
-
                 } // end if
 
-            } // end if
+                // returns the passed double as a string formatted to hours
+                return thisDouble.ToString() + " hrs";
+            }
+            catch (Exception ex)
+            {
+                // writes error to console
+                LogError("Couldn't convert \"" + thisDouble + "\" to hours format!", ex.Message);
+                return "Error!";
 
-            // returns the passed double as a string formatted to hours
-            return thisDouble.ToString() + " hrs";
+            } // end try
 
         } // end string
         #endregion

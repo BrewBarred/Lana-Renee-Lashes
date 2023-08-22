@@ -626,7 +626,7 @@
             this.textBoxOliviaTotal.Name = "textBoxOliviaTotal";
             this.textBoxOliviaTotal.Size = new System.Drawing.Size(159, 20);
             this.textBoxOliviaTotal.TabIndex = 7;
-            this.textBoxOliviaTotal.Text = "$324";
+            this.textBoxOliviaTotal.Text = "$32423";
             this.textBoxOliviaTotal.Leave += new System.EventHandler(this.textBoxOliviaTotal_Leave);
             // 
             // labelOliviaOrdered

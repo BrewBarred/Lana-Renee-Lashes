@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using static Lana_Renee_Lashes.Tools.Logger;
+using static LanaReneeLashes.Tools.Logger;
 
-namespace Lana_Renee_Lashes
+namespace LanaReneeLashes
 {
+    /// <summary>
+    /// Tools (Custom methods)
+    /// </summary>
     public static class Tools
     {
         #region Class Scope Variables
@@ -42,7 +45,6 @@ namespace Lana_Renee_Lashes
         /// </summary>
         /// <param name="textBox">Textbox to enable</param>
         /// <param name="defaultValue">Default value to insert into textbox</param>
-        /// <param name="readOnlySetting">Read-only status of textbox</param>
         public static void Enable(this TextBoxBase textBox, string defaultValue)
         {
 
@@ -71,7 +73,7 @@ namespace Lana_Renee_Lashes
 
         #region ToDecimal()
         /// <summary>
-        /// Extends a formatted string to return a decimal value stripped of any "$" signs or ","
+        /// Extends a formatted string to return a decimal value stripped of unnecessary symbols/words
         /// </summary>
         /// <param name="thisString">String to convert to a stripped decimal value</param>
         /// <returns></returns>
@@ -105,6 +107,11 @@ namespace Lana_Renee_Lashes
         } // end decimal
         #endregion
 
+        /// <summary>
+        /// Extends a formatted string to return a double value stripped of unnecessary symbols/words
+        /// </summary>
+        /// <param name="thisString"></param>
+        /// <returns></returns>
         public static double ToDouble(this string thisString)
         {
             decimal decimalValue = thisString.ToDecimal();
@@ -173,7 +180,7 @@ namespace Lana_Renee_Lashes
         /// <summary>
         /// Extends a double value, splits it into hours and minutes and returns the result as a string
         /// </summary>
-        /// <param name="thisString"></param>
+        /// <param name="thisDouble">Double value to be converted</param>
         /// <returns></returns>
         public static string FormatHours(this double thisDouble)
         {
@@ -292,10 +299,14 @@ namespace Lana_Renee_Lashes
         #endregion
 
         #region Logger
+        /// <summary>
+        /// Logs errors to report lists or console window
+        /// </summary>
         public static class Logger
         {
-
-            // creates a new list to write errors to
+            /// <summary>
+            /// Stores errors to be written to a log file later
+            /// </summary>
             public static List<string> errorReportList = new List<string>();
 
             #region Log(message)

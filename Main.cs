@@ -3,11 +3,14 @@ using System.Drawing;
 using System.Linq;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
-using static Lana_Renee_Lashes.Tools.Logger;
+using static LanaReneeLashes.Tools.Logger;
 
 
-namespace Lana_Renee_Lashes
+namespace LanaReneeLashes
 {
+    /// <summary>
+    /// Main
+    /// </summary>
     public partial class Main : Form
     {
         #region Declarations
@@ -315,6 +318,9 @@ namespace Lana_Renee_Lashes
         // variable used to parse text regex
         //string numberPattern = numberPatternString.ToString();
         // regex pattern used to match numeric digits
+        /// <summary>
+        /// Checks string against valid numbers
+        /// </summary>
         static public Regex numberDigitPattern = new Regex(@"\d", RegexOptions.Compiled);
         // variable used to parse valid keys for textboxes
         string numberDigit = numberDigitPattern.ToString();
@@ -329,118 +335,11 @@ namespace Lana_Renee_Lashes
         // stores current index of mouse cursor
         int oldIndex = 0;
 
-
         #endregion
 
-        //##############################################################################################################
-        // filter through this method and take what you need then delete it cos it's redundant
-        #region Format()
-        private void Format()
-        {
-            try
-            {
-                ///////
-                /// Displays monetary values to respective textboxes in correct currency
-                /////
-
-                if (goodyTotal != 0)
-                {
-                    // displays goody cost in USD
-                    textBoxGoodyTotal.Text = goodyTotal.FormatCurrency();
-
-                } // end if
-
-                if (oliviaTotal != 0)
-                {
-                    // displays olivia cost in USD
-                    textBoxOliviaTotal.Text = oliviaTotal.FormatCurrency();
-
-                } // end if
-
-                // displays estimated total cost in USD
-                textBoxEstTotalCost.Text = (goodyTotal + oliviaTotal).FormatCurrency();
-
-                // if roughBoxCost is greater than $1
-                if (estCostOfBoxing > 1)
-                {
-                    // displays rough box cost in USD to 2.d.p
-                    textBoxBoxingCost.Text = estCostOfBoxing.FormatCurrency() + " cents";
-
-                } // end if
-
-                // if estCostOfShipping is greater than $1
-                if (estCostOfShipping > 1)
-                {
-                    // displays estCostOfShipping in USD to 2.d.p.
-                    textBoxEstCostOfShipping.Text = "$" + estCostOfShipping.ToString("#.00");
-                }
-                // else if estCostOfShipping is less than $1
-                else
-                {
-                    // displays estCostOfShipping in USD to 2.d.p
-                    textBoxEstCostOfShipping.Text = "$0" + estCostOfShipping.ToString("#.00");
-
-                } // end if
-
-                // if include P.A. costs checkbox is checked
-                if (checkBoxPaCosts.Checked)
-                {
-                    // updates estimated PA cost
-                    textBoxEstPaCost.Text = estPaCost.ToString("c2");
-
-                } // end if
-
-                // display estimated p.a. cost
-                textBoxEstCostOfBoxing.Text = estCostOfBoxing.ToString("c2");
-                // updates estimated cost per unit
-                textBoxEstCostPerUnit.Text = estCostPerUnit.ToString("c2");
-                // updates estimated profit per unit
-                textBoxEstProfitPerUnit.Text = (estProfitPerUnit.ToString("c2"));
-                // updates estimated sales until we start to see profit to 0 d.p.
-                textBoxEstSalesToProfit.Text = estSalesToProfit.ToString();
-                // updates total quantity
-                textBoxTotalLashesOrdered.Text = totalQuantity.ToString();
-                // updates estimated total cost
-                textBoxEstTotalCost.Text = estTotalCost.ToString("c2");
-                // updates estimated profit
-                textBoxEstProfit.Text = estProfit.ToString("c2");
-                // updates profit less gst
-                textBoxEstProfitLessGst.Text = estProfitLessGst.ToString("c2");
-                // updates gst to pay
-                textBoxEstGstTotal.Text = estGstTotal.ToString("c2");
-
-                // if active control is a textbox
-                if (ActiveControl is TextBox)
-                {
-                    // creates a reference variable to the active textbox
-                    TextBox textBox = ActiveControl as TextBox;
-
-                    // 
-                    if (textBox.ReadOnly)
-                    {
-                        return;
-
-                    } // end if
-
-                    // if textbox text is $0
-                    if (textBox.Text is "$0")
-                    {
-                        // sets cursor to 2
-                        textBox.SelectionStart = 2;
-
-                    } // end if
-
-                } // end if
-            }
-            catch (Exception ex)
-            {
-                // writes error to console
-                LogError(ex.Message);
-            }
-        }
-
-        #endregion
-
+        /// <summary>
+        /// Initializes Application
+        /// </summary>
         public Main()
         {
             InitializeComponent();
@@ -1084,7 +983,7 @@ namespace Lana_Renee_Lashes
         /// <param name="e"></param>
         private void checkBoxAutoFill_CheckedChanged(object sender, EventArgs e)
         {
-
+            //insert code here
 
         } // end void
         #endregion

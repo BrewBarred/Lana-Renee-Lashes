@@ -1,4 +1,4 @@
-﻿namespace Lana_Renee_Lashes
+﻿namespace LanaReneeLashes
 {
     partial class Main
     {
@@ -806,7 +806,7 @@
             this.pictureBoxWillow.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.pictureBoxWillow.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.pictureBoxWillow.Image = global::Lana_Renee_Lashes.Properties.Resources.Lana;
+            this.pictureBoxWillow.Image = global::LanaReneeLashes.Properties.Resources.Lana;
             this.pictureBoxWillow.Location = new System.Drawing.Point(-1, -69);
             this.pictureBoxWillow.Name = "pictureBoxWillow";
             this.pictureBoxWillow.Size = new System.Drawing.Size(889, 237);

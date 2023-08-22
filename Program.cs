@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace Lana_Renee_Lashes
+namespace LanaReneeLashes
 {
     internal static class Program
     {

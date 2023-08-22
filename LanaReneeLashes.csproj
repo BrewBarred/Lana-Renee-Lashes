@@ -84,6 +84,9 @@
   <PropertyGroup>
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>WillowIcon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="PresentationCore" />
     <Reference Include="System" />
@@ -153,6 +156,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Lana.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WillowIcon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

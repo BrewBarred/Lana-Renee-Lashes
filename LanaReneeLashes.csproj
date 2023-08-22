@@ -14,7 +14,7 @@
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <Deterministic>true</Deterministic>
     <IsWebBootstrapper>true</IsWebBootstrapper>
-    <PublishUrl>C:\Users\Eli\source\repos\BrewBarred\Lana-Renee-Lashes\Published\</PublishUrl>
+    <PublishUrl>C:\Users\Eli\source\repos\BrewBarred\LanaReneeLashes\Published\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Web</InstallFrom>
     <UpdateEnabled>true</UpdateEnabled>
@@ -24,7 +24,7 @@
     <UpdatePeriodically>false</UpdatePeriodically>
     <UpdateRequired>false</UpdateRequired>
     <MapFileExtensions>true</MapFileExtensions>
-    <InstallUrl>https://github.com/BrewBarred/Lana-Renee-Lashes/blob/master/Published/</InstallUrl>
+    <InstallUrl>https://github.com/BrewBarred/LanaReneeLashes/blob/master/Published/</InstallUrl>
     <UpdateUrl>https://github.com/BrewBarred/Lana-Renee-Lashes.git/</UpdateUrl>
     <MinimumRequiredVersion>1.0.0.0</MinimumRequiredVersion>
     <CreateWebPageOnPublish>true</CreateWebPageOnPublish>

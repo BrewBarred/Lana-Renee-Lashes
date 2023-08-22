@@ -422,7 +422,7 @@
             this.textBoxGoodyTotal.Name = "textBoxGoodyTotal";
             this.textBoxGoodyTotal.Size = new System.Drawing.Size(159, 20);
             this.textBoxGoodyTotal.TabIndex = 1;
-            this.textBoxGoodyTotal.Text = "$3433";
+            this.textBoxGoodyTotal.Text = "$343";
             this.textBoxGoodyTotal.Leave += new System.EventHandler(this.textBoxGoodyTotal_Leave);
             // 
             // textBoxGoodyQuantity

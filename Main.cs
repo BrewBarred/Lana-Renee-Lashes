@@ -485,13 +485,21 @@ namespace LanaReneeLashes
                     {
                         // shows a tool tip informing user that they can't use that character
                         textBox.ShowUsYaTips("Invalid input detected!");
-                        // sets textbox backcolor to red to show it is invalid
-                        textBox.BackColor = defaultInvalidTextboxColor;
+
+                        // if the textbox isn't read only
+                        if (!textBox.ReadOnly)
+                        {
+                            // sets textbox backcolor to red to show it is invalid
+                            textBox.BackColor = defaultInvalidTextboxColor;
+
+                        } // end if
 
                         if (!validKeyArray.Contains(keyPressed))
                         {
                             // replaces keypress with nothing
                             textBox.Text = text.Replace(keyPressed.ToString(), "");
+                            // sets cursor back to original position
+                            SetCursor();
                             // stores this character as the last removed character
                             lastCharRemoved = keyPressed;
                             return;
@@ -514,9 +522,6 @@ namespace LanaReneeLashes
                         } // end if
 
                     } // end if
-
-                    // sets cursor back to original position
-                    SetCursor();
 
                 }
                 // else if user was releasing the "enter" key and currently active  control is not a textbox

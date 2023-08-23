@@ -327,9 +327,6 @@ namespace LanaReneeLashes
         //string numberPattern = numberPatternString.ToString();
         // regex pattern used to match numeric digits
 
-        // stores last character removed by filter
-        Keys lastCharRemoved;
-
         // stores current index of mouse cursor
         int oldIndex = 0;
 
@@ -494,18 +491,6 @@ namespace LanaReneeLashes
 
                         } // end if
 
-                        if (!validKeyArray.Contains(keyPressed))
-                        {
-                            // replaces keypress with nothing
-                            textBox.Text = text.Replace(keyPressed.ToString(), "");
-                            // sets cursor back to original position
-                            SetCursor();
-                            // stores this character as the last removed character
-                            lastCharRemoved = keyPressed;
-                            return;
-
-                        } // end if
-
                     }
                     // else if the user presses a valid key
                     else
@@ -513,11 +498,30 @@ namespace LanaReneeLashes
                         // sets textbox back to its default color incase it was previously invalid
                         textBox.BackColor = defaultValidTextboxColor;
 
-                        // if autofill checkbox is checked
-                        if (checkBoxAutoFill.Checked)
+                        // if autofill checkbox is checked and user pressed anything except the enter key
+                        if (checkBoxAutoFill.Checked && keyPressed != Keys.Enter)
                         {
                             // calculates and updates values
                             FetchInput();
+                        }
+                        // else if the user pressed the enter key
+                        else if (keyPressed == Keys.Enter)
+                        {
+                            // if autofill checkbox is checked
+                            if (checkBoxAutoFill.Checked)
+                            {
+                                e.Handled = true;
+                                // sets next textbox as the active control
+                                SelectNextControl((Control)sender, true, true, true, true);
+
+                            }
+                            // else if auto fill checkbox is not checked
+                            else
+                            {
+                                // calculates and updates values
+                                FetchInput();
+
+                            } // end if
 
                         } // end if
 
@@ -576,25 +580,18 @@ namespace LanaReneeLashes
         {
             TextBox textBox = ActiveControl as TextBox;
 
-            // if textbox is displaying $0
-            if (textBox.Text is "$0")
+            // if textbox is displaying a "$" symbol or "0"
+            if (textBox.Text is "$" || textBox.Text is "0")
             {
-                // sets cursor to the end
-                textBox.SelectionStart = 2;
-            }
-            // else if textbox is display a $ symbol
-            else if (textBox.Text is "$")
-            {
-                // sets cursor to the end
+                // sets cursor to the end text
                 textBox.SelectionStart = 1;
             }
-            // if textbox text length is equal to 2
-            else if (textBox.TextLength is 2)
+            // else if textbox is displaying $0
+            else if (textBox.Text is "$0" || textBox.TextLength is 2)
             {
                 // sets cursor to the end of the text
                 textBox.SelectionStart = 2;
             }
-
             // else if textbox is displaying something other than $0 or nothing
             else
             {
@@ -602,6 +599,7 @@ namespace LanaReneeLashes
                 textBox.SelectionStart = oldIndex;
 
             } // end if
+
         }
         #endregion
 
@@ -992,7 +990,17 @@ namespace LanaReneeLashes
         /// <param name="e"></param>
         private void checkBoxAutoFill_CheckedChanged(object sender, EventArgs e)
         {
-            //insert code here
+            if (checkBoxAutoFill.Checked == true)
+            {
+
+
+            }
+            else
+            {
+                // sets the forms acceptbutton (enter) to the button to avoid a dinging sound when enter is pressed
+                AcceptButton = buttonCalculate;
+
+            } // end if
 
         } // end void
         #endregion

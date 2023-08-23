@@ -108,6 +108,7 @@
             this.labelSettingsPanel = new System.Windows.Forms.Label();
             this.panelBoxing = new System.Windows.Forms.Panel();
             this.labelBoxingPanel = new System.Windows.Forms.Label();
+            this.buttonCalculate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWillow)).BeginInit();
@@ -217,7 +218,7 @@
             this.checkBoxPaCosts.Location = new System.Drawing.Point(237, 106);
             this.checkBoxPaCosts.Name = "checkBoxPaCosts";
             this.checkBoxPaCosts.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxPaCosts.TabIndex = 3;
+            this.checkBoxPaCosts.TabIndex = 13;
             this.checkBoxPaCosts.UseVisualStyleBackColor = true;
             this.checkBoxPaCosts.CheckedChanged += new System.EventHandler(this.checkBoxPaCosts_CheckedChanged);
             // 
@@ -267,7 +268,7 @@
             this.checkBoxEnableFlatBoxEst.Location = new System.Drawing.Point(237, 126);
             this.checkBoxEnableFlatBoxEst.Name = "checkBoxEnableFlatBoxEst";
             this.checkBoxEnableFlatBoxEst.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxEnableFlatBoxEst.TabIndex = 9;
+            this.checkBoxEnableFlatBoxEst.TabIndex = 14;
             this.checkBoxEnableFlatBoxEst.UseVisualStyleBackColor = true;
             this.checkBoxEnableFlatBoxEst.CheckedChanged += new System.EventHandler(this.checkBoxEnableFlatBoxEst_CheckedChanged);
             // 
@@ -384,8 +385,7 @@
             this.linkLabel1.Location = new System.Drawing.Point(771, 1012);
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(111, 13);
-            this.linkLabel1.TabIndex = 14;
-            this.linkLabel1.TabStop = true;
+            this.linkLabel1.TabIndex = 0;
             this.linkLabel1.Text = "Lanareneelashes.com";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelLanaReneeLashes_LinkClicked);
             // 
@@ -409,7 +409,7 @@
             this.linkLabelCheckMe.Location = new System.Drawing.Point(215, 76);
             this.linkLabelCheckMe.Name = "linkLabelCheckMe";
             this.linkLabelCheckMe.Size = new System.Drawing.Size(58, 13);
-            this.linkLabelCheckMe.TabIndex = 12;
+            this.linkLabelCheckMe.TabIndex = 6;
             this.linkLabelCheckMe.TabStop = true;
             this.linkLabelCheckMe.Text = "Check me!";
             this.linkLabelCheckMe.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelUsdToAud_LinkClicked);
@@ -443,7 +443,7 @@
             this.textBoxPaHourlyRate.MaxLength = 12;
             this.textBoxPaHourlyRate.Name = "textBoxPaHourlyRate";
             this.textBoxPaHourlyRate.Size = new System.Drawing.Size(159, 20);
-            this.textBoxPaHourlyRate.TabIndex = 4;
+            this.textBoxPaHourlyRate.TabIndex = 9;
             this.textBoxPaHourlyRate.Text = "$25.00";
             // 
             // textBoxHoursSpentBoxing
@@ -454,7 +454,7 @@
             this.textBoxHoursSpentBoxing.MaxLength = 4;
             this.textBoxHoursSpentBoxing.Name = "textBoxHoursSpentBoxing";
             this.textBoxHoursSpentBoxing.Size = new System.Drawing.Size(159, 20);
-            this.textBoxHoursSpentBoxing.TabIndex = 5;
+            this.textBoxHoursSpentBoxing.TabIndex = 8;
             this.textBoxHoursSpentBoxing.Text = "0";
             this.textBoxHoursSpentBoxing.Leave += new System.EventHandler(this.textBoxHoursSpentBoxing_Leave);
             // 
@@ -467,7 +467,8 @@
             this.textBoxEstHoursToBox.Name = "textBoxEstHoursToBox";
             this.textBoxEstHoursToBox.ReadOnly = true;
             this.textBoxEstHoursToBox.Size = new System.Drawing.Size(159, 20);
-            this.textBoxEstHoursToBox.TabIndex = 6;
+            this.textBoxEstHoursToBox.TabIndex = 0;
+            this.textBoxEstHoursToBox.TabStop = false;
             this.textBoxEstHoursToBox.Text = "0";
             // 
             // textBoxEstCostPerUnit
@@ -617,7 +618,7 @@
             this.textBoxOliviaQuantity.MaxLength = 7;
             this.textBoxOliviaQuantity.Name = "textBoxOliviaQuantity";
             this.textBoxOliviaQuantity.Size = new System.Drawing.Size(159, 20);
-            this.textBoxOliviaQuantity.TabIndex = 8;
+            this.textBoxOliviaQuantity.TabIndex = 4;
             this.textBoxOliviaQuantity.Text = "234";
             // 
             // textBoxOliviaTotal
@@ -628,7 +629,7 @@
             this.textBoxOliviaTotal.MaxLength = 9;
             this.textBoxOliviaTotal.Name = "textBoxOliviaTotal";
             this.textBoxOliviaTotal.Size = new System.Drawing.Size(159, 20);
-            this.textBoxOliviaTotal.TabIndex = 7;
+            this.textBoxOliviaTotal.TabIndex = 3;
             this.textBoxOliviaTotal.Text = "$32423";
             this.textBoxOliviaTotal.Leave += new System.EventHandler(this.textBoxOliviaTotal_Leave);
             // 
@@ -667,7 +668,8 @@
             this.textBoxEstCostOfFlatBoxes.Name = "textBoxEstCostOfFlatBoxes";
             this.textBoxEstCostOfFlatBoxes.ReadOnly = true;
             this.textBoxEstCostOfFlatBoxes.Size = new System.Drawing.Size(109, 13);
-            this.textBoxEstCostOfFlatBoxes.TabIndex = 10;
+            this.textBoxEstCostOfFlatBoxes.TabIndex = 0;
+            this.textBoxEstCostOfFlatBoxes.TabStop = false;
             this.textBoxEstCostOfFlatBoxes.Text = "Disabled";
             // 
             // textBoxUsdToAud
@@ -677,7 +679,7 @@
             this.textBoxUsdToAud.MaxLength = 4;
             this.textBoxUsdToAud.Name = "textBoxUsdToAud";
             this.textBoxUsdToAud.Size = new System.Drawing.Size(159, 20);
-            this.textBoxUsdToAud.TabIndex = 11;
+            this.textBoxUsdToAud.TabIndex = 5;
             this.textBoxUsdToAud.Text = "1.50";
             // 
             // labelETA
@@ -690,7 +692,7 @@
             this.labelETA.Location = new System.Drawing.Point(4, 1011);
             this.labelETA.Name = "labelETA";
             this.labelETA.Size = new System.Drawing.Size(37, 14);
-            this.labelETA.TabIndex = 59;
+            this.labelETA.TabIndex = 0;
             this.labelETA.Text = "E.T.A. ";
             // 
             // checkBoxAutoFill
@@ -703,7 +705,7 @@
             this.checkBoxAutoFill.Location = new System.Drawing.Point(237, 51);
             this.checkBoxAutoFill.Name = "checkBoxAutoFill";
             this.checkBoxAutoFill.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxAutoFill.TabIndex = 14;
+            this.checkBoxAutoFill.TabIndex = 11;
             this.checkBoxAutoFill.UseVisualStyleBackColor = true;
             this.checkBoxAutoFill.CheckedChanged += new System.EventHandler(this.checkBoxAutoFill_CheckedChanged);
             // 
@@ -730,7 +732,8 @@
             this.textBoxEstCostOfShipping.Name = "textBoxEstCostOfShipping";
             this.textBoxEstCostOfShipping.ReadOnly = true;
             this.textBoxEstCostOfShipping.Size = new System.Drawing.Size(109, 13);
-            this.textBoxEstCostOfShipping.TabIndex = 64;
+            this.textBoxEstCostOfShipping.TabIndex = 0;
+            this.textBoxEstCostOfShipping.TabStop = false;
             this.textBoxEstCostOfShipping.Text = "Disabled";
             // 
             // labelEstimatedCostOfShipping
@@ -743,7 +746,7 @@
             this.labelEstimatedCostOfShipping.Location = new System.Drawing.Point(146, 168);
             this.labelEstimatedCostOfShipping.Name = "labelEstimatedCostOfShipping";
             this.labelEstimatedCostOfShipping.Size = new System.Drawing.Size(176, 16);
-            this.labelEstimatedCostOfShipping.TabIndex = 63;
+            this.labelEstimatedCostOfShipping.TabIndex = 0;
             this.labelEstimatedCostOfShipping.Text = "Estimated cost of shipping:";
             // 
             // buttonUsdToAud
@@ -753,7 +756,7 @@
             this.buttonUsdToAud.Location = new System.Drawing.Point(64, 99);
             this.buttonUsdToAud.Name = "buttonUsdToAud";
             this.buttonUsdToAud.Size = new System.Drawing.Size(134, 23);
-            this.buttonUsdToAud.TabIndex = 65;
+            this.buttonUsdToAud.TabIndex = 7;
             this.buttonUsdToAud.Text = "Convert to AUD";
             this.buttonUsdToAud.UseVisualStyleBackColor = false;
             this.buttonUsdToAud.Click += new System.EventHandler(this.buttonUsdToAud_Click);
@@ -766,7 +769,7 @@
             this.checkBoxEstPricesByQuantity.Location = new System.Drawing.Point(237, 71);
             this.checkBoxEstPricesByQuantity.Name = "checkBoxEstPricesByQuantity";
             this.checkBoxEstPricesByQuantity.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxEstPricesByQuantity.TabIndex = 66;
+            this.checkBoxEstPricesByQuantity.TabIndex = 12;
             this.checkBoxEstPricesByQuantity.UseVisualStyleBackColor = true;
             this.checkBoxEstPricesByQuantity.CheckedChanged += new System.EventHandler(this.checkBoxEstPricesByQuantity_CheckedChanged);
             // 
@@ -779,7 +782,7 @@
             this.labelEstPricesByQuantity.Location = new System.Drawing.Point(60, 69);
             this.labelEstPricesByQuantity.Name = "labelEstPricesByQuantity";
             this.labelEstPricesByQuantity.Size = new System.Drawing.Size(169, 16);
-            this.labelEstPricesByQuantity.TabIndex = 67;
+            this.labelEstPricesByQuantity.TabIndex = 0;
             this.labelEstPricesByQuantity.Text = "Estimate prices by quantity?";
             // 
             // pictureBox3
@@ -832,7 +835,7 @@
             this.panelGoody.Margin = new System.Windows.Forms.Padding(2);
             this.panelGoody.Name = "panelGoody";
             this.panelGoody.Size = new System.Drawing.Size(262, 169);
-            this.panelGoody.TabIndex = 68;
+            this.panelGoody.TabIndex = 0;
             // 
             // panelOlivia
             // 
@@ -849,7 +852,7 @@
             this.panelOlivia.Margin = new System.Windows.Forms.Padding(2);
             this.panelOlivia.Name = "panelOlivia";
             this.panelOlivia.Size = new System.Drawing.Size(317, 169);
-            this.panelOlivia.TabIndex = 69;
+            this.panelOlivia.TabIndex = 0;
             // 
             // panelUsdToAud
             // 
@@ -864,7 +867,7 @@
             this.panelUsdToAud.Location = new System.Drawing.Point(486, 405);
             this.panelUsdToAud.Name = "panelUsdToAud";
             this.panelUsdToAud.Size = new System.Drawing.Size(317, 158);
-            this.panelUsdToAud.TabIndex = 74;
+            this.panelUsdToAud.TabIndex = 0;
             // 
             // labelCurrencyConversionPanel
             // 
@@ -875,7 +878,7 @@
             this.labelCurrencyConversionPanel.Location = new System.Drawing.Point(31, 13);
             this.labelCurrencyConversionPanel.Name = "labelCurrencyConversionPanel";
             this.labelCurrencyConversionPanel.Size = new System.Drawing.Size(172, 21);
-            this.labelCurrencyConversionPanel.TabIndex = 34;
+            this.labelCurrencyConversionPanel.TabIndex = 0;
             this.labelCurrencyConversionPanel.Text = "Currency Conversion:";
             // 
             // labelSubTitle
@@ -936,6 +939,7 @@
             // panelDisplay
             // 
             this.panelDisplay.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right)));
+            this.panelDisplay.Controls.Add(this.buttonCalculate);
             this.panelDisplay.Controls.Add(this.labelPaCost);
             this.panelDisplay.Controls.Add(this.textBoxEstPaCost);
             this.panelDisplay.Controls.Add(this.labelTotal);
@@ -964,7 +968,8 @@
             this.panelDisplay.Location = new System.Drawing.Point(1, 815);
             this.panelDisplay.Name = "panelDisplay";
             this.panelDisplay.Size = new System.Drawing.Size(887, 194);
-            this.panelDisplay.TabIndex = 73;
+            this.panelDisplay.TabIndex = 0;
+            this.panelDisplay.Visible = false;
             // 
             // labelPaCost
             // 
@@ -976,7 +981,7 @@
             this.labelPaCost.Location = new System.Drawing.Point(146, 119);
             this.labelPaCost.Name = "labelPaCost";
             this.labelPaCost.Size = new System.Drawing.Size(126, 16);
-            this.labelPaCost.TabIndex = 67;
+            this.labelPaCost.TabIndex = 0;
             this.labelPaCost.Text = "Estimated P.A. cost";
             // 
             // textBoxEstPaCost
@@ -989,7 +994,7 @@
             this.textBoxEstPaCost.Name = "textBoxEstPaCost";
             this.textBoxEstPaCost.ReadOnly = true;
             this.textBoxEstPaCost.Size = new System.Drawing.Size(109, 13);
-            this.textBoxEstPaCost.TabIndex = 68;
+            this.textBoxEstPaCost.TabIndex = 0;
             this.textBoxEstPaCost.TabStop = false;
             this.textBoxEstPaCost.Text = "Disabled";
             // 
@@ -1003,7 +1008,7 @@
             this.labelTotal.Location = new System.Drawing.Point(338, 9);
             this.labelTotal.Name = "labelTotal";
             this.labelTotal.Size = new System.Drawing.Size(149, 21);
-            this.labelTotal.TabIndex = 66;
+            this.labelTotal.TabIndex = 0;
             this.labelTotal.Text = "Estimated Figures:";
             // 
             // panelPa
@@ -1019,7 +1024,7 @@
             this.panelPa.Location = new System.Drawing.Point(86, 601);
             this.panelPa.Name = "panelPa";
             this.panelPa.Size = new System.Drawing.Size(262, 184);
-            this.panelPa.TabIndex = 75;
+            this.panelPa.TabIndex = 0;
             // 
             // labelPaHoursSpentOnThisOrder
             // 
@@ -1030,7 +1035,7 @@
             this.labelPaHoursSpentOnThisOrder.Location = new System.Drawing.Point(13, 112);
             this.labelPaHoursSpentOnThisOrder.Name = "labelPaHoursSpentOnThisOrder";
             this.labelPaHoursSpentOnThisOrder.Size = new System.Drawing.Size(161, 16);
-            this.labelPaHoursSpentOnThisOrder.TabIndex = 36;
+            this.labelPaHoursSpentOnThisOrder.TabIndex = 0;
             this.labelPaHoursSpentOnThisOrder.Text = "Hours spent on this order:";
             // 
             // textBoxPaHoursSpentOnThisOrder
@@ -1041,7 +1046,7 @@
             this.textBoxPaHoursSpentOnThisOrder.MaxLength = 12;
             this.textBoxPaHoursSpentOnThisOrder.Name = "textBoxPaHoursSpentOnThisOrder";
             this.textBoxPaHoursSpentOnThisOrder.Size = new System.Drawing.Size(159, 20);
-            this.textBoxPaHoursSpentOnThisOrder.TabIndex = 37;
+            this.textBoxPaHoursSpentOnThisOrder.TabIndex = 10;
             this.textBoxPaHoursSpentOnThisOrder.Text = "0";
             // 
             // labelPaPanel
@@ -1053,7 +1058,7 @@
             this.labelPaPanel.Location = new System.Drawing.Point(32, 11);
             this.labelPaPanel.Name = "labelPaPanel";
             this.labelPaPanel.Size = new System.Drawing.Size(152, 21);
-            this.labelPaPanel.TabIndex = 33;
+            this.labelPaPanel.TabIndex = 0;
             this.labelPaPanel.Text = "Personal Assistant:";
             // 
             // labelBoxingCost
@@ -1066,7 +1071,7 @@
             this.labelBoxingCost.Location = new System.Drawing.Point(13, 43);
             this.labelBoxingCost.Name = "labelBoxingCost";
             this.labelBoxingCost.Size = new System.Drawing.Size(133, 16);
-            this.labelBoxingCost.TabIndex = 34;
+            this.labelBoxingCost.TabIndex = 0;
             this.labelBoxingCost.Text = "Boxing cost: (Per Box)";
             // 
             // textBoxBoxingCost
@@ -1078,7 +1083,8 @@
             this.textBoxBoxingCost.Name = "textBoxBoxingCost";
             this.textBoxBoxingCost.ReadOnly = true;
             this.textBoxBoxingCost.Size = new System.Drawing.Size(159, 20);
-            this.textBoxBoxingCost.TabIndex = 35;
+            this.textBoxBoxingCost.TabIndex = 0;
+            this.textBoxBoxingCost.TabStop = false;
             this.textBoxBoxingCost.Text = "0.25 cents";
             // 
             // panelSettings
@@ -1100,7 +1106,7 @@
             this.panelSettings.Location = new System.Drawing.Point(486, 601);
             this.panelSettings.Name = "panelSettings";
             this.panelSettings.Size = new System.Drawing.Size(317, 184);
-            this.panelSettings.TabIndex = 75;
+            this.panelSettings.TabIndex = 0;
             // 
             // labelEnableShippingEst
             // 
@@ -1111,7 +1117,7 @@
             this.labelEnableShippingEst.Location = new System.Drawing.Point(60, 144);
             this.labelEnableShippingEst.Name = "labelEnableShippingEst";
             this.labelEnableShippingEst.Size = new System.Drawing.Size(165, 16);
-            this.labelEnableShippingEst.TabIndex = 70;
+            this.labelEnableShippingEst.TabIndex = 0;
             this.labelEnableShippingEst.Text = "Enable shipping estimates?";
             // 
             // checkBoxEnableShippingEst
@@ -1122,7 +1128,7 @@
             this.checkBoxEnableShippingEst.Location = new System.Drawing.Point(237, 146);
             this.checkBoxEnableShippingEst.Name = "checkBoxEnableShippingEst";
             this.checkBoxEnableShippingEst.Size = new System.Drawing.Size(15, 14);
-            this.checkBoxEnableShippingEst.TabIndex = 71;
+            this.checkBoxEnableShippingEst.TabIndex = 15;
             this.checkBoxEnableShippingEst.UseVisualStyleBackColor = true;
             this.checkBoxEnableShippingEst.CheckedChanged += new System.EventHandler(this.checkBoxEnableShippingEst_CheckedChanged);
             // 
@@ -1135,7 +1141,7 @@
             this.labelSettingsPanel.Location = new System.Drawing.Point(31, 12);
             this.labelSettingsPanel.Name = "labelSettingsPanel";
             this.labelSettingsPanel.Size = new System.Drawing.Size(76, 21);
-            this.labelSettingsPanel.TabIndex = 66;
+            this.labelSettingsPanel.TabIndex = 0;
             this.labelSettingsPanel.Text = "Settings:";
             // 
             // panelBoxing
@@ -1153,7 +1159,7 @@
             this.panelBoxing.Location = new System.Drawing.Point(86, 374);
             this.panelBoxing.Name = "panelBoxing";
             this.panelBoxing.Size = new System.Drawing.Size(262, 221);
-            this.panelBoxing.TabIndex = 76;
+            this.panelBoxing.TabIndex = 0;
             // 
             // labelBoxingPanel
             // 
@@ -1165,8 +1171,19 @@
             this.labelBoxingPanel.Location = new System.Drawing.Point(32, 13);
             this.labelBoxingPanel.Name = "labelBoxingPanel";
             this.labelBoxingPanel.Size = new System.Drawing.Size(68, 21);
-            this.labelBoxingPanel.TabIndex = 33;
+            this.labelBoxingPanel.TabIndex = 0;
             this.labelBoxingPanel.Text = "Boxing:";
+            // 
+            // buttonCalculate
+            // 
+            this.buttonCalculate.Location = new System.Drawing.Point(-140, -100);
+            this.buttonCalculate.Name = "buttonCalculate";
+            this.buttonCalculate.Size = new System.Drawing.Size(126, 23);
+            this.buttonCalculate.TabIndex = 0;
+            this.buttonCalculate.TabStop = false;
+            this.buttonCalculate.Text = "Calculate";
+            this.buttonCalculate.UseVisualStyleBackColor = true;
+            this.buttonCalculate.Visible = false;
             // 
             // Main
             // 
@@ -1300,6 +1317,7 @@
         private System.Windows.Forms.Label labelBoxingPanel;
         private System.Windows.Forms.Label labelPaCost;
         private System.Windows.Forms.TextBox textBoxEstPaCost;
+        private System.Windows.Forms.Button buttonCalculate;
     }
 }
 

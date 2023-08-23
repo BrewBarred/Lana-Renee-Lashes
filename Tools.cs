@@ -25,7 +25,7 @@ namespace LanaReneeLashes
         /// <summary>
         /// Defines the regular expression to represent a digit
         /// </summary>
-        static public Regex digitPattern = new Regex(@"^0$|^(\$?|[1-9]){1}[\d\,]*(\d*|(\.{1}[\d]{1,2}))$", RegexOptions.Compiled);
+        static public Regex digitPattern = new Regex(@"^0$|^(\$?[1-9]){1}([\d]{0,3}[\,]{1}?[\d]{1,3}?)*(\d*|(\.{1}[\d]{1,2}))$", RegexOptions.Compiled);
         // variable used to parse valid keys for textboxes
         static string digitChar = digitPattern.ToString();
 

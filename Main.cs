@@ -22,6 +22,8 @@ namespace LanaReneeLashes
 
         // default valid font color
         static Color defaultValidTextColor = SystemColors.WindowText;
+        // default display font color
+        static Color defaultDisplayTextColor = SystemColors.Info;
 
         // default valid textbox color
         static Color defaultValidTextboxColor = SystemColors.InactiveCaption;
@@ -138,14 +140,20 @@ namespace LanaReneeLashes
 
         // australian gst multiplier (10%)
         static double GST_MULTIPLIER = 0.1;
-        // maximum total 
-        const double MAX_VALUE = 2147483647;
         // maximum cost per unit before warning
         const decimal COST_WARNING = 5.5m;
-        // max hourly rate
-        const int MAX_HOURLY_RATE = 40;
+        // min usd to aud conversion rate (x0.8)
+        const double MIN_RATE = 0.8;
+        // max usd to aud conversion rate (x2.1)
+        const double MAX_RATE = 2.10;
         // min hourly rate
         const int MIN_HOURLY_RATE = 20;
+        // max hourly rate
+        const int MAX_HOURLY_RATE = 40;
+        // max PA cost
+        const int MAX_PA_COST = 1000;
+        // maximum total 
+        const double MAX_VALUE = 2147483647;
 
         #endregion
 
@@ -599,82 +607,6 @@ namespace LanaReneeLashes
         }
         #endregion
 
-        #region UpdateEstimates()
-        /// <summary>
-        /// Updates and formats displaying with estimated values
-        /// </summary>
-        private void UpdateEstimates()
-        {
-            // updates all estimate displays
-            textBoxEstCostOfBoxing.Text = estCostOfBoxing.FormatCurrency();
-            textBoxEstHoursToBox.Text = estHoursToBox.FormatHours();
-            textBoxEstCostPerUnit.Text = estCostPerUnit.FormatCurrency();
-            textBoxEstProfitPerUnit.Text = estProfitPerUnit.FormatCurrency();
-            textBoxTotalLashesOrdered.Text = totalQuantity.ToString();
-            textBoxEstSalesToProfit.Text = estSalesToProfit.ToString();
-            textBoxEstTotalCost.Text = estTotalUsdCost.FormatCurrency();
-            textBoxEstProfit.Text = estProfit.FormatCurrency();
-            textBoxEstProfitLessGst.Text = estProfitLessGst.FormatCurrency();
-            textBoxEstGstTotal.Text = estGstTotal.FormatCurrency();
-
-            // if estimate prices by quantity checkbox is checked
-            if (checkBoxEstPricesByQuantity.Checked)
-            {
-                // updates goody/olivia totals
-                textBoxGoodyTotal.Text = goodyTotal.FormatCurrency();
-                textBoxOliviaTotal.Text = oliviaTotal.FormatCurrency();
-
-            } // end if
-
-            // if include P.A. costs checkbox is checked
-            if (checkBoxPaCosts.Checked)
-            {
-                // displays estimated P.A. cost
-                textBoxEstPaCost.Text = estPaCost.FormatCurrency();
-
-            }
-            // else if include P.A. costs checkbox is not checked
-            else
-            {
-                // sets P.A. cost display to "Disabled"
-                textBoxEstPaCost.Text = "Disabled";
-
-            }// end if
-
-            // if enable flatbox estimates checkbox is checked
-            if (checkBoxEnableFlatBoxEst.Checked)
-            {
-                // displays estimated cost of flat boxes
-                textBoxEstCostOfFlatBoxes.Text = estCostOfFlatBoxes.FormatCurrency();
-
-            }
-            // else if enable flatbox estimates checkbox is not checked
-            else
-            {
-                // sets estimated cost of flatboxes to "Disabled"
-                textBoxEstCostOfFlatBoxes.Text = "Disabled";
-
-            }// end if
-
-            // if enable shipping estimates checkbox is checked
-            if (checkBoxEnableShippingEst.Checked)
-            {
-                // displays estimated cost of shipping
-                textBoxEstCostOfShipping.Text = estCostOfShipping.FormatCurrency();
-
-            }
-            // else if enable shipping estimates checkbox is not checked
-            else
-            {
-                // sets estimated cost of shipping to "Disabled"
-                textBoxEstCostOfShipping.Text = "Disabled";
-
-            }// end if
-
-        } // end void
-
-        #endregion
-
         #region FetchInput()
         /// <summary>
         /// Fetches user input from textboxes and parses them into relevant variables
@@ -897,7 +829,6 @@ namespace LanaReneeLashes
 
                 } // end if
 
-                // if auto
             }
             // else if total quantity is 0
             else
@@ -909,6 +840,180 @@ namespace LanaReneeLashes
 
             // updates display boxes with newly calculated values
             UpdateEstimates();
+
+        } // end void
+        #endregion
+
+        #region UpdateEstimates()
+        /// <summary>
+        /// Updates and formats displaying with estimated values
+        /// </summary>
+        private void UpdateEstimates()
+        {
+            // sets label to USD
+            labelEstimatedFigures.Text = "Estimated Figures: (USD)";
+
+            // updates all estimate displays
+            textBoxEstCostOfBoxing.Text = estCostOfBoxing.FormatCurrency();
+            textBoxEstHoursToBox.Text = estHoursToBox.FormatHours();
+            textBoxEstCostPerUnit.Text = estCostPerUnit.FormatCurrency();
+            textBoxEstProfitPerUnit.Text = estProfitPerUnit.FormatCurrency();
+            textBoxTotalLashesOrdered.Text = totalQuantity.ToString();
+            textBoxEstSalesToProfit.Text = estSalesToProfit.ToString();
+            textBoxEstTotalCost.Text = estTotalUsdCost.FormatCurrency();
+            textBoxEstProfit.Text = estProfit.FormatCurrency();
+            textBoxEstProfitLessGst.Text = estProfitLessGst.FormatCurrency();
+            textBoxEstGstTotal.Text = estGstTotal.FormatCurrency();
+
+            // if estimate prices by quantity checkbox is checked
+            if (checkBoxEstPricesByQuantity.Checked)
+            {
+                // updates goody/olivia totals
+                textBoxGoodyTotal.Text = goodyTotal.FormatCurrency();
+                textBoxOliviaTotal.Text = oliviaTotal.FormatCurrency();
+
+            } // end if
+
+            // if include P.A. costs checkbox is checked
+            if (checkBoxPaCosts.Checked)
+            {
+                // displays estimated P.A. cost
+                textBoxEstPaCost.Text = estPaCost.FormatCurrency();
+
+            }
+            // else if include P.A. costs checkbox is not checked
+            else
+            {
+                // sets P.A. cost display to "Disabled"
+                textBoxEstPaCost.Text = "Disabled";
+
+            }// end if
+
+            // if enable flatbox estimates checkbox is checked
+            if (checkBoxEnableFlatBoxEst.Checked)
+            {
+                // displays estimated cost of flat boxes
+                textBoxEstCostOfFlatBoxes.Text = estCostOfFlatBoxes.FormatCurrency();
+
+            }
+            // else if enable flatbox estimates checkbox is not checked
+            else
+            {
+                // sets estimated cost of flatboxes to "Disabled"
+                textBoxEstCostOfFlatBoxes.Text = "Disabled";
+
+            }// end if
+
+            // if enable shipping estimates checkbox is checked
+            if (checkBoxEnableShippingEst.Checked)
+            {
+                // displays estimated cost of shipping
+                textBoxEstCostOfShipping.Text = estCostOfShipping.FormatCurrency();
+
+            }
+            // else if enable shipping estimates checkbox is not checked
+            else
+            {
+                // sets estimated cost of shipping to "Disabled"
+                textBoxEstCostOfShipping.Text = "Disabled";
+
+            }// end if
+
+            CheckAbsurdities();
+
+        } // end void
+        #endregion
+
+        #region CheckAbsurdities()
+        /// <summary>
+        /// Checks for absurd values incase a mistaken value has gone unnoticed
+        /// </summary>
+        public void CheckAbsurdities()
+        {
+            // if estimated cost per unit is greater than or equal to the COST_WARNING value
+            if (estCostPerUnit > COST_WARNING || estProfitPerUnit < 0)
+            {
+                // makes text reddish to show that cost per unit is a bit too high
+                textBoxEstCostPerUnit.ForeColor = defaultInvalidTextboxColor;
+                // shows a tool tip to explain the red text
+                textBoxEstCostPerUnit.ShowUsYaTips("This is too high!");
+                // makes text reddish to show that profit per unit is a bit too low
+                textBoxEstProfitPerUnit.ForeColor = defaultInvalidTextboxColor;
+                // shows a tool tip to explain the red text
+                textBoxEstProfitPerUnit.ShowUsYaTips("You must hate money!");
+
+                // makes related values red too (as they can't be good if profit per unit is too low)
+                textBoxEstProfit.ForeColor = defaultInvalidTextboxColor;
+                textBoxEstProfitLessGst.ForeColor = defaultInvalidTextboxColor;
+                textBoxEstGstTotal.ForeColor = defaultInvalidTextboxColor;
+
+                // shows tool tips on related values
+                textBoxEstProfit.ShowUsYaTips("One job...");
+                textBoxEstProfitLessGst.ShowUsYaTips("Consider revising prices!");
+                textBoxEstGstTotal.ShowUsYaTips("This is actually good, but it means we are losing money elswhere");
+
+            }
+            // else if estimated cost per unit is less than the COST_WARNING value
+            else
+            {
+                // resets textboxes text to default color
+                textBoxEstCostPerUnit.ForeColor = defaultDisplayTextColor;
+                textBoxEstProfitPerUnit.ForeColor = defaultDisplayTextColor;
+                textBoxEstProfit.ForeColor = defaultDisplayTextColor;
+                textBoxEstProfitLessGst.ForeColor = defaultDisplayTextColor;
+                textBoxEstGstTotal.ForeColor = defaultDisplayTextColor;
+
+            } // end if
+
+            // if estimated PA cost is greater than the max PA cost allowance
+            if (estPaCost > MAX_PA_COST)
+            {
+                // makes text reddish to show that cost per unit is a bit too high
+                textBoxEstPaCost.ForeColor = defaultInvalidTextboxColor;
+                // shows a tool tip to explain the red text
+                textBoxEstPaCost.ShowUsYaTips("P.A. might be milking it!");
+
+            }
+            else
+            {
+                // resets textboxes text to default color
+                textBoxEstPaCost.ForeColor = defaultDisplayTextColor;
+
+            } // end if
+
+            // if sales to profit is less than 0
+            if (estSalesToProfit < 0)
+            {
+                // makes text reddish to show that cost per unit is a bit too high
+                textBoxEstSalesToProfit.ForeColor = Color.MediumSeaGreen;
+                // shows a tool tip to explain the red text
+                textBoxEstSalesToProfit.ShowUsYaTips("This is great! But consider double checking it's true...");
+
+            }
+            // else if sales to profit is greater than 0
+            else
+            {
+                // resets textboxes text to default color
+                textBoxEstSalesToProfit.ForeColor = defaultDisplayTextColor;
+
+            } // end if
+
+            // if usd to aud rate is less than x0.8 or greater than x2.1
+            if (usdToAud < MIN_RATE || usdToAud > MAX_RATE)
+            {
+                // makes textbox reddish to show that cost per unit is a bit too high
+                textBoxUsdToAud.BackColor = defaultInvalidTextboxColor;
+                // shows a tool tip to explain the red text
+                textBoxEstSalesToProfit.ShowUsYaTips("This doesn't seem right!");
+
+            }
+            // else if usd to aud is within the limits
+            else
+            {
+                // resets textboxes text to default color
+                textBoxEstSalesToProfit.ForeColor = defaultDisplayTextColor;
+
+            } // end if
 
         } // end void
         #endregion
@@ -931,7 +1036,7 @@ namespace LanaReneeLashes
             } // end if
 
             // checks if figures have already been converted to AUD, returns true if they have, else returns false
-            bool converted = estTotalAudCost == textBoxEstTotalCost.Text.ToDecimal();
+            bool converted = estTotalAudCost.ToString("0.00").ToDecimal() == textBoxEstTotalCost.Text.ToDecimal();
 
             // converts usd to aud multiplier to a decimal for easier calculations
             decimal conversionRate = (decimal)usdToAud;
@@ -947,6 +1052,9 @@ namespace LanaReneeLashes
 
                 // updates displays with new values
                 UpdateEstimates();
+
+                // changes estimated figures label to AUD
+                labelEstimatedFigures.Text = "Estimated Figures: (AUD)";
 
             } // end if
 
@@ -1143,7 +1251,8 @@ namespace LanaReneeLashes
             // launches website address
             var urlLauncher = System.Diagnostics.Process.Start(url);
             // sets checkedCurrency to true
-        }
+
+        }// end void
         #endregion
 
         #region linkLabelLanaReneeLashes_LinkClicked Event

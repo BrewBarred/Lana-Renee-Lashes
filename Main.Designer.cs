@@ -93,9 +93,10 @@
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.panelHeader = new System.Windows.Forms.Panel();
             this.panelDisplay = new System.Windows.Forms.Panel();
+            this.buttonCalculate = new System.Windows.Forms.Button();
             this.labelPaCost = new System.Windows.Forms.Label();
             this.textBoxEstPaCost = new System.Windows.Forms.TextBox();
-            this.labelTotal = new System.Windows.Forms.Label();
+            this.labelEstimatedFigures = new System.Windows.Forms.Label();
             this.panelPa = new System.Windows.Forms.Panel();
             this.labelPaHoursSpentOnThisOrder = new System.Windows.Forms.Label();
             this.textBoxPaHoursSpentOnThisOrder = new System.Windows.Forms.TextBox();
@@ -108,7 +109,6 @@
             this.labelSettingsPanel = new System.Windows.Forms.Label();
             this.panelBoxing = new System.Windows.Forms.Panel();
             this.labelBoxingPanel = new System.Windows.Forms.Label();
-            this.buttonCalculate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxWillow)).BeginInit();
@@ -386,6 +386,7 @@
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(111, 13);
             this.linkLabel1.TabIndex = 0;
+            this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Lanareneelashes.com";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelLanaReneeLashes_LinkClicked);
             // 
@@ -422,7 +423,7 @@
             this.textBoxGoodyTotal.Name = "textBoxGoodyTotal";
             this.textBoxGoodyTotal.Size = new System.Drawing.Size(159, 20);
             this.textBoxGoodyTotal.TabIndex = 1;
-            this.textBoxGoodyTotal.Text = "$343";
+            this.textBoxGoodyTotal.Text = "$0";
             this.textBoxGoodyTotal.Leave += new System.EventHandler(this.textBoxGoodyTotal_Leave);
             // 
             // textBoxGoodyQuantity
@@ -680,7 +681,7 @@
             this.textBoxUsdToAud.Name = "textBoxUsdToAud";
             this.textBoxUsdToAud.Size = new System.Drawing.Size(159, 20);
             this.textBoxUsdToAud.TabIndex = 5;
-            this.textBoxUsdToAud.Text = "1.50";
+            this.textBoxUsdToAud.Text = "1.57";
             // 
             // labelETA
             // 
@@ -942,7 +943,7 @@
             this.panelDisplay.Controls.Add(this.buttonCalculate);
             this.panelDisplay.Controls.Add(this.labelPaCost);
             this.panelDisplay.Controls.Add(this.textBoxEstPaCost);
-            this.panelDisplay.Controls.Add(this.labelTotal);
+            this.panelDisplay.Controls.Add(this.labelEstimatedFigures);
             this.panelDisplay.Controls.Add(this.labelEstimatedCostOfShipping);
             this.panelDisplay.Controls.Add(this.textBoxEstTotalCost);
             this.panelDisplay.Controls.Add(this.textBoxEstProfit);
@@ -969,6 +970,17 @@
             this.panelDisplay.Name = "panelDisplay";
             this.panelDisplay.Size = new System.Drawing.Size(887, 194);
             this.panelDisplay.TabIndex = 0;
+            // 
+            // buttonCalculate
+            // 
+            this.buttonCalculate.Location = new System.Drawing.Point(-140, -100);
+            this.buttonCalculate.Name = "buttonCalculate";
+            this.buttonCalculate.Size = new System.Drawing.Size(126, 23);
+            this.buttonCalculate.TabIndex = 0;
+            this.buttonCalculate.TabStop = false;
+            this.buttonCalculate.Text = "Calculate";
+            this.buttonCalculate.UseVisualStyleBackColor = true;
+            this.buttonCalculate.Visible = false;
             // 
             // labelPaCost
             // 
@@ -997,18 +1009,18 @@
             this.textBoxEstPaCost.TabStop = false;
             this.textBoxEstPaCost.Text = "Disabled";
             // 
-            // labelTotal
+            // labelEstimatedFigures
             // 
-            this.labelTotal.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
-            this.labelTotal.AutoSize = true;
-            this.labelTotal.BackColor = System.Drawing.Color.Transparent;
-            this.labelTotal.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelTotal.ForeColor = System.Drawing.Color.Thistle;
-            this.labelTotal.Location = new System.Drawing.Point(338, 9);
-            this.labelTotal.Name = "labelTotal";
-            this.labelTotal.Size = new System.Drawing.Size(149, 21);
-            this.labelTotal.TabIndex = 0;
-            this.labelTotal.Text = "Estimated Figures:";
+            this.labelEstimatedFigures.Anchor = System.Windows.Forms.AnchorStyles.Bottom;
+            this.labelEstimatedFigures.AutoSize = true;
+            this.labelEstimatedFigures.BackColor = System.Drawing.Color.Transparent;
+            this.labelEstimatedFigures.Font = new System.Drawing.Font("Microsoft Tai Le", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelEstimatedFigures.ForeColor = System.Drawing.Color.Thistle;
+            this.labelEstimatedFigures.Location = new System.Drawing.Point(315, 10);
+            this.labelEstimatedFigures.Name = "labelEstimatedFigures";
+            this.labelEstimatedFigures.Size = new System.Drawing.Size(198, 21);
+            this.labelEstimatedFigures.TabIndex = 0;
+            this.labelEstimatedFigures.Text = "Estimated Figures: (USD)";
             // 
             // panelPa
             // 
@@ -1173,17 +1185,6 @@
             this.labelBoxingPanel.TabIndex = 0;
             this.labelBoxingPanel.Text = "Boxing:";
             // 
-            // buttonCalculate
-            // 
-            this.buttonCalculate.Location = new System.Drawing.Point(-140, -100);
-            this.buttonCalculate.Name = "buttonCalculate";
-            this.buttonCalculate.Size = new System.Drawing.Size(126, 23);
-            this.buttonCalculate.TabIndex = 0;
-            this.buttonCalculate.TabStop = false;
-            this.buttonCalculate.Text = "Calculate";
-            this.buttonCalculate.UseVisualStyleBackColor = true;
-            this.buttonCalculate.Visible = false;
-            // 
             // Main
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(96F, 96F);
@@ -1305,7 +1306,7 @@
         private System.Windows.Forms.Label labelPaPanel;
         private System.Windows.Forms.Label labelCurrencyConversionPanel;
         private System.Windows.Forms.Label labelSettingsPanel;
-        private System.Windows.Forms.Label labelTotal;
+        private System.Windows.Forms.Label labelEstimatedFigures;
         private System.Windows.Forms.Label labelBoxingCost;
         private System.Windows.Forms.TextBox textBoxBoxingCost;
         private System.Windows.Forms.Label labelPaHoursSpentOnThisOrder;

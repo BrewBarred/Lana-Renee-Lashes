@@ -128,7 +128,6 @@ namespace LanaReneeLashes
             // if the extended key event doesn't match a valid digit character
             if (Regex.IsMatch(thisString, digitChar))
             {
-                Console.WriteLine("Match found!");
                 return true;
 
             } // end if
@@ -383,7 +382,7 @@ namespace LanaReneeLashes
                 // enables tool tip even if parent control is not active
                 ShowAlways = true,
                 // sets the period of time that the tool tip is shown for
-                AutoPopDelay = 1600,
+                AutoPopDelay = 2500,
                 // sets the period of time that the mouse pointer must remain stationary for before the tool tip is shown
                 InitialDelay = 0,
                 // enables tool tip animation effect

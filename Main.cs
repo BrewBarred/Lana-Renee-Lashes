@@ -309,6 +309,7 @@ namespace LanaReneeLashes
 
         // protects user from accidentally looping confirmation by pressing enter to exit error dialogs
         bool spamProtect = true;
+
         // regex pattern to match priceboxes
         //static public Regex pricePatternString = new Regex(@"^\$?(\d{0,3}|\,|\.){0,8}", RegexOptions.Compiled);
         // variable used to parse price regex
@@ -321,13 +322,13 @@ namespace LanaReneeLashes
         /// <summary>
         /// Checks string against valid numbers
         /// </summary>
-        static public Regex numberDigitPattern = new Regex(@"\d", RegexOptions.Compiled);
+        static public Regex numberDigitPattern = new Regex(@"\d^(!@#%\^&\*\(\))", RegexOptions.Compiled);
         // variable used to parse valid keys for textboxes
         string numberDigit = numberDigitPattern.ToString();
 
         // stores valid keys that can be typed into textboxes
-        Keys[] validKeyArray = { Keys.Back, Keys.Oemcomma, Keys.OemPeriod, Keys.Decimal, Keys.ShiftKey, Keys.Left,
-                                 Keys.Right, Keys.Up, Keys.Down, Keys.Tab, Keys.Delete, Keys.Oemcomma, Keys.Enter };
+        Keys[] validKeyArray = { Keys.Back, Keys.Oemcomma, Keys.OemPeriod, Keys.Decimal, Keys.Left,
+                                 Keys.Right, Keys.Up, Keys.Down, Keys.Tab, Keys.Delete, Keys.Oemcomma};
 
         // stores last character removed by filter
         Keys lastCharRemoved;
@@ -358,8 +359,10 @@ namespace LanaReneeLashes
             Height = Screen.GetWorkingArea(this).Height;
             // defaults the app to the top of the screen
             Top = 0;
+
             // resets all values to their defaults
             ResetAll();
+
             // focuses cursor onto textBoxGoodyCost
             textBoxGoodyTotal.Focus();
             // sets cursor to the end of the text in textBoxGoodyCost
@@ -448,6 +451,7 @@ namespace LanaReneeLashes
         /// <param name="e"></param>
         private void Main_KeyUp(object sender, KeyEventArgs e)
         {
+            Console.WriteLine(e.KeyData + " " + e.KeyCode);
             try
             {
 
@@ -457,13 +461,11 @@ namespace LanaReneeLashes
 
                     // unlocks the proper textbox properties
                     TextBox textBox = ActiveControl as TextBox;
-                    // creates a string reference of the textbox being used atm
+                    // stores the user input of this textbox as a string
                     string text = textBox.Text;
-                    // creates a string reference of the char being used atm
-                    string keyPressed = e.KeyCode.ToString();
-
-
-                    // stores current index
+                    // stores the last pressed character as a string
+                    Keys keyPressed = e.KeyCode;
+                    // stores the current cursor position
                     oldIndex = textBox.SelectionStart;
 
                     // if textbox is empty
@@ -474,19 +476,17 @@ namespace LanaReneeLashes
                         // updates displays
                         UpdateEstimates();
                         // writes info to console
-                        Log("Event handled due to null or empty textbox");
+                        Log("Calculations skipped due to \"" + textBox.Name + "\" being a null value");
 
-                    } // end if
-
-                    // else if user was releasing any key other than the "enter key" and currently active control is a textbox
-                    else if (!(e.KeyCode is Keys.Enter))
+                    }
+                    // else if user presses an invalid key
+                    else if (!validKeyArray.Contains(keyPressed))
                     {
-
-                        // if pressed key is a valid key defined by regex and keystrokes array
-                        if (!(Regex.IsMatch(keyPressed, numberDigit) || validKeyArray.Contains(e.KeyCode)))
+                        // if pressed key doesn't match the numberDigit regular expression
+                        if (!Regex.IsMatch(text, numberDigit))
                         {
                             // if the user enters the same invalid character twice in a row
-                            if (lastCharRemoved == e.KeyCode)
+                            if (lastCharRemoved == keyPressed)
                             {
                                 // informs the user that they may not use that character
                                 MessageBox.Show("\"" + e.KeyCode + "\" is not a valid input!");
@@ -494,9 +494,9 @@ namespace LanaReneeLashes
                             } // end if
 
                             // replaces keypress with nothing
-                            textBox.Text = text.Remove(oldIndex - 1, 1);
+                            textBox.Text = text.Replace(keyPressed.ToString(), "");
                             // stores this character as the last removed character
-                            lastCharRemoved = e.KeyCode;
+                            lastCharRemoved = keyPressed;
                             return;
 
                         } // end if
@@ -512,9 +512,7 @@ namespace LanaReneeLashes
                     } // end if
 
                     SetCursor();
-
-                } // end if
-
+                }
                 // else if user was releasing the "enter" key and currently active  control is not a textbox
                 else
                 {

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using static LanaReneeLashes.Tools.Logger;
 
@@ -21,7 +22,54 @@ namespace LanaReneeLashes
         static Color defaultInactiveColor = Color.LightGray;
         // default active textbox color
         static Color defaultActiveTextBoxColor = SystemColors.InactiveCaption;
+        /// <summary>
+        /// Defines the regular expression to represent a digit
+        /// </summary>
+        static public Regex digitPattern = new Regex(@"\d", RegexOptions.Compiled);
+        // variable used to parse valid keys for textboxes
+        static string digitChar = digitPattern.ToString();
 
+        #endregion
+
+        #region IsDigitChar()
+        /// <summary>
+        /// Extends a key event argument and returns true if it is a currency character, else returns false
+        /// </summary>
+        /// <param name="e">Key event argument to check</param>
+        /// <returns></returns>
+        public static bool IsCurrencyChar(this KeyEventArgs e)
+        {
+            // defines digit keys that shouldn't be modified with shift (note: D4 is excluded as a '$' is a valid currency char)
+            Keys[] invalidShiftKeysArray = { Keys.D1, Keys.D2, Keys.D3, Keys.D5, Keys.D6, Keys.D7, Keys.D8, Keys.D9, Keys.D0 };
+
+            // if the extended key event doesn't match a valid digit character
+            if (!Regex.IsMatch(e.KeyCode.ToString(), digitChar))
+            {
+                return false;
+
+            }
+            // else if the extended key 'does' match a valid digit character
+            else
+            {
+                // returns false if the extended key is a shift modified digit key (e.g. !, @, #, etc.)
+                for (int i = 0; i < invalidShiftKeysArray.Length - 1; i++)
+                {
+                    // if the passed key event represents a a shift modified digit key
+                    if (e.KeyData == (Keys.Shift | invalidShiftKeysArray[i]))
+                    {
+                        Console.WriteLine(e.KeyData);
+                        // returns false as the key will be a symbol not a number
+                        return false;
+
+                    } // end if
+
+                } // end for
+
+            }// end if
+
+            return true;
+
+        } // end bool
         #endregion
 
         #region Disable(TextBoxBase textbox)
@@ -106,6 +154,7 @@ namespace LanaReneeLashes
         } // end decimal
         #endregion
 
+        #region ToDouble(this string thisString)
         /// <summary>
         /// Extends a formatted string to return a double value stripped of unnecessary symbols/words
         /// </summary>
@@ -119,60 +168,7 @@ namespace LanaReneeLashes
 
             return newDouble;
 
-        }
-
-        #region FormatCurrency(this decimal thisDecimal)
-        /// <summary>
-        /// Extends a decimal value to return it as a string formatted to a currency value
-        /// </summary>
-        /// <param name="thisDecimal">Decimal to convert to a string formatted as a currency value</param>
-        /// <returns></returns>
-        public static string FormatCurrency(this decimal thisDecimal)
-        {
-            try
-            {
-
-                // stores the decimal value formatted as a currency string
-                string newCurrency;
-
-                // if thisDecimal is equal to 0
-                if (thisDecimal == 0)
-                {
-                    // sets newCurrency to $0
-                    newCurrency = "$0";
-                }
-                // if thisDecimal is a negative value
-                else if (thisDecimal < 0)
-                {
-                    // formats passed decimal value to 2 d.p. with a 0 in front and inserts the dollar sign 'after' the negative sign
-                    newCurrency = thisDecimal.ToString("#.00").Insert(1, " $");
-                }
-                // if thisDecimal is less than 1
-                else if (thisDecimal < 1)
-                {
-                    // formats passed decimal value to 2 d.p. with a 0 in front
-                    newCurrency = "$0" + thisDecimal.ToString("#.00");
-                }
-                // else if thisDecimal is greater than 1
-                else
-                {
-                    // formats passed decimal value to 2 d.p.
-                    newCurrency = "$" + thisDecimal.ToString("#.00");
-
-                } // end if
-
-                // returns the formatted decimal value as a string
-                return newCurrency;
-            }
-            catch (Exception ex)
-            {
-                // logs error message
-                LogError("Failed to parse " + thisDecimal + " into a decimal value", ex.Message);
-                return null;
-
-            } // end try
-
-        } // end string
+        } // end double
         #endregion
 
         #region ToHours()
@@ -244,6 +240,60 @@ namespace LanaReneeLashes
                 // writes error to console
                 LogError("Couldn't convert \"" + thisDouble + "\" to hours format!", ex.Message);
                 return "Error!";
+
+            } // end try
+
+        } // end string
+        #endregion
+
+        #region FormatCurrency(this decimal thisDecimal)
+        /// <summary>
+        /// Extends a decimal value to return it as a string formatted to a currency value
+        /// </summary>
+        /// <param name="thisDecimal">Decimal to convert to a string formatted as a currency value</param>
+        /// <returns></returns>
+        public static string FormatCurrency(this decimal thisDecimal)
+        {
+            try
+            {
+
+                // stores the decimal value formatted as a currency string
+                string newCurrency;
+
+                // if thisDecimal is equal to 0
+                if (thisDecimal == 0)
+                {
+                    // sets newCurrency to $0
+                    newCurrency = "$0";
+                }
+                // if thisDecimal is a negative value
+                else if (thisDecimal < 0)
+                {
+                    // formats passed decimal value to 2 d.p. with a 0 in front and inserts the dollar sign 'after' the negative sign
+                    newCurrency = thisDecimal.ToString("#.00").Insert(1, " $");
+                }
+                // if thisDecimal is less than 1
+                else if (thisDecimal < 1)
+                {
+                    // formats passed decimal value to 2 d.p. with a 0 in front
+                    newCurrency = "$0" + thisDecimal.ToString("#.00");
+                }
+                // else if thisDecimal is greater than 1
+                else
+                {
+                    // formats passed decimal value to 2 d.p.
+                    newCurrency = "$" + thisDecimal.ToString("#.00");
+
+                } // end if
+
+                // returns the formatted decimal value as a string
+                return newCurrency;
+            }
+            catch (Exception ex)
+            {
+                // logs error message
+                LogError("Failed to parse " + thisDecimal + " into a decimal value", ex.Message);
+                return null;
 
             } // end try
 

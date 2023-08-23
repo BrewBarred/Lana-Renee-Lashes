@@ -969,7 +969,6 @@
             this.panelDisplay.Name = "panelDisplay";
             this.panelDisplay.Size = new System.Drawing.Size(887, 194);
             this.panelDisplay.TabIndex = 0;
-            this.panelDisplay.Visible = false;
             // 
             // labelPaCost
             // 

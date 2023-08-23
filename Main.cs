@@ -510,9 +510,9 @@ namespace LanaReneeLashes
                             // if autofill checkbox is checked
                             if (checkBoxAutoFill.Checked)
                             {
-                                e.Handled = true;
+                                Control control = (Control)sender;
                                 // sets next textbox as the active control
-                                SelectNextControl((Control)sender, true, true, true, true);
+                                control.SelectNextControl(ActiveControl, true, true, true, true);
 
                             }
                             // else if auto fill checkbox is not checked
@@ -531,32 +531,22 @@ namespace LanaReneeLashes
                 // else if user was releasing the "enter" key and currently active  control is not a textbox
                 else
                 {
-                    // if user releases enter once in a row
-                    if (e.KeyCode == Keys.Enter && spamProtect == false && e.KeyCode != Keys.Back)
-                    {
-                        //sets spam protection to true to prevent double entering while trying to exit an error dialog
-                        spamProtect = true;
-                    }
-                    // else if user presses twice in a row
-                    else
-                    {
-                        // breaks out to prevent looping
-                        spamProtect = false;
-                        return;
-
-                    } // end if
-
                     // if the currently active control is a checkbox
-                    if (ActiveControl is CheckBox thisCheckBox)
+                    if (ActiveControl is CheckBox thisCheckBox && e.KeyData == Keys.Enter)
                     {
-                        // checks/unchecks current textbox depending on current state
-                        thisCheckBox.Checked = thisCheckBox.Checked = false ? true : false;
-                    }
-                    // else if the current active control is not a checkbox
-                    else
-                    {
-                        // calculates new textbox values and updates textboxes
-                        FetchInput();
+                        // if this checkbox is currently checked
+                        if (thisCheckBox.Checked)
+                        {
+                            // unchecks the checkbox
+                            thisCheckBox.Checked = false;
+                        }
+                        // else if this checkbox is currently unchecked
+                        else
+                        {
+                            // checks the checkbox
+                            thisCheckBox.Checked = true;
+
+                        } // end if
 
                     } // end if
 

@@ -342,15 +342,15 @@ namespace LanaReneeLashes
 
         #region ShowUsYaTips(text)
         /// <summary>
-        /// Displays a tool tip at the current control
+        /// Extends a control to display a tooltip on it with the passed text
         /// </summary>
-        /// <param name="control">Current Control</param>
-        /// <param name="text">Desired tool tip message</param>
+        /// <param name="control">Extended control</param>
+        /// <param name="text">Tool tip text</param>
         /// <returns></returns>
         public static void ShowUsYaTips(this Control control, string text)
         {
-
-            var toolTip = new ToolTip
+            // creates a new tool tip object
+            ToolTip toolTip = new ToolTip
             {
                 // sets the tool tip shape to a rectangle instead of a balloon
                 IsBalloon = false,
@@ -365,8 +365,11 @@ namespace LanaReneeLashes
                 // enables tool tip fading effect
                 UseFading = true
             };
+
+            // creates a tooltip with the above settings at the passed control with the passed text
             toolTip.SetToolTip(control, text);
-        }
+
+        } // end void
         #endregion
 
         #region Logger
@@ -380,15 +383,30 @@ namespace LanaReneeLashes
             /// </summary>
             public static List<string> errorReportList = new List<string>();
 
-            #region Log(message)
+            #region Log(string message)
             /// <summary>
-            /// Writes passed string to console window on a new line
+            /// Writes passed message to the console
             /// </summary>
-            /// <param name="message"></param>
+            /// <param name="message">Message to write to console</param>
             public static void Log(string message)
             {
+                // writes passed message to the console
                 Console.WriteLine(message);
             }
+            #endregion
+
+            #region Log(message)
+            /// <summary>
+            /// Writes passed error message to the console along with passed exception message
+            /// </summary>
+            /// <param name="errorMessage">Error message to write to the console</param>
+            /// <param name="exMessage">Exception message to write to the console</param>
+            public static void Log(string errorMessage, string exMessage)
+            {
+                // writes error to console window along with exception message
+                Console.WriteLine("Error: " + errorMessage + ". Exception: " + exMessage);
+
+            } // end void
             #endregion
 
             #region LogError(string errorMessage)
@@ -414,10 +432,12 @@ namespace LanaReneeLashes
             } // end void
             #endregion
 
-            #region LogError(string errorMessage, Exception exMessage)
+            #region LogError(string errorMessage, string exMessage)
             /// <summary>
             /// Writes error message to error report list and console window along with passed exception message
             /// </summary>
+            /// <param name="errorMessage">Error message to write to the console</param>
+            /// <param name="exMessage">Exception message to write to the console</param>
             public static void LogError(string errorMessage, string exMessage)
             {
                 try
@@ -430,37 +450,17 @@ namespace LanaReneeLashes
                 catch (Exception ex)
                 {
                     // write error to console
-                    Log(ex.Message);
+                    Log("Failed to log error!", ex.Message);
 
                 } // end try
 
             } // end void
             #endregion
 
-            #region LogException()
-            /// <summary>
-            /// Writes exception message to console window and error report list
-            /// </summary>
-            public static void LogException(string errorMessage)
-            {
-                try
-                {
-                    // writes error to error report
-                    errorReportList.Add("[" + DateTime.Now + "]" + errorMessage);
-                    // writes line to console window on its own line
-                    Console.WriteLine("Exception: " + errorMessage);
-                }
-                catch (Exception ex)
-                {
-                    // write error to console
-                    Log(ex.Message);
-
-                } // end try
-            }
-
-            #endregion
-        }
+        } // end class
 
         #endregion
-    }
-}
+
+    } // end class
+
+} // end namespace

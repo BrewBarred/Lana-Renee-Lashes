@@ -510,6 +510,7 @@ namespace LanaReneeLashes
                             // if autofill checkbox is checked
                             if (checkBoxAutoFill.Checked)
                             {
+                                // creates a control object using the sending object
                                 Control control = (Control)sender;
                                 // sets next textbox as the active control
                                 control.SelectNextControl(ActiveControl, true, true, true, true);
@@ -552,9 +553,10 @@ namespace LanaReneeLashes
 
                 } // end if
             }
-            catch
+            catch (Exception ex)
             {
-                LogError("????????");
+                // writes an error to the console
+                Log("Failed to process key up event!", ex.Message);
 
             } // end try
 

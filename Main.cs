@@ -331,7 +331,40 @@ namespace LanaReneeLashes
         int oldIndex = 0;
 
         #endregion
+        // CHECK THIS METHOD -- MIGHT BE REDUNDANT########################################################################################
+        #region SetCursor()
+        /// <summary>
+        /// Sets cursor back into it's correct position
+        /// </summary>
+        private void SetCursor()
+        {
+            // treats active control as a textbox
+            TextBox textBox = ActiveControl as TextBox;
 
+            // if textbox is displaying a "$" symbol or "0"
+            if (textBox.Text is "$" || textBox.Text is "0")
+            {
+                // sets cursor to the end text
+                textBox.SelectionStart = 1;
+            }
+            // else if textbox is displaying $0
+            else if (textBox.Text is "$0" || textBox.TextLength is 2)
+            {
+                // sets cursor to the end of the text
+                textBox.SelectionStart = 2;
+            }
+            // else if textbox is displaying something other than $0 or nothing
+            else
+            {
+                // reverts index from start of string back to last position
+                textBox.SelectionStart = oldIndex;
+
+            } // end if
+
+        } // end void
+        #endregion
+
+        #region Main()
         /// <summary>
         /// Initializes Application
         /// </summary>
@@ -342,6 +375,7 @@ namespace LanaReneeLashes
             Setup();
 
         } // end main
+        #endregion
 
         #region Setup()
         /// <summary>
@@ -556,49 +590,16 @@ namespace LanaReneeLashes
             catch (Exception ex)
             {
                 // writes an error to the console
-                Log("Failed to process key up event!", ex.Message);
+                LogError("Failed to process key up event!", ex.Message);
 
             } // end try
 
         }
         #endregion
 
-        #region SetCursor()
-        /// <summary>
-        /// Sets cursor back into it's correct position
-        /// </summary>
-
-        private void SetCursor()
-        {
-            TextBox textBox = ActiveControl as TextBox;
-
-            // if textbox is displaying a "$" symbol or "0"
-            if (textBox.Text is "$" || textBox.Text is "0")
-            {
-                // sets cursor to the end text
-                textBox.SelectionStart = 1;
-            }
-            // else if textbox is displaying $0
-            else if (textBox.Text is "$0" || textBox.TextLength is 2)
-            {
-                // sets cursor to the end of the text
-                textBox.SelectionStart = 2;
-            }
-            // else if textbox is displaying something other than $0 or nothing
-            else
-            {
-                // reverts index from start of string back to last position
-                textBox.SelectionStart = oldIndex;
-
-            } // end if
-
-        }
-        #endregion
-
         #region UpdateEstimates()
-
         /// <summary>
-        /// Clears all display boxes
+        /// Updates and formats displaying with estimated values
         /// </summary>
         private void UpdateEstimates()
         {
@@ -680,23 +681,20 @@ namespace LanaReneeLashes
         {
             try
             {
-
+                // stores all display textboxes
                 TextBox[] displayBoxes = { textBoxEstCostOfBoxing, textBoxEstCostPerUnit , textBoxEstProfitPerUnit, textBoxEstPaCost, textBoxEstCostOfFlatBoxes,
                                            textBoxEstCostOfShipping, textBoxTotalLashesOrdered, textBoxEstSalesToProfit, textBoxEstTotalCost, textBoxEstProfit,
                                            textBoxEstProfitLessGst, textBoxEstGstTotal};
 
+                // stores all panels with useable controls in them
                 Panel[] panelList = { panelGoody, panelOlivia, panelBoxing, panelPa, panelUsdToAud };
 
                 ///////
                 /// Parses all values to their respective variables
                 /////
 
-                foreach (Panel panel in panelList)
+                foreach (Panel thisPanel in panelList)
                 {
-                    Panel thisPanel = panel as Panel;
-
-                    //MessageBox.Show(thisPanel.Name.ToString());
-
                     // for each control in this form
                     foreach (Control control in thisPanel.Controls)
                     {
@@ -705,8 +703,8 @@ namespace LanaReneeLashes
                         {
                             // continues to next control
                             continue;
-                        }
 
+                        } // end if
 
                         // sets control to a proper textbox for referencing
                         TextBox textBox = control as TextBox;
@@ -715,58 +713,41 @@ namespace LanaReneeLashes
                         // creates a string reference for the text in the textbox being used
                         string text = textBox.Text;
 
-                        //MessageBox.Show(textBox.ToString());
-
                         // if the current textbox is used for display only
                         if (displayBoxes.Contains(textBox))
                         {
                             // continues to next control
                             continue;
 
-                        } // end if
-
-                        if (!(text is null))
+                        }
+                        // else if the current textbox is not a display textbox and the text is not null
+                        else if (text != null)
                         {
-                            // if the text has a $ symbol in it
-                            if (text.Contains("$"))
-                            {
-                                // removes the "$"
-                                text = text.Replace("$", "");
-
-                            }
-
-                            // if the text is empty
-                            if (text is "")
-                            {
-                                // sets the text value to 0
-                                text = "0";
-
-                            } // end if
-
+                            // switches to textbox name
                             switch (textBoxName)
                             {
 
                                 case "textBoxGoodyTotal":
                                     // stores user input to goodyCost variable
-                                    goodyTotal = decimal.Parse(text);
+                                    goodyTotal = text.ToDecimal();
 
                                     break;
 
                                 case "textBoxOliviaTotal":
                                     // stores user input to oliviaCost variable
-                                    oliviaTotal = decimal.Parse(text);
+                                    oliviaTotal = text.ToDecimal();
 
                                     break;
 
                                 case "textBoxGoodyQuantity":
                                     // stores user input to goodyCost variable
-                                    goodyQuantity = int.Parse(text);
+                                    goodyQuantity = text.ToInt();
 
                                     break;
 
                                 case "textBoxOliviaQuantity":
                                     // stores user input to olivia quantity variable
-                                    oliviaQuantity = int.Parse(text);
+                                    oliviaQuantity = text.ToInt();
 
                                     break;
 
@@ -784,7 +765,7 @@ namespace LanaReneeLashes
 
                                 case "textBoxHoursSpentBoxing":
                                     // stores user input to hoursSpentBoxing
-                                    hoursSpentBoxing = double.Parse(text);
+                                    hoursSpentBoxing = text.ToDouble();
 
                                     break;
 
@@ -793,7 +774,7 @@ namespace LanaReneeLashes
                                     if (checkBoxPaCosts.Checked)
                                     {
                                         // stores user input to paHourlyRate
-                                        paHourlyRate = decimal.Parse(text);
+                                        paHourlyRate = text.ToDecimal();
 
                                     } // end if
 
@@ -804,7 +785,7 @@ namespace LanaReneeLashes
                                     if (checkBoxPaCosts.Checked)
                                     {
                                         // stores user input to paHoursSpentOnThisOrder
-                                        paHoursSpentThisOrder = double.Parse(text);
+                                        paHoursSpentThisOrder = text.ToDouble();
 
                                     } // end if
 
@@ -812,7 +793,7 @@ namespace LanaReneeLashes
 
                                 case "textBoxUsdToAud":
                                     // stores user input to UsdToAud
-                                    usdToAud = double.Parse(text);
+                                    usdToAud = text.ToDouble();
 
                                     break;
 
@@ -838,7 +819,7 @@ namespace LanaReneeLashes
             catch (Exception ex)
             {
                 // writes error to console
-                LogError(ex.Message);
+                LogError("Failed to fetch input!", ex.Message);
 
             } // end try
 
@@ -866,19 +847,6 @@ namespace LanaReneeLashes
 
                 // calculates the PA's hourly rate
                 estPaCost = paHourlyRate * (decimal)paHoursSpentThisOrder;
-
-                // if include P.A. costs checkbox is checked
-                if (checkBoxPaCosts.Checked)
-                {
-                    // if P.A. hourly rate is greater than max rate OR less than min rate
-                    if (paHourlyRate < MIN_HOURLY_RATE || paHourlyRate > MAX_HOURLY_RATE)
-                    {
-                        // writes error message to user
-                        textBoxPaHourlyRate.ShowUsYaTips("Please ensure hourly rate is valid!");
-
-                    } // end if
-
-                } // end if
 
                 ///////
                 /// Calculates other costs
@@ -949,8 +917,17 @@ namespace LanaReneeLashes
         /// <param name="e"></param>
         private void buttonUsdToAud_Click(object sender, EventArgs e)
         {
+            // if estimated total cost is 0
+            if (estTotalCost is 0)
+            {
+                // displays error to user
+                MessageBox.Show("Cannot convert to AUD until USD estimates have been calculated!");
+                return;
+
+            } // end if
+
             // checks if figures have already been converted to AUD, returns true if they have, else returns false
-            bool converted = ((goodyTotal + oliviaTotal + estPaCost) * (decimal)usdToAud) == textBoxEstTotalCost.Text.ToDecimal();
+            bool converted = ((goodyTotal + oliviaTotal + estCostOfBoxing + estPaCost) * (decimal)usdToAud) == textBoxEstTotalCost.Text.ToDecimal();
 
             // converts usd to aud multiplier to a decimal for easier calculations
             decimal conversionRate = (decimal)usdToAud;
@@ -982,11 +959,14 @@ namespace LanaReneeLashes
         /// <param name="e"></param>
         private void checkBoxAutoFill_CheckedChanged(object sender, EventArgs e)
         {
-            if (checkBoxAutoFill.Checked == true)
+            // if checkbox autofill is checked
+            if (checkBoxAutoFill.Checked is true)
             {
-
+                // calculates and updates estimates
+                FetchInput();
 
             }
+            // else if checkbox autofill is not checked
             else
             {
                 // sets the forms acceptbutton (enter) to the button to avoid a dinging sound when enter is pressed
@@ -1225,7 +1205,30 @@ namespace LanaReneeLashes
         /// <param name="e"></param>
         private void textBoxHoursSpentBoxing_Leave(object sender, EventArgs e)
         {
-            // textBoxHoursSpentBoxing.
+            try
+            {
+                // if hours spent boxing is greater than 0
+                if (hoursSpentBoxing > 0)
+                {
+                    // sets hours spent boxing text to time format
+                    textBoxHoursSpentBoxing.Text = double.Parse(textBoxHoursSpentBoxing.Text).FormatHours();
+
+                }
+                // else if hours spent boxing is not greater than 0
+                else
+                {
+                    // sets hours spent boxing and it's textbox text to 0
+                    hoursSpentBoxing = 0;
+                    textBoxHoursSpentBoxing.Text = "0";
+
+                }// end if
+            }
+            catch (Exception ex)
+            {
+                // logs error to console and error log
+                LogError("Failed to convert hours spent boxing!", ex.Message);
+
+            } // end try
 
         } // end void
         #endregion

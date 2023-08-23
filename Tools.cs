@@ -140,7 +140,23 @@ namespace LanaReneeLashes
         } // end bool
         #endregion
 
-        #region ToDecimal()
+        #region ToInt(this string thisString)
+        /// <summary>
+        /// Extends a string to return an integer value stripped of unnecessary symbols/words
+        /// </summary>
+        /// <param name="thisString"></param>
+        /// <returns></returns>
+        public static int ToInt(this string thisString)
+        {
+            // uses the ToDecimal() method to strip back the passed string
+            decimal decimalValue = thisString.ToDecimal();
+            // converts the decimal value to an int and returns the result
+            return (int)decimalValue;
+
+        } // end int
+        #endregion
+
+        #region ToDecimal(this string thisString)
         /// <summary>
         /// Extends a formatted string to return a decimal value stripped of unnecessary symbols/words
         /// </summary>
@@ -150,6 +166,14 @@ namespace LanaReneeLashes
         {
             try
             {
+                // if the passed string is empty
+                if (thisString is "")
+                {
+                    // sets the passed string to "0"
+                    thisString = "0";
+
+                } // end if
+
                 // removes any "$" symbols from the string
                 string newString = thisString.Replace("$", "");
                 // removes "cents" from the text (found in boxing cost)
@@ -160,7 +184,7 @@ namespace LanaReneeLashes
                 newString = newString.Replace("mins", "");
                 // removes any white spaces from the string
                 newString = newString.Replace(" ", "");
-                // removes any commas from the string
+                // removes any commas from the string and parses the stripped value into a decimal
                 decimal newDecimal = decimal.Parse(newString.Replace(",", ""));
 
                 // returns the stripped decimal
@@ -184,25 +208,27 @@ namespace LanaReneeLashes
         /// <returns></returns>
         public static double ToDouble(this string thisString)
         {
+            // converts passed string to a stripped decimal value
             decimal decimalValue = thisString.ToDecimal();
-            string decimalString = decimalValue.ToString("0.##");
-            double newDouble = double.Parse(decimalString);
-
-            return newDouble;
+            // converts the decimal to a double to 2 d.p. and returns the result
+            return double.Parse(decimalValue.ToString("0.##"));
 
         } // end double
         #endregion
 
-        #region ToHours()
+        #region FormatHours(this double thisDouble)
         /// <summary>
         /// Extends a double value, splits it into hours and minutes and returns the result as a string
         /// </summary>
-        /// <param name="thisDouble">Double value to be converted</param>
+        /// <param name="thisDouble">Double value to be formatted</param>
         /// <returns></returns>
         public static string FormatHours(this double thisDouble)
         {
             try
             {
+                // uses the ToDecimal() method to strip any unnecessary symbols/words
+                thisDouble = (double)thisDouble.ToString().ToDecimal();
+
                 // if the passed double value has a decimal point
                 if (thisDouble.ToString().Contains("."))
                 {

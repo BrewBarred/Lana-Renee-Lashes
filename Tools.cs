@@ -25,51 +25,10 @@ namespace LanaReneeLashes
         /// <summary>
         /// Defines the regular expression to represent a digit
         /// </summary>
-        static public Regex digitPattern = new Regex(@"\d", RegexOptions.Compiled);
+        static public Regex digitPattern = new Regex(@"^[\$|\d][\d\,\.]*[\d]$", RegexOptions.Compiled);
         // variable used to parse valid keys for textboxes
         static string digitChar = digitPattern.ToString();
 
-        #endregion
-
-        #region IsDigitChar()
-        /// <summary>
-        /// Extends a key event argument and returns true if it is a currency character, else returns false
-        /// </summary>
-        /// <param name="e">Key event argument to check</param>
-        /// <returns></returns>
-        public static bool IsCurrencyChar(this KeyEventArgs e)
-        {
-            // defines digit keys that shouldn't be modified with shift (note: D4 is excluded as a '$' is a valid currency char)
-            Keys[] invalidShiftKeysArray = { Keys.D1, Keys.D2, Keys.D3, Keys.D5, Keys.D6, Keys.D7, Keys.D8, Keys.D9, Keys.D0 };
-
-            // if the extended key event doesn't match a valid digit character
-            if (!Regex.IsMatch(e.KeyCode.ToString(), digitChar))
-            {
-                return false;
-
-            }
-            // else if the extended key 'does' match a valid digit character
-            else
-            {
-                // returns false if the extended key is a shift modified digit key (e.g. !, @, #, etc.)
-                for (int i = 0; i < invalidShiftKeysArray.Length - 1; i++)
-                {
-                    // if the passed key event represents a a shift modified digit key
-                    if (e.KeyData == (Keys.Shift | invalidShiftKeysArray[i]))
-                    {
-                        Console.WriteLine(e.KeyData);
-                        // returns false as the key will be a symbol not a number
-                        return false;
-
-                    } // end if
-
-                } // end for
-
-            }// end if
-
-            return true;
-
-        } // end bool
         #endregion
 
         #region Disable(TextBoxBase textbox)
@@ -116,6 +75,69 @@ namespace LanaReneeLashes
             textBox.Enable("0");
 
         } // end void
+        #endregion
+
+        #region IsCurrencyChar()
+        /// <summary>
+        /// Extends a key event argument and returns true if it is a currency character, else returns false
+        /// </summary>
+        /// <param name="e">Key event argument to check</param>
+        /// <returns></returns>
+        public static bool IsCurrencyChar(this KeyEventArgs e)
+        {
+            // defines digit keys that shouldn't be modified with shift (note: D4 is excluded as a '$' is a valid currency char)
+            Keys[] invalidShiftKeysArray = { Keys.D1, Keys.D2, Keys.D3, Keys.D5, Keys.D6, Keys.D7, Keys.D8, Keys.D9, Keys.D0 };
+
+            // if the extended key event doesn't match a valid digit character
+            if (!Regex.IsMatch(e.KeyCode.ToString(), digitChar))
+            {
+                return false;
+
+            }
+            // else if the extended key 'does' match a valid digit character
+            else
+            {
+                // returns false if the extended key is a shift modified digit key (e.g. !, @, #, etc.)
+                for (int i = 0; i < invalidShiftKeysArray.Length - 1; i++)
+                {
+                    // if the passed key event represents a a shift modified digit key
+                    if (e.KeyData == (Keys.Shift | invalidShiftKeysArray[i]))
+                    {
+                        // returns false as the key will be a symbol not a number
+                        return false;
+
+                    } // end if
+
+                } // end for
+
+            }// end if
+
+            return true;
+
+        } // end bool
+        #endregion
+
+        #region IsValidDigit()
+        /// <summary>
+        /// Extends a string and returns true if the whole string is a valid currency string
+        /// </summary>
+        /// <param name="thisString"></param>
+        /// <returns></returns>
+        public static bool IsCurrency(this string thisString)
+        {
+            // if the extended key event doesn't match a valid digit character
+            if (Regex.IsMatch(thisString, digitChar))
+            {
+                Console.WriteLine("Match found!");
+                return true;
+
+            } // end if
+
+            // writes error to console
+            Log("Invalid input detected in string: \"" + thisString + "\"");
+            return false;
+
+        } // end bool
         #endregion
 
         #region ToDecimal()

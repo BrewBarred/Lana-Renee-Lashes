@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Drawing;
 using System.Linq;
-using System.Text.RegularExpressions;
 using System.Windows.Forms;
 using static LanaReneeLashes.Tools.Logger;
 
@@ -21,14 +20,22 @@ namespace LanaReneeLashes
         // Settable defaults
         ////
 
-        // price per goody lash
+        // default valid font color
+        static Color defaultValidTextColor = SystemColors.WindowText;
+
+        // default valid textbox color
+        static Color defaultValidTextboxColor = SystemColors.InactiveCaption;
+        // default invalid textbox color
+        static Color defaultInvalidTextboxColor = Color.RosyBrown;
+
+        // set price per goody lash
         static decimal setGoodyLashCost = 2.9m;
-        // estimated goody price per unit calculated from a past order
+        // set estimated goody price per unit calculated from a past order
         static decimal setGoodyTotalCostPerUnit = 2.9309m;
 
         // set price per olivia lash 
         static decimal setOliviaLashCost = 2;
-        // estimated olivia price per unit calculated from a past order
+        // set estimated olivia price per unit calculated from a past order
         static decimal setOliviaTotalCostPerUnit = 3.3523m;
 
         // set retail price per unit
@@ -319,16 +326,6 @@ namespace LanaReneeLashes
         // variable used to parse text regex
         //string numberPattern = numberPatternString.ToString();
         // regex pattern used to match numeric digits
-        /// <summary>
-        /// Checks string against valid numbers
-        /// </summary>
-        static public Regex numberDigitPattern = new Regex(@"\d^(!@#%\^&\*\(\))", RegexOptions.Compiled);
-        // variable used to parse valid keys for textboxes
-        string numberDigit = numberDigitPattern.ToString();
-
-        // stores valid keys that can be typed into textboxes
-        Keys[] validKeyArray = { Keys.Back, Keys.Oemcomma, Keys.OemPeriod, Keys.Decimal, Keys.Left,
-                                 Keys.Right, Keys.Up, Keys.Down, Keys.Tab, Keys.Delete, Keys.Oemcomma};
 
         // stores last character removed by filter
         Keys lastCharRemoved;
@@ -445,20 +442,22 @@ namespace LanaReneeLashes
 
         #region Main_KeyUp Event
         /// <summary>
-        /// When any key is lifted, checks if all controls are valid to enable/disable "Create Account" button and displays tool tips to assist user with validation process
+        /// As each key is lifted on this form, validates the user input and calculates totals if all input boxes are valid
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void Main_KeyUp(object sender, KeyEventArgs e)
         {
-            Console.WriteLine(e.KeyData + " " + e.KeyCode);
+            // stores valid keys that can be typed into textboxes
+            Keys[] validKeyArray = { Keys.Back, Keys.Oemcomma, Keys.OemPeriod, Keys.Decimal, Keys.Left,
+                                 Keys.Right, Keys.Up, Keys.Down, Keys.Tab, Keys.Delete, Keys.Oemcomma };
+
             try
             {
 
                 // if the active control of this form is a textbox
                 if (ActiveControl is TextBoxBase)
                 {
-
                     // unlocks the proper textbox properties
                     TextBox textBox = ActiveControl as TextBox;
                     // stores the user input of this textbox as a string
@@ -478,21 +477,19 @@ namespace LanaReneeLashes
                         // writes info to console
                         Log("Calculations skipped due to \"" + textBox.Name + "\" being a null value");
 
+                        return;
+
                     }
-                    // else if user presses an invalid key
-                    else if (!validKeyArray.Contains(keyPressed))
+                    // else if text is invalid
+                    else if (!text.IsCurrency())
                     {
-                        // if pressed key doesn't match the numberDigit regular expression
-                        if (!Regex.IsMatch(text, numberDigit))
+                        // shows a tool tip informing user that they can't use that character
+                        textBox.ShowUsYaTips("Invalid input detected!");
+                        // sets textbox backcolor to red to show it is invalid
+                        textBox.BackColor = defaultInvalidTextboxColor;
+
+                        if (!validKeyArray.Contains(keyPressed))
                         {
-                            // if the user enters the same invalid character twice in a row
-                            if (lastCharRemoved == keyPressed)
-                            {
-                                // informs the user that they may not use that character
-                                MessageBox.Show("\"" + e.KeyCode + "\" is not a valid input!");
-
-                            } // end if
-
                             // replaces keypress with nothing
                             textBox.Text = text.Replace(keyPressed.ToString(), "");
                             // stores this character as the last removed character
@@ -501,7 +498,14 @@ namespace LanaReneeLashes
 
                         } // end if
 
-                        // if user has selected autofill on
+                    }
+                    // else if the user presses a valid key
+                    else
+                    {
+                        // sets textbox back to its default color incase it was previously invalid
+                        textBox.BackColor = defaultValidTextboxColor;
+
+                        // if autofill checkbox is checked
                         if (checkBoxAutoFill.Checked)
                         {
                             // calculates and updates values
@@ -511,7 +515,9 @@ namespace LanaReneeLashes
 
                     } // end if
 
+                    // sets cursor back to original position
                     SetCursor();
+
                 }
                 // else if user was releasing the "enter" key and currently active  control is not a textbox
                 else

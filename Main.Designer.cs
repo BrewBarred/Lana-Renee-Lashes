@@ -612,6 +612,7 @@
             // textBoxOliviaQuantity
             // 
             this.textBoxOliviaQuantity.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.textBoxOliviaQuantity.ForeColor = System.Drawing.SystemColors.WindowText;
             this.textBoxOliviaQuantity.Location = new System.Drawing.Point(50, 132);
             this.textBoxOliviaQuantity.MaxLength = 7;
             this.textBoxOliviaQuantity.Name = "textBoxOliviaQuantity";
@@ -622,6 +623,7 @@
             // textBoxOliviaTotal
             // 
             this.textBoxOliviaTotal.BackColor = System.Drawing.SystemColors.InactiveCaption;
+            this.textBoxOliviaTotal.ForeColor = System.Drawing.SystemColors.WindowText;
             this.textBoxOliviaTotal.Location = new System.Drawing.Point(50, 69);
             this.textBoxOliviaTotal.MaxLength = 9;
             this.textBoxOliviaTotal.Name = "textBoxOliviaTotal";

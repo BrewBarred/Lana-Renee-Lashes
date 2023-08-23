@@ -1191,7 +1191,8 @@ namespace LanaReneeLashes
         {
             //changes subtitle color back to white
             labelSubTitle.ForeColor = Color.White;
-        }
+
+        } // end void
         #endregion
 
         #region labelSubTitle_Click()
@@ -1205,6 +1206,19 @@ namespace LanaReneeLashes
 
         #endregion
 
+        #endregion
+
+        #region textBoxSpentBoxing_Leave() Event
+        /// <summary>
+        /// Formats text input when focus is lost
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxHoursSpentBoxing_Leave(object sender, EventArgs e)
+        {
+            // textBoxHoursSpentBoxing.
+
+        } // end void
         #endregion
 
     } // end class

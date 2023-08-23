@@ -47,7 +47,6 @@ namespace LanaReneeLashes
         /// <param name="defaultValue">Default value to insert into textbox</param>
         public static void Enable(this TextBoxBase textBox, string defaultValue)
         {
-
             // disables textbox
             textBox.Enabled = true;
             // sets backcolor back to normal

@@ -34,12 +34,12 @@
             this.labelGoodyCost = new System.Windows.Forms.Label();
             this.labelGoodyQuantity = new System.Windows.Forms.Label();
             this.labelEnableFlatBoxEst = new System.Windows.Forms.Label();
-            this.labelPaCosts = new System.Windows.Forms.Label();
+            this.labelEnablePaCosts = new System.Windows.Forms.Label();
             this.labelHoursSpentBoxing = new System.Windows.Forms.Label();
             this.checkBoxPaCosts = new System.Windows.Forms.CheckBox();
             this.labelPaHourlyRate = new System.Windows.Forms.Label();
             this.labelEstBoxingCost = new System.Windows.Forms.Label();
-            this.labelPaHoursToBox = new System.Windows.Forms.Label();
+            this.labelPaTimeToBox = new System.Windows.Forms.Label();
             this.checkBoxEnableFlatBoxEst = new System.Windows.Forms.CheckBox();
             this.labelCostPerUnit = new System.Windows.Forms.Label();
             this.labelEstimatedtotal = new System.Windows.Forms.Label();
@@ -182,18 +182,18 @@
             this.labelEnableFlatBoxEst.TabIndex = 0;
             this.labelEnableFlatBoxEst.Text = "Enable flat box estimates?";
             // 
-            // labelPaCosts
+            // labelEnablePaCosts
             // 
-            this.labelPaCosts.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.labelPaCosts.AutoSize = true;
-            this.labelPaCosts.BackColor = System.Drawing.Color.Transparent;
-            this.labelPaCosts.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPaCosts.ForeColor = System.Drawing.Color.Thistle;
-            this.labelPaCosts.Location = new System.Drawing.Point(61, 71);
-            this.labelPaCosts.Name = "labelPaCosts";
-            this.labelPaCosts.Size = new System.Drawing.Size(113, 16);
-            this.labelPaCosts.TabIndex = 0;
-            this.labelPaCosts.Text = "Include P.A. costs?";
+            this.labelEnablePaCosts.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.labelEnablePaCosts.AutoSize = true;
+            this.labelEnablePaCosts.BackColor = System.Drawing.Color.Transparent;
+            this.labelEnablePaCosts.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelEnablePaCosts.ForeColor = System.Drawing.Color.Thistle;
+            this.labelEnablePaCosts.Location = new System.Drawing.Point(60, 104);
+            this.labelEnablePaCosts.Name = "labelEnablePaCosts";
+            this.labelEnablePaCosts.Size = new System.Drawing.Size(111, 16);
+            this.labelEnablePaCosts.TabIndex = 0;
+            this.labelEnablePaCosts.Text = "Enable P.A. costs?";
             // 
             // labelHoursSpentBoxing
             // 
@@ -204,9 +204,9 @@
             this.labelHoursSpentBoxing.ForeColor = System.Drawing.Color.Thistle;
             this.labelHoursSpentBoxing.Location = new System.Drawing.Point(13, 161);
             this.labelHoursSpentBoxing.Name = "labelHoursSpentBoxing";
-            this.labelHoursSpentBoxing.Size = new System.Drawing.Size(125, 16);
+            this.labelHoursSpentBoxing.Size = new System.Drawing.Size(187, 16);
             this.labelHoursSpentBoxing.TabIndex = 0;
-            this.labelHoursSpentBoxing.Text = "Hours spent boxing:";
+            this.labelHoursSpentBoxing.Text = "Hours spent boxing: (Optional)";
             // 
             // checkBoxPaCosts
             // 
@@ -214,7 +214,7 @@
             this.checkBoxPaCosts.AutoSize = true;
             this.checkBoxPaCosts.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F);
             this.checkBoxPaCosts.ForeColor = System.Drawing.Color.Thistle;
-            this.checkBoxPaCosts.Location = new System.Drawing.Point(237, 71);
+            this.checkBoxPaCosts.Location = new System.Drawing.Point(237, 106);
             this.checkBoxPaCosts.Name = "checkBoxPaCosts";
             this.checkBoxPaCosts.Size = new System.Drawing.Size(15, 14);
             this.checkBoxPaCosts.TabIndex = 3;
@@ -246,18 +246,18 @@
             this.labelEstBoxingCost.TabIndex = 0;
             this.labelEstBoxingCost.Text = "Estimated cost of boxing:";
             // 
-            // labelPaHoursToBox
+            // labelPaTimeToBox
             // 
-            this.labelPaHoursToBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
-            this.labelPaHoursToBox.AutoSize = true;
-            this.labelPaHoursToBox.BackColor = System.Drawing.Color.Transparent;
-            this.labelPaHoursToBox.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelPaHoursToBox.ForeColor = System.Drawing.Color.Thistle;
-            this.labelPaHoursToBox.Location = new System.Drawing.Point(13, 103);
-            this.labelPaHoursToBox.Name = "labelPaHoursToBox";
-            this.labelPaHoursToBox.Size = new System.Drawing.Size(146, 16);
-            this.labelPaHoursToBox.TabIndex = 0;
-            this.labelPaHoursToBox.Text = "Estimated hours to box:";
+            this.labelPaTimeToBox.Anchor = System.Windows.Forms.AnchorStyles.Top;
+            this.labelPaTimeToBox.AutoSize = true;
+            this.labelPaTimeToBox.BackColor = System.Drawing.Color.Transparent;
+            this.labelPaTimeToBox.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelPaTimeToBox.ForeColor = System.Drawing.Color.Thistle;
+            this.labelPaTimeToBox.Location = new System.Drawing.Point(13, 103);
+            this.labelPaTimeToBox.Name = "labelPaTimeToBox";
+            this.labelPaTimeToBox.Size = new System.Drawing.Size(138, 16);
+            this.labelPaTimeToBox.TabIndex = 0;
+            this.labelPaTimeToBox.Text = "Estimated time to box:";
             // 
             // checkBoxEnableFlatBoxEst
             // 
@@ -456,6 +456,7 @@
             this.textBoxHoursSpentBoxing.Size = new System.Drawing.Size(159, 20);
             this.textBoxHoursSpentBoxing.TabIndex = 5;
             this.textBoxHoursSpentBoxing.Text = "0";
+            this.textBoxHoursSpentBoxing.Leave += new System.EventHandler(this.textBoxHoursSpentBoxing_Leave);
             // 
             // textBoxEstHoursToBox
             // 
@@ -671,7 +672,7 @@
             // 
             this.textBoxUsdToAud.BackColor = System.Drawing.SystemColors.InactiveCaption;
             this.textBoxUsdToAud.Location = new System.Drawing.Point(50, 73);
-            this.textBoxUsdToAud.MaxLength = 6;
+            this.textBoxUsdToAud.MaxLength = 4;
             this.textBoxUsdToAud.Name = "textBoxUsdToAud";
             this.textBoxUsdToAud.Size = new System.Drawing.Size(159, 20);
             this.textBoxUsdToAud.TabIndex = 11;
@@ -710,7 +711,7 @@
             this.labelAutofillForm.BackColor = System.Drawing.Color.Transparent;
             this.labelAutofillForm.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelAutofillForm.ForeColor = System.Drawing.Color.Thistle;
-            this.labelAutofillForm.Location = new System.Drawing.Point(61, 51);
+            this.labelAutofillForm.Location = new System.Drawing.Point(61, 49);
             this.labelAutofillForm.Name = "labelAutofillForm";
             this.labelAutofillForm.Size = new System.Drawing.Size(87, 16);
             this.labelAutofillForm.TabIndex = 0;
@@ -760,7 +761,7 @@
             this.checkBoxEstPricesByQuantity.AutoSize = true;
             this.checkBoxEstPricesByQuantity.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F);
             this.checkBoxEstPricesByQuantity.ForeColor = System.Drawing.Color.Thistle;
-            this.checkBoxEstPricesByQuantity.Location = new System.Drawing.Point(237, 91);
+            this.checkBoxEstPricesByQuantity.Location = new System.Drawing.Point(237, 71);
             this.checkBoxEstPricesByQuantity.Name = "checkBoxEstPricesByQuantity";
             this.checkBoxEstPricesByQuantity.Size = new System.Drawing.Size(15, 14);
             this.checkBoxEstPricesByQuantity.TabIndex = 66;
@@ -773,7 +774,7 @@
             this.labelEstPricesByQuantity.BackColor = System.Drawing.Color.Transparent;
             this.labelEstPricesByQuantity.Font = new System.Drawing.Font("Microsoft Tai Le", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelEstPricesByQuantity.ForeColor = System.Drawing.Color.Thistle;
-            this.labelEstPricesByQuantity.Location = new System.Drawing.Point(60, 89);
+            this.labelEstPricesByQuantity.Location = new System.Drawing.Point(60, 69);
             this.labelEstPricesByQuantity.Name = "labelEstPricesByQuantity";
             this.labelEstPricesByQuantity.Size = new System.Drawing.Size(169, 16);
             this.labelEstPricesByQuantity.TabIndex = 67;
@@ -1062,9 +1063,9 @@
             this.labelBoxingCost.ForeColor = System.Drawing.Color.Thistle;
             this.labelBoxingCost.Location = new System.Drawing.Point(13, 43);
             this.labelBoxingCost.Name = "labelBoxingCost";
-            this.labelBoxingCost.Size = new System.Drawing.Size(135, 16);
+            this.labelBoxingCost.Size = new System.Drawing.Size(133, 16);
             this.labelBoxingCost.TabIndex = 34;
-            this.labelBoxingCost.Text = "Boxing cost (per box):";
+            this.labelBoxingCost.Text = "Boxing cost: (Per Box)";
             // 
             // textBoxBoxingCost
             // 
@@ -1089,7 +1090,7 @@
             this.panelSettings.Controls.Add(this.labelAutofillForm);
             this.panelSettings.Controls.Add(this.checkBoxEstPricesByQuantity);
             this.panelSettings.Controls.Add(this.labelEnableFlatBoxEst);
-            this.panelSettings.Controls.Add(this.labelPaCosts);
+            this.panelSettings.Controls.Add(this.labelEnablePaCosts);
             this.panelSettings.Controls.Add(this.checkBoxEnableFlatBoxEst);
             this.panelSettings.Controls.Add(this.checkBoxPaCosts);
             this.panelSettings.Controls.Add(this.checkBoxAutoFill);
@@ -1146,7 +1147,7 @@
             this.panelBoxing.Controls.Add(this.textBoxEstHoursToBox);
             this.panelBoxing.Controls.Add(this.textBoxBoxingCost);
             this.panelBoxing.Controls.Add(this.labelHoursSpentBoxing);
-            this.panelBoxing.Controls.Add(this.labelPaHoursToBox);
+            this.panelBoxing.Controls.Add(this.labelPaTimeToBox);
             this.panelBoxing.Location = new System.Drawing.Point(86, 374);
             this.panelBoxing.Name = "panelBoxing";
             this.panelBoxing.Size = new System.Drawing.Size(262, 221);
@@ -1224,12 +1225,12 @@
         private System.Windows.Forms.Label labelGoodyCost;
         private System.Windows.Forms.Label labelGoodyQuantity;
         private System.Windows.Forms.Label labelEnableFlatBoxEst;
-        private System.Windows.Forms.Label labelPaCosts;
+        private System.Windows.Forms.Label labelEnablePaCosts;
         private System.Windows.Forms.Label labelHoursSpentBoxing;
         private System.Windows.Forms.CheckBox checkBoxPaCosts;
         private System.Windows.Forms.Label labelPaHourlyRate;
         private System.Windows.Forms.Label labelEstBoxingCost;
-        private System.Windows.Forms.Label labelPaHoursToBox;
+        private System.Windows.Forms.Label labelPaTimeToBox;
         private System.Windows.Forms.CheckBox checkBoxEnableFlatBoxEst;
         private System.Windows.Forms.Label labelCostPerUnit;
         private System.Windows.Forms.Label labelEstimatedtotal;

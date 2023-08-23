@@ -120,7 +120,7 @@ namespace LanaReneeLashes
         // default estimated sales to profit
         static int defaultEstSalesToProfit = 0;
         // default estimated total cost
-        static decimal defaultEstTotalCost = 0.00m;
+        static decimal defaultEstTotalUsdCost = 0.00m;
         // default estimated profit
         static decimal defaultEstProfit = 0.00m;
         // default estimated profit less GST
@@ -153,7 +153,7 @@ namespace LanaReneeLashes
 
         // groups all USD currency values into an array for easier conversion to AUD later
         static decimal[] currencyValuesArray = { defaultCostOfBoxing, defaultEstCostPerUnit, defaultEstProfitPerUnit, defaultEstCostOfFlatBoxes, defaultEstCostOfShipping,
-                                                 defaultEstTotalCost, defaultEstProfit, defaultEstProfitLessGst, defaultEstGstTotal };
+                                                 defaultEstTotalUsdCost, defaultEstProfit, defaultEstProfitLessGst, defaultEstGstTotal };
 
         ///////
         // Goody price break-down
@@ -209,7 +209,8 @@ namespace LanaReneeLashes
         // Currency conversion break-down
         ////
 
-        double usdToAud;
+        static double usdToAud;
+        decimal estTotalAudCost;
 
 
         ///////
@@ -273,11 +274,11 @@ namespace LanaReneeLashes
         // estimated sales required before profit starts
         int estSalesToProfit;
         // estimated total cost
-        static decimal estTotalCost
+        static decimal estTotalUsdCost
         {
-            // returns estTotalCost
+            // returns estTotalUsdCost
             get { return currencyValuesArray[5]; }
-            // updates estTotalCost
+            // updates estTotalUsdCost
             set { currencyValuesArray[5] = value; }
 
         } // end decimal
@@ -457,7 +458,8 @@ namespace LanaReneeLashes
 
             totalQuantity = defaultTotalQuantity;
             estSalesToProfit = defaultEstSalesToProfit;
-            estTotalCost = defaultEstTotalCost;
+            estTotalUsdCost = defaultEstTotalUsdCost;
+            estTotalAudCost = defaultEstTotalUsdCost;
             estProfit = defaultEstProfit;
             estProfitLessGst = defaultEstProfitLessGst;
             estGstTotal = defaultEstGstTotal;
@@ -610,7 +612,7 @@ namespace LanaReneeLashes
             textBoxEstProfitPerUnit.Text = estProfitPerUnit.FormatCurrency();
             textBoxTotalLashesOrdered.Text = totalQuantity.ToString();
             textBoxEstSalesToProfit.Text = estSalesToProfit.ToString();
-            textBoxEstTotalCost.Text = estTotalCost.FormatCurrency();
+            textBoxEstTotalCost.Text = estTotalUsdCost.FormatCurrency();
             textBoxEstProfit.Text = estProfit.FormatCurrency();
             textBoxEstProfitLessGst.Text = estProfitLessGst.FormatCurrency();
             textBoxEstGstTotal.Text = estGstTotal.FormatCurrency();
@@ -871,11 +873,13 @@ namespace LanaReneeLashes
                     // calculates estimated boxing cost
                     estCostOfBoxing = totalQuantity * boxingCost;
                     // adds the cost of both orders together plus Pa expenses for an estimated total cost
-                    estTotalCost = goodyTotal + oliviaTotal + estPaCost + estCostOfBoxing;
+                    estTotalUsdCost = goodyTotal + oliviaTotal + estPaCost + estCostOfBoxing;
+                    // calculates AUD total
+                    estTotalAudCost = estTotalUsdCost * (decimal)usdToAud;
                     // estimates how many hours it will take to box the unpacked lashes
                     estHoursToBox = totalQuantity / setEstBoxesPerHour - hoursSpentBoxing;
                     // estimates the cost per lash set
-                    estCostPerUnit = estTotalCost / totalQuantity;
+                    estCostPerUnit = estTotalUsdCost / totalQuantity;
                     // estimated profit per sale
                     estProfitPerUnit = setRetailSalePrice - estCostPerUnit;
                     // estimated cost of flatboxes
@@ -883,7 +887,7 @@ namespace LanaReneeLashes
                     // estimated cost of shipping
                     estCostOfShipping = totalQuantity * setCostOfShipping;
                     // sales required to profit
-                    estSalesToProfit = (int)estTotalCost / (int)estProfitPerUnit + 1;
+                    estSalesToProfit = (int)estTotalUsdCost / (int)estProfitPerUnit + 1;
                     // total profit for this order
                     estProfit = estProfitPerUnit * totalQuantity;
                     // total profit for this order less GST
@@ -918,7 +922,7 @@ namespace LanaReneeLashes
         private void buttonUsdToAud_Click(object sender, EventArgs e)
         {
             // if estimated total cost is 0
-            if (estTotalCost is 0)
+            if (estTotalUsdCost is 0)
             {
                 // displays error to user
                 MessageBox.Show("Cannot convert to AUD until USD estimates have been calculated!");
@@ -927,7 +931,7 @@ namespace LanaReneeLashes
             } // end if
 
             // checks if figures have already been converted to AUD, returns true if they have, else returns false
-            bool converted = ((goodyTotal + oliviaTotal + estCostOfBoxing + estPaCost) * (decimal)usdToAud) == textBoxEstTotalCost.Text.ToDecimal();
+            bool converted = estTotalAudCost == textBoxEstTotalCost.Text.ToDecimal();
 
             // converts usd to aud multiplier to a decimal for easier calculations
             decimal conversionRate = (decimal)usdToAud;

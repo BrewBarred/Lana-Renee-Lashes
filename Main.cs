@@ -763,6 +763,7 @@ namespace LanaReneeLashes
                 // if goody total and olivia total are both 0
                 if (goodyTotal + oliviaTotal == 0)
                 {
+                    ResetAll();
                     return;
 
                 } // end if

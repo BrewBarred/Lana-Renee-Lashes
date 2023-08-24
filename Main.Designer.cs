@@ -510,7 +510,7 @@
             this.textBoxEstSalesToProfit.Location = new System.Drawing.Point(655, 69);
             this.textBoxEstSalesToProfit.Name = "textBoxEstSalesToProfit";
             this.textBoxEstSalesToProfit.ReadOnly = true;
-            this.textBoxEstSalesToProfit.Size = new System.Drawing.Size(86, 13);
+            this.textBoxEstSalesToProfit.Size = new System.Drawing.Size(105, 13);
             this.textBoxEstSalesToProfit.TabIndex = 0;
             this.textBoxEstSalesToProfit.TabStop = false;
             this.textBoxEstSalesToProfit.Text = "0";
@@ -538,7 +538,7 @@
             this.textBoxEstProfitLessGst.Location = new System.Drawing.Point(654, 143);
             this.textBoxEstProfitLessGst.Name = "textBoxEstProfitLessGst";
             this.textBoxEstProfitLessGst.ReadOnly = true;
-            this.textBoxEstProfitLessGst.Size = new System.Drawing.Size(87, 13);
+            this.textBoxEstProfitLessGst.Size = new System.Drawing.Size(106, 13);
             this.textBoxEstProfitLessGst.TabIndex = 0;
             this.textBoxEstProfitLessGst.TabStop = false;
             this.textBoxEstProfitLessGst.Text = "$0.00";
@@ -552,7 +552,7 @@
             this.textBoxTotalLashesOrdered.Location = new System.Drawing.Point(655, 43);
             this.textBoxTotalLashesOrdered.Name = "textBoxTotalLashesOrdered";
             this.textBoxTotalLashesOrdered.ReadOnly = true;
-            this.textBoxTotalLashesOrdered.Size = new System.Drawing.Size(86, 13);
+            this.textBoxTotalLashesOrdered.Size = new System.Drawing.Size(105, 13);
             this.textBoxTotalLashesOrdered.TabIndex = 0;
             this.textBoxTotalLashesOrdered.TabStop = false;
             this.textBoxTotalLashesOrdered.Text = "0";
@@ -566,7 +566,7 @@
             this.textBoxEstTotalCost.Location = new System.Drawing.Point(655, 94);
             this.textBoxEstTotalCost.Name = "textBoxEstTotalCost";
             this.textBoxEstTotalCost.ReadOnly = true;
-            this.textBoxEstTotalCost.Size = new System.Drawing.Size(86, 13);
+            this.textBoxEstTotalCost.Size = new System.Drawing.Size(105, 13);
             this.textBoxEstTotalCost.TabIndex = 0;
             this.textBoxEstTotalCost.TabStop = false;
             this.textBoxEstTotalCost.Text = "$0.00";
@@ -580,7 +580,7 @@
             this.textBoxEstProfit.Location = new System.Drawing.Point(655, 119);
             this.textBoxEstProfit.Name = "textBoxEstProfit";
             this.textBoxEstProfit.ReadOnly = true;
-            this.textBoxEstProfit.Size = new System.Drawing.Size(86, 13);
+            this.textBoxEstProfit.Size = new System.Drawing.Size(105, 13);
             this.textBoxEstProfit.TabIndex = 0;
             this.textBoxEstProfit.TabStop = false;
             this.textBoxEstProfit.Text = "$0.00";
@@ -594,7 +594,7 @@
             this.textBoxEstGstTotal.Location = new System.Drawing.Point(655, 168);
             this.textBoxEstGstTotal.Name = "textBoxEstGstTotal";
             this.textBoxEstGstTotal.ReadOnly = true;
-            this.textBoxEstGstTotal.Size = new System.Drawing.Size(87, 13);
+            this.textBoxEstGstTotal.Size = new System.Drawing.Size(105, 13);
             this.textBoxEstGstTotal.TabIndex = 0;
             this.textBoxEstGstTotal.TabStop = false;
             this.textBoxEstGstTotal.Text = "$0.00";

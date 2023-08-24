@@ -757,6 +757,18 @@ namespace LanaReneeLashes
             // calculates total quantity
             totalQuantity = goodyQuantity + oliviaQuantity;
 
+            // if estimate prices by quantity checkbox is not checked
+            if (!checkBoxEstPricesByQuantity.Checked)
+            {
+                // if goody total and olivia total are both 0
+                if (goodyTotal + oliviaTotal == 0)
+                {
+                    return;
+
+                } // end if
+
+            } // end if
+
             // if total lashes ordered is greater than 0
             if (totalQuantity > 0)
             {

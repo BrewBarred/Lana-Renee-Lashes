@@ -16,19 +16,27 @@ namespace LanaReneeLashes
 
         #region Static Defaults
 
-        ///////
-        // Settable defaults
-        ////
+        ///////          
+        // Settable defaults (Changeable in settings later)
+        ////          
+
+
+        // Settable default colors
+
 
         // default valid font color
-        static Color defaultValidTextColor = SystemColors.WindowText;
+        static Color colorNormalText = SystemColors.WindowText;
         // default display font color
-        static Color defaultDisplayTextColor = SystemColors.Info;
+        static Color colorDisplayText = SystemColors.Info;
 
         // default valid textbox color
-        static Color defaultValidTextboxColor = SystemColors.InactiveCaption;
+        static Color colorValidTextBox = SystemColors.InactiveCaption;
         // default invalid textbox color
-        static Color defaultInvalidTextboxColor = Color.RosyBrown;
+        static Color colorInvalidTextBox = Color.RosyBrown;
+
+
+        // Settable Estimates/Costs
+
 
         // set price per goody lash
         static decimal setGoodyLashCost = 2.9m;
@@ -48,14 +56,22 @@ namespace LanaReneeLashes
         // set estimated boxes packed per hour
         static double setEstBoxesPerHour = 90d;
 
+        // set P.A. hourly rate
+        static decimal setPaHourlyRate = 25.00m;
+
+        // set USD to AUS currency conversion rate
+        static double setUsdToAudRate = 1.57d;
+
         // set estimated cost of flatboxes
-        static decimal setCostOfFlatBoxes = 0.2632m;
+        static decimal setCostPerFlatBox = 0.2632m;
         // set estimated cost of shipping
         static decimal setCostOfShipping = 0.2263m;
 
+
         ///////
-        // Defaults
+        // Defaults (Reset values)
         ////
+
 
         // default goody costs
 
@@ -89,22 +105,14 @@ namespace LanaReneeLashes
         // default PA costs
 
 
-        // default P.A. hourly rate
-        static decimal defaultPaHourlyRate = 25.00m;
         // default P.A. hours spent on this order
         static double defaultPaHoursSpentThisOrder = 0;
         // default estimated P.A. cost
         static decimal defaultEstPaCost = 0.00m;
 
 
-        // default currency conversion rate
-
-
-        // default USD to AUS currency conversion rate
-        static double defaultUsdToAudRate = 1.57d;
-
-
         // default estimates
+
 
         // default estimated boxing cost
         static decimal defaultCostOfBoxing = 0.00m;
@@ -132,6 +140,18 @@ namespace LanaReneeLashes
 
         #endregion
 
+        #region Class Scope Arrays
+
+        // stores valid keys that can be pressed
+        Keys[] validKeyArray = { Keys.Back, Keys.Oemcomma, Keys.OemPeriod, Keys.Decimal, Keys.Left,
+                                 Keys.Right, Keys.Up, Keys.Down, Keys.Tab, Keys.Delete, Keys.Oemcomma };
+
+        // groups all USD currency values into an array for easier conversion to AUD later
+        static decimal[] currencyValuesArray = { defaultCostOfBoxing, defaultEstCostPerUnit, defaultEstProfitPerUnit, defaultEstCostOfFlatBoxes, defaultEstCostOfShipping,
+                                                 defaultEstTotalUsdCost, defaultEstProfit, defaultEstProfitLessGst, defaultEstGstTotal };
+
+        #endregion
+
         #region Constants
 
         ///////
@@ -153,15 +173,11 @@ namespace LanaReneeLashes
         // max PA cost
         const int MAX_PA_COST = 1000;
         // maximum total 
-        const double MAX_VALUE = 2147483647;
+        public const double MAX_VALUE = 2147483647;
 
         #endregion
 
         #region Variables
-
-        // groups all USD currency values into an array for easier conversion to AUD later
-        static decimal[] currencyValuesArray = { defaultCostOfBoxing, defaultEstCostPerUnit, defaultEstProfitPerUnit, defaultEstCostOfFlatBoxes, defaultEstCostOfShipping,
-                                                 defaultEstTotalUsdCost, defaultEstProfit, defaultEstProfitLessGst, defaultEstGstTotal };
 
         ///////
         // Goody price break-down
@@ -171,8 +187,6 @@ namespace LanaReneeLashes
         decimal goodyTotal;
         // quantity of lashes from goody
         int goodyQuantity;
-        // price per goody lash
-        static decimal goodyEstLashCost;
         // estimated goody price per unit calculated from a past order
         static decimal goodyEstTotalCostPerUnit;
 
@@ -185,8 +199,6 @@ namespace LanaReneeLashes
         decimal oliviaTotal;
         // quantity of lashes from olivia
         int oliviaQuantity;
-        // price per olivia lash 
-        decimal oliviaEstLashCost;
         // estimated olivia price per unit calculated from a past order
         decimal oliviaEstTotalCostPerUnit;
 
@@ -225,7 +237,10 @@ namespace LanaReneeLashes
         // Estimated figures break-down (Display side)
         ////
 
-        // total estimated boxing cost
+
+        /// <summary>
+        /// Gets or sets estimated cost of boxing
+        /// </summary>
         static decimal estCostOfBoxing
         {
             // returns estBoxingCost
@@ -235,7 +250,10 @@ namespace LanaReneeLashes
 
         } // end decimal
 
-        // estimated cost per unit
+
+        /// <summary>
+        /// Gets or sets estimated cost per unit
+        /// </summary>
         static decimal estCostPerUnit
         {
             // returns estCostPerUnit
@@ -245,7 +263,10 @@ namespace LanaReneeLashes
 
         } // end decimal
 
-        // estimated profit per unit
+
+        /// <summary>
+        /// Gets or sets estimated profit per unit
+        /// </summary>
         static decimal estProfitPerUnit
         {
             // returns estProfitPerUnit
@@ -255,9 +276,12 @@ namespace LanaReneeLashes
 
         } // end decimal
 
-        // estimated pa cost
+        // estimated personal assistant cost
         static decimal estPaCost;
-        // rough price per box
+
+        /// <summary>
+        /// Gets or sets estimated cost of all flatboxes
+        /// </summary>
         static decimal estCostOfFlatBoxes
         {
             // returns estCostOfFlatBoxes
@@ -267,7 +291,9 @@ namespace LanaReneeLashes
 
         } // end decimal
 
-        // rough shipping cost per unit
+        /// <summary>
+        /// Gets or sets estimated cost of shipping fees
+        /// </summary>
         static decimal estCostOfShipping
         {
             // returns estCostOfShipping
@@ -277,11 +303,15 @@ namespace LanaReneeLashes
 
         } // end decimal
 
-        // total lashes ordered
+
+        // total number of lashes ordered
         int totalQuantity;
         // estimated sales required before profit starts
         int estSalesToProfit;
-        // estimated total cost
+
+        /// <summary>
+        /// Gets or sets the estimated total cost in USD
+        /// </summary>
         static decimal estTotalUsdCost
         {
             // returns estTotalUsdCost
@@ -291,7 +321,9 @@ namespace LanaReneeLashes
 
         } // end decimal
 
-        // estimated profit
+        /// <summary>
+        /// Gets or sets the estimated amount of profit
+        /// </summary>
         static decimal estProfit
         {
             // returns estProfit
@@ -301,7 +333,9 @@ namespace LanaReneeLashes
 
         } // end decimal
 
-        // estimated profit less gst
+        /// <summary>
+        /// Gets or sets the estimated amount of profit excluding GST
+        /// </summary>
         static decimal estProfitLessGst
         {
             // returns estProfitLessGst
@@ -311,7 +345,9 @@ namespace LanaReneeLashes
 
         } // end decimal
 
-        // gst to pay
+        /// <summary>
+        /// Gets or sets the estimated amount GST owed for this order
+        /// </summary>
         static decimal estGstTotal
         {
             // returns estGstTotal
@@ -323,54 +359,6 @@ namespace LanaReneeLashes
 
         #endregion
 
-        // protects user from accidentally looping confirmation by pressing enter to exit error dialogs
-        bool spamProtect = true;
-
-        // regex pattern to match priceboxes
-        //static public Regex pricePatternString = new Regex(@"^\$?(\d{0,3}|\,|\.){0,8}", RegexOptions.Compiled);
-        // variable used to parse price regex
-        //string pricePattern = pricePatternString.ToString();
-        // regex pattern to match non-priceboxes
-        //static public Regex numberPatternString = new Regex(@"^(\d{0,3}|\,|\.){0,8}", RegexOptions.Compiled);
-        // variable used to parse text regex
-        //string numberPattern = numberPatternString.ToString();
-        // regex pattern used to match numeric digits
-
-        // stores current index of mouse cursor
-        int oldIndex = 0;
-
-        #endregion
-        // CHECK THIS METHOD -- MIGHT BE REDUNDANT########################################################################################
-        #region SetCursor()
-        /// <summary>
-        /// Sets cursor back into it's correct position
-        /// </summary>
-        private void SetCursor()
-        {
-            // treats active control as a textbox
-            TextBox textBox = ActiveControl as TextBox;
-
-            // if textbox is displaying a "$" symbol or "0"
-            if (textBox.Text is "$" || textBox.Text is "0")
-            {
-                // sets cursor to the end text
-                textBox.SelectionStart = 1;
-            }
-            // else if textbox is displaying $0
-            else if (textBox.Text is "$0" || textBox.TextLength is 2)
-            {
-                // sets cursor to the end of the text
-                textBox.SelectionStart = 2;
-            }
-            // else if textbox is displaying something other than $0 or nothing
-            else
-            {
-                // reverts index from start of string back to last position
-                textBox.SelectionStart = oldIndex;
-
-            } // end if
-
-        } // end void
         #endregion
 
         #region Main()
@@ -380,17 +368,17 @@ namespace LanaReneeLashes
         public Main()
         {
             InitializeComponent();
-            // sets up applications default settings and values
-            Setup();
 
         } // end main
         #endregion
 
-        #region Setup()
+        #region Main_Activated()
         /// <summary>
-        /// Sets up application defaults
+        /// Sets up application defaults on app launch
         /// </summary>
-        public void Setup()
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void Main_Activated(object sender, EventArgs e)
         {
             // sets height of app to match working area of the current screen
             Height = Screen.GetWorkingArea(this).Height;
@@ -400,10 +388,13 @@ namespace LanaReneeLashes
             // resets all values to their defaults
             ResetAll();
 
-            // focuses cursor onto textBoxGoodyCost
-            textBoxGoodyTotal.Focus();
-            // sets cursor to the end of the text in textBoxGoodyCost
+            // sets usd to aud conversion rate to set default
+            usdToAud = setUsdToAudRate;
+            textBoxUsdToAud.Text = setUsdToAudRate.ToString();
+
+            // focuses cursor to the end of textBoxGoodyCost
             textBoxGoodyTotal.SelectionStart = textBoxGoodyTotal.TextLength;
+            textBoxGoodyTotal.Focus();
 
         } // end void
         #endregion
@@ -421,7 +412,6 @@ namespace LanaReneeLashes
 
             goodyTotal = defaultGoodyTotal;
             goodyQuantity = defaultGoodyQuantity;
-            goodyEstLashCost = setGoodyLashCost;
             goodyEstTotalCostPerUnit = setGoodyTotalCostPerUnit;
 
 
@@ -431,7 +421,6 @@ namespace LanaReneeLashes
 
             oliviaTotal = defaultOliviaTotal;
             oliviaQuantity = defaultOliviaQuantity;
-            oliviaEstLashCost = setOliviaLashCost;
             oliviaEstTotalCostPerUnit = setOliviaTotalCostPerUnit;
 
 
@@ -449,7 +438,7 @@ namespace LanaReneeLashes
             // Resets PA values
             ////
 
-            paHourlyRate = defaultPaHourlyRate;
+            paHourlyRate = setPaHourlyRate;
             paHoursSpentThisOrder = defaultPaHoursSpentThisOrder;
 
 
@@ -472,12 +461,6 @@ namespace LanaReneeLashes
             estProfitLessGst = defaultEstProfitLessGst;
             estGstTotal = defaultEstGstTotal;
 
-            ///////
-            // Resets USD to AUD conversion rate
-            ////
-
-            usdToAud = defaultUsdToAudRate;
-
         } // end void
         #endregion
 
@@ -489,10 +472,6 @@ namespace LanaReneeLashes
         /// <param name="e"></param>
         private void Main_KeyUp(object sender, KeyEventArgs e)
         {
-            // stores valid keys that can be typed into textboxes
-            Keys[] validKeyArray = { Keys.Back, Keys.Oemcomma, Keys.OemPeriod, Keys.Decimal, Keys.Left,
-                                 Keys.Right, Keys.Up, Keys.Down, Keys.Tab, Keys.Delete, Keys.Oemcomma };
-
             try
             {
 
@@ -505,8 +484,6 @@ namespace LanaReneeLashes
                     string text = textBox.Text;
                     // stores the last pressed character as a string
                     Keys keyPressed = e.KeyCode;
-                    // stores the current cursor position
-                    oldIndex = textBox.SelectionStart;
 
                     // if textbox is empty
                     if (text is null or "" or "$")
@@ -531,7 +508,9 @@ namespace LanaReneeLashes
                         if (!textBox.ReadOnly)
                         {
                             // sets textbox backcolor to red to show it is invalid
-                            textBox.BackColor = defaultInvalidTextboxColor;
+                            textBox.BackColor = colorInvalidTextBox;
+                            // displays error
+                            DisplayError(true);
 
                         } // end if
 
@@ -540,7 +519,7 @@ namespace LanaReneeLashes
                     else
                     {
                         // sets textbox back to its default color incase it was previously invalid
-                        textBox.BackColor = defaultValidTextboxColor;
+                        textBox.BackColor = colorValidTextBox;
 
                         // if autofill checkbox is checked and user pressed anything except the enter key
                         if (checkBoxAutoFill.Checked && keyPressed != Keys.Enter)
@@ -596,6 +575,7 @@ namespace LanaReneeLashes
                     } // end if
 
                 } // end if
+
             }
             catch (Exception ex)
             {
@@ -604,7 +584,7 @@ namespace LanaReneeLashes
 
             } // end try
 
-        }
+        } // end void
         #endregion
 
         #region FetchInput()
@@ -815,7 +795,7 @@ namespace LanaReneeLashes
                     // estimated profit per sale
                     estProfitPerUnit = setRetailSalePrice - estCostPerUnit;
                     // estimated cost of flatboxes
-                    estCostOfFlatBoxes = totalQuantity * setCostOfFlatBoxes;
+                    estCostOfFlatBoxes = totalQuantity * setCostPerFlatBox;
                     // estimated cost of shipping
                     estCostOfShipping = totalQuantity * setCostOfShipping;
                     // sales required to profit
@@ -850,6 +830,27 @@ namespace LanaReneeLashes
         /// </summary>
         private void UpdateEstimates()
         {
+            // foreach decimal value in currency values array
+            foreach (decimal value in currencyValuesArray)
+            {
+                // if one of the values are greater than the max value
+                if ((long)value >= MAX_VALUE)
+                {
+                    // displays error to textboxes
+                    DisplayError(true);
+                    return;
+
+                }
+                // else if none of the values are greater than the max value
+                else
+                {
+                    // resets display text color
+                    DisplayError(false);
+
+                }// end if
+
+            } // end foreach
+
             // sets label to USD
             labelEstimatedFigures.Text = "Estimated Figures: (USD)";
 
@@ -930,22 +931,36 @@ namespace LanaReneeLashes
         /// </summary>
         public void CheckAbsurdities()
         {
+
             // if estimated cost per unit is greater than or equal to the COST_WARNING value
             if (estCostPerUnit > COST_WARNING || estProfitPerUnit < 0)
             {
                 // makes text reddish to show that cost per unit is a bit too high
-                textBoxEstCostPerUnit.ForeColor = defaultInvalidTextboxColor;
+                textBoxEstCostPerUnit.ForeColor = colorInvalidTextBox;
                 // shows a tool tip to explain the red text
                 textBoxEstCostPerUnit.ShowUsYaTips("This is too high!");
+
+            }
+            // else if estimated cost per unit is less than the COST_WARNING value
+            else
+            {
+                // resets textbox text to default color
+                textBoxEstCostPerUnit.ForeColor = colorDisplayText;
+
+            } // end if
+
+            // if profit per unit is less than 0
+            if (estProfitPerUnit < 0)
+            {
                 // makes text reddish to show that profit per unit is a bit too low
-                textBoxEstProfitPerUnit.ForeColor = defaultInvalidTextboxColor;
+                textBoxEstProfitPerUnit.ForeColor = colorInvalidTextBox;
                 // shows a tool tip to explain the red text
                 textBoxEstProfitPerUnit.ShowUsYaTips("You must hate money!");
 
                 // makes related values red too (as they can't be good if profit per unit is too low)
-                textBoxEstProfit.ForeColor = defaultInvalidTextboxColor;
-                textBoxEstProfitLessGst.ForeColor = defaultInvalidTextboxColor;
-                textBoxEstGstTotal.ForeColor = defaultInvalidTextboxColor;
+                textBoxEstProfit.ForeColor = colorInvalidTextBox;
+                textBoxEstProfitLessGst.ForeColor = colorInvalidTextBox;
+                textBoxEstGstTotal.ForeColor = colorInvalidTextBox;
 
                 // shows tool tips on related values
                 textBoxEstProfit.ShowUsYaTips("One job...");
@@ -953,15 +968,14 @@ namespace LanaReneeLashes
                 textBoxEstGstTotal.ShowUsYaTips("This is actually good, but it means we are losing money elswhere");
 
             }
-            // else if estimated cost per unit is less than the COST_WARNING value
+            // else if profit per unit is greater than 0
             else
             {
                 // resets textboxes text to default color
-                textBoxEstCostPerUnit.ForeColor = defaultDisplayTextColor;
-                textBoxEstProfitPerUnit.ForeColor = defaultDisplayTextColor;
-                textBoxEstProfit.ForeColor = defaultDisplayTextColor;
-                textBoxEstProfitLessGst.ForeColor = defaultDisplayTextColor;
-                textBoxEstGstTotal.ForeColor = defaultDisplayTextColor;
+                textBoxEstProfitPerUnit.ForeColor = colorDisplayText;
+                textBoxEstProfit.ForeColor = colorDisplayText;
+                textBoxEstProfitLessGst.ForeColor = colorDisplayText;
+                textBoxEstGstTotal.ForeColor = colorDisplayText;
 
             } // end if
 
@@ -969,15 +983,16 @@ namespace LanaReneeLashes
             if (estPaCost > MAX_PA_COST)
             {
                 // makes text reddish to show that cost per unit is a bit too high
-                textBoxEstPaCost.ForeColor = defaultInvalidTextboxColor;
+                textBoxEstPaCost.ForeColor = colorInvalidTextBox;
                 // shows a tool tip to explain the red text
                 textBoxEstPaCost.ShowUsYaTips("P.A. might be milking it!");
 
             }
+            // else if estimated PA cost is less than the max PA cost allowance
             else
             {
                 // resets textboxes text to default color
-                textBoxEstPaCost.ForeColor = defaultDisplayTextColor;
+                textBoxEstPaCost.ForeColor = colorDisplayText;
 
             } // end if
 
@@ -994,7 +1009,7 @@ namespace LanaReneeLashes
             else
             {
                 // resets textboxes text to default color
-                textBoxEstSalesToProfit.ForeColor = defaultDisplayTextColor;
+                textBoxEstSalesToProfit.ForeColor = colorDisplayText;
 
             } // end if
 
@@ -1002,16 +1017,16 @@ namespace LanaReneeLashes
             if (usdToAud < MIN_RATE || usdToAud > MAX_RATE)
             {
                 // makes textbox reddish to show that cost per unit is a bit too high
-                textBoxUsdToAud.BackColor = defaultInvalidTextboxColor;
+                textBoxUsdToAud.BackColor = colorInvalidTextBox;
                 // shows a tool tip to explain the red text
-                textBoxEstSalesToProfit.ShowUsYaTips("This doesn't seem right!");
+                textBoxUsdToAud.ShowUsYaTips("This doesn't seem right!");
 
             }
             // else if usd to aud is within the limits
             else
             {
                 // resets textboxes text to default color
-                textBoxEstSalesToProfit.ForeColor = defaultDisplayTextColor;
+                textBoxUsdToAud.ForeColor = colorNormalText;
 
             } // end if
 
@@ -1041,11 +1056,13 @@ namespace LanaReneeLashes
             // converts usd to aud multiplier to a decimal for easier calculations
             decimal conversionRate = (decimal)usdToAud;
 
+            // if the estimates have not already been converted to AUD
             if (!converted)
             {
                 // foreach decimal value in the decimal value array
                 for (int i = 0; i < currencyValuesArray.Length - 1; i++)
                 {
+                    // multiplies every currency value by the conversion rate to display AUD values
                     currencyValuesArray[i] *= conversionRate;
 
                 } // end foreach
@@ -1060,6 +1077,53 @@ namespace LanaReneeLashes
 
         } // end void
         #endregion
+
+        #region DisplayError()
+        /// <summary>
+        /// Makes all display textboxes display an error
+        /// </summary>
+        /// <param name="isError">True = Set error, False = Reset error</param>
+        public void DisplayError(bool isError)
+        {
+            // foreach control in the display panel
+            foreach (Control control in panelDisplay.Controls)
+            {
+                // if the control is a textbox
+                if (control is TextBox textBox)
+                {
+                    // if passed bool is true
+                    if (isError)
+                    {
+                        // if textbox isn't a disabled value
+                        if (textBox.Text != "Disabled")
+                        {
+                            // writes error to all display boxes
+                            textBox.Text = "Error!";
+                            // turns values red
+                            textBox.ForeColor = colorInvalidTextBox;
+
+                        } // end if
+                    }
+                    // else if passed bool is false
+                    else
+                    {
+                        // sets display text back to normal color
+                        textBox.ForeColor = colorDisplayText;
+
+                    } // end if
+
+                } // end if
+
+            } // end foreach
+
+        } // end void
+        #endregion
+
+
+        ///////          
+        // Settings:
+        ////   
+
 
         #region Settings:
 
@@ -1101,8 +1165,8 @@ namespace LanaReneeLashes
             if (checkBoxPaCosts.Checked)
             {
                 // enables P.A's hourly rate textbox
-                paHourlyRate = defaultPaHourlyRate;
-                textBoxPaHourlyRate.Enable(defaultPaHourlyRate.ToString("C2"));
+                paHourlyRate = setPaHourlyRate;
+                textBoxPaHourlyRate.Enable(setPaHourlyRate.ToString("C2"));
 
                 // enables P.A's hoursSpentBoxing textbox
                 paHoursSpentThisOrder = defaultPaHoursSpentThisOrder;
@@ -1207,6 +1271,12 @@ namespace LanaReneeLashes
         #endregion
 
         #endregion
+
+
+        ///////          
+        // Miscellanious events:
+        ////   
+
 
         #region Misc Events:
 

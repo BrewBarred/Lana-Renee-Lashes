@@ -1211,6 +1211,7 @@
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lana Renee - Lash Calculator";
+            this.Activated += new System.EventHandler(this.Main_Activated);
             this.KeyUp += new System.Windows.Forms.KeyEventHandler(this.Main_KeyUp);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();

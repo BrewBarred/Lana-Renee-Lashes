@@ -394,8 +394,7 @@ namespace LanaReneeLashes
 
             // focuses cursor to the end of textBoxGoodyCost and selects the "0" for easy changing
             textBoxGoodyTotal.Focus();
-            textBoxGoodyTotal.SelectionLength = 1;
-            textBoxGoodyTotal.SelectionStart = textBoxGoodyTotal.TextLength - 1;
+            textBoxGoodyTotal.SelectionStart = textBoxGoodyTotal.TextLength;
 
         } // end void
         #endregion
@@ -1489,7 +1488,8 @@ namespace LanaReneeLashes
             string url = "https://www.google.com/search?q=calc&source=hp&ei=wqObZIrLLqCw4-EPq-qA-Ao&iflsig=AOEireoAAAAAZJux0siSA2TGgXYq7dNvvdXoMeRk0TFQ&ved=0ahUKEwiKtKr8_eT_AhUg2DgGHSs1AK8Q4dUDCAs&uact=5&oq=calc&gs_lcp=Cgdnd3Mtd2l6EAMyDQgAEIoFELEDEIMBEEMyBwguEIoFEEMyBwgAEIoFEEMyDQgAEIoFELEDEIMBEEMyDQgAEIoFELEDEIMBEEMyBwgAEIoFEEMyDQgAEIoFELEDEIMBEEMyEQguEIAEELEDEIMBEMcBENEDMgsIABCABBCxAxCDATILCAAQgAQQsQMQgwE6FwgAEIoFEOoCELQCEIoDELcDENQDEOUCOggIABCABBCxAzoLCAAQigUQsQMQgwFQ4gJYmAVg3AVoAXAAeACAAc0BiAHtApIBBTAuMS4xmAEAoAEBsAEK&sclient=gws-wiz";
             // launches website address
             var urlLauncher = System.Diagnostics.Process.Start(url);
-        }
+
+        } // end void
 
         #endregion
 

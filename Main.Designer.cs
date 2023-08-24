@@ -386,7 +386,6 @@
             this.linkLabel1.Name = "linkLabel1";
             this.linkLabel1.Size = new System.Drawing.Size(111, 13);
             this.linkLabel1.TabIndex = 0;
-            this.linkLabel1.TabStop = true;
             this.linkLabel1.Text = "Lanareneelashes.com";
             this.linkLabel1.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.linkLabelLanaReneeLashes_LinkClicked);
             // 
@@ -423,7 +422,7 @@
             this.textBoxGoodyTotal.Name = "textBoxGoodyTotal";
             this.textBoxGoodyTotal.Size = new System.Drawing.Size(159, 20);
             this.textBoxGoodyTotal.TabIndex = 1;
-            this.textBoxGoodyTotal.Text = "$0";
+            this.textBoxGoodyTotal.Text = "$";
             this.textBoxGoodyTotal.Leave += new System.EventHandler(this.textBoxGoodyTotal_Leave);
             // 
             // textBoxGoodyQuantity
@@ -632,7 +631,7 @@
             this.textBoxOliviaTotal.Name = "textBoxOliviaTotal";
             this.textBoxOliviaTotal.Size = new System.Drawing.Size(159, 20);
             this.textBoxOliviaTotal.TabIndex = 3;
-            this.textBoxOliviaTotal.Text = "$0";
+            this.textBoxOliviaTotal.Text = "$";
             this.textBoxOliviaTotal.Leave += new System.EventHandler(this.textBoxOliviaTotal_Leave);
             // 
             // labelOliviaOrdered

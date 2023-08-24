@@ -169,7 +169,7 @@ namespace LanaReneeLashes
         // min hourly rate
         const int MIN_HOURLY_RATE = 20;
         // max hourly rate
-        const int MAX_HOURLY_RATE = 40;
+        const int MAX_HOURLY_RATE = 45;
         // max PA cost
         const int MAX_PA_COST = 1000;
         // maximum total 
@@ -982,6 +982,21 @@ namespace LanaReneeLashes
                 textBoxEstProfit.ForeColor = colorDisplayText;
                 textBoxEstProfitLessGst.ForeColor = colorDisplayText;
                 textBoxEstGstTotal.ForeColor = colorDisplayText;
+
+            } // end if
+
+            // if personal assistants hourly rate is less than the minimum or maximum allowed values
+            if (paHourlyRate < MIN_HOURLY_RATE || paHourlyRate > MAX_HOURLY_RATE)
+            {
+                // makes hourly rate textbox reddish to show that rates don't look right
+                textBoxPaHourlyRate.BackColor = colorInvalidTextBox;
+                textBoxPaHourlyRate.ShowUsYaTips("This doesn't look right!");
+            }
+            // else if personal assistants hourly rate is within its limits
+            else
+            {
+                // resets textboxes text to default color
+                textBoxEstProfitPerUnit.ForeColor = colorNormalText;
 
             } // end if
 

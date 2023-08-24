@@ -434,7 +434,7 @@
             this.textBoxGoodyQuantity.Name = "textBoxGoodyQuantity";
             this.textBoxGoodyQuantity.Size = new System.Drawing.Size(159, 20);
             this.textBoxGoodyQuantity.TabIndex = 2;
-            this.textBoxGoodyQuantity.Text = "234";
+            this.textBoxGoodyQuantity.Text = "0";
             // 
             // textBoxPaHourlyRate
             // 
@@ -620,7 +620,7 @@
             this.textBoxOliviaQuantity.Name = "textBoxOliviaQuantity";
             this.textBoxOliviaQuantity.Size = new System.Drawing.Size(159, 20);
             this.textBoxOliviaQuantity.TabIndex = 4;
-            this.textBoxOliviaQuantity.Text = "234";
+            this.textBoxOliviaQuantity.Text = "0";
             // 
             // textBoxOliviaTotal
             // 
@@ -631,7 +631,7 @@
             this.textBoxOliviaTotal.Name = "textBoxOliviaTotal";
             this.textBoxOliviaTotal.Size = new System.Drawing.Size(159, 20);
             this.textBoxOliviaTotal.TabIndex = 3;
-            this.textBoxOliviaTotal.Text = "$32423";
+            this.textBoxOliviaTotal.Text = "$0";
             this.textBoxOliviaTotal.Leave += new System.EventHandler(this.textBoxOliviaTotal_Leave);
             // 
             // labelOliviaOrdered

@@ -15,6 +15,8 @@ namespace LanaReneeLashes
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new Main());
 
-        }
-    }
-}
+        } // end void
+
+    } // end class
+
+} // end namespace

@@ -392,9 +392,10 @@ namespace LanaReneeLashes
             usdToAud = setUsdToAudRate;
             textBoxUsdToAud.Text = setUsdToAudRate.ToString();
 
-            // focuses cursor to the end of textBoxGoodyCost
-            textBoxGoodyTotal.SelectionStart = textBoxGoodyTotal.TextLength;
+            // focuses cursor to the end of textBoxGoodyCost and selects the "0" for easy changing
             textBoxGoodyTotal.Focus();
+            textBoxGoodyTotal.SelectionLength = 1;
+            textBoxGoodyTotal.SelectionStart = textBoxGoodyTotal.TextLength - 1;
 
         } // end void
         #endregion
@@ -460,6 +461,11 @@ namespace LanaReneeLashes
             estProfit = defaultEstProfit;
             estProfitLessGst = defaultEstProfitLessGst;
             estGstTotal = defaultEstGstTotal;
+
+            usdToAud = double.Parse(textBoxUsdToAud.Text);
+
+            // updates display boxes with newly calculated values
+            UpdateEstimates();
 
         } // end void
         #endregion
@@ -1147,6 +1153,8 @@ namespace LanaReneeLashes
             {
                 // sets the forms acceptbutton (enter) to the button to avoid a dinging sound when enter is pressed
                 AcceptButton = buttonCalculate;
+                // resets values to make it obvious that auto calculate is no longer active
+                ResetAll();
 
             } // end if
 
@@ -1288,8 +1296,17 @@ namespace LanaReneeLashes
         /// <param name="e"></param>
         private void textBoxGoodyTotal_Leave(object sender, EventArgs e)
         {
-            // formats goody total to represent a currency value
-            textBoxGoodyTotal.Text = goodyTotal.FormatCurrency();
+            try
+            {
+                // formats goody total to represent a currency value
+                textBoxGoodyTotal.Text = decimal.Parse(textBoxGoodyTotal.Text).FormatCurrency();
+            }
+            catch (Exception ex)
+            {
+                // writes error to console
+                LogError("Failed to parse goody total to a decimal!", ex.Message);
+
+            } // end try
 
         } // end void
         #endregion
@@ -1302,8 +1319,18 @@ namespace LanaReneeLashes
         /// <param name="e"></param>
         private void textBoxOliviaTotal_Leave(object sender, EventArgs e)
         {
-            // formats olivia total to represent a currency value
-            textBoxOliviaTotal.Text = oliviaTotal.FormatCurrency();
+            try
+            {
+                // formats olivia total to represent a currency value
+                textBoxOliviaTotal.Text = decimal.Parse(textBoxOliviaTotal.Text).FormatCurrency();
+
+            }
+            catch (Exception ex)
+            {
+                // writes error to console
+                LogError("Failed to parse olivia total to a decimal!", ex.Message);
+
+            } // end try
 
         } // end void
         #endregion

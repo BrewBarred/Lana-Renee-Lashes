@@ -446,6 +446,7 @@
             this.textBoxPaHourlyRate.Size = new System.Drawing.Size(159, 20);
             this.textBoxPaHourlyRate.TabIndex = 9;
             this.textBoxPaHourlyRate.Text = "$25.00";
+            this.textBoxPaHourlyRate.Leave += new System.EventHandler(this.textBoxPaHourlyRate_Leave);
             // 
             // textBoxHoursSpentBoxing
             // 

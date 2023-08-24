@@ -439,7 +439,7 @@ namespace LanaReneeLashes
             // Resets PA values
             ////
 
-            paHourlyRate = setPaHourlyRate;
+            paHourlyRate = textBoxPaHourlyRate.Text.ToDecimal();
             paHoursSpentThisOrder = defaultPaHoursSpentThisOrder;
 
 
@@ -996,7 +996,7 @@ namespace LanaReneeLashes
             else
             {
                 // resets textboxes text to default color
-                textBoxEstProfitPerUnit.ForeColor = colorNormalText;
+                textBoxPaHourlyRate.BackColor = colorValidTextBox;
 
             } // end if
 
@@ -1305,7 +1305,7 @@ namespace LanaReneeLashes
 
         #region textBoxGoodyTotal_Leave() Event
         /// <summary>
-        /// Formats textbox to currency value when user leaves textbox
+        /// Formats goody total to a currency value when leaving textbox
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1328,7 +1328,7 @@ namespace LanaReneeLashes
 
         #region textBoxOliviaTotal_Leave() Event
         /// <summary>
-        /// Formats textbox to currency value when user leaves textbox
+        /// Formats olivia total to a currency value when leaving textbox
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -1344,6 +1344,66 @@ namespace LanaReneeLashes
             {
                 // writes error to console
                 LogError("Failed to parse olivia total to a decimal!", ex.Message);
+
+            } // end try
+
+        } // end void
+        #endregion
+
+        #region textBoxSpentBoxing_Leave() Event
+        /// <summary>
+        /// Formats hours spent boxing to a time value when leaving textbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxHoursSpentBoxing_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                // if hours spent boxing is greater than 0
+                if (hoursSpentBoxing > 0)
+                {
+                    // sets hours spent boxing text to time format
+                    textBoxHoursSpentBoxing.Text = double.Parse(textBoxHoursSpentBoxing.Text).FormatHours();
+
+                }
+                // else if hours spent boxing is not greater than 0
+                else
+                {
+                    // sets hours spent boxing and it's textbox text to 0
+                    hoursSpentBoxing = 0;
+                    textBoxHoursSpentBoxing.Text = "0";
+
+                }// end if
+            }
+            catch (Exception ex)
+            {
+                // logs error to console and error log
+                LogError("Failed to convert hours spent boxing!", ex.Message);
+
+            } // end try
+
+        } // end void
+        #endregion
+
+        #region textBoxPaHourlyRate_Leave()
+        /// <summary>
+        /// Formats Pa's hourly rate to a currency value when leaving textbox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void textBoxPaHourlyRate_Leave(object sender, EventArgs e)
+        {
+            try
+            {
+                // formats olivia total to represent a currency value
+                textBoxPaHourlyRate.Text = decimal.Parse(textBoxPaHourlyRate.Text).FormatCurrency();
+
+            }
+            catch (Exception ex)
+            {
+                // writes error to console
+                LogError("Failed to parse Pa's hourly rate to a decimal!", ex.Message);
 
             } // end try
 
@@ -1420,42 +1480,6 @@ namespace LanaReneeLashes
 
         #endregion
 
-        #endregion
-
-        #region textBoxSpentBoxing_Leave() Event
-        /// <summary>
-        /// Formats text input when focus is lost
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void textBoxHoursSpentBoxing_Leave(object sender, EventArgs e)
-        {
-            try
-            {
-                // if hours spent boxing is greater than 0
-                if (hoursSpentBoxing > 0)
-                {
-                    // sets hours spent boxing text to time format
-                    textBoxHoursSpentBoxing.Text = double.Parse(textBoxHoursSpentBoxing.Text).FormatHours();
-
-                }
-                // else if hours spent boxing is not greater than 0
-                else
-                {
-                    // sets hours spent boxing and it's textbox text to 0
-                    hoursSpentBoxing = 0;
-                    textBoxHoursSpentBoxing.Text = "0";
-
-                }// end if
-            }
-            catch (Exception ex)
-            {
-                // logs error to console and error log
-                LogError("Failed to convert hours spent boxing!", ex.Message);
-
-            } // end try
-
-        } // end void
         #endregion
 
     } // end class
